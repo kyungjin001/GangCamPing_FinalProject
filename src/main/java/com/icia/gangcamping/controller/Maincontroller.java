@@ -10,11 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class Maincontroller {
 
 
-    @RequestMapping("offers.html")
-    public String of() {
-        return "offers";
-    }
-
     @RequestMapping("about.html")
     public String osf() {
         return "about";
@@ -35,23 +30,15 @@ public class Maincontroller {
         return "single_listing";
     }
 
-    @RequestMapping("blog.html")
-    public String cxxxcoxxf() {
-        return "blog";
 
-    }
 
     @RequestMapping("index.html")
     public String cxczcof() {
         return "index";
     }
-
-
-
-
-    @RequestMapping("shopdetail.html")
-    public String cxczcsof() {
-        return "shopdetail";
-    }
-
 }
+
+
+
+
+
