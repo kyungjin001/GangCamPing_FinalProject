@@ -6,8 +6,8 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/springboot_MemberBoard?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: memberboard
+    url: jdbc:mysql://localhost:3306/gangcamping?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: gangcamping
     password: 1234
   thymeleaf:
     cache: false
@@ -17,10 +17,10 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
 # mybatis 관련 설정
 mybatis:
   # resources/mapper/ 에 있는 모든 xml 파일
   mapper-locations: mapper/*.xml
   # alias 설정
-  type-aliases-package: com.icia.project.dto
+  type-aliases-package: com.icia.gangcamping.dto
