@@ -16,12 +16,12 @@ public class shoppingLikeEntity extends BaseEntity{
     @GeneratedValue
     @Column(name = "shoppingLikeId")
     private Long shoppingLikeId;
-    @Column
-
-    private Long memberId;
-    @Column
-
-    private Long productId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "productId")
+    private productEntity productEntity;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "memberId")
+    private memberEntity memberEntity;
     @Column
     @NotNull
     private LocalDateTime shoppingLikeDate;

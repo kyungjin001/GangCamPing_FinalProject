@@ -15,9 +15,9 @@ public class answerEntity {
     @GeneratedValue
     @Column(name = "answerId")
     private Long answerId;
-    @Column
-    @NotNull
-    private Long questionId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "questionId")
+    private questionEntity questionEntity;
     @Column
     @NotNull
     private String answerContents;

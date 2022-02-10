@@ -41,4 +41,6 @@ public class campingEntity {
     private List<campingPayEntity> campingPayEntityList = new ArrayList<>();
     @OneToMany(mappedBy = "campingEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<bookEntity> bookEntityList = new ArrayList<>();
+    @OneToMany(mappedBy = "campingEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<reviewEntity> reviewEntityList = new ArrayList<>();
 }

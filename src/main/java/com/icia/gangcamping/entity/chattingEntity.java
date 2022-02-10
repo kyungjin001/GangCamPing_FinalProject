@@ -16,8 +16,9 @@ public class chattingEntity extends BaseEntity{
     @GeneratedValue
     @Column(name = "chattingId")
     private Long chattingId;
-    @Column
-    private Long memberId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "memberId")
+    private memberEntity memberEntity;
     @Column
     @NotNull
     private LocalDateTime chattingDate;
@@ -27,4 +28,6 @@ public class chattingEntity extends BaseEntity{
     @Column
     @NotNull
     private String chattingFileName;
+
+
 }

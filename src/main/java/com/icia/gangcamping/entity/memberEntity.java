@@ -41,5 +41,12 @@ public class memberEntity {
     private List<cartEntity> cartEntityList = new ArrayList<>();
     @OneToMany(mappedBy = "memberEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<orderEntity> orderEntityList= new ArrayList<>();
-
+    @OneToMany(mappedBy = "memberEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<shoppingLikeEntity> shoppingLikeEntityList= new ArrayList<>();
+    @OneToMany(mappedBy = "memberEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<questionEntity> questionEntityList= new ArrayList<>();
+    @OneToMany(mappedBy = "memberEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<reviewEntity> reviewEntityList= new ArrayList<>();
+    @OneToMany(mappedBy = "memberEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<chattingEntity> chattingEntityList= new ArrayList<>();
 }

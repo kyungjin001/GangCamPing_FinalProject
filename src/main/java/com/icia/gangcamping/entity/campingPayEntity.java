@@ -22,8 +22,6 @@ public class campingPayEntity extends BaseEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "campingId")
     private campingEntity campingEntity;
-    @Column
-    private Long roomId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "roomId")
     private roomEntity roomEntity;

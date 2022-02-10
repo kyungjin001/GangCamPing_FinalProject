@@ -19,8 +19,6 @@ public class campingLikeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "campingId")
     private campingEntity campingEntity;
-    @Column
-    private Long memberId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId")
     private memberEntity memberEntity;

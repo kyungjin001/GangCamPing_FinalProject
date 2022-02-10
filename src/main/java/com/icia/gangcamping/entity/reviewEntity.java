@@ -15,12 +15,12 @@ public class reviewEntity extends BaseEntity{
     @GeneratedValue
     @Column(name = "reviewId")
     private Long reviewId;
-    @Column
-    @NotNull
-    private Long campingId;
-    @Column
-    @NotNull
-    private Long memberId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "campingId")
+    private campingEntity campingEntity;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "memberId")
+    private memberEntity memberEntity;
     @Column
     @NotNull
     private String reviewTitle;
