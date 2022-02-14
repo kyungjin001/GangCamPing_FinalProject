@@ -1,18 +1,19 @@
 package com.icia.gangcamping.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Getter
 @Setter
 @Table(name = "member_table")
-public class memberEntity {
+public class MemberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="memberId")
@@ -32,21 +33,21 @@ public class memberEntity {
     @NotNull
     private String memberPhone;
     @OneToMany(mappedBy = "memberEntity",cascade = CascadeType.PERSIST, orphanRemoval = false,fetch = FetchType.LAZY)
-    private List<campingLikeEntity> campingLikeEntityList = new ArrayList<>();
+    private List<CampingLikeEntity> campingLikeEntityList = new ArrayList<>();
     @OneToMany(mappedBy = "memberEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<campingPayEntity> campingPayEntityList = new ArrayList<>();
+    private List<CampingPayEntity> campingPayEntityList = new ArrayList<>();
     @OneToMany(mappedBy = "memberEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<bookEntity> bookEntityList = new ArrayList<>();
+    private List<BookEntity> bookEntityList = new ArrayList<>();
     @OneToMany(mappedBy = "memberEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<cartEntity> cartEntityList = new ArrayList<>();
+    private List<CartEntity> cartEntityList = new ArrayList<>();
     @OneToMany(mappedBy = "memberEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<orderEntity> orderEntityList= new ArrayList<>();
+    private List<OrderEntity> orderEntityList= new ArrayList<>();
     @OneToMany(mappedBy = "memberEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<shoppingLikeEntity> shoppingLikeEntityList= new ArrayList<>();
+    private List<ShoppingLikeEntity> shoppingLikeEntityList= new ArrayList<>();
     @OneToMany(mappedBy = "memberEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<questionEntity> questionEntityList= new ArrayList<>();
+    private List<QuestionEntity> questionEntityList= new ArrayList<>();
     @OneToMany(mappedBy = "memberEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<reviewEntity> reviewEntityList= new ArrayList<>();
+    private List<ReviewEntity> reviewEntityList= new ArrayList<>();
     @OneToMany(mappedBy = "memberEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<chattingEntity> chattingEntityList= new ArrayList<>();
+    private List<ChattingEntity> chattingEntityList= new ArrayList<>();
 }

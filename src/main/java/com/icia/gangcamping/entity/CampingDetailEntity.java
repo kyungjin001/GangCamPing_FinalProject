@@ -1,22 +1,23 @@
 package com.icia.gangcamping.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Getter
 @Setter
 @Table(name = "campingDetail_table")
-public class campingDetailEntity {
+public class CampingDetailEntity {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     @Column
     private Long campingDetailId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "campingId")
-    private campingEntity campingEntity;
+    private CampingEntity campingEntity;
     @Column
     private String facility1;
     @Column

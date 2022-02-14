@@ -1,18 +1,19 @@
 package com.icia.gangcamping.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Getter
 @Setter
 @Table(name = "product_table")
-public class productEntity {
+public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="productId")
@@ -34,14 +35,14 @@ public class productEntity {
     private String productFileName;
 
     @OneToMany(mappedBy = "productEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<stockEntity> stockEntityList = new ArrayList<>();
+    private List<StockEntity> stockEntityList = new ArrayList<>();
     @OneToMany(mappedBy = "productEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<cartEntity> cartEntityList = new ArrayList<>();
+    private List<CartEntity> cartEntityList = new ArrayList<>();
     @OneToMany(mappedBy = "productEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<orderEntity> orderEntityList = new ArrayList<>();
+    private List<OrderEntity> orderEntityList = new ArrayList<>();
     @OneToMany(mappedBy = "productEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<shoppingLikeEntity> shoppingLikeEntityArrayList = new ArrayList<>();
+    private List<ShoppingLikeEntity> shoppingLikeEntityArrayList = new ArrayList<>();
     @OneToMany(mappedBy = "productEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<questionEntity> questionEntityList = new ArrayList<>();
+    private List<QuestionEntity> questionEntityList = new ArrayList<>();
 
 }

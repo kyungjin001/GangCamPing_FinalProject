@@ -1,24 +1,25 @@
 package com.icia.gangcamping.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Getter
 @Setter
 @Table(name = "campingSale_table")
-public class campingSaleEntity extends BaseEntity{
+public class CampingSaleEntity extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="campingSaleId")
     private Long campingSaleId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bookId")
-    private bookEntity bookEntity;
+    private BookEntity bookEntity;
     @Column
     @NotNull
     private LocalDateTime campingSaleDate;

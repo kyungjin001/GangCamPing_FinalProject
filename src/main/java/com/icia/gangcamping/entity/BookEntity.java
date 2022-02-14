@@ -1,32 +1,33 @@
 package com.icia.gangcamping.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Getter
 @Setter
 @Table(name = "book_table")
-public class bookEntity extends BaseEntity{
+public class BookEntity extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bookId")
     private Long bookId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId")
-    private memberEntity memberEntity;
+    private MemberEntity memberEntity;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "campingId")
-    private campingEntity campingEntity;
+    private CampingEntity campingEntity;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "roomId")
-    private roomEntity roomEntity;
+    private RoomEntity roomEntity;
     @Column
     @NotNull
     private LocalDateTime bookCheckIn;
@@ -41,9 +42,9 @@ public class bookEntity extends BaseEntity{
     private int bookPrice;
 
     @OneToMany(mappedBy = "bookEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<campingPayEntity> campingPayEntityList = new ArrayList<>();
+    private List<CampingPayEntity> campingPayEntityList = new ArrayList<>();
     @OneToMany(mappedBy = "bookEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<campingSaleEntity> campingSaleEntityList = new ArrayList<>();
+    private List<CampingSaleEntity> campingSaleEntityList = new ArrayList<>();
 
 
 }

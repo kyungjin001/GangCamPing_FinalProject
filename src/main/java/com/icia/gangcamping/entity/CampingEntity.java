@@ -1,18 +1,19 @@
 package com.icia.gangcamping.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Getter
 @Setter
 @Table(name = "camping_table")
-public class campingEntity {
+public class CampingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="campingId")
@@ -34,13 +35,13 @@ public class campingEntity {
     private String campingLikeCount;
 
     @OneToMany(mappedBy = "campingEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<roomEntity> roomEntityList = new ArrayList<>();
+    private List<RoomEntity> roomEntityList = new ArrayList<>();
     @OneToMany(mappedBy = "campingEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<campingDetailEntity> campingDetailEntityList = new ArrayList<>();
+    private List<CampingDetailEntity> campingDetailEntityList = new ArrayList<>();
     @OneToMany(mappedBy = "campingEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<campingPayEntity> campingPayEntityList = new ArrayList<>();
+    private List<CampingPayEntity> campingPayEntityList = new ArrayList<>();
     @OneToMany(mappedBy = "campingEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<bookEntity> bookEntityList = new ArrayList<>();
+    private List<BookEntity> bookEntityList = new ArrayList<>();
     @OneToMany(mappedBy = "campingEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<reviewEntity> reviewEntityList = new ArrayList<>();
+    private List<ReviewEntity> reviewEntityList = new ArrayList<>();
 }

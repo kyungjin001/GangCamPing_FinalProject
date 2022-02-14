@@ -1,28 +1,27 @@
 package com.icia.gangcamping.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
-
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Getter
 @Setter
 @Table(name = "question_table")
-public class questionEntity {
+public class QuestionEntity {
     @Id
     @GeneratedValue
     @Column(name = "questionId")
     private Long questionId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "productId")
-    private productEntity productEntity;
+    private ProductEntity productEntity;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId")
-    private memberEntity memberEntity;
+    private MemberEntity memberEntity;
     @Column
     @NotNull
     private  String questionContents;
@@ -31,7 +30,7 @@ public class questionEntity {
     private boolean answerCheck;
 
     @OneToOne(mappedBy = "questionEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private answerEntity answerEntity;
+    private AnswerEntity answerEntity;
 
 
 }

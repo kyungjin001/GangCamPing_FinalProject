@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/shopping/*")
-public class shoppingcontroller {
+public class ShoppingController {
 
 
     @RequestMapping("blog")

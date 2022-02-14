@@ -1,26 +1,27 @@
 package com.icia.gangcamping.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Getter
 @Setter
 @Table(name = "review_table")
-public class reviewEntity extends BaseEntity{
+public class ReviewEntity extends BaseEntity{
     @Id
     @GeneratedValue
     @Column(name = "reviewId")
     private Long reviewId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "campingId")
-    private campingEntity campingEntity;
+    private CampingEntity campingEntity;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId")
-    private memberEntity memberEntity;
+    private MemberEntity memberEntity;
     @Column
     @NotNull
     private String reviewTitle;

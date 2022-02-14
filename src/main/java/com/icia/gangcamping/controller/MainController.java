@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequiredArgsConstructor
 @Controller
-public class Maincontroller {
+public class MainController {
     @RequestMapping("/")
     public String main(){return "index";}
     @RequestMapping("about")
