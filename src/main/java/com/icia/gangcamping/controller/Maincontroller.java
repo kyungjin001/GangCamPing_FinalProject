@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 @Controller
 public class Maincontroller {
-
-
-    @RequestMapping("about.html")
+    @RequestMapping("/")
+    public String main(){return "index";}
+    @RequestMapping("about")
     public String osf() {
         return "about";
     }
 
-    @RequestMapping("elements.html")
+    @RequestMapping("booking")
     public String ofa() {
-        return "elements";
+        return "offers";
     }
 
-    @RequestMapping("contact.html")
+    @RequestMapping("contact")
     public String cof() {
         return "contact";
     }
@@ -32,10 +32,7 @@ public class Maincontroller {
 
 
 
-    @RequestMapping("index.html")
-    public String cxczcof() {
-        return "index";
-    }
+
 }
 
 
