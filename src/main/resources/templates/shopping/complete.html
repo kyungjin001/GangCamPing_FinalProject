@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
 <title>Blog</title>
 <meta charset="utf-8">
@@ -13,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="/styles/blog_styles.css">
 <link rel="stylesheet" type="text/css" href="/styles/blog_responsive.css">
 
+
 <style>
 
 .line{
@@ -20,6 +20,34 @@
 	height: 1px;
 	background-color: #cccccc;
 }
+
+	b{
+		font-size: 30px;
+	}
+
+
+
+			.information{
+				margin-bottom: 100px;
+				margin-top: 100px;
+				margin-left: 300px;
+			}
+
+
+		.complete{
+			width: 1000px;
+			height: 1000px;
+			border: solid 1px black;
+			margin-left: 300px;
+			margin-bottom: 100px;
+			margin-top: 100px;
+		}
+
+
+	li{
+		font-size: 20px;
+	}
+
 
 </style>
 
@@ -44,7 +72,6 @@
 
 
 
-	<link rel="shortcut icon" href="favicon.ico">
 
 	<!-- Fonts START -->
 	<!-- Global styles START -->
@@ -57,6 +84,79 @@
 	<!-- Theme styles END -->
 
 
+	<script>
+
+		//전화번호 정규식
+		function phoneCheck(){
+			const exp = /^\d{3}-\d{4}-\d{4}$/;
+			const phone = document.getElementById('phone').value;
+			const result = document.getElementById('phone-check-result')
+
+			if(phone.match(exp)){
+				result.innerHTML = "유효한 형식입니다."
+				result.style.color ='green'
+			}else {
+				result.innerHTML = "유효하지 않은 형식입니다."
+				result.style.color='red'
+			}
+		}
+		//전화번호 정규식 끝
+
+		// 주소찾기
+		function sample6_execDaumPostcode() {
+			new daum.Postcode({
+				oncomplete: function(data) {
+
+					var addr = '';
+					var extraAddr = '';
+
+					if (data.userSelectedType === 'R') {
+						addr = data.roadAddress;
+					} else {
+						addr = data.jibunAddress;
+					}
+
+					if(data.userSelectedType === 'R'){
+						if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+							extraAddr += data.bname;
+						}
+						if(data.buildingName !== '' && data.apartment === 'Y'){
+							extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+						}
+						if(extraAddr !== ''){
+							extraAddr = ' (' + extraAddr + ')';
+						}
+						document.getElementById("sample6_extraAddress").value = extraAddr;
+
+					} else {
+						document.getElementById("sample6_extraAddress").value = '';
+					}
+
+					document.getElementById('sample6_postcode').value = data.zonecode;
+					document.getElementById("sample6_address").value = addr;
+					document.getElementById("sample6_detailAddress").focus();
+				}
+			}).open();
+		}
+		// 주소찾기 끝
+
+
+
+		//이메일 함수
+		function emailSelect(){
+			const domainselect = document.getElementById('domainselect').value
+			const domain = document.getElementById('domain')
+			// select 에서 선택한 값을 domain id를 적용한 input 태그에 출력
+			domain.value = domainselect;
+
+		}
+		//이메일 함수 끝
+
+
+
+	</script>
+
+
 
 
 
@@ -65,7 +165,7 @@
 <body>
 
 <div class="super_container">
-	
+
 	<!-- Header -->
 
 	<header class="header">
@@ -93,7 +193,7 @@
 						</div>
 					</div>
 				</div>
-			</div>		
+			</div>
 		</div>
 
 		<!-- Main Navigation -->
@@ -171,124 +271,51 @@
 	<div class="home">
 		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="/images/blog_background.jpg"></div>
 		<div class="home_content">
-			<div class="home_title">CART</div>
+			<div class="home_title">COMPLETE</div>
 		</div>
 	</div>
 
 	<!-- BEGIN CONTENT -->
 	<div class="col-md-12 col-sm-12">
 
-			<h2>장바구니</h2>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<img src="/img/img_step1.png" width="1200px">
+		<img src="/img/img_step3.png" width="1200px">
 		<div class="line">
 		</div>
 
-		<div class="goods-page">
-			<div class="goods-data clearfix">
-				<div class="table-wrapper-responsive">
-					<table summary="Shopping cart">
-						<tr>
-							<th class="goods-page-image">이미지</th>
-							<th class="goods-page-description">상품정보</th>
-							<th class="goods-page-quantity">수량</th>
-							<th class="goods-page-ref-no">배송비</th>
-							<th class="goods-page-price">판매가</th>
-							<th class="goods-page-total" colspan="2">합계</th>
-						</tr>
-						<tr>
-							<td class="goods-page-image">
-								<a href="javascript:;"><img src="/assets/pages/img/products/model3.jpg" alt="Berry Lace Dress"></a>
-							</td>
-							<td class="goods-page-description">
-								<h3><a href="javascript:;">Cool green dress with red bell</a></h3>
-								<p><strong>Item 1</strong> - Color: Green; Size: S</p>
-								<em>More info is here</em>
-							</td>
-							<td class="goods-page-quantity">
-								<div class="product-quantity">
-									<input id="product-quantity" type="text" value="1" readonly class="form-control input-sm">
-								</div>
-									<button class="btn btn-primary" type="submit">변경</button>
-							</td>
-							<td class="goods-page-ref-no">
-								javc2133
-							</td>
-							<td class="goods-page-price">
-								<strong><span>$</span>47.00</strong>
-							</td>
-							<td class="goods-page-total">
-								<strong><span>$</span>47.00</strong>
-							</td>
-							<td class="del-goods-col">
-								<a class="del-goods" href="javascript:;">&nbsp;</a>
-							</td>
-						</tr>
-						<tr>
-							<td class="goods-page-image">
-								<a href="javascript:;"><img src="/assets/pages/img/products/model4.jpg" alt="Berry Lace Dress"></a>
-							</td>
-							<td class="goods-page-description">
-								<h3><a href="javascript:;">Cool green dress with red bell</a></h3>
-								<p><strong>Item 1</strong> - Color: Green; Size: S</p>
-								<em>More info is here</em>
-							</td>
-							<td class="goods-page-quantity">
-								<div class="product-quantity">
-									<input id="product-quantity2" type="text" value="1" readonly class="form-control input-sm">
-								</div>
-							</td>
-							<td class="goods-page-ref-no">
-								javc2133
-							</td>
-							<td class="goods-page-price">
-								<strong><span>$</span>47.00</strong>
-							</td>
-							<td class="goods-page-total">
-								<strong><span>$</span>47.00</strong>
-							</td>
-							<td class="del-goods-col">
-								<a class="del-goods" href="javascript:;">&nbsp;</a>
-							</td>
-						</tr>
-					</table>
-				</div>
 
-				<div class="shopping-total">
-					<ul>
-						<li>
-							<em>Sub total</em>
-							<strong class="price"><span>$</span>47.00</strong>
-						</li>
-						<li>
-							<em>Shipping cost</em>
-							<strong class="price"><span>$</span>3.00</strong>
-						</li>
-						<li class="shopping-total-price">
-							<em>Total</em>
-							<strong class="price"><span>$</span>50.00</strong>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<button class="btn btn-default" type="submit">쇼핑하기<i class="fa fa-shopping-cart"></i></button>
-			<button class="btn btn-primary" onclick="location.href = '/shopping/order' " type="submit">전체상품주문 <i class="fa fa-check"></i></button>
+		<div class="information">
+			<h4>주문의 완료되었습니다.</h4>
+			<h6>구매번호 / 일자 찍힘</h6>
+			<h6>주문명 / 갯수 찍힘</h6> <h6>결제여부 찍힘</h6>
 		</div>
-	</div>
+		<div class="complete">
+			<ul>
+				<b>배송지 정보</b><br><br>
+				<li>수령인 :</li><br>
+				<li>휴대폰 :</li><br>
+				<li>주소지 : </li><br><br><br><br>
+
+
+				<b>결제정보</b><br><br>
+				<li>결제 방식</li><br>
+				<li>결제 금액</li><br>
+
+
+
+
+
+			</ul>
+
+
+
+		</div>
+
+
+
+
 	<!-- END CONTENT -->
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -330,7 +357,7 @@
 					<div class="footer_col">
 						<div class="footer_title">blog posts</div>
 						<div class="footer_content footer_blog">
-							
+
 							<!-- Footer blog item -->
 							<div class="footer_blog_item clearfix">
 								<div class="footer_blog_image"><img src="/images/footer_blog_1.jpg" alt="https://unsplash.com/@avidenov"></div>
@@ -339,7 +366,7 @@
 									<div class="footer_blog_date">Nov 29, 2017</div>
 								</div>
 							</div>
-							
+
 							<!-- Footer blog item -->
 							<div class="footer_blog_item clearfix">
 								<div class="footer_blog_image"><img src="/images/footer_blog_2.jpg" alt="https://unsplash.com/@deannaritchie"></div>

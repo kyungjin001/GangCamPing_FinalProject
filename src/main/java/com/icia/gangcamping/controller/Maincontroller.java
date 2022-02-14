@@ -30,7 +30,10 @@ public class Maincontroller {
         return "single_listing";
     }
 
-
+    @RequestMapping("offers.html")
+    public String sssss() {
+        return "offers";
+    }
 
     @RequestMapping("index.html")
     public String cxczcof() {
