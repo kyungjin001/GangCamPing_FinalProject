@@ -52,4 +52,28 @@ public class MemberController {
 
     }
 
+    @RequestMapping("shoppingDetail")
+    public String shoppingDetail() {
+        return "member/shoppingDetail";
+
+    }
+
+
+    @RequestMapping("bookDetail")
+    public String bookDetail() {
+        return "member/bookDetail";
+
+    }
+    @RequestMapping("addrChange")
+    public String addrChange() {
+        return "member/addrChange";
+
+    }
+
+    @RequestMapping("confirmPW")
+    public String confirmPW() {
+        return "member/confirmPW";
+
+    }
+
 }

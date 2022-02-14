@@ -89,24 +89,46 @@
 			border-radius: 20%;
 		}
 
-		.kickout-wrapper {
-			text-align: right;
+		.kick-wrapper {
+			text-align: center;
 			padding: 50px 0;
 			background-color: white;
-			margin-right: 200px;
 		}
 
-		.kickout {
+		.kick {
+			width: 450px;
+			height: 300px;
+			line-height : 300px;
+			background-color: whitesmoke;
+			border : solid 1px;
+			color :brown;
+			font-size: 0.75rem;
+			text-align: center;
+			display: inline-block;
+			border-radius: 20%;
+		}
+
+		.agreekick-wrapper {
+			text-align: center;
+			padding: 50px 0;
+			background-color: white;
+		}
+
+		.kickokorno {
 			width: 100px;
 			height: 30px;
 			line-height : 30px;
+			background-color: whitesmoke;
 			border : solid 1px;
+			color :brown;
 			font-size: 0.75rem;
 			text-align: center;
 			display: inline-block;
 			border-radius: 20%;
 		}
 		</style>
+
+
 
 
 
@@ -160,7 +182,7 @@
 								<li class="main_nav_item"><a href="index.html">home</a></li>
 								<li class="main_nav_item"><a href="#">about us</a></li>
 								<li class="main_nav_item"><a href="offers.html">offers</a></li>
-								<li class="main_nav_item"><a href="shopping/blog.html">shopping</a></li>
+								<li class="main_nav_item"><a href="shopping/blogd.html">news</a></li>
 								<li class="main_nav_item"><a href="contact.html">contact</a></li>
 							</ul>
 						</div>
@@ -232,8 +254,16 @@
 		<div class="menu4" onclick="location.href='/member/shoppingLike'" style="cursor: pointer;"><h4>찜</h4></div>
 		<div class="menu5" onclick="location.href='/member/chat'" style="cursor: pointer;"><h4>예약변경</h4></div>
 	</div>
+	<p style="text-align:center; color :brown";>주소 수정</p>
 
+	<div class="kick-wrapper">
+		<div class="kick" onclick="location.href='/member/delete'" style="cursor: pointer;">주소가 수정되었습니다.</div>
+	</div>
 
+	<div class="agreekick-wrapper">
+		<div class="kickokorno" onclick="location.href='/member/delete'" style="cursor: pointer;">확인</div>
+		<div class="kickokorno" onclick="location.href='/member/myinfo'" style="cursor: pointer;">취소</div>
+	</div>
 
 
 

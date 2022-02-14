@@ -88,23 +88,51 @@
 			display: inline-block;
 			border-radius: 20%;
 		}
-
-		.kickout-wrapper {
-			text-align: right;
-			padding: 50px 0;
-			background-color: white;
-			margin-right: 200px;
-		}
-
-		.kickout {
-			width: 100px;
-			height: 30px;
-			line-height : 30px;
+		.camp_pic {
+			width: 250px;
+			height: 300px;
+			line-height : 300px;
+			background-color: whitesmoke;
 			border : solid 1px;
+			color :black;
 			font-size: 0.75rem;
 			text-align: center;
 			display: inline-block;
 			border-radius: 20%;
+			margin-left : 350px;
+		}
+
+		.pic-wrapper {
+			text-align: center;
+			padding: 50px 0;
+			background-color: white;
+			float: left;
+			margin-left: 10px;
+			margin-right:10px;
+
+		}
+
+		.detail-wrapper {
+			width: 600px;
+			height: 350px;
+			/*line-height : 300px;*/
+			background-color: whitesmoke;
+			border : solid 1px;
+			color :black;
+			font-size: 0.75rem;
+			text-align: center;
+			display: inline-block;
+			border-radius: 20%;
+			margin-top: 45px;
+			margin-bottom: 100px;
+		}
+
+		.detail {
+			color :black;
+			font-size: 0.75rem;
+			text-align: left;
+			display: inline-block;
+
 		}
 		</style>
 
@@ -160,7 +188,7 @@
 								<li class="main_nav_item"><a href="index.html">home</a></li>
 								<li class="main_nav_item"><a href="#">about us</a></li>
 								<li class="main_nav_item"><a href="offers.html">offers</a></li>
-								<li class="main_nav_item"><a href="shopping/blog.html">shopping</a></li>
+								<li class="main_nav_item"><a href="shopping/blogd.html">news</a></li>
 								<li class="main_nav_item"><a href="contact.html">contact</a></li>
 							</ul>
 						</div>
@@ -237,7 +265,27 @@
 
 
 
+	<p style="text-align:center; color :brown";>캠핑 내역</p>
 
+
+	<div class="pic-wrapper">
+		<div class="camp_pic" onclick="location.href='/member/myInfo'" style="cursor: pointer;">캠핑장 사진</div>
+	</div>
+
+	<div class="detail-wrapper">
+		<div class="detail">
+			<br>
+			<br>
+			<br>
+			예약일 : ______________________________<br><br>
+			예약번호 : ____________________________<br><br>
+			캠핑장명 : ____________________________<br><br>
+			예약 상세정보 : ________________________<br><br>
+			결제액 : ______________________________<br><br>
+			결제일자 : ____________________________<br><br>
+			결제방식 : ____________________________<br><br>
+		</div>
+	</div>
 
 
 

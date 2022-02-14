@@ -89,25 +89,35 @@
 			border-radius: 20%;
 		}
 
-		.kickout-wrapper {
-			text-align: right;
-			padding: 50px 0;
-			background-color: white;
-			margin-right: 200px;
+		#input1 {
+			width: 300px;
+			height: 50px;
+			border-top: none;
+			border-left: none;
+			border-right: none;
+			border-bottom : 2px solid black;
+			text-align:center;
 		}
-
-		.kickout {
-			width: 100px;
-			height: 30px;
-			line-height : 30px;
-			border : solid 1px;
-			font-size: 0.75rem;
-			text-align: center;
-			display: inline-block;
-			border-radius: 20%;
+		#input2 {
+			width: 300px;
+			height: 55px;
+			border-top: none;
+			border-left: none;
+			border-right: none;
+			border-bottom : 2px solid black;
+			text-align:center;
+		}
+		#input3 {
+			width: 300px;
+			height: 55px;
+			border-top: none;
+			border-left: none;
+			border-right: none;
+			border-bottom : 2px solid black;
+			text-align:center;
+			margin-bottom: 50px;
 		}
 		</style>
-
 
 
 </head>
@@ -160,7 +170,7 @@
 								<li class="main_nav_item"><a href="index.html">home</a></li>
 								<li class="main_nav_item"><a href="#">about us</a></li>
 								<li class="main_nav_item"><a href="offers.html">offers</a></li>
-								<li class="main_nav_item"><a href="shopping/blog.html">shopping</a></li>
+								<li class="main_nav_item"><a href="shopping/blogd.html">news</a></li>
 								<li class="main_nav_item"><a href="contact.html">contact</a></li>
 							</ul>
 						</div>
@@ -233,6 +243,17 @@
 		<div class="menu5" onclick="location.href='/member/chat'" style="cursor: pointer;"><h4>예약변경</h4></div>
 	</div>
 
+
+	<p style="text-align:center; color :brown";>비밀번호 재설정</p>
+
+
+	<div style="text-align: center;">
+		<form action="/member/update" method="POST">
+			<input id="input1" type="password" name="memberPassword" placeholder="새로운 비밀번호를 입력해주세요!"><br>
+			<input id="input2" type="password" name="memberPassword" placeholder="새로운 비밀번호를 다시 입력해주세요!"><br><br>
+			<input id="input3" type="submit" value="비밀번호 수정">
+		</form>
+	</div>
 
 
 
