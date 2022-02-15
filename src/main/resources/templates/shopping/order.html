@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
 <title>Blog</title>
 <meta charset="utf-8">
@@ -13,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="/styles/blog_styles.css">
 <link rel="stylesheet" type="text/css" href="/styles/blog_responsive.css">
 
+
 <style>
 
 .line{
@@ -20,6 +20,95 @@
 	height: 1px;
 	background-color: #cccccc;
 }
+
+	.payLine{
+		width: 50%;
+		height: 1px;
+		background-color: #cccccc;
+		margin-left: 400px;
+		margin-bottom: 30px;
+	}
+
+
+
+		.pay{
+		width: 40%;
+		height: 200px;
+		margin-left: 400px;
+		}
+
+		.deliveryLine{
+			width: 50%;
+			height: 1px;
+			background-color: #cccccc;
+			margin-left: 400px;
+			margin-bottom: 50px;
+		}
+
+	.delivery{
+		width: 40%;
+		height: 400px;
+		margin-left: 400px;
+		margin-bottom: 100px;
+	}
+
+	/*.main{*/
+	/*	width: 800px;*/
+	/*	height: 800px;*/
+	/*	border: black 1px solid;*/
+	/*}*/
+	/*.left{*/
+	/*	float: left;*/
+	/*	width: 300px;*/
+	/*	height: 400px;*/
+	/*	border: red 1px solid;*/
+
+	/*}*/
+	/*.right{*/
+	/*	float: right;*/
+	/*	width: 300px;*/
+	/*	height: 400px;*/
+	/*	border: purple 1px solid;*/
+	/*}*/
+
+.text{
+	margin-left: 400px;
+}
+
+
+.a1 {
+	width: 380px !important;
+	/* background-color: cadetblue; */
+	/* margin-right: 200px; */
+	display: inline-block !important;
+	margin-left: 3px;
+
+}
+
+.a2 {
+	width: 200px !important;
+	/* background-color: cadetblue; */
+	/* margin-right: 200px; */
+	display: inline-block !important;
+	margin-left: 3px;
+	color: gray;
+
+}
+#e1{
+	width: 180px !important;
+	display: inline-block !important;
+	margin-left:3px;
+
+}
+.a3 {
+	width: 180px !important;
+	/* background-color: cadetblue; */
+	/* margin-right: 200px; */
+	display: inline-block !important;
+	margin-left: 3px;
+
+}
+
 
 </style>
 
@@ -44,7 +133,6 @@
 
 
 
-	<link rel="shortcut icon" href="favicon.ico">
 
 	<!-- Fonts START -->
 	<!-- Global styles START -->
@@ -57,6 +145,79 @@
 	<!-- Theme styles END -->
 
 
+	<script>
+
+		//전화번호 정규식
+		function phoneCheck(){
+			const exp = /^\d{3}-\d{4}-\d{4}$/;
+			const phone = document.getElementById('phone').value;
+			const result = document.getElementById('phone-check-result')
+
+			if(phone.match(exp)){
+				result.innerHTML = "유효한 형식입니다."
+				result.style.color ='green'
+			}else {
+				result.innerHTML = "유효하지 않은 형식입니다."
+				result.style.color='red'
+			}
+		}
+		//전화번호 정규식 끝
+
+		// 주소찾기
+		function sample6_execDaumPostcode() {
+			new daum.Postcode({
+				oncomplete: function(data) {
+
+					var addr = '';
+					var extraAddr = '';
+
+					if (data.userSelectedType === 'R') {
+						addr = data.roadAddress;
+					} else {
+						addr = data.jibunAddress;
+					}
+
+					if(data.userSelectedType === 'R'){
+						if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+							extraAddr += data.bname;
+						}
+						if(data.buildingName !== '' && data.apartment === 'Y'){
+							extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+						}
+						if(extraAddr !== ''){
+							extraAddr = ' (' + extraAddr + ')';
+						}
+						document.getElementById("sample6_extraAddress").value = extraAddr;
+
+					} else {
+						document.getElementById("sample6_extraAddress").value = '';
+					}
+
+					document.getElementById('sample6_postcode').value = data.zonecode;
+					document.getElementById("sample6_address").value = addr;
+					document.getElementById("sample6_detailAddress").focus();
+				}
+			}).open();
+		}
+		// 주소찾기 끝
+
+
+
+		//이메일 함수
+		function emailSelect(){
+			const domainselect = document.getElementById('domainselect').value
+			const domain = document.getElementById('domain')
+			// select 에서 선택한 값을 domain id를 적용한 input 태그에 출력
+			domain.value = domainselect;
+
+		}
+		//이메일 함수 끝
+
+
+
+	</script>
+
+
 
 
 
@@ -65,7 +226,7 @@
 <body>
 
 <div class="super_container">
-	
+
 	<!-- Header -->
 
 	<header class="header">
@@ -93,7 +254,7 @@
 						</div>
 					</div>
 				</div>
-			</div>		
+			</div>
 		</div>
 
 		<!-- Main Navigation -->
@@ -178,10 +339,10 @@
 	<!-- BEGIN CONTENT -->
 	<div class="col-md-12 col-sm-12">
 
-			<h2>장바구니</h2>
+			<h2>주문서 작성</h2>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<img src="/img/img_step1.png" width="1200px">
+		<img src="/img/img_step2.png" width="1200px">
 		<div class="line">
 		</div>
 
@@ -272,23 +433,70 @@
 					</ul>
 				</div>
 			</div>
-			<button class="btn btn-default" type="submit">쇼핑하기<i class="fa fa-shopping-cart"></i></button>
-			<button class="btn btn-primary" onclick="location.href = '/shopping/order' " type="submit">전체상품주문 <i class="fa fa-check"></i></button>
+
+
+<!--			<div class="main">-->
+<!--			<div class="left">이거는 왼쪽</div>-->
+<!--			<div class="right">이거는 오른쪽</div>-->
+<!--			</div>-->
+			<div class="text">	<h1>배송정보</h1></div>
+
+			<div class="deliveryLine"></div>
+
+			<div class="delivery">
+
+			<form>
+
+				받는분
+				<br><input type='text' class="a1 form-control shadow-sm" placeholder="이름을 입력바랍니다."><br><br>
+					이메일
+					<br><input type='text' name="emailId" id="e1" class="form-control shadow-sm" placeholder="your email"> @
+					<input type="text" id="domain" name="domain" class="a3 form-control shadow-sm">
+<!--					<select id="domainselect" class="a2 form-control shadow-sm" onchange="emailSelect()">-->
+					<select>
+					<option selected>직접입력</option>
+						<option value="naver.com">naver.com</option>
+						<option value="daum.net">daum.net</option>
+						<option value="hanmail.net">hanmail.net</option>
+					</select>
+				<br><br>전화번호
+				<br><input type="text" id="phone" class="a1 form-control shadow-sm" onblur="phoneCheck()" placeholder="010-xxxx-xxxx 형식으로 입력바랍니다."><br>
+				<span id="phone-check-result"></span><br>
+
+				우편번호 확인<br>
+				<input type="text" class="a1 form-control shadow-sm" id="sample6_postcode" placeholder="우편번호">
+				<input type="button" class="btn btn-primary" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+				<input type="text" class="a1 form-control shadow-sm" id="sample6_address" placeholder="주소"><br>
+				<input type="text" class="a1 form-control shadow-sm" id="sample6_detailAddress" placeholder="상세주소">
+				<input type="text" class="a1 form-control shadow-sm" id="sample6_extraAddress" placeholder="참고항목">
+				<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script><br>
+				<br>배송시 요청사항
+				<br><input type="text" class="a1 form-control shadow-sm" placeholder="요청사항 기재">
+			</form>
+
+			</div>
+
+			<div class="payLine">
+			</div>
+			<div class="pay">
+			결제수단 선택<br>
+				<select>
+					<option>카카오페이</option>
+					<option>무통장입금</option>
+					<option>신용카드</option>
+					<option>네이버페이</option>
+					<option>페이코</option>
+					<option>모바일결제</option>
+				</select>
+			</div>
+
+
+
+			<br><br><button class="btn btn-default" type="submit">쇼핑하기<i class="fa fa-shopping-cart"></i></button>
+			<br><br><button class="btn btn-primary" onclick="location.href ='/shopping/complete'" type="submit">전체상품주문 <i class="fa fa-check"></i></button>
 		</div>
-	</div>
+	</table>
 	<!-- END CONTENT -->
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -330,7 +538,7 @@
 					<div class="footer_col">
 						<div class="footer_title">blog posts</div>
 						<div class="footer_content footer_blog">
-							
+
 							<!-- Footer blog item -->
 							<div class="footer_blog_item clearfix">
 								<div class="footer_blog_image"><img src="/images/footer_blog_1.jpg" alt="https://unsplash.com/@avidenov"></div>
@@ -339,7 +547,7 @@
 									<div class="footer_blog_date">Nov 29, 2017</div>
 								</div>
 							</div>
-							
+
 							<!-- Footer blog item -->
 							<div class="footer_blog_item clearfix">
 								<div class="footer_blog_image"><img src="/images/footer_blog_2.jpg" alt="https://unsplash.com/@deannaritchie"></div>

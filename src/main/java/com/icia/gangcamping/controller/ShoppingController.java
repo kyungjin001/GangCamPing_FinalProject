@@ -29,5 +29,15 @@ public class ShoppingController {
     }
 
 
+    @RequestMapping("order")
+    public String order() {
+        return "shopping/order";
+    }
+
+    @RequestMapping("complete")
+    public String complete() {
+        return "shopping/complete";
+    }
+
 
 }

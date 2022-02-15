@@ -30,7 +30,10 @@ public class MainController {
         return "single_listing";
     }
 
-
+    @RequestMapping("offers.html")
+    public String sssss() {
+        return "offers";
+    }
 
 
 }
