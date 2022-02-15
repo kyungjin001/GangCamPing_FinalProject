@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            margin:30px auto;
+        }
+
+        .menu-wrapper {
+            text-align: center;
+            padding: 50px 0;
+            background-color: white;
+        }
+        .menu {
+            width: 100px;
+            height: 30px;
+            line-height : 30px;
+            background-color: whitesmoke;
+            border : solid 1px;
+            color :brown;
+            font-size: 0.75rem;
+            text-align: center;
+            display: inline-block;
+            border-radius: 20%;
+        }
+    </style>
+
+
+
+    <style type="text/css">
+        .tg  {border-collapse:collapse;border-color:#ccc;border-spacing:0;}
+        .tg td{background-color:#fff;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
+            font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg th{background-color:#f0f0f0;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
+            font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg .tg-lstg{border-color:inherit;font-family:"Arial Black", Gadget, sans-serif !important;font-size:11px;font-weight:bold;
+            text-align:center;vertical-align:middle}
+        .tg .tg-80qx{border-color:inherit;font-family:Arial, Helvetica, sans-serif !important;font-size:11px;text-align:center;
+            vertical-align:middle}
+        .tg {
+            margin-left:auto;
+            margin-right:auto;
+        }
+    </style>
+    <title>Title</title>
+</head>
+<body>
+<p style="text-align:center; color :brown";>관리자 페이지</p>
+<div class="menu-wrapper">
+    <div class="menu" onclick="location.href='/admin/bookList'" style="cursor: pointer;">예약관리</div>
+    <div class="menu" onclick="location.href='/admin/findAll'" style="cursor: pointer;">회원관리</div>
+    <div class="menu" onclick="location.href='/shopping/findAll'" style="cursor: pointer;">상품관리</div>
+    <div class="menu" onclick="location.href='/admin/salesGraph'" style="cursor: pointer;">매출통계</div>
+    <div class="menu" onclick="location.href='/admin/chatList'" style="cursor: pointer;">캠핑장문의</div>
+    <div class="menu" onclick="location.href='/admin/shoppingAsk'" style="cursor: pointer;">상품문의</div>
+    <div class="menu" onclick="location.href='/admin/save'" style="cursor: pointer;">상품등록</div>
+</div>
+
+
+<p style="text-align:center; color :brown";>예약 리스트</p>
+
+<table class="tg" style="undefined; table-layout: fixed; width: 878px" table>
+    <colgroup>
+        <col style="width: 74px">
+        <col style="width: 83px">
+        <col style="width: 113px">
+        <col style="width: 295px">
+        <col style="width: 93px">
+        <col style="width: 100px">
+        <col style="width: 120px">
+    </colgroup>
+    <thead>
+    <tr>
+        <th class="tg-lstg">회원번호</th>
+        <th class="tg-lstg">ID</th>
+        <th class="tg-lstg">이름</th>
+        <th class="tg-lstg">이메일</th>
+        <th class="tg-lstg">전화번호</th>
+        <th class="tg-lstg">상태</th>
+        <th class="tg-lstg">주소</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="tg-80qx">00001</td>
+        <td class="tg-80qx">aaaaa</td>
+        <td class="tg-80qx">테스트1</td>
+        <td class="tg-80qx">aaaaa@aaaaa.com <br>옵션: 大 </td>
+        <td class="tg-80qx">01234567890</td>
+        <td class="tg-80qx">등록완료</td>
+        <td class="tg-80qx">인천시 남구 가나다동 다라마아파트 가동 101호</td>
+    </tr>
+    <tr>
+        <td class="tg-80qx"></td>
+        <td class="tg-80qx"></td>
+        <td class="tg-80qx"></td>
+        <td class="tg-80qx"></td>
+        <td class="tg-80qx"></td>
+        <td class="tg-80qx"></td>
+        <td class="tg-80qx"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>
