@@ -4,13 +4,11 @@ package com.icia.gangcamping.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @RequiredArgsConstructor
 @Controller
-public class Maincontroller {
+public class MainController {
 
 
     @RequestMapping("about.html")
