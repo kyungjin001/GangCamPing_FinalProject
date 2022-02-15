@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            margin:30px auto;
+        }
+
+        .menu-wrapper {
+            text-align: center;
+            padding: 50px 0;
+            background-color: white;
+        }
+        .menu {
+            width: 100px;
+            height: 30px;
+            line-height : 30px;
+            background-color: whitesmoke;
+            border : solid 1px;
+            color :brown;
+            font-size: 0.75rem;
+            text-align: center;
+            display: inline-block;
+            border-radius: 20%;
+        }
+    </style>
+
+    <style>
+        #input1 {
+            width: 300px;
+            height: 50px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 2px solid black;
+            text-align:center;
+        }
+        #input2 {
+            width: 300px;
+            height: 55px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 2px solid black;
+            text-align:center;
+        }
+        #input3 {
+            width: 300px;
+            height: 55px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 2px solid black;
+            text-align:center;
+        }
+
+    </style>
+    <title>mypage</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+</head>
+<body>
+
+
+    <div class="menu-wrapper">
+        <div class="menu" onclick="location.href='/member/myInfo'" style="cursor: pointer;">나의정보</div>
+        <div class="menu" onclick="location.href='/member/bookList'" style="cursor: pointer;">캠핑내역</div>
+        <div class="menu" onclick="location.href='/member/shoppingList'" style="cursor: pointer;">쇼핑내역</div>
+        <div class="menu" onclick="location.href='/member/shoppingLike'" style="cursor: pointer;">찜</div>
+        <div class="menu" onclick="location.href='/member/chat'" style="cursor: pointer;">예약변경(1:1)</div>
+    </div>
+
+<p style="text-align:center; color :brown";>비밀번호 재설정</p>
+
+
+    <div style="text-align: center;">
+    <form action="/member/update" method="POST">
+        <input id="input1" type="password" name="memberPassword" placeholder="새로운 비밀번호를 입력해주세요!"><br>
+        <input id="input2" type="password" name="memberPassword" placeholder="새로운 비밀번호를 다시 입력해주세요!"><br><br>
+    <input id="input3" type="submit" value="비밀번호 수정">
+    </form>
+    </div>
+
+
+
+</body>
+</html>

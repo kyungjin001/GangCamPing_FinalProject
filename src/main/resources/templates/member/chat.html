@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>myInfo.html</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <style>
+        body {
+            margin:30px auto;
+        }
+
+        .menu-wrapper {
+            text-align: center;
+            padding: 50px 0;
+            background-color: white;
+        }
+        .menu {
+            width: 100px;
+            height: 30px;
+            line-height : 30px;
+            background-color: whitesmoke;
+            border : solid 1px;
+            color :brown;
+            font-size: 0.75rem;
+            text-align: center;
+            display: inline-block;
+            border-radius: 20%;
+        }
+
+        .kick-wrapper {
+            text-align: center;
+            padding: 50px 0;
+            background-color: white;
+        }
+
+        .kick {
+            width: 450px;
+            height: 300px;
+            line-height : 300px;
+            background-color: whitesmoke;
+            border : solid 1px;
+            color :brown;
+            font-size: 0.75rem;
+            text-align: center;
+            display: inline-block;
+            border-radius: 20%;
+        }
+
+        .agreekick-wrapper {
+            text-align: center;
+            padding: 50px 0;
+            background-color: white;
+        }
+
+        .kickokorno {
+            width: 100px;
+            height: 30px;
+            line-height : 30px;
+            background-color: whitesmoke;
+            border : solid 1px;
+            color :brown;
+            font-size: 0.75rem;
+            text-align: center;
+            display: inline-block;
+            border-radius: 20%;
+        }
+    </style>
+
+    <style>
+        #input1 {
+            width: 300px;
+            height: 50px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 1px solid black;
+            text-align:center;
+        }
+        #input2 {
+            width: 300px;
+            height: 55px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 1px solid black;
+            text-align:center;
+        }
+        #input3 {
+            width: 300px;
+            height: 55px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 1px solid black;
+            text-align:center;
+        }
+
+        #input4 {
+            width: 300px;
+            height: 55px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 1px solid black;
+            text-align:center;
+        }
+
+        #input5 {
+            width: 300px;
+            height: 55px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 1px solid black;
+            text-align:center;
+        }
+
+        #input6 {
+            width: 300px;
+            height: 55px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 1px solid black;
+            text-align:center;
+        }
+
+        #input7 {
+            width: 300px;
+            height: 55px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 1px solid black;
+            text-align:center;
+        }
+
+        #input8 {
+            width: 150px;
+            height: 35px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 1px solid black;
+            text-align:center;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="menu-wrapper">
+    <div class="menu" onclick="location.href='/member/myInfo'" style="cursor: pointer;">나의정보</div>
+    <div class="menu" onclick="location.href='/member/bookList'" style="cursor: pointer;">캠핑내역</div>
+    <div class="menu" onclick="location.href='/member/shoppingList'" style="cursor: pointer;">쇼핑내역</div>
+    <div class="menu" onclick="location.href='/member/shoppingLike'" style="cursor: pointer;">찜</div>
+    <div class="menu" onclick="location.href='/member/chat'" style="cursor: pointer;">예약변경(1:1)</div>
+</div>
+
+<p style="text-align:center; color :brown";>1:1 상담</p>
+
+<div class="kick-wrapper">
+    <div class="kick" onclick="location.href='/member/delete'" style="cursor: pointer;">1:1 상담창</div>
+</div>
+
+<div class="agreekick-wrapper">
+    <div class="kickokorno" onclick="location.href='/member/myinfo'" style="cursor: pointer;">나의정보</div>
+    <div class="kickokorno" onclick="location.href='/'" style="cursor: pointer;">홈페이지</div>
+</div>
+
+</body>
+</html>
