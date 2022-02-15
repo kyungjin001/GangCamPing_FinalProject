@@ -2,7 +2,6 @@ server:
   port: 8098
 
 
-
 # DB 접속 정보
 spring:
   datasource:
