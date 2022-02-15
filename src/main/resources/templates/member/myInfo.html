@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>myInfo.html</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <style>
+        body {
+            margin:30px auto;
+        }
+
+        .menu-wrapper {
+            text-align: center;
+            padding: 50px 0;
+            background-color: white;
+        }
+        .menu {
+            width: 100px;
+            height: 30px;
+            line-height : 30px;
+            background-color: whitesmoke;
+            border : solid 1px;
+            color :brown;
+            font-size: 0.75rem;
+            text-align: center;
+            display: inline-block;
+            border-radius: 20%;
+        }
+
+        .kickout-wrapper {
+            text-align: right;
+            padding: 50px 0;
+            background-color: white;
+            margin-right: 200px;
+        }
+
+        .kickout {
+            width: 100px;
+            height: 30px;
+            line-height : 30px;
+            background-color: whitesmoke;
+            border : solid 1px;
+            color :brown;
+            font-size: 0.75rem;
+            text-align: center;
+            display: inline-block;
+            border-radius: 20%;
+        }
+    </style>
+
+    <style>
+        #input1 {
+            width: 300px;
+            height: 50px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 1px solid black;
+            text-align:center;
+        }
+        #input2 {
+            width: 300px;
+            height: 55px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 1px solid black;
+            text-align:center;
+        }
+        #input3 {
+            width: 300px;
+            height: 55px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 1px solid black;
+            text-align:center;
+        }
+
+        #input4 {
+            width: 300px;
+            height: 55px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 1px solid black;
+            text-align:center;
+        }
+
+        #input5 {
+            width: 300px;
+            height: 55px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 1px solid black;
+            text-align:center;
+        }
+
+        #input6 {
+            width: 300px;
+            height: 55px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 1px solid black;
+            text-align:center;
+        }
+
+        #input7 {
+            width: 300px;
+            height: 55px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 1px solid black;
+            text-align:center;
+        }
+
+        #input8 {
+            width: 150px;
+            height: 35px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 1px solid black;
+            text-align:center;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="menu-wrapper">
+    <div class="menu" onclick="location.href='/member/myInfo'" style="cursor: pointer;">나의정보</div>
+    <div class="menu" onclick="location.href='/member/bookList'" style="cursor: pointer;">캠핑내역</div>
+    <div class="menu" onclick="location.href='/member/shoppingList'" style="cursor: pointer;">쇼핑내역</div>
+    <div class="menu" onclick="location.href='/member/shoppingLike'" style="cursor: pointer;">찜</div>
+    <div class="menu" onclick="location.href='/member/chat'" style="cursor: pointer;">예약변경(1:1)</div>
+</div>
+    <div style="text-align: center;">
+                    <form action="/member/update" method="post">
+                        이   메  일<input type="text" id="input1" name="memberEmail"  placeholder="이메일"><br>
+                        닉   네  임<input type="text" id="input2" name="memberNick"  placeholder="닉네임"><br>
+                        현재 비밀번호<input type="password" id="input3" name="memberPassword" placeholder="현재 비밀번호"><br>
+                        새  비밀번호<input type="password" id="input4" name="memberPassword" placeholder="새 비밀번호"><br>
+                        새  비밀번호<input type="password" id="input5" name="memberPassword" placeholder="새 비밀번호"><br>
+                        핸드폰  번호<input type="text" id="input6" name="memberPhone" placeholder="핸드폰 번호"><br>
+                        주       소<input type="text" id="input7" name="memberAddr" placeholder="주소"><br>
+                        <button onclick="document.location='/member/addrupdate'">주소변경</button><br><br>
+                        <input type="submit" id="input8" value="나의정보 수정">
+                    </form>
+    </div>
+             <div class="kickout-wrapper">
+                 <div class="kickout" onclick="location.href='/member/delete'" style="cursor: pointer;">회원탈퇴</div>
+                 </div>
+</body>
+</html>
+
