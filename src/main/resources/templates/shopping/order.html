@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+<title>Blog</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Travelix Project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="/styles/bootstrap4/bootstrap.min.css">
+<link href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="/plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/styles/blog_styles.css">
+<link rel="stylesheet" type="text/css" href="/styles/blog_responsive.css">
+
+
+<style>
+
+.line{
+	width: 100%;
+	height: 1px;
+	background-color: #cccccc;
+}
+
+	.payLine{
+		width: 50%;
+		height: 1px;
+		background-color: #cccccc;
+		margin-left: 400px;
+		margin-bottom: 30px;
+	}
+
+
+
+		.pay{
+		width: 40%;
+		height: 200px;
+		margin-left: 400px;
+		}
+
+		.deliveryLine{
+			width: 50%;
+			height: 1px;
+			background-color: #cccccc;
+			margin-left: 400px;
+			margin-bottom: 50px;
+		}
+
+	.delivery{
+		width: 40%;
+		height: 400px;
+		margin-left: 400px;
+		margin-bottom: 100px;
+	}
+
+	/*.main{*/
+	/*	width: 800px;*/
+	/*	height: 800px;*/
+	/*	border: black 1px solid;*/
+	/*}*/
+	/*.left{*/
+	/*	float: left;*/
+	/*	width: 300px;*/
+	/*	height: 400px;*/
+	/*	border: red 1px solid;*/
+
+	/*}*/
+	/*.right{*/
+	/*	float: right;*/
+	/*	width: 300px;*/
+	/*	height: 400px;*/
+	/*	border: purple 1px solid;*/
+	/*}*/
+
+.text{
+	margin-left: 400px;
+}
+
+
+.a1 {
+	width: 380px !important;
+	/* background-color: cadetblue; */
+	/* margin-right: 200px; */
+	display: inline-block !important;
+	margin-left: 3px;
+
+}
+
+.a2 {
+	width: 200px !important;
+	/* background-color: cadetblue; */
+	/* margin-right: 200px; */
+	display: inline-block !important;
+	margin-left: 3px;
+	color: gray;
+
+}
+#e1{
+	width: 180px !important;
+	display: inline-block !important;
+	margin-left:3px;
+
+}
+.a3 {
+	width: 180px !important;
+	/* background-color: cadetblue; */
+	/* margin-right: 200px; */
+	display: inline-block !important;
+	margin-left: 3px;
+
+}
+
+
+</style>
+
+
+
+
+
+			<!-- 상품 CSS 	-->
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+	<!-- Css Styles -->
+	<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+	<link rel="stylesheet" href="/css/elegant-icons.css" type="text/css">
+	<link rel="stylesheet" href="/css/nice-select.css" type="text/css">
+	<link rel="stylesheet" href="/css/jquery-ui.min.css" type="text/css">
+	<link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
+	<link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
+	<link rel="stylesheet" href="/css/style.css" type="text/css">
+
+
+
+
+
+	<!-- Fonts START -->
+	<!-- Global styles START -->
+	<link href="/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Global styles END -->
+
+	<!-- Theme styles START -->
+	<link href="/assets/pages/css/style-shop.css" rel="stylesheet" type="text/css">
+	<!-- Theme styles END -->
+
+
+	<script>
+
+		//전화번호 정규식
+		function phoneCheck(){
+			const exp = /^\d{3}-\d{4}-\d{4}$/;
+			const phone = document.getElementById('phone').value;
+			const result = document.getElementById('phone-check-result')
+
+			if(phone.match(exp)){
+				result.innerHTML = "유효한 형식입니다."
+				result.style.color ='green'
+			}else {
+				result.innerHTML = "유효하지 않은 형식입니다."
+				result.style.color='red'
+			}
+		}
+		//전화번호 정규식 끝
+
+		// 주소찾기
+		function sample6_execDaumPostcode() {
+			new daum.Postcode({
+				oncomplete: function(data) {
+
+					var addr = '';
+					var extraAddr = '';
+
+					if (data.userSelectedType === 'R') {
+						addr = data.roadAddress;
+					} else {
+						addr = data.jibunAddress;
+					}
+
+					if(data.userSelectedType === 'R'){
+						if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+							extraAddr += data.bname;
+						}
+						if(data.buildingName !== '' && data.apartment === 'Y'){
+							extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+						}
+						if(extraAddr !== ''){
+							extraAddr = ' (' + extraAddr + ')';
+						}
+						document.getElementById("sample6_extraAddress").value = extraAddr;
+
+					} else {
+						document.getElementById("sample6_extraAddress").value = '';
+					}
+
+					document.getElementById('sample6_postcode').value = data.zonecode;
+					document.getElementById("sample6_address").value = addr;
+					document.getElementById("sample6_detailAddress").focus();
+				}
+			}).open();
+		}
+		// 주소찾기 끝
+
+
+
+		//이메일 함수
+		function emailSelect(){
+			const domainselect = document.getElementById('domainselect').value
+			const domain = document.getElementById('domain')
+			// select 에서 선택한 값을 domain id를 적용한 input 태그에 출력
+			domain.value = domainselect;
+
+		}
+		//이메일 함수 끝
+
+
+
+	</script>
+
+
+
+
+
+</head>
+
+<body>
+
+<div class="super_container">
+
+	<!-- Header -->
+
+	<header class="header">
+
+		<!-- Top Bar -->
+
+		<div class="top_bar">
+			<div class="container">
+				<div class="row">
+					<div class="col d-flex flex-row">
+						<div class="phone">+45 345 3324 56789</div>
+						<div class="social">
+							<ul class="social_list">
+								<li class="social_list_item"><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+								<li class="social_list_item"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+								<li class="social_list_item"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+								<li class="social_list_item"><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+								<li class="social_list_item"><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
+								<li class="social_list_item"><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+							</ul>
+						</div>
+						<div class="user_box ml-auto">
+							<div class="user_box_login user_box_link"><a href="#">login</a></div>
+							<div class="user_box_register user_box_link"><a href="#">register</a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Main Navigation -->
+
+		<nav class="main_nav">
+			<div class="container">
+				<div class="row">
+					<div class="col main_nav_col d-flex flex-row align-items-center justify-content-start">
+						<div class="logo_container">
+							<div class="logo"><a href="#"><img src="/images/logo.png" alt="">travelix</a></div>
+						</div>
+						<div class="main_nav_container ml-auto">
+							<ul class="main_nav_list">
+								<li class="main_nav_item"><a href="../index.html">home</a></li>
+								<li class="main_nav_item"><a href="../about.html">about us</a></li>
+								<li class="main_nav_item"><a href="../offers.html">offers</a></li>
+								<li class="main_nav_item"><a href="#">news</a></li>
+								<li class="main_nav_item"><a href="../contact.html">contact</a></li>
+							</ul>
+						</div>
+						<div class="content_search ml-lg-0 ml-auto">
+							<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+							width="17px" height="17px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+								<g>
+									<g>
+										<g>
+											<path class="mag_glass" fill="#FFFFFF" d="M78.438,216.78c0,57.906,22.55,112.343,63.493,153.287c40.945,40.944,95.383,63.494,153.287,63.494
+											s112.344-22.55,153.287-63.494C489.451,329.123,512,274.686,512,216.78c0-57.904-22.549-112.342-63.494-153.286
+											C407.563,22.549,353.124,0,295.219,0c-57.904,0-112.342,22.549-153.287,63.494C100.988,104.438,78.439,158.876,78.438,216.78z
+											M119.804,216.78c0-96.725,78.69-175.416,175.415-175.416s175.418,78.691,175.418,175.416
+											c0,96.725-78.691,175.416-175.416,175.416C198.495,392.195,119.804,313.505,119.804,216.78z"/>
+										</g>
+									</g>
+									<g>
+										<g>
+											<path class="mag_glass" fill="#FFFFFF" d="M6.057,505.942c4.038,4.039,9.332,6.058,14.625,6.058s10.587-2.019,14.625-6.058L171.268,369.98
+											c8.076-8.076,8.076-21.172,0-29.248c-8.076-8.078-21.172-8.078-29.249,0L6.057,476.693
+											C-2.019,484.77-2.019,497.865,6.057,505.942z"/>
+										</g>
+									</g>
+								</g>
+							</svg>
+						</div>
+
+						<form id="search_form" class="search_form bez_1">
+							<input type="search" class="search_content_input bez_1">
+						</form>
+
+						<div class="hamburger">
+							<i class="fa fa-bars trans_200"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+	</header>
+
+	<div class="menu trans_500">
+		<div class="menu_content d-flex flex-column align-items-center justify-content-center text-center">
+			<div class="menu_close_container"><div class="menu_close"></div></div>
+			<div class="logo menu_logo"><a href="#"><img src="/images/logo.png" alt=""></a></div>
+			<ul>
+				<li class="menu_item"><a href="../index.html">home</a></li>
+				<li class="menu_item"><a href="../about.html">about us</a></li>
+				<li class="menu_item"><a href="../offers.html">offers</a></li>
+				<li class="menu_item"><a href="#">news</a></li>
+				<li class="menu_item"><a href="../contact.html">contact</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<!-- Home -->
+
+	<div class="home">
+		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="/images/blog_background.jpg"></div>
+		<div class="home_content">
+			<div class="home_title">CART</div>
+		</div>
+	</div>
+
+	<!-- BEGIN CONTENT -->
+	<div class="col-md-12 col-sm-12">
+
+			<h2>주문서 작성</h2>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<img src="/img/img_step2.png" width="1200px">
+		<div class="line">
+		</div>
+
+		<div class="goods-page">
+			<div class="goods-data clearfix">
+				<div class="table-wrapper-responsive">
+					<table summary="Shopping cart">
+						<tr>
+							<th class="goods-page-image">이미지</th>
+							<th class="goods-page-description">상품정보</th>
+							<th class="goods-page-quantity">수량</th>
+							<th class="goods-page-ref-no">배송비</th>
+							<th class="goods-page-price">판매가</th>
+							<th class="goods-page-total" colspan="2">합계</th>
+						</tr>
+						<tr>
+							<td class="goods-page-image">
+								<a href="javascript:;"><img src="/assets/pages/img/products/model3.jpg" alt="Berry Lace Dress"></a>
+							</td>
+							<td class="goods-page-description">
+								<h3><a href="javascript:;">Cool green dress with red bell</a></h3>
+								<p><strong>Item 1</strong> - Color: Green; Size: S</p>
+								<em>More info is here</em>
+							</td>
+							<td class="goods-page-quantity">
+								<div class="product-quantity">
+									<input id="product-quantity" type="text" value="1" readonly class="form-control input-sm">
+								</div>
+									<button class="btn btn-primary" type="submit">변경</button>
+							</td>
+							<td class="goods-page-ref-no">
+								javc2133
+							</td>
+							<td class="goods-page-price">
+								<strong><span>$</span>47.00</strong>
+							</td>
+							<td class="goods-page-total">
+								<strong><span>$</span>47.00</strong>
+							</td>
+							<td class="del-goods-col">
+								<a class="del-goods" href="javascript:;">&nbsp;</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="goods-page-image">
+								<a href="javascript:;"><img src="/assets/pages/img/products/model4.jpg" alt="Berry Lace Dress"></a>
+							</td>
+							<td class="goods-page-description">
+								<h3><a href="javascript:;">Cool green dress with red bell</a></h3>
+								<p><strong>Item 1</strong> - Color: Green; Size: S</p>
+								<em>More info is here</em>
+							</td>
+							<td class="goods-page-quantity">
+								<div class="product-quantity">
+									<input id="product-quantity2" type="text" value="1" readonly class="form-control input-sm">
+								</div>
+							</td>
+							<td class="goods-page-ref-no">
+								javc2133
+							</td>
+							<td class="goods-page-price">
+								<strong><span>$</span>47.00</strong>
+							</td>
+							<td class="goods-page-total">
+								<strong><span>$</span>47.00</strong>
+							</td>
+							<td class="del-goods-col">
+								<a class="del-goods" href="javascript:;">&nbsp;</a>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+				<div class="shopping-total">
+					<ul>
+						<li>
+							<em>Sub total</em>
+							<strong class="price"><span>$</span>47.00</strong>
+						</li>
+						<li>
+							<em>Shipping cost</em>
+							<strong class="price"><span>$</span>3.00</strong>
+						</li>
+						<li class="shopping-total-price">
+							<em>Total</em>
+							<strong class="price"><span>$</span>50.00</strong>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+
+<!--			<div class="main">-->
+<!--			<div class="left">이거는 왼쪽</div>-->
+<!--			<div class="right">이거는 오른쪽</div>-->
+<!--			</div>-->
+			<div class="text">	<h1>배송정보</h1></div>
+
+			<div class="deliveryLine"></div>
+
+			<div class="delivery">
+
+			<form>
+
+				받는분
+				<br><input type='text' class="a1 form-control shadow-sm" placeholder="이름을 입력바랍니다."><br><br>
+					이메일
+					<br><input type='text' name="emailId" id="e1" class="form-control shadow-sm" placeholder="your email"> @
+					<input type="text" id="domain" name="domain" class="a3 form-control shadow-sm">
+<!--					<select id="domainselect" class="a2 form-control shadow-sm" onchange="emailSelect()">-->
+					<select>
+					<option selected>직접입력</option>
+						<option value="naver.com">naver.com</option>
+						<option value="daum.net">daum.net</option>
+						<option value="hanmail.net">hanmail.net</option>
+					</select>
+				<br><br>전화번호
+				<br><input type="text" id="phone" class="a1 form-control shadow-sm" onblur="phoneCheck()" placeholder="010-xxxx-xxxx 형식으로 입력바랍니다."><br>
+				<span id="phone-check-result"></span><br>
+
+				우편번호 확인<br>
+				<input type="text" class="a1 form-control shadow-sm" id="sample6_postcode" placeholder="우편번호">
+				<input type="button" class="btn btn-primary" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+				<input type="text" class="a1 form-control shadow-sm" id="sample6_address" placeholder="주소"><br>
+				<input type="text" class="a1 form-control shadow-sm" id="sample6_detailAddress" placeholder="상세주소">
+				<input type="text" class="a1 form-control shadow-sm" id="sample6_extraAddress" placeholder="참고항목">
+				<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script><br>
+				<br>배송시 요청사항
+				<br><input type="text" class="a1 form-control shadow-sm" placeholder="요청사항 기재">
+			</form>
+
+			</div>
+
+			<div class="payLine">
+			</div>
+			<div class="pay">
+			결제수단 선택<br>
+				<select>
+					<option>카카오페이</option>
+					<option>무통장입금</option>
+					<option>신용카드</option>
+					<option>네이버페이</option>
+					<option>페이코</option>
+					<option>모바일결제</option>
+				</select>
+			</div>
+
+
+
+			<br><br><button class="btn btn-default" type="submit">쇼핑하기<i class="fa fa-shopping-cart"></i></button>
+			<br><br><button class="btn btn-primary" onclick="location.href ='/shopping/complete'" type="submit">전체상품주문 <i class="fa fa-check"></i></button>
+		</div>
+	</table>
+	<!-- END CONTENT -->
+
+
+
+
+
+
+</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer -->
+
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+
+				<!-- Footer Column -->
+				<div class="col-lg-3 footer_column">
+					<div class="footer_col">
+						<div class="footer_content footer_about">
+							<div class="logo_container footer_logo">
+								<div class="logo"><a href="#"><img src="/images/logo.png" alt="">travelix</a></div>
+							</div>
+							<p class="footer_about_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis vu lputate eros, iaculis consequat nisl. Nunc et suscipit urna. Integer eleme ntum orci eu vehicula pretium.</p>
+							<ul class="footer_social_list">
+								<li class="footer_social_item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+								<li class="footer_social_item"><a href="#"><i class="fa fa-facebook-f"></i></a></li>
+								<li class="footer_social_item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li class="footer_social_item"><a href="#"><i class="fa fa-dribbble"></i></a></li>
+								<li class="footer_social_item"><a href="#"><i class="fa fa-behance"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<!-- Footer Column -->
+				<div class="col-lg-3 footer_column">
+					<div class="footer_col">
+						<div class="footer_title">blog posts</div>
+						<div class="footer_content footer_blog">
+
+							<!-- Footer blog item -->
+							<div class="footer_blog_item clearfix">
+								<div class="footer_blog_image"><img src="/images/footer_blog_1.jpg" alt="https://unsplash.com/@avidenov"></div>
+								<div class="footer_blog_content">
+									<div class="footer_blog_title"><a href="blog.html">Travel with us this year</a></div>
+									<div class="footer_blog_date">Nov 29, 2017</div>
+								</div>
+							</div>
+
+							<!-- Footer blog item -->
+							<div class="footer_blog_item clearfix">
+								<div class="footer_blog_image"><img src="/images/footer_blog_2.jpg" alt="https://unsplash.com/@deannaritchie"></div>
+								<div class="footer_blog_content">
+									<div class="footer_blog_title"><a href="blog.html">New destinations for you</a></div>
+									<div class="footer_blog_date">Nov 29, 2017</div>
+								</div>
+							</div>
+
+							<!-- Footer blog item -->
+							<div class="footer_blog_item clearfix">
+								<div class="footer_blog_image"><img src="/images/footer_blog_3.jpg" alt="https://unsplash.com/@bergeryap87"></div>
+								<div class="footer_blog_content">
+									<div class="footer_blog_title"><a href="blog.html">Travel with us this year</a></div>
+									<div class="footer_blog_date">Nov 29, 2017</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+				<!-- Footer Column -->
+				<div class="col-lg-3 footer_column">
+					<div class="footer_col">
+						<div class="footer_title">tags</div>
+						<div class="footer_content footer_tags">
+							<ul class="tags_list clearfix">
+								<li class="tag_item"><a href="#">design</a></li>
+								<li class="tag_item"><a href="#">fashion</a></li>
+								<li class="tag_item"><a href="#">music</a></li>
+								<li class="tag_item"><a href="#">video</a></li>
+								<li class="tag_item"><a href="#">party</a></li>
+								<li class="tag_item"><a href="#">photography</a></li>
+								<li class="tag_item"><a href="#">adventure</a></li>
+								<li class="tag_item"><a href="#">travel</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<!-- Footer Column -->
+				<div class="col-lg-3 footer_column">
+					<div class="footer_col">
+						<div class="footer_title">contact info</div>
+						<div class="footer_content footer_contact">
+							<ul class="contact_info_list">
+								<li class="contact_info_item d-flex flex-row">
+									<div><div class="contact_info_icon"><img src="/images/placeholder.svg" alt=""></div></div>
+									<div class="contact_info_text">4127 Raoul Wallenber 45b-c Gibraltar</div>
+								</li>
+								<li class="contact_info_item d-flex flex-row">
+									<div><div class="contact_info_icon"><img src="/images/phone-call.svg" alt=""></div></div>
+									<div class="contact_info_text">2556-808-8613</div>
+								</li>
+								<li class="contact_info_item d-flex flex-row">
+									<div><div class="contact_info_icon"><img src="/images/message.svg" alt=""></div></div>
+									<div class="contact_info_text"><a href="mailto:contactme@gmail.com?Subject=Hello" target="_top">contactme@gmail.com</a></div>
+								</li>
+								<li class="contact_info_item d-flex flex-row">
+									<div><div class="contact_info_icon"><img src="/images/planet-earth.svg" alt=""></div></div>
+									<div class="contact_info_text"><a href="https://colorlib.com">www.colorlib.com</a></div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</footer>
+
+	<!-- Copyright -->
+
+	<div class="copyright">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 order-lg-1 order-2  ">
+					<div class="copyright_content d-flex flex-row align-items-center">
+						<div><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
+					</div>
+				</div>
+				<div class="col-lg-9 order-lg-2 order-1">
+					<div class="footer_nav_container d-flex flex-row align-items-center justify-content-lg-end">
+						<div class="footer_nav">
+							<ul class="footer_nav_list">
+								<li class="footer_nav_item"><a href="../index.html">home</a></li>
+								<li class="footer_nav_item"><a href="../about.html">about us</a></li>
+								<li class="footer_nav_item"><a href="../offers.html">offers</a></li>
+								<li class="footer_nav_item"><a href="#">news</a></li>
+								<li class="footer_nav_item"><a href="../contact.html">contact</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/styles/bootstrap4/popper.js"></script>
+<script src="/styles/bootstrap4/bootstrap.min.js"></script>
+<script src="/plugins/colorbox/jquery.colorbox-min.js"></script>
+<script src="/plugins/parallax-js-master/parallax.min.js"></script>
+<script src="/js/blog_custom.js"></script>
+
+
+
+
+		<!-- 상품 js-->
+<!-- Js Plugins -->
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.nice-select.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<script src="/js/jquery.slicknav.js"></script>
+<script src="/js/mixitup.min.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+<![endif]-->
+<script src="/assets/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="/assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+<script src="/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/assets/corporate/scripts/back-to-top.js" type="text/javascript"></script>
+<script src="/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+
+<!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
+<script src="/assets/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
+<script src="/assets/plugins/owl.carousel/owl.carousel.min.js" type="text/javascript"></script><!-- slider for products -->
+<script src='/assets/plugins/zoom/jquery.zoom.min.js' type="text/javascript"></script><!-- product zoom -->
+<script src="/assets/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script><!-- Quantity -->
+<script src="/assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+<script src="/assets/plugins/rateit/src/jquery.rateit.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript"></script><!-- for slider-range -->
+
+<script src="/assets/corporate/scripts/layout.js" type="text/javascript"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		Layout.init();
+		Layout.initOWL();
+		Layout.initTwitter();
+		Layout.initImageZoom();
+		Layout.initTouchspin();
+		Layout.initUniform();
+		Layout.initSliderRange();
+	});
+</script>
+<!-- END PAGE LEVEL JAVASCRIPTS -->
+
+
+
+
+
+
+
+</body>
+
+</html>
