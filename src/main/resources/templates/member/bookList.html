@@ -29,9 +29,10 @@
 			padding: 50px 0;
 		}
 		.menu1 {
-			width: 150px;
-			height: 50px;
+			width: 100px;
+			height: 30px;
 			line-height : 30px;
+			margin-right: 20px;
 			background-color: whitesmoke;
 			border : solid 1px;
 			color :black;
@@ -41,9 +42,10 @@
 			border-radius: 20%;
 		}
 		.menu2 {
-			width: 150px;
-			height: 50px;
+			width: 100px;
+			height: 30px;
 			line-height : 30px;
+			margin-right: 20px;
 			background-color: whitesmoke;
 			border : solid 1px;
 			color :black;
@@ -53,9 +55,10 @@
 			border-radius: 20%;
 		}
 		.menu3 {
-			width: 150px;
-			height: 50px;
+			width: 100px;
+			height: 30px;
 			line-height : 30px;
+			margin-right: 20px;
 			background-color: whitesmoke;
 			border : solid 1px;
 			color :black;
@@ -65,9 +68,10 @@
 			border-radius: 20%;
 		}
 		.menu4 {
-			width: 150px;
-			height: 50px;
+			width: 100px;
+			height: 30px;
 			line-height : 30px;
+			margin-right: 20px;
 			background-color: whitesmoke;
 			border : solid 1px;
 			color :black;
@@ -77,9 +81,10 @@
 			border-radius: 20%;
 		}
 		.menu5 {
-			width: 150px;
-			height: 50px;
+			width: 100px;
+			height: 30px;
 			line-height : 30px;
+			margin-right: 20px;
 			background-color: whitesmoke;
 			border : solid 1px;
 			color :black;
@@ -108,7 +113,21 @@
 		}
 		</style>
 
-
+	<style type="text/css">
+		.tg  {border-collapse:collapse;border-color:#ccc;border-spacing:0;}
+		.tg td{background-color:#fff;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
+			font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
+		.tg th{background-color:#f0f0f0;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
+			font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+		.tg .tg-lstg{border-color:inherit;font-family:"Arial Black", Gadget, sans-serif !important;font-size:11px;font-weight:bold;
+			text-align:center;vertical-align:middle}
+		.tg .tg-80qx{border-color:inherit;font-family:Arial, Helvetica, sans-serif !important;font-size:11px;text-align:center;
+			vertical-align:middle}
+		.tg {
+			margin-left:auto;
+			margin-right:auto;
+		}
+	</style>
 
 </head>
 
@@ -226,13 +245,57 @@
 	</div>
 
 	<div class="menu-wrapper">
-		<div class="menu1" onclick="location.href='/member/myInfo'" ><h4>나의정보</h4></div>
-		<div class="menu2" onclick="location.href='/member/bookList'" style="cursor: pointer;"><h4>캠핑내역</h4></div>
-		<div class="menu3" onclick="location.href='/member/shoppingList'" style="cursor: pointer;"><h4>쇼핑내역</h4></div>
-		<div class="menu4" onclick="location.href='/member/shoppingLike'" style="cursor: pointer;"><h4>찜</h4></div>
-		<div class="menu5" onclick="location.href='/member/chat'" style="cursor: pointer;"><h4>예약변경</h4></div>
+		<div class="menu1" onclick="location.href='/member/myInfo'" >나의정보</div>
+		<div class="menu2" onclick="location.href='/member/bookList'" style="cursor: pointer;">캠핑내역</div>
+		<div class="menu3" onclick="location.href='/member/shoppingList'" style="cursor: pointer;">쇼핑내역</div>
+		<div class="menu4" onclick="location.href='/member/shoppingLike'" style="cursor: pointer;">찜</div>
+		<div class="menu5" onclick="location.href='/member/chat'" style="cursor: pointer;">예약변경</div>
 	</div>
 
+	<p style="text-align:center; color :brown";>캠핑 예약내역</p>
+
+	<table class="tg" style="undefined; table-layout: fixed; width: 878px" table>
+		<colgroup>
+			<col style="width: 74px">
+			<col style="width: 83px">
+			<col style="width: 113px">
+			<col style="width: 295px">
+			<col style="width: 93px">
+			<col style="width: 100px">
+			<col style="width: 120px">
+		</colgroup>
+		<thead>
+		<tr>
+			<th class="tg-lstg">주문번호</th>
+			<th class="tg-lstg">주문일</th>
+			<th class="tg-lstg">캠핑장명</th>
+			<th class="tg-lstg">캠핑장 상세내용</th>
+			<th class="tg-lstg">결제액</th>
+			<th class="tg-lstg">상태</th>
+			<th class="tg-lstg">비고</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td class="tg-80qx">00001</td>
+			<td class="tg-80qx">2022-02-22</td>
+			<td class="tg-80qx">강따라캠핑장</td>
+			<td class="tg-80qx">오토캠핑 <br>옵션: 大 </td>
+			<td class="tg-80qx">50,000원</td>
+			<td class="tg-80qx">결제 완료</td>
+			<td class="tg-80qx">예약취소</td>
+		</tr>
+		<tr>
+			<td class="tg-80qx"></td>
+			<td class="tg-80qx"></td>
+			<td class="tg-80qx"></td>
+			<td class="tg-80qx"></td>
+			<td class="tg-80qx"></td>
+			<td class="tg-80qx"></td>
+			<td class="tg-80qx"></td>
+		</tr>
+		</tbody>
+	</table>
 
 
 
