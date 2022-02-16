@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <
+    <script>
+      function test(){
+            $.ajax({
+                type: 'get',
+                url : '/apiTest',
+                dataType: 'json',
+                success: function (result){
+                    console.log(result);
+                    let output = "<table class='table'>";
+                    output += "<tr><th>댓글번호</th>";
+                    output += "<th>작성자</th>";
+                    output += "<th>내용</th>";
+                    output += "<th>작성시간</th></tr>";
+                    for(let i in result) {
+                        output += "<tr>";
+                        output += "<td>"+result[i].addr+"</td>";
+                        output += "<td>"+result[i].name+"</td>";
+                        output += "<td>"+result[i].tel+"</td>";
+
+                        output += "</tr>";
+                    }
+                    // 댓글의 갯수가 여러개인 경우를 대비해 for문 사용
+                    output += "</table>";
+                    // id가 comment-list인 div에 출력
+                    document.getElementById('boardDetail').innerHTML = output;
+                },
+                error: function (){
+                    alert('fail ajax');
+                }
+
+            })
+        }
+
+    </script>
+</head>
+<body onload="test()">
+<div id="boardDetail">
+
+</div>
+</body>
+</html>

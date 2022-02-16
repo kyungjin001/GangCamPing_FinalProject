@@ -30,6 +30,11 @@ public class MainController {
         return "single_listing";
     }
 
+    @RequestMapping("test")
+    public String test() {
+        return "te1st";
+    }
+
 
 
 
