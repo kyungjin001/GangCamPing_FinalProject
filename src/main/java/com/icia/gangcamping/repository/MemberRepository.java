@@ -9,7 +9,4 @@ import java.util.List;
 public interface MemberRepository extends JpaRepository<memberEntity, Long> {
     memberEntity findByMemberEmail(String memberEmail);
 
-    List<bookEntity> bookList();
-
-//    List<memberEntity> bookList();
 }

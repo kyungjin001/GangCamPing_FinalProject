@@ -2,6 +2,7 @@ package com.icia.gangcamping.service;
 
 
 import com.icia.gangcamping.dto.BookDetailDTO;
+import com.icia.gangcamping.dto.MemberDetailDTO;
 import com.icia.gangcamping.dto.MemberLoginDTO;
 import com.icia.gangcamping.dto.MemberSaveDTO;
 
@@ -12,10 +13,8 @@ public interface MemberService {
 
     boolean login(MemberLoginDTO memberLoginDTO);
 
-    boolean emailCheck(String memberEmail);
-
-    BookDetailDTO findById(Long memberId);
+    String emailDp(String memberEmail);
 
 
-    List<BookDetailDTO> bookList();
+    MemberDetailDTO findByEmail(String memberEmail);
 }

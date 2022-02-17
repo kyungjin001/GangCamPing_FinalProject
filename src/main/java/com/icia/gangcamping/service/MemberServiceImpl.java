@@ -1,6 +1,7 @@
 package com.icia.gangcamping.service;
 
 import com.icia.gangcamping.dto.BookDetailDTO;
+import com.icia.gangcamping.dto.MemberDetailDTO;
 import com.icia.gangcamping.dto.MemberLoginDTO;
 import com.icia.gangcamping.dto.MemberSaveDTO;
 import com.icia.gangcamping.entity.bookEntity;
@@ -45,28 +46,18 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public boolean emailCheck(String memberEmail) {
+    public String emailDp(String memberEmail) {
         Optional<memberEntity> memberEntity = Optional.ofNullable(mr.findByMemberEmail(memberEmail));
         if (memberEntity.isEmpty()) {
-            return true;
+            return "ok";
         } else {
-            return false;
+            return "no";
         }
     }
 
     @Override
-    public BookDetailDTO findById(Long memberId) {
+    public MemberDetailDTO findByEmail(String memberEmail) {
         return null;
-    }
-
-    @Override
-    public List<BookDetailDTO> bookList() {
-        List<bookEntity> bookEntityList = mr.bookList();
-        List<BookDetailDTO> bookList = new ArrayList<>();
-        for(bookEntity bookEntity : bookEntityList) {
-            bookEntityList.add(BookDetailDTO.toBookDetailDTO(bookEntity, memberEntity, campingEntity, roomEntity));
-        }
-        return bookList;
     }
 
 

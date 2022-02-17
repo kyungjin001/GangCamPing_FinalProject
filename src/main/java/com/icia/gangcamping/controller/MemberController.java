@@ -1,9 +1,7 @@
 package com.icia.gangcamping.controller;
 
 
-import com.icia.gangcamping.dto.BookDetailDTO;
-import com.icia.gangcamping.dto.MemberLoginDTO;
-import com.icia.gangcamping.dto.MemberSaveDTO;
+import com.icia.gangcamping.dto.*;
 import com.icia.gangcamping.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
+
+import static com.icia.gangcamping.common.SessionConst.LOGIN_EMAIL;
 
 @RequiredArgsConstructor
 @Controller
@@ -58,8 +57,8 @@ public class MemberController {
         }
         boolean loginResult = ms.login(memberLoginDTO);
         if(ms.login(memberLoginDTO)){
-            session.setAttribute("loginEmail", memberLoginDTO.getMemberEmail());
-            return "index";
+            session.setAttribute("memberEmail", memberLoginDTO.getMemberEmail());
+            return "member/mypage";
         } else {
             // 로그인 결과를 글로벌 오류(Global Error) : 전체적인 오류를 체크하는 것
             bindingResult.reject("loginFail", "이메일 또는 비밀번호가 틀립니다!");
@@ -67,49 +66,47 @@ public class MemberController {
         }
     }
 
-    @GetMapping("/update/{memberId}")
-    public String updateForm(@PathVariable Long memberId, Model model) {
-        BookDetailDTO member = ms.findById(memberId);
-        model.addAttribute("member", member);
-        return "member/update";
-    }
-
-    @PostMapping("emailCheck")
+    // 이메일 중복 체크
+    @PostMapping("emailDp")
     @ResponseBody
-    public String emailCheck(@RequestParam("memberEmail") String memberEmail) {
-        if (ms.emailCheck(memberEmail)) {
-            return "ok";
-        } else {
-            return "no";
-        }
+    public String emailDp(@RequestParam("memberEmail") String memberEmail) {
+        System.out.println("emailDP() :" + memberEmail);
+        String result = ms.emailDp(memberEmail);
+        return result;
     }
 
-
+    //마이페이지
     @GetMapping("mypage")
     public String mypage() {
         return "member/mypage";
 
     }
 
-    @GetMapping("myInfo")
-    public String myInfo() {
-        return "member/myInfo";
-
+    @GetMapping("update")
+    public String updateForm(Model model, HttpSession session) {
+        System.out.println(session.getAttribute("memberEmail"));
+        String memberEmail = (String) session.getAttribute("memberEmail");
+        MemberDetailDTO member = ms.findByEmail(memberEmail);
+        model.addAttribute("member", member);
+        System.out.println(member);
+        return "member/update";
     }
+
+
+    //로그아웃
+    @GetMapping("logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "index";
+    }
+
+
     @GetMapping("shoppingList")
     public String shoppingList() {
         return "member/shoppingList";
 
     }
 
-
-    @GetMapping("bookList")
-    public String bookList(Model model) {
-        List<BookDetailDTO> bookList = ms.bookList();
-        model.addAttribute("bookList", bookList);
-        System.out.println(bookList);
-        return "member/bookList";
-    }
 
 
     @GetMapping("shoppingLike")
@@ -155,10 +152,5 @@ public class MemberController {
 
     }
 
-    @GetMapping("logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "index";
-    }
 
 }
