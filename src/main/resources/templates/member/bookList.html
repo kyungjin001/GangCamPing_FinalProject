@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>About Us</title>
 <meta charset="utf-8">
@@ -276,9 +276,9 @@
 		</tr>
 		</thead>
 		<tbody>
-		<tr>
-			<td class="tg-80qx">00001</td>
-			<td class="tg-80qx">2022-02-22</td>
+		<tr th:each="member: ${bookList}">
+			<td class="tg-80qx" th:text="${member.memberId}"></td>
+			<td class="tg-80qx" th:text="${member.memberId}></td>
 			<td class="tg-80qx">강따라캠핑장</td>
 			<td class="tg-80qx">오토캠핑 <br>옵션: 大 </td>
 			<td class="tg-80qx">50,000원</td>
