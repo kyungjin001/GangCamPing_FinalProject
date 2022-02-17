@@ -34,6 +34,12 @@ public class MainController {
     public String sssss() {
         return "offers";
     }
+    @RequestMapping("test")
+    public String test() {
+        return "te1st";
+    }
+
+
 
 
 }

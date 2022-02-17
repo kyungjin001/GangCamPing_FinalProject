@@ -1,5 +1,6 @@
 package com.icia.gangcamping.entity;
 
+import com.icia.gangcamping.dto.CampingSaveDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,20 +20,20 @@ public class CampingEntity {
     @Column(name="campingId")
     private Long campingId;
     @Column
-    @NotNull
+
     private String campingName;
     @Column
-    @NotNull
+
     private String campingAddr;
     @Column
-    @NotNull
+
     private String campingInfo;
     @Column
-    @NotNull
+
     private String campingFileName;
     @Column
     @NotNull
-    private String campingLikeCount;
+    private int campingLikeCount;
 
     @OneToMany(mappedBy = "campingEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<RoomEntity> roomEntityList = new ArrayList<>();
@@ -44,4 +45,17 @@ public class CampingEntity {
     private List<BookEntity> bookEntityList = new ArrayList<>();
     @OneToMany(mappedBy = "campingEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<ReviewEntity> reviewEntityList = new ArrayList<>();
+
+    public CampingEntity dtoToEntity(CampingSaveDTO campingSaveDTO) {
+        CampingEntity entity = new CampingEntity();
+        System.out.println(campingSaveDTO.toString()+"campingsaveDTO");
+        entity.setCampingAddr(campingSaveDTO.getCampingAddr());
+        entity.setCampingInfo(campingSaveDTO.getCampingInfo());
+        entity.setCampingFileName(campingSaveDTO.getCampingFileName());
+        entity.setCampingName(campingSaveDTO.getCampingName());
+        entity.setCampingLikeCount(campingSaveDTO.getCampingLikeCount());
+        System.out.println(entity.toString());
+        return entity;
+
+    }
 }
