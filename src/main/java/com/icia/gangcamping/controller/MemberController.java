@@ -48,6 +48,12 @@ public class MemberController {
         }
     }
 
+    @GetMapping("/logOut")
+    public String logOut(HttpSession session){
+        session.invalidate();
+        return "redirect:/";
+    }
+
     @GetMapping("/update")
     public String update_form(Model model, HttpSession session){
 
