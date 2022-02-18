@@ -39,10 +39,6 @@ public class MailController {
         System.out.println(Id2);
         Long email = mas.mailSend(mailDTO, mailCodeDTO);
 
-        model.addAttribute("check", mailCodeDTO);
-        model.addAttribute("email", mailDTO);
-        model.addAttribute("member", memberDetailDTO);
-
         System.out.println(memberDetailDTO.toString());
 
         String result="";
@@ -50,6 +46,7 @@ public class MailController {
         if(email != null){
             model.addAttribute("check", mailCodeDTO);
             model.addAttribute("email", mailDTO);
+            model.addAttribute("member", memberDetailDTO);
             result="ok";
         }else{
             result="no";
