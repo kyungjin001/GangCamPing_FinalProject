@@ -1,10 +1,12 @@
 package com.icia.gangcamping.entity;
 
+import com.icia.gangcamping.dto.CartDetailDTO;
+import com.icia.gangcamping.dto.GoodsSaveDTO;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-@ToString
+//@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -31,6 +33,17 @@ public class CartEntity {
     @Column
     @NotNull
     private int cartAmount;
+
+
+
+    public static CartEntity toSaveEntity(CartDetailDTO cartDetailDTO,MemberEntity memberEntity,ProductEntity productEntity) {
+        CartEntity cartEntity = new CartEntity();
+        cartEntity.setMemberEntity(memberEntity);
+        cartEntity.setProductEntity(productEntity);
+        return cartEntity;
+    }
+
+
 
 
 }

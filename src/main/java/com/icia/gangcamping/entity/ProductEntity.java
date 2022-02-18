@@ -1,12 +1,16 @@
 package com.icia.gangcamping.entity;
 
+import com.icia.gangcamping.dto.GoodsDetailDTO;
+import com.icia.gangcamping.dto.GoodsSaveDTO;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-@ToString
+import java.util.Optional;
+
+//@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -44,5 +48,18 @@ public class ProductEntity {
     private List<ShoppingLikeEntity> shoppingLikeEntityArrayList = new ArrayList<>();
     @OneToMany(mappedBy = "productEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<QuestionEntity> questionEntityList = new ArrayList<>();
+
+
+
+    public static ProductEntity toSaveEntity(GoodsSaveDTO goodsSaveDTO) {
+        ProductEntity productEntity = new ProductEntity();
+        productEntity.setProductName(goodsSaveDTO.getProductName());
+        productEntity.setProductWeight(goodsSaveDTO.getProductWeight());
+        productEntity.setProductPrice(goodsSaveDTO.getProductPrice());
+        productEntity.setProductDescription(goodsSaveDTO.getProductDescription());
+        productEntity.setProductFileName(goodsSaveDTO.getProductFileName());
+        return productEntity;
+    }
+
 
 }

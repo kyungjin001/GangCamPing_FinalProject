@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Blog</title>
 <meta charset="utf-8">
@@ -160,7 +160,7 @@
 					<div class="product__details__pic">
 						<div class="product__details__pic__item">
 							<img class="product__details__pic__item--large"
-								 src="/img/product/details/product-details-1.jpg" alt="">
+								 th:src="@{/upload/} + ${goods.productFileName}" alt="">
 						</div>
 						<div class="product__details__pic__slider owl-carousel">
 							<img data-imgbigurl="img/product/details/product-details-2.jpg"
@@ -176,7 +176,7 @@
 				</div>
 				<div class="col-lg-6 col-md-6">
 					<div class="product__details__text">
-						<h3>Vetgetable’s Package</h3>
+						<h3 th:text="${goods.productName}"></h3>
 						<div class="product__details__rating">
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
@@ -185,10 +185,8 @@
 							<i class="fa fa-star-half-o"></i>
 							<span>(18 reviews)</span>
 						</div>
-						<div class="product__details__price">$50.00</div>
-						<p>Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam
-							vehicula elementum sed sit amet dui. Sed porttitor lectus nibh. Vestibulum ac diam sit amet
-							quam vehicula elementum sed sit amet dui. Proin eget tortor risus.</p>
+						<div class="product__details__price" th:text="${goods.productPrice}"></div>
+						<p th:text="${goods.productDescription}"></p>
 						<div class="product__details__quantity">
 							<div class="quantity">
 								<div class="pro-qty">
@@ -196,12 +194,16 @@
 								</div>
 							</div>
 						</div>
-						<a href="/shopping/cart" class="primary-btn">ADD TO CARD</a>
+						<form th:id="aaa" action="/shopping/cart">
+							<input type="hidden" name="productId" th:value="${goods.productId}">
+							<input type="hidden" th:name="memberId" th:value="1">
+						<button type="submit" class="primary-btn">ADD TO CARD</button>
+						</form>
 						<a href="#ddd" class="heart-icon"><span>♡</span></a>
 						<ul>
 							<li><b>Availability</b> <span>In Stock</span></li>
-							<li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
-							<li><b>Weight</b> <span>0.5 kg</span></li>
+							<li><b>Shipping</b> <span>무료배송 <samp>산간,제주도 배송비 추가</samp></span></li>
+							<li><b>Weight</b> <span th:text="${goods.productWeight}"></span>&nbsp;<b>kg</b></li>
 							<li><b>Share on</b>
 								<div class="share">
 									<a href="#"><i class="fa fa-facebook"></i></a>
@@ -401,7 +403,7 @@
 							<div class="footer_blog_item clearfix">
 								<div class="footer_blog_image"><img src="/images/footer_blog_1.jpg" alt="https://unsplash.com/@avidenov"></div>
 								<div class="footer_blog_content">
-									<div class="footer_blog_title"><a href="blog.html">Travel with us this year</a></div>
+									<div class="footer_blog_title"><a href="shopping.html">Travel with us this year</a></div>
 									<div class="footer_blog_date">Nov 29, 2017</div>
 								</div>
 							</div>
@@ -410,7 +412,7 @@
 							<div class="footer_blog_item clearfix">
 								<div class="footer_blog_image"><img src="/images/footer_blog_2.jpg" alt="https://unsplash.com/@deannaritchie"></div>
 								<div class="footer_blog_content">
-									<div class="footer_blog_title"><a href="blog.html">New destinations for you</a></div>
+									<div class="footer_blog_title"><a href="shopping.html">New destinations for you</a></div>
 									<div class="footer_blog_date">Nov 29, 2017</div>
 								</div>
 							</div>
@@ -419,7 +421,7 @@
 							<div class="footer_blog_item clearfix">
 								<div class="footer_blog_image"><img src="/images/footer_blog_3.jpg" alt="https://unsplash.com/@bergeryap87"></div>
 								<div class="footer_blog_content">
-									<div class="footer_blog_title"><a href="blog.html">Travel with us this year</a></div>
+									<div class="footer_blog_title"><a href="shopping.html">Travel with us this year</a></div>
 									<div class="footer_blog_date">Nov 29, 2017</div>
 								</div>
 							</div>

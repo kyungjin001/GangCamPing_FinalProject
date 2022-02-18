@@ -16,23 +16,26 @@
     .container h1{
       text-align: left;
       padding: 5px 5px 5px 15px;
-      color: #FFBB00;
-      border-left: 3px solid #FFBB00;
+      color: #000000;
+      border-left: 3px solid #000000;
       margin-bottom: 20px;
     }
     .chating{
-      background-color: #000;
+      background-color: #ffffff;
       width: 500px;
       height: 500px;
       overflow: auto;
     }
     .chating .me{
-      color: #F6F6F6;
+      color: #000000;
       text-align: right;
+      font-size: 17px;
     }
     .chating .others{
-      color: #FFE400;
+      color: #000000;
       text-align: left;
+      font-size: 17px;
+
     }
     input{
       width: 330px;
@@ -51,9 +54,47 @@
     .img{
       float: right;
     }
+
   </style>
 </head>
 
+
+<body>
+<div id="container" class="container">
+  <h1 th:text="${roomName}">의 채팅방</h1>
+  <input type="hidden" id="sessionId" value="">
+  <input type="hidden" id="roomNumber" th:value="${roomNumber}">
+  <input type="hidden" id="roomDate" th:value="${roomDate}">
+
+  <div id="chating" class="chating">
+  </div>
+
+  <div id="yourName">
+    <table class="inputTable">
+      <tr>
+        <th>사용자명</th>
+        <th><input type="text" name="userName" id="userName"></th>
+        <th><button th:onclick="chatName()" id="startBtn">이름 등록</button></th>
+      </tr>
+    </table>
+  </div>
+  <div id="yourMsg">
+    <table class="inputTable">
+      <tr>
+        <th>메시지</th>
+        <th><input id="chatting" placeholder="보내실 메시지를 입력하세요."></th>
+        <th><button th:onclick="send()" id="sendBtn">보내기</button></th>
+      </tr>
+      <tr>
+        <th>사진</th>
+        <th><input type="file" id="fileUpload"></th>
+        <th><button th:onclick="fileSend()" id="sendFileBtn">첨부하기</button></th>
+      </tr>
+    </table>
+  </div>
+
+
+</div>
 <script type="text/javascript">
   var ws;
 
@@ -71,6 +112,7 @@
     ws.onmessage = function(data) {
       //메시지를 받으면 동작
       var msg = data.data;
+      console.log(msg);
       if(msg != null && msg.type != ''){
         //파일 업로드가 아닌 경우 메시지를 뿌려준다.
         var d = JSON.parse(msg);
@@ -81,9 +123,9 @@
           }
         }else if(d.type == "message"){
           if(d.sessionId == $("#sessionId").val()){
-            $("#chating").append("<p class='me'>나 :" + d.msg + "</p>");
+            $("#chating").append("<p class='me'>" + d.userName + " :" + d.msg + "<br>"+ d.roomDate + "</p>");
           }else{
-            $("#chating").append("<p class='others'>" + d.userName + " :" + d.msg + "</p>");
+            $("#chating").append("<p class='others'>" + d.userName + " :" + d.msg + "<br>"+ d.roomDate + "</p>");
           }
 
         }else{
@@ -121,8 +163,10 @@
       roomNumber: $("#roomNumber").val(),
       sessionId : $("#sessionId").val(),
       userName : $("#userName").val(),
+      roomDate : $("#roomDate").val(),
       msg : $("#chatting").val()
     }
+    console.log(option);
     ws.send(JSON.stringify(option))
     $('#chatting').val("");
   }
@@ -137,7 +181,8 @@
         roomNumber: $("#roomNumber").val(),
         sessionId : $("#sessionId").val(),
         msg : $("#chatting").val(),
-        userName : $("#userName").val()
+        userName : $("#userName").val(),
+        roomDate : $("#roomDate").val()
       }
       ws.send(JSON.stringify(param)); //파일 보내기전 메시지를 보내서 파일을 보냄을 명시한다.
 
@@ -147,38 +192,6 @@
     fileReader.readAsArrayBuffer(file);
   }
 </script>
-<body>
-<div id="container" class="container">
-  <h1 th:text="${roomName}">의 채팅방</h1>
-  <input type="hidden" id="sessionId" value="">
-  <input type="hidden" id="roomNumber" th:value="${roomNumber}">
-
-  <div id="chating" class="chating">
-  </div>
-
-  <div id="yourName">
-    <table class="inputTable">
-      <tr>
-        <th>사용자명</th>
-        <th><input type="text" name="userName" id="userName"></th>
-        <th><button th:onclick="chatName()" id="startBtn">이름 등록</button></th>
-      </tr>
-    </table>
-  </div>
-  <div id="yourMsg">
-    <table class="inputTable">
-      <tr>
-        <th>메시지</th>
-        <th><input id="chatting" placeholder="보내실 메시지를 입력하세요."></th>
-        <th><button th:onclick="send()" id="sendBtn">보내기</button></th>
-      </tr>
-      <tr>
-        <th>파일업로드</th>
-        <th><input type="file" id="fileUpload"></th>
-        <th><button th:onclick="fileSend()" id="sendFileBtn">파일올리기</button></th>
-      </tr>
-    </table>
-  </div>
-</div>
 </body>
+
 </html>

@@ -1,9 +1,18 @@
 package com.icia.gangcamping.vo;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Room {
 
     int roomNumber;
     String roomName;
+    LocalDateTime roomDate;
 
     public int getRoomNumber() {
         return roomNumber;
