@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class commentServiceImpl implements commentService{
+public class MemberServiceImpl implements MemberService{
 }

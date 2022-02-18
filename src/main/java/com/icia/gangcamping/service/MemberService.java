@@ -1,4 +1,4 @@
 package com.icia.gangcamping.service;
 
-public interface campingService {
+public interface MemberService {
 }

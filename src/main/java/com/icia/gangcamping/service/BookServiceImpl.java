@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class bookServiceImpl implements bookService{
+public class BookServiceImpl implements BookService{
 }

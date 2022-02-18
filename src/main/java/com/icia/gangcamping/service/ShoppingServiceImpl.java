@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class shoppingServiceImpl implements shoppingService{
+public class ShoppingServiceImpl implements ShoppingService{
 }

@@ -11,19 +11,19 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Table(name = "board_table")
-public class campingLikeEntity {
+public class CampingLikeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="campingLikeId")
-    private Long campingLikeId;
+    private Long CampingLikeId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "campingId")
-    private campingEntity campingEntity;
+    private CampingEntity campingEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId")
-    private memberEntity memberEntity;
+    private MemberEntity memberEntity;
 
     @Column
     @NotNull
