@@ -6,10 +6,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <
     <script>
-      function test(){
+      function insertCampingDB(){
             $.ajax({
                 type: 'get',
-                url : '/apiTest',
+                url : '/insertCampingDB',
                 dataType: 'json',
                 success: function (result){
                     console.log(result);
@@ -37,10 +37,42 @@
 
             })
         }
+      function insertDetailDB(){
+          $.ajax({
+              type: 'get',
+              url : '/insertDetailDB',
+              dataType: 'json',
+              success: function (result){
+                  console.log(result);
+                  let output = "<table class='table'>";
+                  output += "<tr><th>댓글번호</th>";
+                  output += "<th>작성자</th>";
+                  output += "<th>내용</th>";
+                  output += "<th>작성시간</th></tr>";
+                  for(let i in result) {
+                      output += "<tr>";
+                      output += "<td>"+result[i].addr+"</td>";
+                      output += "<td>"+result[i].name+"</td>";
+                      output += "<td>"+result[i].tel+"</td>";
 
+                      output += "</tr>";
+                  }
+                  // 댓글의 갯수가 여러개인 경우를 대비해 for문 사용
+                  output += "</table>";
+                  // id가 comment-list인 div에 출력
+                  document.getElementById('boardDetail').innerHTML = output;
+              },
+              error: function (){
+                  alert('fail ajax');
+              }
+
+          })
+      }
     </script>
 </head>
-<body onload="test()">
+<body>
+<button id="insertCampingDB" onclick="insertCampingDB()">insertCampingDB</button>
+<button id="insertDetailDB" onclick="insertDetailDB()">insertDetailDB</button>
 <div id="boardDetail">
 
 </div>
