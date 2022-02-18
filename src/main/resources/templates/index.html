@@ -1273,7 +1273,7 @@
                     <div class="form-group">
                         <label for="memberEmail">이메일을 입력해주세요 </label> <br>
                         <input type="text" class="form-control" id="memberEmail" th:onblur="emailCheck()" placeholder="Enter Your Email" name="memberEmail" required>
-                        <input type="text" th:value="${session['memberId']}">
+                        <input type="hidden" th:value="${session['memberId']}">
                         <input type="hidden" class="form-control" id="code" placeholder="이메일 인증코드를 입력해주세요."required>
                     </div>
 
