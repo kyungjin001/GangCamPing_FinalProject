@@ -1,4 +1,4 @@
-package com.icia.gangcamping.controller;
+package com.icia.gangcamping.dto;
 
 import lombok.Data;
 
