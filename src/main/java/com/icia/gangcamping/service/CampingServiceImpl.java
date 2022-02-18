@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 
 @RequiredArgsConstructor
-public class campingServiceImpl implements campingService{
+public class CampingServiceImpl implements CampingService {
     private final CampingRepository campingRepository;
     private final CampingDetailRepository cdr;
     @Override

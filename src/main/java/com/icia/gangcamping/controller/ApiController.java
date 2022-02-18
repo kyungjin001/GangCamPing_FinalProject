@@ -3,10 +3,10 @@ package com.icia.gangcamping.controller;
 
 import com.icia.gangcamping.dto.CampingDetailSaveDTO;
 import com.icia.gangcamping.dto.CampingSaveDTO;
-import com.icia.gangcamping.dto.testDTO;
+import com.icia.gangcamping.dto.TestDTO;
 import com.icia.gangcamping.entity.CampingDetailEntity;
 import com.icia.gangcamping.entity.CampingEntity;
-import com.icia.gangcamping.service.campingService;
+import com.icia.gangcamping.service.CampingService;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -33,7 +33,7 @@ import java.util.List;
 @Controller
 public class ApiController {
 
-    private final campingService cs;
+    private final CampingService cs;
 
 
     private static String getTagValue(String tag, Element element) {
@@ -101,7 +101,7 @@ public class ApiController {
             for(int i=0;i<item.size();i++) {
                 JSONObject item1 = (JSONObject) item.get(i);
                 System.out.println("items : " + item1);
-                testDTO dto = new testDTO();
+                TestDTO dto = new TestDTO();
                 dto.setAddr((String) item1.get("addr1"));
                 dto.setTel((String) item1.get("tel"));
                 dto.setName((String) item1.get("facltNm"));
@@ -168,7 +168,7 @@ public class ApiController {
             for(int i=0;i<item.size();i++) {
                 JSONObject item1 = (JSONObject) item.get(i);
                 System.out.println("items : " + item1);
-                testDTO dto = new testDTO();
+                TestDTO dto = new TestDTO();
                 dto.setAddr((String) item1.get("featureNm"));
                 dto.setTel((String) item1.get("sbrsCl"));
                 dto.setName((String) item1.get("posblFcltyCl"));

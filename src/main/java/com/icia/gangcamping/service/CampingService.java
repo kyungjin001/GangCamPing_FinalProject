@@ -5,7 +5,7 @@ import com.icia.gangcamping.entity.CampingEntity;
 
 import java.util.Optional;
 
-public interface campingService {
+public interface CampingService {
     void save(CampingEntity entity);
 
     Optional<CampingEntity> findById(long l);
