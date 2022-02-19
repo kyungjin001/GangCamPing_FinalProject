@@ -14,7 +14,7 @@ public class CartSaveDTO {
 
     private Long productId;
     private Long memberId;
-    private int cPriceSum;
+    private int cartPriceSum;
     private int cartAmount;
 
 

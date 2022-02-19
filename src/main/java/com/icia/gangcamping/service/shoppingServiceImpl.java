@@ -123,5 +123,18 @@ public class shoppingServiceImpl implements shoppingService{
 
     }
 
+    @Override
+    public String meunUpDown(Long cartId, String type) {
+        Optional<CartEntity> cartEntity = cr.findById(cartId);
+        if (type.equals("up")){
+            cartEntity.get().setCartAmount(cartEntity.get().getCartAmount() + 1);
+            cr.save(cartEntity.get());
+        }else{
+            cartEntity.get().setCartAmount(cartEntity.get().getCartAmount() - 1);
+            cr.save(cartEntity.get());
+        }
+        return "ok";
+    }
+
 
 }

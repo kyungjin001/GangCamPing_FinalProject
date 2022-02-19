@@ -56,6 +56,78 @@
 	<link href="/assets/pages/css/style-shop.css" rel="stylesheet" type="text/css">
 	<!-- Theme styles END -->
 
+<script>
+	const menuDown = (cartId) =>{
+		console.log('함수호출은 하냐?')
+		console.log(cartId);
+		$.ajax({
+			type:'put',
+			url:'/shopping/menu',
+			data:{"cartId":cartId,"type":"down"},
+			dataType:'text',
+			success:function (result){
+				console.log(result);
+				if(result=="ok"){
+					location.reload();
+				}
+			},
+			error:function (){
+				alert('다시해라');
+			}
+		});
+
+	}
+
+
+	const menuUp = (cartId) =>{
+		console.log(cartId);
+		$.ajax({
+			type:'put',
+			url:'/shopping/menu',
+			data:{"cartId":cartId,"type":"up"},
+			dataType:'text',
+			success:function (result){
+				console.log(result);
+				if(result=="ok"){
+					location.reload();
+				}
+			},
+			error:function (){
+				alert('다시해라');
+			}
+		});
+
+	}
+
+
+
+
+
+
+</script>
+
+
+
+
+
+	<script>
+		function deleteById(cartId){
+			const reqUrl = "/shopping/" + cartId;
+
+			$.ajax({
+				type: 'delete',
+				url: reqUrl,
+				success: function (){
+					location.href='/shopping/cart';
+				},
+				error:function (){
+					alert('ajax 실패');
+				}
+
+			});
+		}
+
+	</script>
 
 
 
@@ -103,7 +175,7 @@
 				<div class="row">
 					<div class="col main_nav_col d-flex flex-row align-items-center justify-content-start">
 						<div class="logo_container">
-							<div class="logo"><a href="#"><img src="/images/logo.png" alt="">travelix</a></div>
+							<div class="logo"><a href="#"><img src="/images/logo.png" alt=""></a></div>
 						</div>
 						<div class="main_nav_container ml-auto">
 							<ul class="main_nav_list">
@@ -197,50 +269,50 @@
 							<th class="goods-page-price">판매가(원)</th>
 							<th class="goods-page-total" colspan="2">합계</th>
 						</tr>
-						<tr th:each="goodsList:${goodsList}">
+						<tr th:each="cartList:${cartList}">
 							<td class="goods-page-image">
-								<a href="javascript:;"><img th:src="@{/upload/} + ${goodsList.productFileName}"  alt="Berry Lace Dress"></a>
+								<a href="javascript:;"><img th:src="@{/upload/} + ${cartList.productFileName}"  alt="Berry Lace Dress"></a>
 							</td>
-							<td class="goods-page-description" th:text="${goodsList.productDescription}">
+							<td class="goods-page-description" th:text="${cartList.productDescription}">
 								<h3><a href="javascript:;"></a></h3>
 								<p><strong></strong></p>
 								<em></em>
 							</td>
-							<td class="goods-page-quantity">
-								<div class="product-quantity">
-									<input id="product-quantity" type="text" value="1" readonly class="form-control input-sm">
-								</div>
-									<button class="btn btn-primary" type="submit">변경</button>
+							<td class="goods-page-quantity" >
+								<span th:switch="${cartList.cartAmount}">
+									<span th:case="1"><button>-</button></span>
+									<span th:case="*"><button th:onclick="menuDown([[${cartList.cartId}]])">-</button></span>
+								</span>
+								<span th:text="${cartList.cartAmount}"></span>
+									<button th:onclick="menuUp([[${cartList.cartId}]])">+</button>
 							</td>
 							<td class="goods-page-ref-no">
 								무료
 							</td>
-							<td class="goods-page-price" th:text="${goodsList.productPrice}">
-								<b>원</b></td>
+							<td class="goods-page-price" th:text="|${cartList.productPrice}|+원">
+								</td>
 							<td class="goods-page-total">
-								<strong><span>$</span>47.00</strong>
+								<strong th:text="|${cartList.cartAmount * cartList.productPrice}|+원"></strong>
 							</td>
 							<td class="del-goods-col">
-<!--								<a th:href="@{|/shopping/delete/${goodsList.}|}">삭제</a>-->
-<!--								</a>-->
+							<button th:onclick="deleteById([[${cartList.cartId}]])">삭제(ajax)</button>
+
+							</a>
 							</td>
 						</tr>
+						</div>
 					</table>
 				</div>
 
 				<div class="shopping-total">
 					<ul>
 						<li>
-							<em>Sub total</em>
-							<strong class="price"><span>$</span>47.00</strong>
-						</li>
-						<li>
 							<em>Shipping cost</em>
-							<strong class="price"><span>$</span>3.00</strong>
+							<strong class="price">무료</strong>
 						</li>
 						<li class="shopping-total-price">
 							<em>Total</em>
-							<strong class="price"><span>$</span>50.00</strong>
+							<strong class="price" th:text="${cartList.cartPriceSum}"></strong>
 						</li>
 					</ul>
 				</div>

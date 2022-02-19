@@ -31,4 +31,6 @@ public interface shoppingService {
     void deleteById(Long cartId);
 
     CartDetailDTO findByMemberEntityAndProductEntity(MemberEntity memberEntity, ProductEntity productEntity);
+
+    String meunUpDown(Long cartId, String type);
 }

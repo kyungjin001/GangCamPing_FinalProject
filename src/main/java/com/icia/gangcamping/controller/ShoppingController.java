@@ -83,7 +83,7 @@ public class ShoppingController {
     public String goods(@ModelAttribute GoodsSaveDTO goodsSaveDTO) throws IOException {
         Long productId = ss.save(goodsSaveDTO);
         System.out.println("goodsSaveDTO = " + goodsSaveDTO);
-        return "shopping/shopping";
+        return "redirect:/shopping/shopping";
     }
 
 
@@ -101,7 +101,9 @@ public class ShoppingController {
             model.addAttribute("cartList", cartDetailDTOList);
             GoodsDetailDTO goodsDetailDTO = GoodsDetailDTO.toGoodsDetailDTO(productEntity.get());
             List<GoodsDetailDTO> goodsDetailDTOList = new ArrayList<>();
+           // int cartPriceSum = 0;
             for (int i = 0; i < cartDetailDTOList.size(); i++) {
+//                cartPriceSum += (cartDetailDTO.getProductPrice() * cartDetailDTO.getCartAmount());
                 GoodsDetailDTO goodsDetailDTO2 = new GoodsDetailDTO();
                 goodsDetailDTO2 = ss.findById(cartDetailDTOList.get(i).getProductId());
                 goodsDetailDTOList.add(goodsDetailDTO2);
@@ -119,8 +121,8 @@ public class ShoppingController {
                 goodsDetailDTOList.add(goodsDetailDTO2);
                 model.addAttribute("goodsList", goodsDetailDTOList);
             }
-            System.out.println("dsadsadadad");
-        return "shopping/cart";
+
+            return "shopping/cart";
         }
     }
 
@@ -130,6 +132,20 @@ public class ShoppingController {
     public ResponseEntity cartDelete(@PathVariable Long cartId) {
         ss.deleteById(cartId);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+
+
+
+
+
+    //장바구니 수량카운트
+    @PutMapping("menu")
+    @ResponseBody
+        public String meunUpDown(@RequestParam("cartId") Long cartId, @RequestParam("type") String type){
+        String result = ss.meunUpDown(cartId, type);
+        System.out.println("제발 넘어와" + cartId);
+        return  result;
     }
 
 
