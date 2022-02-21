@@ -29,4 +29,6 @@ public interface MemberService {
 
 
     Long update(MemberUpdateDTO memberUpdateDTO);
+
+    String emailDp(String memberEmail);
 }

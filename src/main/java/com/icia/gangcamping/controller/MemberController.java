@@ -15,7 +15,6 @@ import java.io.IOException;
 
 import static com.icia.gangcamping.common.SessionConst.LOGIN_EMAIL;
 
-@RequiredArgsConstructor
 
 @Controller
 @RequestMapping("/member")
