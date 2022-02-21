@@ -88,5 +88,10 @@ public class MemberServiceImpl implements MemberService{
         return mr.save(memberEntity).getMemberId();
     }
 
+    @Override
+    public String emailDp(String memberEmail) {
+        return null;
+    }
+
 
 }

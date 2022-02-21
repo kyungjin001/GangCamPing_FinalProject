@@ -10,14 +10,14 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @Table(name = "answer_table")
-public class answerEntity {
+public class AnswerEntity {
     @Id
     @GeneratedValue
     @Column(name = "answerId")
     private Long answerId;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "questionId")
-    private questionEntity questionEntity;
+    private QuestionEntity questionEntity;
     @Column
     @NotNull
     private String answerContents;
