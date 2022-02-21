@@ -400,7 +400,7 @@
 						</li>
 						<li class="shopping-total-price" >
 							<em>Total</em>
-							<strong class="price" th:text="|${totalPrice}|+원"></strong>
+							<strong class="price" th:text="|${orderTotalFee}|+원"></strong>
 						</li>
 					</ul>
 				</div>
@@ -462,14 +462,17 @@
 				</select>
 			</div>
 
-<!--			<form action="/shopping/pay" name="pay" th:each="cartList:${cartList}" th:id="pay">-->
-<!--				<input class="" type="hidden" th:value="${cartList.productId}"  name="productId">-->
-<!--				<input class="" type="hidden" th:value="${cartList.memberId}" name="memberId">-->
-<!--			</form>-->
+			<form action="/shopping/pay" th:name="pay" th:id="pay" method="post">
+				<input class="" type="hidden" th:value="${orderDetailDTO.orderUnitNum}" name="orderUnitNum">
+				<input class="" type="hidden" th:value="${orderDetailDTO.memberId}" name="memberId">
+<!--				<input class="" type="hidden" th:value="${orderDetailDTO.productId}" name="productId">-->
+				<input class="" type="hidden" th:value="${orderTotalFee}" name="orderTotalFee">
+				<input class="" type="hidden" th:value="카카오페이" name="orderPayType">
+			</form>
 
 
 			<br><br><button class="btn btn-default" onclick="location.href ='/shopping/shopping'" type="submit">쇼핑하기<i class="fa fa-shopping-cart"></i></button>
-			<br><br><button class="btn btn-primary" id="check_module" type="submit">결제하기 <i class="fa fa-check"></i></button>
+			<br><br><button class="btn btn-primary" id="check_module" th:type="button" th:form="pay">결제하기 <i class="fa fa-check"></i></button>
 
 
 
@@ -687,10 +690,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 
 
-
-
-
-</body>
 <script>
 	$("#check_module").click(function () {
 		var IMP = window.IMP; // 생략가능
@@ -702,32 +701,18 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			pay_method: 'card',
 			merchant_uid: '[[${cartList[0].memberId}]]' + new Date().getTime(),
 
-			/*
-             *  merchant_uid에 경우
-             *  https://docs.iamport.kr/implementation/payment
-             *  위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
-             */
 			name: '[[${menu}]]',
-			// 결제창에서 보여질 이름
-			// name: '주문명 : ${auction.a_title}',
-			// 위와같이 model에 담은 정보를 넣어 쓸수도 있습니다.
-			// amount: document.getElementById('orderPrice').value,
-			amount: '[[${totalPrice}]]',
-			// amount: ${bid.b_bid},
-			// 가격
+			amount: '[[${orderTotalFee}]]',
 			buyer_name: '강캠핑',
-			// 구매자 이름, 구매자 정보도 model값으로 바꿀 수 있습니다.
-			// 구매자 정보에 여러가지도 있으므로, 자세한 내용은 맨 위 링크를 참고해주세요.
+
 			buyer_postcode: '123-456',// 이거는 왜 받음?
 		}, function (rsp) {
 			console.log(rsp);
 			if (rsp.success) {
 				var msg = '결제가 완료되었습니다.';
 				msg += '결제 금액 : ' + rsp.paid_amount;
-				// success.submit();
 				document.getElementById('pay').submit();
-				// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
-				// 자세한 설명은 구글링으로 보시는게 좋습니다.
+
 			} else {
 				var msg = '결제에 실패하였습니다.';
 				msg += '에러내용 : ' + rsp.error_msg;
@@ -736,5 +721,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		});
 	});
 </script>
+
+
+</body>
+
 
 </html>
