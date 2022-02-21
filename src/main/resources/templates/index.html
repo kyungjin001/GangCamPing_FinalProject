@@ -359,55 +359,55 @@
 
                     <div class="search_tabs_container">
                         <div class="search_tabs d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
-                            <div class="search_tab active d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="/images/suitcase.png" alt=""><span>hotels</span></div>
-                            <div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="/images/bus.png" alt="">car rentals</div>
-                            <div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="/images/departure.png" alt="">flights</div>
-                            <div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="/images/island.png" alt="">trips</div>
-                            <div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="/images/cruise.png" alt="">cruises</div>
-                            <div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="/images/diving.png" alt="">activities</div>
+                            <div class="search_tab active d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="/images/suitcase.png" alt=""><span>캠핑</span></div>
+                            <div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="/images/bus.png" alt="">글램핑</div>
+                            <div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="/images/departure.png" alt="">카라반</div>
+                            <div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="/images/island.png" alt="">차박</div>
+                            <div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="/images/cruise.png" alt="">팬션</div>
+                            <div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="/images/diving.png" alt="">엑티비티</div>
                         </div>
                     </div>
 
                     <!-- Search Panel -->
-
                     <div class="search_panel active">
-                        <form action="#" id="search_form_1" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
-                            <div class="search_item">
-                                <div>destination</div>
-                                <input type="text" class="destination search_input" required="required">
+                        <form action="/search/camping" method="get" id="search_form_1" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
+                            <div class="search_item" style="margin:auto; ">
+                                <div>keyword</div>
+                                <input type="text" name="keyword" id="keyword" class="destination search_input" required="required">
                             </div>
-                            <div class="search_item">
-                                <div>check in</div>
-                                <input type="text" class="check_in search_input" placeholder="YYYY-MM-DD">
-                            </div>
-                            <div class="search_item">
-                                <div>check out</div>
-                                <input type="text" class="check_out search_input" placeholder="YYYY-MM-DD">
-                            </div>
-                            <div class="search_item">
-                                <div>adults</div>
-                                <select name="adults" id="adults_1" class="dropdown_item_select search_input">
-                                    <option>01</option>
-                                    <option>02</option>
-                                    <option>03</option>
-                                </select>
-                            </div>
-                            <div class="search_item">
-                                <div>children</div>
-                                <select name="children" id="children_1" class="dropdown_item_select search_input">
-                                    <option>0</option>
-                                    <option>02</option>
-                                    <option>03</option>
-                                </select>
-                            </div>
-                            <button class="button search_button">search<span></span><span></span><span></span></button>
+<!--                            <div class="search_item">-->
+<!--                                <div>check in</div>-->
+<!--                                <input type="text" class="check_in search_input" placeholder="YYYY-MM-DD">-->
+<!--                            </div>-->
+<!--                            <div class="search_item">-->
+<!--                                <div>check out</div>-->
+<!--                                <input type="text" class="check_out search_input" placeholder="YYYY-MM-DD">-->
+<!--                            </div>-->
+<!--                            <div class="search_item">-->
+<!--                                <div>adults</div>-->
+<!--                                <select name="adults" id="adults_1" class="dropdown_item_select search_input">-->
+<!--                                    <option>01</option>-->
+<!--                                    <option>02</option>-->
+<!--                                    <option>03</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                            <div class="search_item">-->
+<!--                                <div>children</div>-->
+<!--                                <select name="children" id="children_1" class="dropdown_item_select search_input">-->
+<!--                                    <option>01</option>-->
+<!--                                    <option>02</option>-->
+<!--                                    <option>03</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+                            <button class="button search_button" type="submit">search<span></span><span></span><span></span></button>
                         </form>
                     </div>
 
                     <!-- Search Panel -->
 
+
                     <div class="search_panel">
-                        <form action="#" id="search_form_2" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
+                        <form action="/search/glamping" method="get" id="search_form_2" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
                             <div class="search_item">
                                 <div>destination</div>
                                 <input type="text" class="destination search_input" required="required">
@@ -431,7 +431,7 @@
                             <div class="search_item">
                                 <div>children</div>
                                 <select name="children" id="children_2" class="dropdown_item_select search_input">
-                                    <option>0</option>
+                                    <option>01</option>
                                     <option>02</option>
                                     <option>03</option>
                                 </select>
@@ -443,7 +443,7 @@
                     <!-- Search Panel -->
 
                     <div class="search_panel">
-                        <form action="#" id="search_form_3" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
+                        <form action="/search/caravan" method="get" id="search_form_3" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
                             <div class="search_item">
                                 <div>destination</div>
                                 <input type="text" class="destination search_input" required="required">
@@ -479,7 +479,7 @@
                     <!-- Search Panel -->
 
                     <div class="search_panel">
-                        <form action="#" id="search_form_4" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
+                        <form action="/search/carCamping" method="get" id="search_form_4" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
                             <div class="search_item">
                                 <div>destination</div>
                                 <input type="text" class="destination search_input" required="required">
@@ -515,7 +515,7 @@
                     <!-- Search Panel -->
 
                     <div class="search_panel">
-                        <form action="#" id="search_form_5" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
+                        <form action="/search/pension" method="get" id="search_form_5" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
                             <div class="search_item">
                                 <div>destination</div>
                                 <input type="text" class="destination search_input" required="required">
@@ -551,7 +551,7 @@
                     <!-- Search Panel -->
 
                     <div class="search_panel">
-                        <form action="#" id="search_form_6" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
+                        <form action="/search/activity" method="get" id="search_form_6" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
                             <div class="search_item">
                                 <div>destination</div>
                                 <input type="text" class="destination search_input" required="required">
