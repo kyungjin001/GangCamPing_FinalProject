@@ -3,7 +3,7 @@ package com.icia.gangcamping.dto;
 import lombok.Data;
 
 @Data
-public class TestDTO {
+public class testDTO {
     private String name;
     private String addr;
     private String tel;

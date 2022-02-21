@@ -8,5 +8,3 @@ public interface MemberRepository extends JpaRepository<MemberEntity,Long> {
 
     boolean findByMemberEmailAndMemberPw(String memberEmail,String memberPw);
 }
-
-
