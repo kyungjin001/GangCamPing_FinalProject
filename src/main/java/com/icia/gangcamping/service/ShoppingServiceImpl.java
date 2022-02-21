@@ -18,7 +18,8 @@ import java.util.*;
 
 @Service
 @AllArgsConstructor
-public class shoppingServiceImpl implements shoppingService{
+
+public class ShoppingServiceImpl implements ShoppingService{
 
     private final ProductRepositroy pr;
     private final CartRepository cr;
@@ -106,20 +107,20 @@ public class shoppingServiceImpl implements shoppingService{
 
     @Override
     public void deleteById(Long cartId) {
-    cr.deleteById(cartId);
+        cr.deleteById(cartId);
     }
 
     @Override
     public CartDetailDTO findByMemberEntityAndProductEntity(MemberEntity memberEntity, ProductEntity productEntity) {
-         CartEntity cart= cr.findByMemberEntityAndProductEntity(memberEntity, productEntity);
-         if(cart != null){
-        CartDetailDTO cartDetailDTO = new CartDetailDTO();
-        System.out.println(cart);
-        cartDetailDTO = CartDetailDTO.toCartDetailDTO(cart);
+        CartEntity cart= cr.findByMemberEntityAndProductEntity(memberEntity, productEntity);
+        if(cart != null){
+            CartDetailDTO cartDetailDTO = new CartDetailDTO();
+            System.out.println(cart);
+            cartDetailDTO = CartDetailDTO.toCartDetailDTO(cart);
             return cartDetailDTO;
-         }else {
-             return null;
-         }
+        }else {
+            return null;
+        }
 
     }
 
@@ -135,6 +136,4 @@ public class shoppingServiceImpl implements shoppingService{
         }
         return "ok";
     }
-
-
-}
+    }

@@ -8,7 +8,7 @@ import com.icia.gangcamping.entity.CartEntity;
 import com.icia.gangcamping.entity.MemberEntity;
 import com.icia.gangcamping.entity.ProductEntity;
 import com.icia.gangcamping.service.MemberService;
-import com.icia.gangcamping.service.shoppingService;
+import com.icia.gangcamping.service.ShoppingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,7 +30,7 @@ import java.util.Optional;
 public class ShoppingController {
 
 
-     private final shoppingService ss;
+     private final ShoppingService ss;
     private final MemberService ms;
     private final HttpSession session;
 

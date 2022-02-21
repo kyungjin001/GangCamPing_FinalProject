@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class campingServiceImpl implements campingService{
+public class AdminServiceImpl implements AdminService {
 }

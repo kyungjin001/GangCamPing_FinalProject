@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            margin:30px auto;
+        }
+
+        .menu-wrapper {
+            text-align: center;
+            padding: 50px 0;
+            background-color: white;
+        }
+        .menu {
+            width: 100px;
+            height: 30px;
+            line-height : 30px;
+            background-color: whitesmoke;
+            border : solid 1px;
+            color :brown;
+            font-size: 0.75rem;
+            text-align: center;
+            display: inline-block;
+            border-radius: 20%;
+        }
+    </style>
+
+
+
+    <style type="text/css">
+        .tg  {border-collapse:collapse;border-color:#ccc;border-spacing:0;}
+        .tg td{background-color:#fff;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
+            font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg th{background-color:#f0f0f0;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
+            font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg .tg-62r5{font-family:Arial, Helvetica, sans-serif !important;font-size:11px;font-weight:bold;text-align:center;
+            vertical-align:middle}
+        .tg .tg-kwqo{font-family:Arial, Helvetica, sans-serif !important;font-size:11px;text-align:center;vertical-align:middle}
+        .tg {
+            margin-left:auto;
+            margin-right:auto;
+    </style>
+    <title>Title</title>
+</head>
+<body>
+<p style="text-align:center; color :brown";>관리자 페이지</p>
+<div class="menu-wrapper">
+    <div class="menu" onclick="location.href='/admin/bookList'" style="cursor: pointer;">예약관리</div>
+    <div class="menu" onclick="location.href='/admin/findAll'" style="cursor: pointer;">회원관리</div>
+    <div class="menu" onclick="location.href='/shopping/findAll'" style="cursor: pointer;">상품관리</div>
+    <div class="menu" onclick="location.href='/admin/salesGraph'" style="cursor: pointer;">매출통계</div>
+    <div class="menu" onclick="location.href='/admin/chatList'" style="cursor: pointer;">캠핑장문의</div>
+    <div class="menu" onclick="location.href='/admin/shoppingAsk'" style="cursor: pointer;">상품문의</div>
+    <div class="menu" onclick="location.href='/admin/save'" style="cursor: pointer;">상품등록</div>
+</div>
+
+
+<p style="text-align:center; color :brown";>캠핑장 문의</p>
+
+<table class="tg" style="undefined;table-layout: fixed; width: 865px">
+    <colgroup>
+        <col style="width: 104px">
+        <col style="width: 116px">
+        <col style="width: 115px">
+        <col style="width: 397px">
+        <col style="width: 133px">
+    </colgroup>
+    <thead>
+    <tr>
+        <th class="tg-62r5">문의번호</th>
+        <th class="tg-62r5">문의일자</th>
+        <th class="tg-62r5">회원 Email</th>
+        <th class="tg-62r5">문의내용</th>
+        <th class="tg-62r5">최근 작성시간</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="tg-kwqo">00001</td>
+        <td class="tg-kwqo">2022-02-22</td>
+        <td class="tg-kwqo">aaaaa@aaaaa.com</td>
+        <td class="tg-kwqo">장작 中자는 몇킬로인가요?</td>
+        <td class="tg-kwqo">2021-02-22 16:00:00</td>
+    </tr>
+    <tr>
+        <td class="tg-kwqo"></td>
+        <td class="tg-kwqo"></td>
+        <td class="tg-kwqo"></td>
+        <td class="tg-kwqo"></td>
+        <td class="tg-kwqo"></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<br>
+<br>
+
+
+</body>
+</html>

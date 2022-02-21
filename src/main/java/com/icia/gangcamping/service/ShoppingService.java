@@ -10,7 +10,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-public interface shoppingService {
+public interface ShoppingService{
+
+
 
     Long save(GoodsSaveDTO goodsSaveDTO) throws IOException;
 

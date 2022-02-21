@@ -3,6 +3,7 @@ package com.icia.gangcamping.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -35,6 +36,12 @@ public class MainController {
     public String sssss() {
         return "offers";
     }
+    @RequestMapping("test")
+    public String test() {
+        return "te1st";
+    }
+
+
 
     @RequestMapping("index.html")
     public String cxczcof() {

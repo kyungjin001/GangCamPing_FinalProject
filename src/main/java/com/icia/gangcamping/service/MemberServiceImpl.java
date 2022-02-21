@@ -1,6 +1,7 @@
 package com.icia.gangcamping.service;
 
 import com.icia.gangcamping.entity.MemberEntity;
+import com.icia.gangcamping.dto.MemberLoginDTO;
 import com.icia.gangcamping.repository.MemberRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,4 +24,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
 
+    public boolean login(MemberLoginDTO memberLoginDTO) {
+        mr.findByMemberEmailAndMemberPw(memberLoginDTO.getMemberEmail(),memberLoginDTO.getMemberPw());
+        return false;
+    }
 }
