@@ -6,7 +6,6 @@ import com.icia.gangcamping.dto.MemberSaveDTO;
 import com.icia.gangcamping.dto.MemberUpdateDTO;
 import com.icia.gangcamping.entity.MemberEntity;
 import com.icia.gangcamping.repository.MemberRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +22,16 @@ public class MemberServiceImpl implements MemberService{
         MemberEntity memberEntity = MemberEntity.saveMember(memberSaveDTO);
 
         return mr.save(memberEntity).getMemberId();
+    }
+
+    @Override
+    public MemberEntity findByMemberEmail(String memberEmail) {
+        return null;
+    }
+
+    @Override
+    public Optional<MemberEntity> findByMemberId(Long memberId) {
+        return Optional.empty();
     }
 
     @Override
