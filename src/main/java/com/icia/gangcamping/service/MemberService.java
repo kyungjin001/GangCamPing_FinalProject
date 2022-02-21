@@ -6,4 +6,7 @@ import java.util.Optional;
 
 public interface MemberService {
     Optional<MemberEntity> findById(Long memberId);
+
+
+    MemberEntity findByMemberEmail(String memberEmail);
 }

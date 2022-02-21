@@ -118,7 +118,7 @@
 				type: 'delete',
 				url: reqUrl,
 				success: function (){
-					location.href='/shopping/cart';
+					location.href= "/shopping/cartview";
 				},
 				error:function (){
 					alert('ajax 실패');
@@ -300,8 +300,8 @@
 							</a>
 							</td>
 						</tr>
-						</div>
 					</table>
+				</div>
 				</div>
 
 				<div class="shopping-total">
@@ -310,16 +310,20 @@
 							<em>Shipping cost</em>
 							<strong class="price">무료</strong>
 						</li>
-						<li class="shopping-total-price">
+						<li class="shopping-total-price" >
 							<em>Total</em>
-							<strong class="price" th:text="${cartList.cartPriceSum}"></strong>
+							<strong class="price" th:text="|${totalPrice}|+원"></strong>
 						</li>
 					</ul>
 				</div>
 			</div>
 			<button class="btn btn-default" type="submit">쇼핑하기<i class="fa fa-shopping-cart"></i></button>
-			<button class="btn btn-primary" onclick="location.href = '/shopping/order' " type="submit">전체상품주문 <i class="fa fa-check"></i></button>
-		</div>
+		<form th:id="aaa" action="/shopping/order">
+			<input type="hidden" th:name="productId"  th:value="${productId}">
+			<input type="hidden" th:name="memberId" th:value="1">
+			<button class="btn btn-primary"  type="submit">전체상품주문 <i class="fa fa-check"></i></button>
+		</form>
+	</div>
 	</div>
 	<!-- END CONTENT -->
 

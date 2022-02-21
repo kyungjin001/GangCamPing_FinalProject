@@ -10,12 +10,15 @@ import com.icia.gangcamping.entity.ProductEntity;
 import com.icia.gangcamping.service.MemberService;
 import com.icia.gangcamping.service.shoppingService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +32,7 @@ public class ShoppingController {
 
      private final shoppingService ss;
     private final MemberService ms;
-
+    private final HttpSession session;
 
 
 
@@ -55,10 +58,6 @@ public class ShoppingController {
         return "shopping/shopdetail";
     }
 
-    @RequestMapping("cart")
-    public String cart() {
-        return "shopping/cart";
-    }
 
 
     @RequestMapping("order")
@@ -95,47 +94,58 @@ public class ShoppingController {
         Optional<MemberEntity> memberEntity = ms.findById(cartDetailDTO.getMemberId());
         Optional<ProductEntity> productEntity = ss.findById1(cartDetailDTO.getProductId());
         CartDetailDTO cart = ss.findByMemberEntityAndProductEntity(memberEntity.get(),productEntity.get());
+        Long productId = cartDetailDTO.getProductId();
+        model.addAttribute("productId",productId);
         if(cart == null){
             CartDetailDTO CartDetailDTO = ss.addCart(cartDetailDTO, memberEntity.get(), productEntity.get());
             List<CartDetailDTO> cartDetailDTOList = ss.findByMemberEntity(memberEntity.get());
             model.addAttribute("cartList", cartDetailDTOList);
-            GoodsDetailDTO goodsDetailDTO = GoodsDetailDTO.toGoodsDetailDTO(productEntity.get());
-            List<GoodsDetailDTO> goodsDetailDTOList = new ArrayList<>();
-           // int cartPriceSum = 0;
-            for (int i = 0; i < cartDetailDTOList.size(); i++) {
-//                cartPriceSum += (cartDetailDTO.getProductPrice() * cartDetailDTO.getCartAmount());
-                GoodsDetailDTO goodsDetailDTO2 = new GoodsDetailDTO();
-                goodsDetailDTO2 = ss.findById(cartDetailDTOList.get(i).getProductId());
-                goodsDetailDTOList.add(goodsDetailDTO2);
-            model.addAttribute("goodsList", goodsDetailDTOList);
+        int cartPriceSum = 0;
+            for (CartDetailDTO c : cartDetailDTOList) {
+                cartPriceSum += (c.getProductPrice() * c.getCartAmount());
+                System.out.println("c = " + c);
             }
+            model.addAttribute("totalPrice",cartPriceSum);
             return "shopping/cart";
         }else {
             List<CartDetailDTO> cartDetailDTOList = ss.findByMemberEntity(memberEntity.get());
             model.addAttribute("cartList", cartDetailDTOList);
-            GoodsDetailDTO goodsDetailDTO = GoodsDetailDTO.toGoodsDetailDTO(productEntity.get());
-            List<GoodsDetailDTO> goodsDetailDTOList = new ArrayList<>();
-            for (int i = 0; i < cartDetailDTOList.size(); i++) {
-                GoodsDetailDTO goodsDetailDTO2 = new GoodsDetailDTO();
-                goodsDetailDTO2 = ss.findById(cartDetailDTOList.get(i).getProductId());
-                goodsDetailDTOList.add(goodsDetailDTO2);
-                model.addAttribute("goodsList", goodsDetailDTOList);
+            int cartPriceSum = 0;
+            for (CartDetailDTO c : cartDetailDTOList) {
+                cartPriceSum += (c.getProductPrice() * c.getCartAmount());
+                System.out.println("c = " + c);
             }
+            model.addAttribute("totalPrice",cartPriceSum);
 
             return "shopping/cart";
         }
     }
 
-
-    //장바구니삭제
-    @DeleteMapping("{cartId}")
-    public ResponseEntity cartDelete(@PathVariable Long cartId) {
-        ss.deleteById(cartId);
-        return new ResponseEntity(HttpStatus.OK);
+    @GetMapping("cartview")
+    public String cartview(Model model){
+        MemberEntity memberEntity = ms.findByMemberEmail((String) session.getAttribute("memberEmail"));
+        List<CartDetailDTO> cartDetailDTOList = ss.findByMemberEntity(memberEntity);
+        if (!cartDetailDTOList.isEmpty()) {
+            model.addAttribute("cartList", cartDetailDTOList);
+            int cartPriceSum = 0;
+            for (CartDetailDTO c : cartDetailDTOList) {
+                cartPriceSum += (c.getProductPrice() * c.getCartAmount());
+                System.out.println("c = " + c);
+            }
+            model.addAttribute("totalPrice",cartPriceSum);
+        }
+        return "shopping/cart";
     }
 
 
 
+    //장바구니삭제
+    @DeleteMapping("{cartId}")
+    public ResponseEntity cartDelete(@PathVariable Long cartId) {
+        System.out.println("cartId = " + cartId);
+        ss.deleteById(cartId);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 
 
 
@@ -147,6 +157,35 @@ public class ShoppingController {
         System.out.println("제발 넘어와" + cartId);
         return  result;
     }
+
+
+
+    @GetMapping("order")
+    public String order(Model model,CartDetailDTO cartDetailDTO){
+        Optional<MemberEntity> memberEntity = ms.findById(cartDetailDTO.getMemberId());
+        Optional<ProductEntity> productEntity = ss.findById1(cartDetailDTO.getProductId());
+        List<CartDetailDTO> cartDetailDTOList = ss.findByMemberEntity(memberEntity.get());
+            model.addAttribute("cartList", cartDetailDTOList);
+            int cartPriceSum = 0;
+            String menuList = "";
+            for (CartDetailDTO c : cartDetailDTOList) {
+                cartPriceSum += (c.getProductPrice() * c.getCartAmount());
+                System.out.println("c = " + c);
+                menuList += c.getProductName();
+            }
+            model.addAttribute("menu",menuList);
+            model.addAttribute("totalPrice",cartPriceSum);
+
+        return "shopping/order";
+    }
+
+
+    // 카카오페이 구매
+//	@PostMapping("{productId},{memberId}")
+//	public String pay(@PathVariable("productId") Long productId , @PathVariable("memberId") Long memberId) {
+//		ss.findAll(productId,memberId);
+//		return "goods/mycart";
+//	}
 
 
 }

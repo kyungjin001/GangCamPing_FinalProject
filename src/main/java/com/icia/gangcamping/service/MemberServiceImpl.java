@@ -16,4 +16,11 @@ public class MemberServiceImpl implements MemberService {
 
         return mr.findById(memberId);
     }
+
+    @Override
+    public MemberEntity findByMemberEmail(String memberEmail) {
+        return mr.findByMemberEmail(memberEmail);
+    }
+
+
 }
