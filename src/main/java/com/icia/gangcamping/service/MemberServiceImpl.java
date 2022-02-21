@@ -3,6 +3,7 @@ package com.icia.gangcamping.service;
 import com.icia.gangcamping.dto.MemberDetailDTO;
 import com.icia.gangcamping.dto.MemberLoginDTO;
 import com.icia.gangcamping.dto.MemberSaveDTO;
+import com.icia.gangcamping.dto.MemberUpdateDTO;
 import com.icia.gangcamping.entity.MemberEntity;
 import com.icia.gangcamping.repository.MemberRepository;
 import lombok.AllArgsConstructor;
@@ -70,4 +71,13 @@ public class MemberServiceImpl implements MemberService{
             return "no";
         }
     }
+
+    @Override
+    public Long update(MemberUpdateDTO memberUpdateDTO) {
+        MemberEntity memberEntity = MemberEntity.toUpdateMember(memberUpdateDTO);
+
+        return mr.save(memberEntity).getMemberId();
+    }
+
+
 }

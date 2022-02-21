@@ -3,6 +3,7 @@ package com.icia.gangcamping.service;
 import com.icia.gangcamping.dto.MemberDetailDTO;
 import com.icia.gangcamping.dto.MemberLoginDTO;
 import com.icia.gangcamping.dto.MemberSaveDTO;
+import com.icia.gangcamping.dto.MemberUpdateDTO;
 
 public interface MemberService {
 
@@ -17,4 +18,7 @@ public interface MemberService {
     MemberDetailDTO findById(Long memberId);
 
     String pwMailCheck(String memberEmail);
+
+
+    Long update(MemberUpdateDTO memberUpdateDTO);
 }

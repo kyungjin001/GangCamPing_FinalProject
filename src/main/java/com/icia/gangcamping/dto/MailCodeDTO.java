@@ -9,5 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MailCodeDTO {
 
+    private Long memberId;
+    private String memberEmail;
     private String emailCode;
 }

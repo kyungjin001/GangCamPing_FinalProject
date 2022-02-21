@@ -3,16 +3,16 @@ package com.icia.gangcamping.controller;
 import com.icia.gangcamping.dto.MemberDetailDTO;
 import com.icia.gangcamping.dto.MemberLoginDTO;
 import com.icia.gangcamping.dto.MemberSaveDTO;
+import com.icia.gangcamping.dto.MemberUpdateDTO;
 import com.icia.gangcamping.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -54,7 +54,7 @@ public class MemberController {
         return "redirect:/";
     }
 
-    @GetMapping("/update")
+    @GetMapping ("/update")
     public String update_form(Model model, HttpSession session){
 
         String memberEmail = (String) session.getAttribute(LOGIN_EMAIL);
@@ -70,6 +70,14 @@ public class MemberController {
             System.out.println("asdfadsf!!!@!@!@!@");
         }
         return "/member/update";
+    }
+
+    @PutMapping("/{memberId}")
+    public ResponseEntity update2(@RequestBody MemberUpdateDTO memberUpdateDTO){
+
+        System.out.println("Adsfsdafsdaf");
+        Long memberId = ms.update(memberUpdateDTO);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 

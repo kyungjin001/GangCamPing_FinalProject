@@ -1,11 +1,12 @@
 package com.icia.gangcamping.service;
 
 import com.icia.gangcamping.dto.MailCodeDTO;
-import com.icia.gangcamping.dto.MailDTO;
+import com.icia.gangcamping.dto.MailCodeDetailDTO;
 import com.icia.gangcamping.entity.MailEntity;
+import com.icia.gangcamping.entity.MemberEntity;
 import com.icia.gangcamping.repository.MailRepository;
+import com.icia.gangcamping.repository.MemberRepository;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -18,14 +19,15 @@ import java.util.Random;
 public class MailServiceImpl implements MailService {
 
     private final MailRepository mar;
+    private final MemberRepository mr;
     private JavaMailSender javaMailSender;
 
     @Override
-    public Long mailSend(MailDTO mailDTO, MailCodeDTO mailCodeDTO) {
+    public Long mailSend(MailCodeDTO mailCodeDTO) {
         Random random = new Random(); // 난수 생성
         String key=""; // 인증번호
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(mailDTO.getMemberEmail());
+        message.setTo(mailCodeDTO.getMemberEmail());
 
         for(int i =0; i<3; i++){
             int index = random.nextInt(25)+65;
@@ -42,10 +44,31 @@ public class MailServiceImpl implements MailService {
         javaMailSender.send(message);
 
         mailCodeDTO.setEmailCode(key);
-        MailEntity mailEntity = MailEntity.saveMailCode(mailCodeDTO);
+        MemberEntity memberEntity = mr.findByMemberEmail(mailCodeDTO.getMemberEmail());
+        MailEntity mailEntity = MailEntity.saveMailCode(mailCodeDTO, memberEntity);
 
         return mar.save(mailEntity).getId();
         // return key;
     }
+
+    @Override
+    public String findByEmailCode(String emailCode) {
+        MailEntity mailEntity = mar.findByEmailCode(emailCode);
+
+        if(mailEntity != null){
+            return "ok";
+        }else{
+            return "no";
+        }
+
     }
+
+    @Override
+    public MailCodeDetailDTO findByMemberEmailAndEmailCode(String memberEmail, String emailCode) {
+        MailEntity mailEntity = mar.findByMemberEmailAndEmailCode(memberEmail,emailCode);
+        MailCodeDetailDTO mailCodeDetailDTO = MailCodeDetailDTO.toMailCodeDetailDTO(mailEntity);
+        return mailCodeDetailDTO;
+    }
+
+}
 

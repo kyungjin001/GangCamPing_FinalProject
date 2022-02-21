@@ -1,10 +1,12 @@
 package com.icia.gangcamping.entity;
 
 import com.icia.gangcamping.dto.MemberSaveDTO;
+import com.icia.gangcamping.dto.MemberUpdateDTO;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 @ToString
@@ -20,7 +22,7 @@ public class MemberEntity {
     @Column(name="memberId")
     private Long memberId;
 
-    @Column(unique = true)
+    @Column
     private String memberEmail;
 
     @Column
@@ -76,6 +78,18 @@ public class MemberEntity {
         memberEntity.setMemberName(memberSaveDTO.getMemberName());
         memberEntity.setMemberAddr(memberSaveDTO.getMemberAddr());
         memberEntity.setMemberPhone(memberSaveDTO.getMemberPhone());
+        return memberEntity;
+    }
+
+    public static MemberEntity toUpdateMember(MemberUpdateDTO memberUpdateDTO) {
+
+        MemberEntity memberEntity = new MemberEntity();
+
+        memberEntity.setMemberEmail(memberUpdateDTO.getMemberEmail());
+        memberEntity.setMemberPw(memberUpdateDTO.getMemberPW());
+        memberEntity.setMemberName(memberUpdateDTO.getMemberName());
+        memberEntity.setMemberAddr(memberUpdateDTO.getMemberAddr());
+        memberEntity.setMemberPhone(memberUpdateDTO.getMemberPhone());
         return memberEntity;
     }
 }

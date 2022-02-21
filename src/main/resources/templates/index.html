@@ -19,7 +19,7 @@
 <!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>-->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
-
+        let id = "";
             function emailCheck(){
 
             const mail = document.getElementById("memberEmail").value;
@@ -42,41 +42,75 @@
                     }
                 });
             }
+
     </script>
     <script>
-            function codeSend(){
+        function codeSend(){
 
-                const mail = document.getElementById("memberEmail").value;
-                const code = document.getElementById("code");
-                const send = document.getElementById("send");
-                const cancel = document.getElementById("cancel");
-                const emailcancel = document.getElementById("emailCancel");
-                const emailSend = document.getElementById("emailSend");
-                $.ajax({
-                    type: 'post',
-                    url: '/mail/mailCode',
-                    data: {"memberEmail":mail},
-                    dataType: 'text',
-                    success: function (result){
+            const mail = document.getElementById("memberEmail").value;
+            const codeInput = document.getElementById("codeInput");
+            const send = document.getElementById("send");
+            const cancel = document.getElementById("cancel");
+            const emailcancel = document.getElementById("emailCancel");
+            const emailSend = document.getElementById("emailSend");
+            const check = document.getElementById("check");
+            const useremail = document.getElementById("members")
+            $.ajax({
+                type: 'post',
+                url: '/mail/mailCode',
+                data: {"memberEmail":mail},
+                dataType: 'json',
+                success: function (result){
 
-                        if(result=='ok') {
-                            emailcancel.type = "hidden";
-                            emailSend.type = "hidden";
-                            code.type = "text";
-                            send.type = "submit";
-                            cancel.type = "button";
-                        }else{
-                            console.log('안되지롱 안되지롱 에베베베베베')
-                        }
+                    if(result != null) {
+                        emailcancel.type = "hidden";
+                        emailSend.type = "hidden";
+                        codeInput.type = "text";
+                        send.type = "submit";
+                        cancel.type = "button";
+                        check.type="button";
+                        useremail.value = result.memberId;
 
-                    },
-                    error: function (){
-                        console.log("다시 확인해주세요.")
+                    }else{
+                        console.log('안되지롱 안되지롱 에베베베베베')
                     }
-                });
-            }
+
+                },
+                error: function (){
+                    console.log("다시 확인해주세요.")
+                }
+            });
+        }
+    </script>
+        <script>
+        function codeCheck() {
+            console.log("???");
+            const mail2 = document.getElementById("memberEmail").value;
+            console.log(mail2);
+            const codeInput = document.getElementById("codeInput").value;
+            console.log(codeInput);
+
+            $.ajax({
+                type: 'post',
+                url: '/mail/codeCheck',
+                data: {"memberEmail":mail2, "emailCode":codeInput},
+                dataType: 'text',
+                success: function(result){
+
+                    if(result == "ok") {
+                        alert("비밀번호를 변경해주세요.");
+                    }else{
+                        alert("인증코드를 다시 확인해주세요.");
+                    }
+                },
+                error: function (){
+                    alert("실패");
+                }
+            });
+        }
 
     </script>
+
 
 </head>
 
@@ -99,7 +133,7 @@
 
                         </div>
                         <div class="user_box ml-auto">
-                            <span th:if="(${session.loginEmail}==null) and (${session.userId}==null)">
+                           <span th:if="(${session.loginEmail}==null) and (${session.userId}==null)">
                             <div class="user_box_login user_box_link">	<a class="nav-link" href="#" data-toggle="modal" data-target="#login" style="font-size: 15px" >
                                 LogIn</a>
                             </div>
@@ -1182,7 +1216,7 @@
                     <div class="form-group">
                         <label for="registerPw">비밀번호 </label>
                         <input type="password" class="form-control" id="registerPw" placeholder="비밀번호를 입력해주세요." name="memberPW" required>
-                        <input type="password" class="form-control" id="registerPwCheck" placeholder="비밀번호를 다시 입력해주세요." name="memberPW" required>
+                        <input type="password" class="form-control" id="registerPwCheck" placeholder="비밀번호를 다시 입력해주세요."  required>
 
                     </div>
                     <div class="form-group">
@@ -1282,26 +1316,28 @@
             </div>
             <!-- Modal body -->
             <div>
-                <form action="/member/update" method="get">
+
             <div class="modal-body">
 
                     <div class="form-group">
                         <label for="memberEmail">이메일을 입력해주세요 </label> <br>
-                        <input type="text" class="form-control" id="memberEmail" th:onblur="emailCheck()" placeholder="Enter Your Email" name="memberEmail" required>
-                        <input type="hidden" th:value="${session['memberId']}">
-                        <input type="hidden" class="form-control" id="code" placeholder="이메일 인증코드를 입력해주세요."required>
+                        <input type="text" class="form-control" id="memberEmail" th:onblur="emailCheck()" placeholder="Enter Your Email" required>
+                        <form action="/member/update" method="get" name="pwUpdate">
+                        <input type="text" id="members" name="memberId">
+                        <input type="hidden" class="form-control" id="codeInput" placeholder="이메일 인증코드를 입력해주세요."required>
+                        <input type="hidden" th:onclick="codeCheck()" id="check" value="코드확인">
                     </div>
 
             </div>
 
             <!-- Modal footer -->
             <div class="modal-footer">
-                <input id="emailSend" th:onclick="codeSend()" class="btn btn-primary" style="margin-left:20%;" value="전송하기">
-                <input type="button" id="emailCancel" class="btn btn-secondary" data-dismiss="modal" value="취소">
+                <input type="button" id="emailSend" th:onclick="codeSend()" class="btn btn-primary" style="margin-left:20%;" value="전송하기" readonly>
+                <input type="button" id="emailCancel" class="btn btn-secondary" data-dismiss="modal" value="취소" readonly>
             </div>
             <div class="modal-footer">
-                <input type="hidden" id="send" class="btn btn-primary" style="margin-left:20%;" value="전송하기">
-                <input type="hidden" id="cancel"  class="btn btn-primary" data-dismiss="modal" value="취소">
+                <input type="hidden" id="send" class="btn btn-primary" style="margin-left:20%;" value="전송하기" readonly>
+                <input type="hidden" id="cancel"  class="btn btn-primary" data-dismiss="modal" value="취소" readonly>
             </div>
         </div>
         </form>
@@ -1326,5 +1362,7 @@
 <script src="/js/custom.js"></script>
 
 </body>
+
+
 
 </html>

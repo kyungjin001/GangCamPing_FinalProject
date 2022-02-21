@@ -12,21 +12,28 @@ import javax.persistence.*;
 @Table(name="emailCode")
 public class MailEntity {
 
-    @javax.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="emailId")
     private Long Id;
 
     @Column
-    private String emailCheck;
+    private String emailCode;
 
-    @ManyToOne
+    @Column
+    private String memberEmail;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId")
     private MemberEntity memberEntity;
 
-    public static MailEntity saveMailCode(MailCodeDTO mailCodeDTO) {
+    public static MailEntity saveMailCode(MailCodeDTO mailCodeDTO, MemberEntity memberEntity) {
         MailEntity mailEntity = new MailEntity();
-        mailEntity.setEmailCheck(mailCodeDTO.getEmailCode());
+        mailEntity.setEmailCode(mailCodeDTO.getEmailCode());
+        mailEntity.setMemberEmail(mailCodeDTO.getMemberEmail());
+        mailEntity.setMemberEntity(memberEntity);
         return mailEntity;
     }
+
+
 }
