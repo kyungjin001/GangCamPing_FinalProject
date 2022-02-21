@@ -6,22 +6,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
 @RequiredArgsConstructor
 @Controller
 public class MainController {
-    @RequestMapping("/")
-    public String main(){return "index";}
-    @RequestMapping("about")
+
+
+    @RequestMapping("about.html")
     public String osf() {
         return "about";
     }
 
-    @RequestMapping("booking")
+    @RequestMapping("elements.html")
     public String ofa() {
-        return "offers";
+        return "elements";
     }
 
-    @RequestMapping("contact")
+    @RequestMapping("contact.html")
     public String cof() {
         return "contact";
     }
@@ -35,6 +36,25 @@ public class MainController {
     public String sssss() {
         return "offers";
     }
+    @RequestMapping("test")
+    public String test() {
+        return "te1st";
+    }
+
+
+
+    @RequestMapping("index.html")
+    public String cxczcof() {
+        return "indexs";
+    }
+
+
+
+
+
+
+
+
 
 
 }

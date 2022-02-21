@@ -1,14 +1,10 @@
 package com.icia.gangcamping.repository;
 
-
 import com.icia.gangcamping.entity.MemberEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+public interface MemberRepository extends JpaRepository<MemberEntity,Long> {
+    MemberEntity findByMemberEmail(String memberEmail);
 
-public interface MemberRepository extends JpaRepository<memberEntity, Long> {
-    memberEntity findByMemberEmail(String memberEmail);
-
+    boolean findByMemberEmailAndMemberPw(String memberEmail,String memberPw);
 }
-
-

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Blog</title>
 <meta charset="utf-8">
@@ -12,8 +12,11 @@
 <link rel="stylesheet" type="text/css" href="/styles/blog_styles.css">
 <link rel="stylesheet" type="text/css" href="/styles/blog_responsive.css">
 
+	<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
-<style>
+
+
+	<style>
 
 .line{
 	width: 100%;
@@ -355,62 +358,35 @@
 							<th class="goods-page-description">상품정보</th>
 							<th class="goods-page-quantity">수량</th>
 							<th class="goods-page-ref-no">배송비</th>
-							<th class="goods-page-price">판매가</th>
+							<th class="goods-page-price">판매가(원)</th>
 							<th class="goods-page-total" colspan="2">합계</th>
 						</tr>
-						<tr>
+						<tr th:each="cartList:${cartList}">
 							<td class="goods-page-image">
-								<a href="javascript:;"><img src="/assets/pages/img/products/model3.jpg" alt="Berry Lace Dress"></a>
+								<a href="javascript:;"><img th:src="@{/upload/} + ${cartList.productFileName}"  alt="Berry Lace Dress"></a>
 							</td>
 							<td class="goods-page-description">
-								<h3><a href="javascript:;">Cool green dress with red bell</a></h3>
-								<p><strong>Item 1</strong> - Color: Green; Size: S</p>
-								<em>More info is here</em>
+								<b th:text="${cartList.productName}"></b><br>
+								<p th:text="${cartList.productDescription}" ></p>
+								<h3><a href="javascript:;"></a></h3>
+								<p><strong></strong></p>
+								<em></em>
 							</td>
-							<td class="goods-page-quantity">
-								<div class="product-quantity">
-									<input id="product-quantity" type="text" value="1" readonly class="form-control input-sm">
-								</div>
-									<button class="btn btn-primary" type="submit">변경</button>
-							</td>
-							<td class="goods-page-ref-no">
-								javc2133
-							</td>
-							<td class="goods-page-price">
-								<strong><span>$</span>47.00</strong>
-							</td>
-							<td class="goods-page-total">
-								<strong><span>$</span>47.00</strong>
-							</td>
-							<td class="del-goods-col">
-								<a class="del-goods" href="javascript:;">&nbsp;</a>
-							</td>
-						</tr>
-						<tr>
-							<td class="goods-page-image">
-								<a href="javascript:;"><img src="/assets/pages/img/products/model4.jpg" alt="Berry Lace Dress"></a>
-							</td>
-							<td class="goods-page-description">
-								<h3><a href="javascript:;">Cool green dress with red bell</a></h3>
-								<p><strong>Item 1</strong> - Color: Green; Size: S</p>
-								<em>More info is here</em>
-							</td>
-							<td class="goods-page-quantity">
-								<div class="product-quantity">
-									<input id="product-quantity2" type="text" value="1" readonly class="form-control input-sm">
-								</div>
+							<td class="goods-page-quantity" >
+								<span th:text="${cartList.cartAmount}"></span>
 							</td>
 							<td class="goods-page-ref-no">
-								javc2133
+								무료
 							</td>
-							<td class="goods-page-price">
-								<strong><span>$</span>47.00</strong>
+							<td class="goods-page-price" th:text="|${cartList.productPrice}|+원">
 							</td>
 							<td class="goods-page-total">
-								<strong><span>$</span>47.00</strong>
+								<strong th:text="|${cartList.cartAmount * cartList.productPrice}|+원"></strong>
 							</td>
 							<td class="del-goods-col">
-								<a class="del-goods" href="javascript:;">&nbsp;</a>
+								<button th:onclick="deleteById([[${cartList.cartId}]])">삭제(ajax)</button>
+
+								</a>
 							</td>
 						</tr>
 					</table>
@@ -419,16 +395,12 @@
 				<div class="shopping-total">
 					<ul>
 						<li>
-							<em>Sub total</em>
-							<strong class="price"><span>$</span>47.00</strong>
-						</li>
-						<li>
 							<em>Shipping cost</em>
-							<strong class="price"><span>$</span>3.00</strong>
+							<strong class="price">무료</strong>
 						</li>
-						<li class="shopping-total-price">
+						<li class="shopping-total-price" >
 							<em>Total</em>
-							<strong class="price"><span>$</span>50.00</strong>
+							<strong class="price" th:text="|${totalPrice}|+원"></strong>
 						</li>
 					</ul>
 				</div>
@@ -490,10 +462,18 @@
 				</select>
 			</div>
 
+<!--			<form action="/shopping/pay" name="pay" th:each="cartList:${cartList}" th:id="pay">-->
+<!--				<input class="" type="hidden" th:value="${cartList.productId}"  name="productId">-->
+<!--				<input class="" type="hidden" th:value="${cartList.memberId}" name="memberId">-->
+<!--			</form>-->
 
 
-			<br><br><button class="btn btn-default" type="submit">쇼핑하기<i class="fa fa-shopping-cart"></i></button>
-			<br><br><button class="btn btn-primary" onclick="location.href ='/shopping/complete'" type="submit">전체상품주문 <i class="fa fa-check"></i></button>
+			<br><br><button class="btn btn-default" onclick="location.href ='/shopping/shopping'" type="submit">쇼핑하기<i class="fa fa-shopping-cart"></i></button>
+			<br><br><button class="btn btn-primary" id="check_module" type="submit">결제하기 <i class="fa fa-check"></i></button>
+
+
+
+
 		</div>
 	</table>
 	<!-- END CONTENT -->
@@ -543,7 +523,7 @@
 							<div class="footer_blog_item clearfix">
 								<div class="footer_blog_image"><img src="/images/footer_blog_1.jpg" alt="https://unsplash.com/@avidenov"></div>
 								<div class="footer_blog_content">
-									<div class="footer_blog_title"><a href="blog.html">Travel with us this year</a></div>
+									<div class="footer_blog_title"><a href="shopping.html">Travel with us this year</a></div>
 									<div class="footer_blog_date">Nov 29, 2017</div>
 								</div>
 							</div>
@@ -552,7 +532,7 @@
 							<div class="footer_blog_item clearfix">
 								<div class="footer_blog_image"><img src="/images/footer_blog_2.jpg" alt="https://unsplash.com/@deannaritchie"></div>
 								<div class="footer_blog_content">
-									<div class="footer_blog_title"><a href="blog.html">New destinations for you</a></div>
+									<div class="footer_blog_title"><a href="shopping.html">New destinations for you</a></div>
 									<div class="footer_blog_date">Nov 29, 2017</div>
 								</div>
 							</div>
@@ -561,7 +541,7 @@
 							<div class="footer_blog_item clearfix">
 								<div class="footer_blog_image"><img src="/images/footer_blog_3.jpg" alt="https://unsplash.com/@bergeryap87"></div>
 								<div class="footer_blog_content">
-									<div class="footer_blog_title"><a href="blog.html">Travel with us this year</a></div>
+									<div class="footer_blog_title"><a href="shopping.html">Travel with us this year</a></div>
 									<div class="footer_blog_date">Nov 29, 2017</div>
 								</div>
 							</div>
@@ -711,5 +691,50 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 
 </body>
+<script>
+	$("#check_module").click(function () {
+		var IMP = window.IMP; // 생략가능
+		IMP.init('imp83858826');
+		// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
+		// ''안에 띄어쓰기 없이 가맹점 식별코드를 붙여넣어주세요. 안그러면 결제창이 안뜹니다.
+		IMP.request_pay({
+			pg: 'kakao',
+			pay_method: 'card',
+			merchant_uid: '[[${cartList[0].memberId}]]' + new Date().getTime(),
+
+			/*
+             *  merchant_uid에 경우
+             *  https://docs.iamport.kr/implementation/payment
+             *  위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
+             */
+			name: '[[${menu}]]',
+			// 결제창에서 보여질 이름
+			// name: '주문명 : ${auction.a_title}',
+			// 위와같이 model에 담은 정보를 넣어 쓸수도 있습니다.
+			// amount: document.getElementById('orderPrice').value,
+			amount: '[[${totalPrice}]]',
+			// amount: ${bid.b_bid},
+			// 가격
+			buyer_name: '강캠핑',
+			// 구매자 이름, 구매자 정보도 model값으로 바꿀 수 있습니다.
+			// 구매자 정보에 여러가지도 있으므로, 자세한 내용은 맨 위 링크를 참고해주세요.
+			buyer_postcode: '123-456',// 이거는 왜 받음?
+		}, function (rsp) {
+			console.log(rsp);
+			if (rsp.success) {
+				var msg = '결제가 완료되었습니다.';
+				msg += '결제 금액 : ' + rsp.paid_amount;
+				// success.submit();
+				document.getElementById('pay').submit();
+				// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
+				// 자세한 설명은 구글링으로 보시는게 좋습니다.
+			} else {
+				var msg = '결제에 실패하였습니다.';
+				msg += '에러내용 : ' + rsp.error_msg;
+			}
+			alert(msg);
+		});
+	});
+</script>
 
 </html>

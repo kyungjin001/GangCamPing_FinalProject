@@ -16,8 +16,10 @@ import java.io.IOException;
 import static com.icia.gangcamping.common.SessionConst.LOGIN_EMAIL;
 
 @RequiredArgsConstructor
+
 @Controller
-@RequestMapping("/member/*")
+@RequestMapping("/member")
+@RequiredArgsConstructor
 public class MemberController {
 
     private final MemberService ms;
@@ -78,6 +80,7 @@ public class MemberController {
     //마이페이지
     @GetMapping("mypage")
     public String mypage() {
+
         return "member/mypage";
 
     }
@@ -100,25 +103,9 @@ public class MemberController {
         return "index";
     }
 
-
-    @GetMapping("shoppingList")
-    public String shoppingList() {
-        return "member/shoppingList";
-
-    }
-
-
-
-    @GetMapping("shoppingLike")
-    public String shoppingLike() {
-        return "member/shoppingLike";
-
-    }
-
-    @GetMapping("chat")
-    public String chat() {
-        return "member/chat";
-
+    @GetMapping("bookList")
+    public String bookList() {
+        return "member/bookList";
     }
 
 
@@ -140,21 +127,19 @@ public class MemberController {
         return "member/bookDetail";
 
     }
+
     @GetMapping("addrChange")
     public String addrChange() {
         return "member/addrChange";
 
     }
 
-    @GetMapping("confirmPW")
-    public String confirmPW() {
-        return "member/confirmPW";
-    }
 
     @GetMapping("shoppingList")
     public String shoppingList() {
         return "member/shoppingList";
     }
+
 
     @GetMapping("shoppingLike")
     public String shoppingLike() {

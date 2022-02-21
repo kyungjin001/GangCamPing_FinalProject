@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Blog</title>
 <meta charset="utf-8">
@@ -56,6 +56,78 @@
 	<link href="/assets/pages/css/style-shop.css" rel="stylesheet" type="text/css">
 	<!-- Theme styles END -->
 
+<script>
+	const menuDown = (cartId) =>{
+		console.log('함수호출은 하냐?')
+		console.log(cartId);
+		$.ajax({
+			type:'put',
+			url:'/shopping/menu',
+			data:{"cartId":cartId,"type":"down"},
+			dataType:'text',
+			success:function (result){
+				console.log(result);
+				if(result=="ok"){
+					location.reload();
+				}
+			},
+			error:function (){
+				alert('다시해라');
+			}
+		});
+
+	}
+
+
+	const menuUp = (cartId) =>{
+		console.log(cartId);
+		$.ajax({
+			type:'put',
+			url:'/shopping/menu',
+			data:{"cartId":cartId,"type":"up"},
+			dataType:'text',
+			success:function (result){
+				console.log(result);
+				if(result=="ok"){
+					location.reload();
+				}
+			},
+			error:function (){
+				alert('다시해라');
+			}
+		});
+
+	}
+
+
+
+
+
+
+</script>
+
+
+
+
+
+	<script>
+		function deleteById(cartId){
+			const reqUrl = "/shopping/" + cartId;
+
+			$.ajax({
+				type: 'delete',
+				url: reqUrl,
+				success: function (){
+					location.href= "/shopping/cartview";
+				},
+				error:function (){
+					alert('ajax 실패');
+				}
+
+			});
+		}
+
+	</script>
 
 
 
@@ -103,7 +175,7 @@
 				<div class="row">
 					<div class="col main_nav_col d-flex flex-row align-items-center justify-content-start">
 						<div class="logo_container">
-							<div class="logo"><a href="#"><img src="/images/logo.png" alt="">travelix</a></div>
+							<div class="logo"><a href="#"><img src="/images/logo.png" alt=""></a></div>
 						</div>
 						<div class="main_nav_container ml-auto">
 							<ul class="main_nav_list">
@@ -194,101 +266,66 @@
 							<th class="goods-page-description">상품정보</th>
 							<th class="goods-page-quantity">수량</th>
 							<th class="goods-page-ref-no">배송비</th>
-							<th class="goods-page-price">판매가</th>
+							<th class="goods-page-price">판매가(원)</th>
 							<th class="goods-page-total" colspan="2">합계</th>
 						</tr>
-						<tr>
+						<tr th:each="cartList:${cartList}">
 							<td class="goods-page-image">
-								<a href="javascript:;"><img src="/assets/pages/img/products/model3.jpg" alt="Berry Lace Dress"></a>
+								<a href="javascript:;"><img th:src="@{/upload/} + ${cartList.productFileName}"  alt="Berry Lace Dress"></a>
 							</td>
-							<td class="goods-page-description">
-								<h3><a href="javascript:;">Cool green dress with red bell</a></h3>
-								<p><strong>Item 1</strong> - Color: Green; Size: S</p>
-								<em>More info is here</em>
+							<td class="goods-page-description" th:text="${cartList.productDescription}">
+								<h3><a href="javascript:;"></a></h3>
+								<p><strong></strong></p>
+								<em></em>
 							</td>
-							<td class="goods-page-quantity">
-								<div class="product-quantity">
-									<input id="product-quantity" type="text" value="1" readonly class="form-control input-sm">
-								</div>
-									<button class="btn btn-primary" type="submit">변경</button>
+							<td class="goods-page-quantity" >
+								<span th:switch="${cartList.cartAmount}">
+									<span th:case="1"><button>-</button></span>
+									<span th:case="*"><button th:onclick="menuDown([[${cartList.cartId}]])">-</button></span>
+								</span>
+								<span th:text="${cartList.cartAmount}"></span>
+									<button th:onclick="menuUp([[${cartList.cartId}]])">+</button>
 							</td>
 							<td class="goods-page-ref-no">
-								javc2133
+								무료
 							</td>
-							<td class="goods-page-price">
-								<strong><span>$</span>47.00</strong>
-							</td>
+							<td class="goods-page-price" th:text="|${cartList.productPrice}|+원">
+								</td>
 							<td class="goods-page-total">
-								<strong><span>$</span>47.00</strong>
+								<strong th:text="|${cartList.cartAmount * cartList.productPrice}|+원"></strong>
 							</td>
 							<td class="del-goods-col">
-								<a class="del-goods" href="javascript:;">&nbsp;</a>
-							</td>
-						</tr>
-						<tr>
-							<td class="goods-page-image">
-								<a href="javascript:;"><img src="/assets/pages/img/products/model4.jpg" alt="Berry Lace Dress"></a>
-							</td>
-							<td class="goods-page-description">
-								<h3><a href="javascript:;">Cool green dress with red bell</a></h3>
-								<p><strong>Item 1</strong> - Color: Green; Size: S</p>
-								<em>More info is here</em>
-							</td>
-							<td class="goods-page-quantity">
-								<div class="product-quantity">
-									<input id="product-quantity2" type="text" value="1" readonly class="form-control input-sm">
-								</div>
-							</td>
-							<td class="goods-page-ref-no">
-								javc2133
-							</td>
-							<td class="goods-page-price">
-								<strong><span>$</span>47.00</strong>
-							</td>
-							<td class="goods-page-total">
-								<strong><span>$</span>47.00</strong>
-							</td>
-							<td class="del-goods-col">
-								<a class="del-goods" href="javascript:;">&nbsp;</a>
+							<button th:onclick="deleteById([[${cartList.cartId}]])">삭제(ajax)</button>
+
+							</a>
 							</td>
 						</tr>
 					</table>
+				</div>
 				</div>
 
 				<div class="shopping-total">
 					<ul>
 						<li>
-							<em>Sub total</em>
-							<strong class="price"><span>$</span>47.00</strong>
-						</li>
-						<li>
 							<em>Shipping cost</em>
-							<strong class="price"><span>$</span>3.00</strong>
+							<strong class="price">무료</strong>
 						</li>
-						<li class="shopping-total-price">
+						<li class="shopping-total-price" >
 							<em>Total</em>
-							<strong class="price"><span>$</span>50.00</strong>
+							<strong class="price" th:text="|${totalPrice}|+원"></strong>
 						</li>
 					</ul>
 				</div>
 			</div>
 			<button class="btn btn-default" type="submit">쇼핑하기<i class="fa fa-shopping-cart"></i></button>
-			<button class="btn btn-primary" onclick="location.href = '/shopping/order' " type="submit">전체상품주문 <i class="fa fa-check"></i></button>
-		</div>
+		<form th:id="aaa" action="/shopping/order">
+			<input type="hidden" th:name="productId"  th:value="${productId}">
+			<input type="hidden" th:name="memberId" th:value="1">
+			<button class="btn btn-primary"  type="submit">전체상품주문 <i class="fa fa-check"></i></button>
+		</form>
+	</div>
 	</div>
 	<!-- END CONTENT -->
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -335,7 +372,7 @@
 							<div class="footer_blog_item clearfix">
 								<div class="footer_blog_image"><img src="/images/footer_blog_1.jpg" alt="https://unsplash.com/@avidenov"></div>
 								<div class="footer_blog_content">
-									<div class="footer_blog_title"><a href="blog.html">Travel with us this year</a></div>
+									<div class="footer_blog_title"><a href="shopping.html">Travel with us this year</a></div>
 									<div class="footer_blog_date">Nov 29, 2017</div>
 								</div>
 							</div>
@@ -344,7 +381,7 @@
 							<div class="footer_blog_item clearfix">
 								<div class="footer_blog_image"><img src="/images/footer_blog_2.jpg" alt="https://unsplash.com/@deannaritchie"></div>
 								<div class="footer_blog_content">
-									<div class="footer_blog_title"><a href="blog.html">New destinations for you</a></div>
+									<div class="footer_blog_title"><a href="shopping.html">New destinations for you</a></div>
 									<div class="footer_blog_date">Nov 29, 2017</div>
 								</div>
 							</div>
@@ -353,7 +390,7 @@
 							<div class="footer_blog_item clearfix">
 								<div class="footer_blog_image"><img src="/images/footer_blog_3.jpg" alt="https://unsplash.com/@bergeryap87"></div>
 								<div class="footer_blog_content">
-									<div class="footer_blog_title"><a href="blog.html">Travel with us this year</a></div>
+									<div class="footer_blog_title"><a href="shopping.html">Travel with us this year</a></div>
 									<div class="footer_blog_date">Nov 29, 2017</div>
 								</div>
 							</div>
