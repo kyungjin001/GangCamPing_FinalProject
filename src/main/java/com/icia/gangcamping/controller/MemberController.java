@@ -108,12 +108,6 @@ public class MemberController {
     }
 
 
-
-
-
-    }
-
-
     @GetMapping("delete")
     public String delete() {
         return "member/delete";
@@ -132,17 +126,19 @@ public class MemberController {
         return "member/bookDetail";
 
     }
+
     @GetMapping("addrChange")
     public String addrChange() {
         return "member/addrChange";
 
-
+    }
 
 
     @GetMapping("shoppingList")
     public String shoppingList() {
         return "member/shoppingList";
     }
+
 
     @GetMapping("shoppingLike")
     public String shoppingLike() {
