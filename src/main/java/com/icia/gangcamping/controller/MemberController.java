@@ -19,6 +19,7 @@ import static com.icia.gangcamping.common.SessionConst.LOGIN_EMAIL;
 
 @Controller
 @RequestMapping("/member")
+@RequiredArgsConstructor
 public class MemberController {
 
     private final MemberService ms;

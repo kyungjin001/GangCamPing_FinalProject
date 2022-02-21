@@ -11,13 +11,24 @@ spring:
     password: 1234
   thymeleaf:
     cache: false
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: 147kbj@gmail.com
+    password: rlaqorwns12!@
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
   # JPA 관련 설정
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
 # mybatis 관련 설정
 mybatis:
   # resources/mapper/ 에 있는 모든 xml 파일
