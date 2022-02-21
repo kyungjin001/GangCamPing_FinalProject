@@ -1,13 +1,12 @@
 package com.icia.gangcamping.controller;
 
 
-import com.icia.gangcamping.dto.CartDetailDTO;
-import com.icia.gangcamping.dto.GoodsDetailDTO;
-import com.icia.gangcamping.dto.GoodsSaveDTO;
+import com.icia.gangcamping.dto.*;
 import com.icia.gangcamping.entity.CartEntity;
 import com.icia.gangcamping.entity.MemberEntity;
 import com.icia.gangcamping.entity.ProductEntity;
 import com.icia.gangcamping.service.MemberService;
+import com.icia.gangcamping.service.OrderService;
 import com.icia.gangcamping.service.ShoppingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +30,7 @@ public class ShoppingController {
 
 
      private final ShoppingService ss;
+     private final OrderService os;
     private final MemberService ms;
     private final HttpSession session;
 
@@ -101,21 +101,28 @@ public class ShoppingController {
             List<CartDetailDTO> cartDetailDTOList = ss.findByMemberEntity(memberEntity.get());
             model.addAttribute("cartList", cartDetailDTOList);
         int cartPriceSum = 0;
+        int orderUnitNum = 0;
             for (CartDetailDTO c : cartDetailDTOList) {
                 cartPriceSum += (c.getProductPrice() * c.getCartAmount());
+                orderUnitNum += c.getCartAmount();
+
                 System.out.println("c = " + c);
             }
             model.addAttribute("totalPrice",cartPriceSum);
+            model.addAttribute("orderUnitNum",orderUnitNum);
             return "shopping/cart";
         }else {
             List<CartDetailDTO> cartDetailDTOList = ss.findByMemberEntity(memberEntity.get());
             model.addAttribute("cartList", cartDetailDTOList);
             int cartPriceSum = 0;
+            int orderUnitNum = 0;
             for (CartDetailDTO c : cartDetailDTOList) {
                 cartPriceSum += (c.getProductPrice() * c.getCartAmount());
+                orderUnitNum += c.getCartAmount();
                 System.out.println("c = " + c);
             }
             model.addAttribute("totalPrice",cartPriceSum);
+            model.addAttribute("orderUnitNum",orderUnitNum);
 
             return "shopping/cart";
         }
@@ -161,31 +168,37 @@ public class ShoppingController {
 
 
     @GetMapping("order")
-    public String order(Model model,CartDetailDTO cartDetailDTO){
-        Optional<MemberEntity> memberEntity = ms.findById(cartDetailDTO.getMemberId());
-        Optional<ProductEntity> productEntity = ss.findById1(cartDetailDTO.getProductId());
+    public String order(Model model,OrderDetailDTO orderDetailDTO){
+        Optional<MemberEntity> memberEntity = ms.findById(orderDetailDTO.getMemberId());
         List<CartDetailDTO> cartDetailDTOList = ss.findByMemberEntity(memberEntity.get());
-            model.addAttribute("cartList", cartDetailDTOList);
-            int cartPriceSum = 0;
+        model.addAttribute("cartList", cartDetailDTOList);
+            int orderUnitNum = 0;
+            int orderTotalFee = 0;
+            String orderPayType = "";
             String menuList = "";
             for (CartDetailDTO c : cartDetailDTOList) {
-                cartPriceSum += (c.getProductPrice() * c.getCartAmount());
+                orderTotalFee += (c.getProductPrice() * c.getCartAmount());
                 System.out.println("c = " + c);
                 menuList += c.getProductName();
+                orderUnitNum += c.getCartAmount();
             }
             model.addAttribute("menu",menuList);
-            model.addAttribute("totalPrice",cartPriceSum);
+            model.addAttribute("orderTotalFee",orderTotalFee);
+            model.addAttribute("orderDetailDTO",orderDetailDTO);
+
 
         return "shopping/order";
     }
 
 
     // 카카오페이 구매
-//	@PostMapping("{productId},{memberId}")
-//	public String pay(@PathVariable("productId") Long productId , @PathVariable("memberId") Long memberId) {
-//		ss.findAll(productId,memberId);
-//		return "goods/mycart";
-//	}
+	@PostMapping("pay")
+	public String pay(@ModelAttribute OrderSaveDTO orderSaveDTO, Model model) {
+		Long result = os.save(orderSaveDTO);
+        OrderDetailDTO orderDetailDTO = os.findById(result);
+        model.addAttribute("order", orderDetailDTO);
+		return "redirect:/shopping/complete";
+	}
 
 
 }
