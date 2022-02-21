@@ -1,5 +1,7 @@
 package com.icia.gangcamping.entity;
 
+import com.icia.gangcamping.dto.GoodsSaveDTO;
+import com.icia.gangcamping.dto.OrderSaveDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -36,4 +38,20 @@ public class OrderEntity extends BaseEntity{
 
     @OneToMany(mappedBy = "orderEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<ShoppingListEntity> shoppingListEntityList = new ArrayList<>();
+
+
+
+    public static OrderEntity toSaveEntity(OrderSaveDTO orderSaveDTO, MemberEntity memberEntity) {
+        OrderEntity orderEntity = new OrderEntity();
+        orderEntity.setOrderPayType(orderSaveDTO.getOrderPayType());
+        orderEntity.setOrderTotalFee(orderSaveDTO.getOrderTotalFee());
+        orderEntity.setOrderUnitNum(orderSaveDTO.getOrderUnitNum());
+        orderEntity.setOrderId(orderSaveDTO.getOrderId());
+        orderEntity.setMemberEntity(memberEntity);
+//        orderEntity.setProductEntity(productEntity);
+        return orderEntity;
+    }
+
+
+
 }
