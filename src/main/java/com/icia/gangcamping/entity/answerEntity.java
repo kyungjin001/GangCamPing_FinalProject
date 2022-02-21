@@ -1,6 +1,7 @@
 package com.icia.gangcamping.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -8,18 +9,15 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Getter
 @Setter
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
 @Table(name = "answer_table")
-public class AnswerEntity {
+public class answerEntity {
     @Id
     @GeneratedValue
     @Column(name = "answerId")
     private Long answerId;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "questionId")
-    private QuestionEntity questionEntity;
+    private questionEntity questionEntity;
     @Column
     @NotNull
     private String answerContents;

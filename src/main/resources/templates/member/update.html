@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>About Us</title>
     <meta charset="utf-8">
@@ -32,6 +32,7 @@
             width: 100px;
             height: 30px;
             line-height : 30px;
+            margin-right: 20px;
             background-color: whitesmoke;
             border : solid 1px;
             color :black;
@@ -44,6 +45,7 @@
             width: 100px;
             height: 30px;
             line-height : 30px;
+            margin-right: 20px;
             background-color: whitesmoke;
             border : solid 1px;
             color :black;
@@ -56,6 +58,7 @@
             width: 100px;
             height: 30px;
             line-height : 30px;
+            margin-right: 20px;
             background-color: whitesmoke;
             border : solid 1px;
             color :black;
@@ -68,6 +71,7 @@
             width: 100px;
             height: 30px;
             line-height : 30px;
+            margin-right: 20px;
             background-color: whitesmoke;
             border : solid 1px;
             color :black;
@@ -80,45 +84,7 @@
             width: 100px;
             height: 30px;
             line-height : 30px;
-            background-color: whitesmoke;
-            border : solid 1px;
-            color :black;
-            font-size: 0.75rem;
-            text-align: center;
-            display: inline-block;
-            border-radius: 20%;
-        }
-
-        .menu6 {
-            width: 100px;
-            height: 30px;
-            line-height : 30px;
-            background-color: whitesmoke;
-            border : solid 1px;
-            color :black;
-            font-size: 0.75rem;
-            text-align: center;
-            display: inline-block;
-            border-radius: 20%;
-        }
-
-        .menu7 {
-            width: 100px;
-            height: 30px;
-            line-height : 30px;
-            background-color: whitesmoke;
-            border : solid 1px;
-            color :black;
-            font-size: 0.75rem;
-            text-align: center;
-            display: inline-block;
-            border-radius: 20%;
-        }
-
-        .menu8 {
-            width: 100px;
-            height: 30px;
-            line-height : 30px;
+            margin-right: 20px;
             background-color: whitesmoke;
             border : solid 1px;
             color :black;
@@ -147,20 +113,95 @@
         }
     </style>
 
-    <style type="text/css">
-        .tg  {border-collapse:collapse;border-color:#ccc;border-spacing:0;}
-        .tg td{background-color:#fff;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
-            font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
-        .tg th{background-color:#f0f0f0;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
-            font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-        .tg .tg-lstg{border-color:inherit;font-family:"Arial Black", Gadget, sans-serif !important;font-size:11px;font-weight:bold;
-            text-align:center;vertical-align:middle}
-        .tg .tg-80qx{border-color:inherit;font-family:Arial, Helvetica, sans-serif !important;font-size:11px;text-align:center;
-            vertical-align:middle}
-        .tg {
-            margin-left:auto;
-            margin-right:auto;
+    <style>
+        #input1 {
+            width: 300px;
+            height: 55px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 1px solid black;
+            text-align:center;
         }
+        #input2 {
+            width: 300px;
+            height: 55px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 1px solid black;
+            text-align:center;
+        }
+        #input3 {
+            width: 300px;
+            height: 55px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 1px solid black;
+            text-align:center;
+        }
+
+        #input4 {
+            width: 300px;
+            height: 55px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 1px solid black;
+            text-align:center;
+        }
+
+        #input5 {
+            width: 300px;
+            height: 55px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 1px solid black;
+            text-align:center;
+        }
+
+        #input6 {
+            width: 300px;
+            height: 55px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 1px solid black;
+            text-align:center;
+        }
+
+        #input7 {
+            width: 300px;
+            height: 55px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 1px solid black;
+            text-align:center;
+        }
+
+        #input8 {
+            width: 150px;
+            height: 35px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 1px solid black;
+            text-align:center;
+        }
+
+        #input9 {
+            width: 150px;
+            height: 35px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom : 1px solid black;
+            text-align:center;
+        }
+
     </style>
 
 </head>
@@ -277,66 +318,41 @@
             <div class="home_title">My page</div>
         </div>
     </div>
-    <br>
-    <br>
-    <p style="text-align:center";>관리자 페이지</p>
+
+
+    <a href="/member/shoppingDetail">쇼핑상세페이지</a>
+    <a href="/member/bookDetail">쇼핑상세페이지</a>
+    <a href="/member/addrChange">주소수정</a>
+    <a href="/member/confirmPW">비밀번호찾기</a>
+
     <div class="menu-wrapper">
-        <div class="menu1" onclick="location.href='/admin/bookList'" style="cursor: pointer;">예약관리</div>
-        <div class="menu2" onclick="location.href='/admin/memberList'" style="cursor: pointer;">회원관리</div>
-        <div class="menu3" onclick="location.href='/admin/findAll'" style="cursor: pointer;">상품관리</div>
-        <div class="menu4" onclick="location.href='/admin/campingSaleList'" style="cursor: pointer;">매출통계</div>
-        <div class="menu5" onclick="location.href='/admin/chatList'" style="cursor: pointer;">캠핑장문의</div>
-        <div class="menu6" onclick="location.href='/admin/shoppingAsk'" style="cursor: pointer;">상품문의</div>
-        <div class="menu7" onclick="location.href='/admin/save'" style="cursor: pointer;">상품등록</div>
-        <div class="menu8" onclick="location.href='/admin/stock'" style="cursor: pointer;">상품재고</div>
+        <div class="menu1" onclick="location.href='/member/update'" >나의정보</div>
+        <div class="menu2" onclick="location.href='/member/bookList'" style="cursor: pointer;">캠핑내역</div>
+        <div class="menu3" onclick="location.href='/member/shoppingList'" style="cursor: pointer;">쇼핑내역</div>
+        <div class="menu4" onclick="location.href='/member/shoppingLike'" style="cursor: pointer;">찜</div>
+        <div class="menu5" onclick="location.href='/member/chat'" style="cursor: pointer;">예약변경</div>
     </div>
 
+    <h3>update.html</h3>
+    	<div style="text-align: center;" class="formWrapper" method="put">
+    		<form action="/member/update" name="updateForm">
+    			<input type="hidden" id="memberId" th:value="${member.memberId}">
+    			이   메  일<input type="text" id="input1" th:value="${member.memberEmail}"  placeholder="이메일"><br>
+    			이       름<input type="text" id="input2" th:value="${member.memberName}"  placeholder="닉네임"><br>
+    			핸드폰  번호<input type="text" id="input6" th:value="${member.memberPhone}" placeholder="핸드폰 번호"><br>
+    			주       소<input type="text" id="input7" th:value="${member.memberAddr}" placeholder="주소"><br>
+    			<input type="button" value="수정(put)" id="input8" th:onclick="update()">
+            </form>
+        </div>
 
-    <p style="text-align:center";>상품 관리</p>
+    <button onclick="document.location='/member/addrChange'">주소변경</button><br><br>
+    <button onclick="location.href='/member/confirmPW'">비밀번호변경</button><br><br>
 
-    <table class="tg" style="undefined; table-layout: fixed; width: 878px" table>
-        <colgroup>
-            <col style="width: 74px">
-            <col style="width: 83px">
-            <col style="width: 113px">
-            <col style="width: 295px">
-            <col style="width: 93px">
-            <col style="width: 100px">
-            <col style="width: 120px">
-        </colgroup>
-        <thead>
-        <tr>
-            <th class="tg-lstg">상품번호</th>
-            <th class="tg-lstg">등록일</th>
-            <th class="tg-lstg">상품사진</th>
-            <th class="tg-lstg">상품명</th>
-            <th class="tg-lstg">상품 상세정보</th>
-            <th class="tg-lstg">판매가격</th>
-            <th class="tg-lstg">재고</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td class="tg-80qx">00001</td>
-            <td class="tg-80qx">2022-02-22</td>
-            <td class="tg-80qx">상품사진</td>
-            <td class="tg-80qx">장작<br>옵션: 大 </td>
-            <td class="tg-80qx">브랜드: 아주잘타, 10kg</td>
-            <td class="tg-80qx">10000</td>
-            <td class="tg-80qx">99</td>
-        </tr>
-        <tr>
-            <td class="tg-80qx"></td>
-            <td class="tg-80qx"></td>
-            <td class="tg-80qx"></td>
-            <td class="tg-80qx"></td>
-            <td class="tg-80qx"></td>
-            <td class="tg-80qx"></td>
-            <td class="tg-80qx"></td>
-        </tr>
-        </tbody>
-    </table>
-
+    <a href="/member/logout">로그아웃</a><br><br><br>
+    	로그인ID(email_session): <p th:text="${session['loginEmail']}"></p>
+    	<div class="kickout-wrapper">
+    		<div class="kickout" onclick="location.href='/member/delete'" style="cursor: pointer;">회원탈퇴</div>
+    	</div>
 
 
 

@@ -1,14 +1,13 @@
 package com.icia.gangcamping.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Entity
 @Getter
 @Setter
@@ -50,4 +49,15 @@ public class MemberEntity {
     private List<ReviewEntity> reviewEntityList= new ArrayList<>();
     @OneToMany(mappedBy = "memberEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<ChattingEntity> chattingEntityList= new ArrayList<>();
+    private List<ChattingEntity> chattingEntityList= new ArrayList<>();
+
+    public static memberEntity saveMember(MemberSaveDTO memberSaveDTO) {
+        memberEntity memberEntity = new memberEntity();
+        memberEntity.setMemberEmail(memberSaveDTO.getMemberEmail());
+        memberEntity.setMemberPw(memberSaveDTO.getMemberPw());
+        memberEntity.setMemberName(memberSaveDTO.getMemberName());
+        memberEntity.setMemberAddr(memberSaveDTO.getMemberAddr());
+        memberEntity.setMemberPhone(memberSaveDTO.getMemberPhone());
+        return memberEntity;
+    }
 }
