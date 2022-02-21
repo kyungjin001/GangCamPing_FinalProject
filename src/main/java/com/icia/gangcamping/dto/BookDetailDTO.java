@@ -1,9 +1,11 @@
 package com.icia.gangcamping.dto;
 
-import com.icia.gangcamping.entity.bookEntity;
-import com.icia.gangcamping.entity.campingEntity;
-import com.icia.gangcamping.entity.memberEntity;
-import com.icia.gangcamping.entity.roomEntity;
+import com.icia.gangcamping.entity.BookEntity;
+import com.icia.gangcamping.entity.CampingEntity;
+import com.icia.gangcamping.entity.MemberEntity;
+
+
+import com.icia.gangcamping.entity.RoomEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,7 +26,7 @@ public class BookDetailDTO {
     private String bookPeriod;
     private int bookPrice;
 
-    public static BookDetailDTO toBookDetailDTO(bookEntity bookEntity, memberEntity memberEntity, campingEntity campingEntity, roomEntity roomEntity) {
+    public static BookDetailDTO toBookDetailDTO(BookEntity bookEntity, MemberEntity memberEntity, CampingEntity campingEntity, RoomEntity roomEntity) {
         BookDetailDTO bookDetailDTO = new BookDetailDTO();
         bookDetailDTO.setBookId(bookEntity.getBookId());
         bookDetailDTO.setMemberId(memberEntity.getMemberId());

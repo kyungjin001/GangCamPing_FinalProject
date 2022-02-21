@@ -1,6 +1,6 @@
 package com.icia.gangcamping.dto;
 
-import com.icia.gangcamping.entity.memberEntity;
+import com.icia.gangcamping.entity.MemberEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,8 +17,9 @@ public class MemberDetailDTO {
     private String memberAddr;
     private String memberPhone;
 
-    public static MemberDetailDTO toMemberDetailDTO(memberEntity memberEntity) {
+    public static MemberDetailDTO toMemberDetailDTO(MemberEntity memberEntity) {
         MemberDetailDTO memberDetailDTO = new MemberDetailDTO();
+        memberDetailDTO.setMemberId(memberEntity.getMemberId());
         memberDetailDTO.setMemberEmail(memberEntity.getMemberEmail());
         memberDetailDTO.setMemberPw(memberEntity.getMemberPw());
         memberDetailDTO.setMemberName(memberEntity.getMemberName());

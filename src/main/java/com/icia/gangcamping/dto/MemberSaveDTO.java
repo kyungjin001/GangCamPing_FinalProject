@@ -23,10 +23,11 @@ public class MemberSaveDTO {
     @NotBlank(message = "이름은 필수입니다.")
     private String memberName;
 
+    @NotBlank(message = "전화번호는 필수입니다.")
+    private String memberPhone;
+
     @NotBlank(message = "주소는 필수입니다.")
     private String memberAddr;
 
-    @NotBlank(message = "전화번호는 필수입니다.")
-    private String memberPhone;
 
 }

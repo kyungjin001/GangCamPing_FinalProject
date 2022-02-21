@@ -149,8 +149,19 @@ public class MemberController {
     @GetMapping("confirmPW")
     public String confirmPW() {
         return "member/confirmPW";
-
     }
+
+    @GetMapping("shoppingList")
+    public String shoppingList() {
+        return "member/shoppingList";
+    }
+
+    @GetMapping("shoppingLike")
+    public String shoppingLike() {
+        return "member/shoppingLike";
+    }
+
+
 
 
 }
