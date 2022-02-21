@@ -4,7 +4,10 @@ import com.icia.gangcamping.dto.BookDetailDTO;
 import com.icia.gangcamping.dto.MemberDetailDTO;
 import com.icia.gangcamping.dto.MemberLoginDTO;
 import com.icia.gangcamping.dto.MemberSaveDTO;
-import com.icia.gangcamping.entity.MemberEntity;
+import com.icia.gangcamping.entity.bookEntity;
+import com.icia.gangcamping.entity.campingEntity;
+import com.icia.gangcamping.entity.memberEntity;
+import com.icia.gangcamping.entity.roomEntity;
 import com.icia.gangcamping.repository.BookRepository;
 import com.icia.gangcamping.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,20 +19,21 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class memberServiceImpl implements memberService {
+public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository mr;
+    private final BookRepository br;
 
 
     @Override
     public Long save(MemberSaveDTO memberSaveDTO) {
-        MemberEntity memberEntity = MemberEntity.saveMember(memberSaveDTO);
-        return mr.save(memberEntity).getMemberId();
+        memberEntity memberEntity1 = memberEntity.saveMember(memberSaveDTO);
+        return mr.save(memberEntity1).getMemberId();
     }
 
     @Override
     public boolean login(MemberLoginDTO memberLoginDTO) {
-        MemberEntity memberEntity = mr.findByMemberEmail(memberLoginDTO.getMemberEmail());
+        memberEntity memberEntity = mr.findByMemberEmail(memberLoginDTO.getMemberEmail());
         if(memberEntity != null) {
             if (memberLoginDTO.getMemberPw().equals(memberEntity.getMemberPw())) {
                 return true;
@@ -43,7 +47,7 @@ public class memberServiceImpl implements memberService {
 
     @Override
     public String emailDp(String memberEmail) {
-        Optional<MemberEntity> memberEntity = Optional.ofNullable(mr.findByMemberEmail(memberEmail));
+        Optional<memberEntity> memberEntity = Optional.ofNullable(mr.findByMemberEmail(memberEmail));
         if (memberEntity.isEmpty()) {
             return "ok";
         } else {
