@@ -678,7 +678,7 @@
 									<div class="button book_button trans_200"><a href="#">book<span></span><span></span><span></span></a></div>
 									<div class="hotel_map_link_container">
 <!--										지도연동부분-->
-										<div class="hotel_map_link">구글 지도로 보기</div>
+										<div class="hotel_map_link"><a href="#location">Location On Map</a></div>
 									</div>
 								</div>
 							</div>
@@ -872,7 +872,7 @@
 									</div>
 									<div class="col-lg-3 text-lg-right">
 										<div class="room_button">
-											<div class="button book_button trans_200"><a href="#">book<span></span><span></span><span></span></a></div>
+											<div class="button book_button trans_200"><a href="/camping/reservation">book<span></span><span></span><span></span></a></div>
 										</div>
 									</div>
 								</div>	
@@ -913,11 +913,6 @@
 								<!-- Review -->
 								<div class="review">
 									<div class="row">
-										<div class="col-lg-1">
-											<div class="review_image">
-												<img src="/images/review_2.jpg" alt="Image by Andrew Robles">
-											</div>
-										</div>
 										<div class="col-lg-11">
 											<div class="review_content">
 												<div class="review_title_container">
@@ -940,17 +935,37 @@
 						<!-- Location on Map -->
 
 						<div class="location_on_map">
-							<div class="location_on_map_title">location on map</div>
+							<div class="location_on_map_title" id="location">location on map</div>
 
 							<!-- Google Map -->
+
+							<div id="map" style="width:400px;height:400px;"></div>
+							<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4a1f482822e34aa18a339c0eeb9a3b8d"></script>
+							<script>
+								var container = document.getElementById('map');
+								var options = {
+									center: new kakao.maps.LatLng(37.56922500646008, 126.74922236426688),
+									level: 3
+								};
+
+								var map = new kakao.maps.Map(container, options);
+
+								var markerPosition  = new kakao.maps.LatLng(37.56922500646008, 126.74922236426688);
+
+								// 마커를 생성합니다
+								var marker = new kakao.maps.Marker({
+									position: markerPosition});
+
+								marker.setMap(map);
+							</script>
 		
-							<div class="travelix_map">
+							<!--<div class="travelix_map">
 								<div id="google_map" class="google_map">
 									<div class="map_container">
 										<div id="map"></div>
 									</div>
 								</div>
-							</div>
+							</div>-->
 
 						</div>
 					</div>
@@ -1116,7 +1131,6 @@
 <script src="/plugins/parallax-js-master/parallax.min.js"></script>
 <script src="/plugins/colorbox/jquery.colorbox-min.js"></script>
 <script src="/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script>
 <script src="/js/single_listing_custom.js"></script>
 
 </body>
