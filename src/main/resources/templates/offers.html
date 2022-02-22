@@ -729,14 +729,14 @@
 										</th:block>
 
 
-										<div class="offer_name"><a href="single_listing.html" th:text="${result.campingName}">
+										<div class="offer_name"><a th:href="@{|/search/searchDetail/${result.campingName}|}" th:text="${result.campingName}">
 
 										</a></div>
 									</div>
 								</div>
 								<div class="col-lg-8">
 									<div class="offers_content">
-										<div class="offers_price"><a href="single_listing.html" th:text="${result.campingName}"></a></div>
+										<div class="offers_price"><a th:href="@{|/search/searchDetail/${result.campingName}|}" th:text="${result.campingName}"></a></div>
 										<div class="rating_r rating_r_3 offers_rating" data-rating="1">
 											<i></i>
 											<i></i>
@@ -758,7 +758,7 @@
 												<li class="offers_icons_item"><img src="/images/sailboat.png" alt=""></li>
 											</ul>
 										</div>
-										<div class="button book_button"><a href="/camping/campingPay">book<span></span><span></span><span></span></a></div>
+										<div class="button book_button"><a th:href="@{|/search/searchDetail/${result.campingName}|}">book<span></span><span></span><span></span></a></div>
 										<div class="offer_reviews">
 											<div class="offer_reviews_content">
 												<div class="offer_reviews_title"></div>
