@@ -4,6 +4,7 @@ import com.icia.gangcamping.dto.CampingDetailDTO;
 import com.icia.gangcamping.entity.CampingDetailEntity;
 import com.icia.gangcamping.entity.CampingEntity;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface CampingService {
@@ -14,4 +15,6 @@ public interface CampingService {
     void saveDetail(CampingDetailEntity entity);
 
     CampingDetailDTO findByCampingName(String campingName);
+
+    List findAll();
 }

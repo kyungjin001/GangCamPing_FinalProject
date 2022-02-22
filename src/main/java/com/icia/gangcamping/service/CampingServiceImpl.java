@@ -6,8 +6,10 @@ import com.icia.gangcamping.entity.CampingEntity;
 import com.icia.gangcamping.repository.CampingDetailRepository;
 import com.icia.gangcamping.repository.CampingRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -40,5 +42,10 @@ public class CampingServiceImpl implements CampingService {
         CampingDetailDTO campingDetailDTO = CampingDetailDTO.toCampingDetailDTO(entity);
 
         return campingDetailDTO;
+    }
+
+    @Override
+    public List findAll() {
+        return campingRepository.findAll(Sort.by(Sort.Direction.DESC,"CampingName"));
     }
 }

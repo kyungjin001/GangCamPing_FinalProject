@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/animate.css">
     <link rel="stylesheet" type="text/css" href="/styles/main_styles.css">
     <link rel="stylesheet" type="text/css" href="/styles/responsive.css">
-
+    <script src="https://kit.fontawesome.com/8eb5905426.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
         let id = "";
@@ -382,251 +382,43 @@
 
                     <!-- Search Tabs 이미지 변경할것  -->
 
-                    <div class="search_tabs_container">
-                        <div class="search_tabs d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
-                            <div class="search_tab active d-flex flex-row align-items-center justify-content-lg-center justify-content-start">
-                                <img src="/images/suitcase.png" alt=""><span>캠핑</span></div>
-                            <div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start">
-                                <img src="/images/bus.png" alt="">글램핑
-                            </div>
-                            <div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start">
-                                <img src="/images/departure.png" alt="">카라반
-                            </div>
-                            <div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start">
-                                <img src="/images/island.png" alt="">차박
-                            </div>
-                            <div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start">
-                                <img src="/images/cruise.png" alt="">팬션
-                            </div>
-                            <div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start">
-                                <img src="/images/diving.png" alt="">엑티비티
-                            </div>
-                        </div>
-                    </div>
+                    <!--                    <div class="search_tabs_container">-->
+                    <!--                        <div class="search_tabs d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">-->
+                    <!--                            <div class="search_tab active d-flex flex-row align-items-center justify-content-lg-center justify-content-start">-->
+                    <!--                                <img src="/images/suitcase.png" alt=""><span>캠핑</span></div>-->
+                    <!--                            <div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start">-->
+                    <!--                                <img src="/images/bus.png" alt="">글램핑-->
+                    <!--                            </div>-->
+                    <!--                            <div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start">-->
+                    <!--                                <img src="/images/departure.png" alt="">카라반-->
+                    <!--                            </div>-->
+                    <!--                            <div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start">-->
+                    <!--                                <img src="/images/island.png" alt="">차박-->
+                    <!--                            </div>-->
+                    <!--                            <div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start">-->
+                    <!--                                <img src="/images/cruise.png" alt="">팬션-->
+                    <!--                            </div>-->
+                    <!--                            <div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start">-->
+                    <!--                                <img src="/images/diving.png" alt="">엑티비티-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
 
                     <!-- Search Panel -->
                     <div class="search_panel active">
                         <form action="/search/camping" method="get" id="search_form_1"
                               class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
-                            <div class="search_item" style="margin:auto; ">
+                            <div class="search_item">
                                 <div>keyword</div>
                                 <input type="text" name="keyword" id="keyword" class="destination search_input"
                                        required="required">
                             </div>
-                            <!--                            <div class="search_item">-->
-                            <!--                                <div>check in</div>-->
-                            <!--                                <input type="text" class="check_in search_input" placeholder="YYYY-MM-DD">-->
-                            <!--                            </div>-->
-                            <!--                            <div class="search_item">-->
-                            <!--                                <div>check out</div>-->
-                            <!--                                <input type="text" class="check_out search_input" placeholder="YYYY-MM-DD">-->
-                            <!--                            </div>-->
-                            <!--                            <div class="search_item">-->
-                            <!--                                <div>adults</div>-->
-                            <!--                                <select name="adults" id="adults_1" class="dropdown_item_select search_input">-->
-                            <!--                                    <option>01</option>-->
-                            <!--                                    <option>02</option>-->
-                            <!--                                    <option>03</option>-->
-                            <!--                                </select>-->
-                            <!--                            </div>-->
-                            <!--                            <div class="search_item">-->
-                            <!--                                <div>children</div>-->
-                            <!--                                <select name="children" id="children_1" class="dropdown_item_select search_input">-->
-                            <!--                                    <option>01</option>-->
-                            <!--                                    <option>02</option>-->
-                            <!--                                    <option>03</option>-->
-                            <!--                                </select>-->
-                            <!--                            </div>-->
+
                             <button class="button search_button" type="submit">
                                 search<span></span><span></span><span></span></button>
                         </form>
                     </div>
 
-                    <!-- Search Panel -->
-
-
-                    <div class="search_panel">
-                        <form action="/search/glamping" method="get" id="search_form_2"
-                              class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
-                            <div class="search_item">
-                                <div>destination</div>
-                                <input type="text" class="destination search_input" required="required">
-                            </div>
-                            <div class="search_item">
-                                <div>check in</div>
-                                <input type="text" class="check_in search_input" placeholder="YYYY-MM-DD">
-                            </div>
-                            <div class="search_item">
-                                <div>check out</div>
-                                <input type="text" class="check_out search_input" placeholder="YYYY-MM-DD">
-                            </div>
-                            <div class="search_item">
-                                <div>adults</div>
-                                <select name="adults" id="adults_2" class="dropdown_item_select search_input">
-                                    <option>01</option>
-                                    <option>02</option>
-                                    <option>03</option>
-                                </select>
-                            </div>
-                            <div class="search_item">
-                                <div>children</div>
-                                <select name="children" id="children_2" class="dropdown_item_select search_input">
-                                    <option>01</option>
-                                    <option>02</option>
-                                    <option>03</option>
-                                </select>
-                            </div>
-                            <button class="button search_button">search<span></span><span></span><span></span></button>
-                        </form>
-                    </div>
-
-                    <!-- Search Panel -->
-
-                    <div class="search_panel">
-                        <form action="/search/caravan" method="get" id="search_form_3"
-                              class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
-                            <div class="search_item">
-                                <div>destination</div>
-                                <input type="text" class="destination search_input" required="required">
-                            </div>
-                            <div class="search_item">
-                                <div>check in</div>
-                                <input type="text" class="check_in search_input" placeholder="YYYY-MM-DD">
-                            </div>
-                            <div class="search_item">
-                                <div>check out</div>
-                                <input type="text" class="check_out search_input" placeholder="YYYY-MM-DD">
-                            </div>
-                            <div class="search_item">
-                                <div>adults</div>
-                                <select name="adults" id="adults_3" class="dropdown_item_select search_input">
-                                    <option>01</option>
-                                    <option>02</option>
-                                    <option>03</option>
-                                </select>
-                            </div>
-                            <div class="search_item">
-                                <div>children</div>
-                                <select name="children" id="children_3" class="dropdown_item_select search_input">
-                                    <option>0</option>
-                                    <option>02</option>
-                                    <option>03</option>
-                                </select>
-                            </div>
-                            <button class="button search_button">search<span></span><span></span><span></span></button>
-                        </form>
-                    </div>
-
-                    <!-- Search Panel -->
-
-                    <div class="search_panel">
-                        <form action="/search/carCamping" method="get" id="search_form_4"
-                              class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
-                            <div class="search_item">
-                                <div>destination</div>
-                                <input type="text" class="destination search_input" required="required">
-                            </div>
-                            <div class="search_item">
-                                <div>check in</div>
-                                <input type="text" class="check_in search_input" placeholder="YYYY-MM-DD">
-                            </div>
-                            <div class="search_item">
-                                <div>check out</div>
-                                <input type="text" class="check_out search_input" placeholder="YYYY-MM-DD">
-                            </div>
-                            <div class="search_item">
-                                <div>adults</div>
-                                <select name="adults" id="adults_4" class="dropdown_item_select search_input">
-                                    <option>01</option>
-                                    <option>02</option>
-                                    <option>03</option>
-                                </select>
-                            </div>
-                            <div class="search_item">
-                                <div>children</div>
-                                <select name="children" id="children_4" class="dropdown_item_select search_input">
-                                    <option>0</option>
-                                    <option>02</option>
-                                    <option>03</option>
-                                </select>
-                            </div>
-                            <button class="button search_button">search<span></span><span></span><span></span></button>
-                        </form>
-                    </div>
-
-                    <!-- Search Panel -->
-
-                    <div class="search_panel">
-                        <form action="/search/pension" method="get" id="search_form_5"
-                              class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
-                            <div class="search_item">
-                                <div>destination</div>
-                                <input type="text" class="destination search_input" required="required">
-                            </div>
-                            <div class="search_item">
-                                <div>check in</div>
-                                <input type="text" class="check_in search_input" placeholder="YYYY-MM-DD">
-                            </div>
-                            <div class="search_item">
-                                <div>check out</div>
-                                <input type="text" class="check_out search_input" placeholder="YYYY-MM-DD">
-                            </div>
-                            <div class="search_item">
-                                <div>adults</div>
-                                <select name="adults" id="adults_5" class="dropdown_item_select search_input">
-                                    <option>01</option>
-                                    <option>02</option>
-                                    <option>03</option>
-                                </select>
-                            </div>
-                            <div class="search_item">
-                                <div>children</div>
-                                <select name="children" id="children_5" class="dropdown_item_select search_input">
-                                    <option>0</option>
-                                    <option>02</option>
-                                    <option>03</option>
-                                </select>
-                            </div>
-                            <button class="button search_button">search<span></span><span></span><span></span></button>
-                        </form>
-                    </div>
-
-                    <!-- Search Panel -->
-
-                    <div class="search_panel">
-                        <form action="/search/activity" method="get" id="search_form_6"
-                              class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
-                            <div class="search_item">
-                                <div>destination</div>
-                                <input type="text" class="destination search_input" required="required">
-                            </div>
-                            <div class="search_item">
-                                <div>check in</div>
-                                <input type="text" class="check_in search_input" placeholder="YYYY-MM-DD">
-                            </div>
-                            <div class="search_item">
-                                <div>check out</div>
-                                <input type="text" class="check_out search_input" placeholder="YYYY-MM-DD">
-                            </div>
-                            <div class="search_item">
-                                <div>adults</div>
-                                <select name="adults" id="adults_6" class="dropdown_item_select search_input">
-                                    <option>01</option>
-                                    <option>02</option>
-                                    <option>03</option>
-                                </select>
-                            </div>
-                            <div class="search_item">
-                                <div>children</div>
-                                <select name="children" id="children_6" class="dropdown_item_select search_input">
-                                    <option>0</option>
-                                    <option>02</option>
-                                    <option>03</option>
-                                </select>
-                            </div>
-                            <button class="button search_button">search<span></span><span></span><span></span></button>
-                        </form>
-                    </div>
                 </div>
             </div>
         </div>
@@ -649,87 +441,113 @@
                 </div>
             </div>
             <div class="row intro_items">
+                <!--                <script>-->
+                <!--                  window.onload =-->
+                <!--                    function rndCamping () {-->
+                <!--                      let resultList;-->
+                <!--                            $.ajax({-->
+                <!--                                type: 'get',-->
+                <!--                                url: '/search/random',-->
+                <!--                                dataType: 'json',-->
+                <!--                                async: false,-->
+                <!--                                success : function (result){-->
 
+                <!--                                    resultList = result;-->
+                <!--                                },-->
+                <!--                                error: function (){-->
+                <!--                                    alert('ajax fail');-->
+                <!--                                }-->
+                <!--                            });-->
+                <!--                        console.log(resultList);-->
+
+                <!--                        return resultList;-->
+                <!--                    }-->
+
+
+                <!--                </script>-->
                 <!-- Intro Item -->
+                <th:block th:each="result : ${resultList}">
 
-                <div class="col-lg-4 intro_col">
-                    <div class="intro_item">
-                        <div class="intro_item_overlay"></div>
-                        <!-- Image by https://unsplash.com/@dnevozhai -->
-                        <div class="intro_item_background" style="background-image:url(/images/intro_1.jpg)"></div>
-                        <div class="intro_item_content d-flex flex-column align-items-center justify-content-center">
-                            <div class="intro_date">May 25th - June 01st</div>
-                            <div class="button intro_button">
-                                <div class="button_bcg"></div>
-                                <a href="#">see more<span></span><span></span><span></span></a></div>
-                            <div class="intro_center text-center">
-                                <h1>Mauritius</h1>
-                                <div class="intro_price">From $1450</div>
-                                <div class="rating rating_4">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
+
+                    <div class="col-lg-4 intro_col">
+                        <div class="intro_item">
+                            <div class="intro_item_overlay"></div>
+
+                            <div class="intro_item_background" th:style="'background-image:url(' + ${result.campingFileName} + ');'"></div>
+                            <div class="intro_item_content d-flex flex-column align-items-center justify-content-center">
+                                <div class="intro_date" th:text="${result.campingName}"></div>
+                                <div class="button intro_button">
+                                    <div class="button_bcg"></div>
+                                    <a th:href="@{|/search/searchDetail/${result.campingName}|}" id="introItem1">see more<span></span><span></span><span></span></a>
+                                </div>
+                                <div class="intro_center text-center">
+                                    <h1><a></a></h1>
+                                    <div class="intro_price" th:text="${result.campingAddr}"></div>
+                                    <div class="rating rating_4">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </th:block>
+                <!--                &lt;!&ndash; Intro Item &ndash;&gt;-->
 
-                <!-- Intro Item -->
+                <!--                <div class="col-lg-4 intro_col">-->
+                <!--                    <div class="intro_item">-->
+                <!--                        <div class="intro_item_overlay"></div>-->
+                <!--                        &lt;!&ndash; Image by https://unsplash.com/@hellolightbulb &ndash;&gt;-->
+                <!--                        <div class="intro_item_background" style="background-image:url(/images/intro_2.jpg)"></div>-->
+                <!--                        <div class="intro_item_content d-flex flex-column align-items-center justify-content-center">-->
+                <!--                            <div class="intro_date">May 25th - June 01st</div>-->
+                <!--                            <div class="button intro_button">-->
+                <!--                                <div class="button_bcg"></div>-->
+                <!--                                <a href="#">see more<span></span><span></span><span></span></a></div>-->
+                <!--                            <div class="intro_center text-center">-->
+                <!--                                <h1>Greece</h1>-->
+                <!--                                <div class="intro_price">From $1450</div>-->
+                <!--                                <div class="rating rating_4">-->
+                <!--                                    <i class="fa fa-star"></i>-->
+                <!--                                    <i class="fa fa-star"></i>-->
+                <!--                                    <i class="fa fa-star"></i>-->
+                <!--                                    <i class="fa fa-star"></i>-->
+                <!--                                    <i class="fa fa-star"></i>-->
+                <!--                                </div>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
 
-                <div class="col-lg-4 intro_col">
-                    <div class="intro_item">
-                        <div class="intro_item_overlay"></div>
-                        <!-- Image by https://unsplash.com/@hellolightbulb -->
-                        <div class="intro_item_background" style="background-image:url(/images/intro_2.jpg)"></div>
-                        <div class="intro_item_content d-flex flex-column align-items-center justify-content-center">
-                            <div class="intro_date">May 25th - June 01st</div>
-                            <div class="button intro_button">
-                                <div class="button_bcg"></div>
-                                <a href="#">see more<span></span><span></span><span></span></a></div>
-                            <div class="intro_center text-center">
-                                <h1>Greece</h1>
-                                <div class="intro_price">From $1450</div>
-                                <div class="rating rating_4">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!--                &lt;!&ndash; Intro Item &ndash;&gt;-->
 
-                <!-- Intro Item -->
-
-                <div class="col-lg-4 intro_col">
-                    <div class="intro_item">
-                        <div class="intro_item_overlay"></div>
-                        <!-- Image by https://unsplash.com/@willianjusten -->
-                        <div class="intro_item_background" style="background-image:url(/images/intro_3.jpg)"></div>
-                        <div class="intro_item_content d-flex flex-column align-items-center justify-content-center">
-                            <div class="intro_date">May 25th - June 01st</div>
-                            <div class="button intro_button">
-                                <div class="button_bcg"></div>
-                                <a href="#">see more<span></span><span></span><span></span></a></div>
-                            <div class="intro_center text-center">
-                                <h1>Scotland</h1>
-                                <div class="intro_price">From $1450</div>
-                                <div class="rating rating_4">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!--                <div class="col-lg-4 intro_col">-->
+                <!--                    <div class="intro_item">-->
+                <!--                        <div class="intro_item_overlay"></div>-->
+                <!--                        &lt;!&ndash; Image by https://unsplash.com/@willianjusten &ndash;&gt;-->
+                <!--                        <div class="intro_item_background" style="background-image:url(/images/intro_3.jpg)"></div>-->
+                <!--                        <div class="intro_item_content d-flex flex-column align-items-center justify-content-center">-->
+                <!--                            <div class="intro_date">May 25th - June 01st</div>-->
+                <!--                            <div class="button intro_button">-->
+                <!--                                <div class="button_bcg"></div>-->
+                <!--                                <a href="#">see more<span></span><span></span><span></span></a></div>-->
+                <!--                            <div class="intro_center text-center">-->
+                <!--                                <h1>Scotland</h1>-->
+                <!--                                <div class="intro_price">From $1450</div>-->
+                <!--                                <div class="rating rating_4">-->
+                <!--                                    <i class="fa fa-star"></i>-->
+                <!--                                    <i class="fa fa-star"></i>-->
+                <!--                                    <i class="fa fa-star"></i>-->
+                <!--                                    <i class="fa fa-star"></i>-->
+                <!--                                    <i class="fa fa-star"></i>-->
+                <!--                                </div>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
 
             </div>
         </div>
@@ -1675,60 +1493,60 @@
         </div>
     </div>
 </div>
-    <!-- findpw Modal -->
-    <div class="modal fade" id="findPw" data-backdrop="static" data-keyboard="false" tabindex="-1"
-         aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">비밀번호 찾기</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <!-- Modal body -->
-                <div class="modal-body">
+<!-- findpw Modal -->
+<div class="modal fade" id="findPw" data-backdrop="static" data-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">비밀번호 찾기</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
 
-                    <div class="form-group">
-                        <label for="memberEmail">이메일을 입력해주세요 </label> <br>
-                        <input type="text" class="form-control" id="memberEmail" th:onblur="emailCheck()"
-                               placeholder="Enter Your Email" required>
-                        <form action="/member/update" method="get" name="pwUpdate">
-                            <input type="text" id="members" name="memberId">
-                            <input type="hidden" class="form-control" id="codeInput" placeholder="이메일 인증코드를 입력해주세요."
-                                   required>
-                            <input type="hidden" th:onclick="codeCheck()" id="check" value="코드확인">
-                        </form>
-                    </div>
+                <div class="form-group">
+                    <label for="memberEmail">이메일을 입력해주세요 </label> <br>
+                    <input type="text" class="form-control" id="memberEmail" th:onblur="emailCheck()"
+                           placeholder="Enter Your Email" required>
+                    <form action="/member/update" method="get" name="pwUpdate">
+                        <input type="text" id="members" name="memberId">
+                        <input type="hidden" class="form-control" id="codeInput" placeholder="이메일 인증코드를 입력해주세요."
+                               required>
+                        <input type="hidden" th:onclick="codeCheck()" id="check" value="코드확인">
+                    </form>
                 </div>
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <input type="button" id="emailSend" th:onclick="codeSend()" class="btn btn-primary"
-                           style="margin-left:20%;" value="전송하기" readonly>
-                    <input type="button" id="emailCancel" class="btn btn-secondary" data-dismiss="modal" value="취소"
-                           readonly>
-                </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <input type="button" id="emailSend" th:onclick="codeSend()" class="btn btn-primary"
+                       style="margin-left:20%;" value="전송하기" readonly>
+                <input type="button" id="emailCancel" class="btn btn-secondary" data-dismiss="modal" value="취소"
+                       readonly>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        var myModal = document.getElementById('login')
-        var myInput = document.getElementById('loginId')
+<script>
+    var myModal = document.getElementById('login')
+    var myInput = document.getElementById('loginId')
 
-        myModal.addEventListener('shown.bs.modal', function () {
-            myInput.focus()
-        })
-    </script>
-    <!-- 모달 끝 -->
+    myModal.addEventListener('shown.bs.modal', function () {
+        myInput.focus()
+    })
+</script>
+<!-- 모달 끝 -->
 
-    <script src="/js/jquery-3.2.1.min.js"></script>
-    <script src="/styles/bootstrap4/popper.js"></script>
-    <script src="/styles/bootstrap4/bootstrap.min.js"></script>
-    <script src="/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-    <script src="/plugins/easing/easing.js"></script>
-    <script src="/js/custom.js"></script>
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/styles/bootstrap4/popper.js"></script>
+<script src="/styles/bootstrap4/bootstrap.min.js"></script>
+<script src="/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="/plugins/easing/easing.js"></script>
+<script src="/js/custom.js"></script>
 
 </body>
 
