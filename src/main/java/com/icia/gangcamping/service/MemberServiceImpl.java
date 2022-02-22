@@ -1,16 +1,10 @@
 package com.icia.gangcamping.service;
 
-import com.icia.gangcamping.dto.MemberDetailDTO;
-import com.icia.gangcamping.dto.MemberLoginDTO;
-import com.icia.gangcamping.dto.MemberSaveDTO;
-import com.icia.gangcamping.dto.MemberUpdateDTO;
+import com.icia.gangcamping.dto.*;
 import com.icia.gangcamping.entity.MemberEntity;
 import com.icia.gangcamping.repository.MemberRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -73,7 +67,7 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public Long update(MemberUpdateDTO memberUpdateDTO) {
+    public Long update(RoomSaveDTO.MemberUpdateDTO memberUpdateDTO) {
         MemberEntity memberEntity = MemberEntity.toUpdateMember(memberUpdateDTO);
 
         return mr.save(memberEntity).getMemberId();
