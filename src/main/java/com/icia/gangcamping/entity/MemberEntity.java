@@ -71,7 +71,7 @@ public class MemberEntity {
         MemberEntity memberEntity = new MemberEntity();
 
         memberEntity.setMemberEmail(memberSaveDTO.getMemberEmail());
-        memberEntity.setMemberPw(memberSaveDTO.getMemberPW());
+        memberEntity.setMemberPw(memberSaveDTO.getMemberPw());
         memberEntity.setMemberName(memberSaveDTO.getMemberName());
         memberEntity.setMemberAddr(memberSaveDTO.getMemberAddr());
         memberEntity.setMemberPhone(memberSaveDTO.getMemberPhone());
@@ -81,9 +81,9 @@ public class MemberEntity {
     public static MemberEntity toUpdateMember(RoomSaveDTO.MemberUpdateDTO memberUpdateDTO) {
 
         MemberEntity memberEntity = new MemberEntity();
-        me
+        memberEntity.setMemberId(memberUpdateDTO.getMemberId());
         memberEntity.setMemberEmail(memberUpdateDTO.getMemberEmail());
-        memberEntity.setMemberPw(memberUpdateDTO.getMemberPW());
+        memberEntity.setMemberPw(memberUpdateDTO.getMemberPw());
         memberEntity.setMemberName(memberUpdateDTO.getMemberName());
         memberEntity.setMemberAddr(memberUpdateDTO.getMemberAddr());
         memberEntity.setMemberPhone(memberUpdateDTO.getMemberPhone());

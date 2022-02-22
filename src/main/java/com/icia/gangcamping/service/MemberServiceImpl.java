@@ -20,6 +20,16 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
+    public MemberEntity findByMemberEmail(String memberEmail) {
+        return null;
+    }
+
+    @Override
+    public Optional<MemberEntity> findByMemberId(Long memberId) {
+        return Optional.empty();
+    }
+
+    @Override
     public boolean login(MemberLoginDTO memberLoginDTO) {
         MemberEntity memberEntity = mr.findByMemberEmail(memberLoginDTO.getMemberEmail());
         if(memberEntity != null){
@@ -71,6 +81,11 @@ public class MemberServiceImpl implements MemberService{
         MemberEntity memberEntity = MemberEntity.toUpdateMember(memberUpdateDTO);
 
         return mr.save(memberEntity).getMemberId();
+    }
+
+    @Override
+    public String emailDp(String memberEmail) {
+        return null;
     }
 
 
