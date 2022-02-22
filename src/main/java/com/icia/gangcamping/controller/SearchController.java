@@ -1,6 +1,7 @@
 package com.icia.gangcamping.controller;
 
 import com.icia.gangcamping.dto.CampingDetailDTO;
+import com.icia.gangcamping.service.CampingService;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -23,6 +24,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/search")
 public class SearchController {
+    private final CampingService cs;
 
      public List searchList(String keyword) throws IOException, ParseException {
 
@@ -81,10 +83,27 @@ public class SearchController {
     }
 
     @GetMapping("/camping")
-    public String indexSearch(Model model, @RequestParam("keyword")String keyword) throws IOException, ParseException {
-        List<CampingDetailDTO> campingDetailDTOList = this.searchList(keyword);
-        model.addAttribute("searchList",campingDetailDTOList);
+    public String indexSearch(Model model, @RequestParam(value = "keyword",required = false)String keyword) throws IOException, ParseException {
+        System.out.println(keyword);
+         if(keyword==null){
+             keyword = "캠핑";
+             List<CampingDetailDTO> campingDetailDTOList = this.searchList(keyword);
+             model.addAttribute("searchList",campingDetailDTOList);
+         }else{
+            List<CampingDetailDTO> campingDetailDTOList = this.searchList(keyword);
+             model.addAttribute("searchList",campingDetailDTOList);
+         }
         return "offers";
+    }
+    @GetMapping("/searchDetail/{campingName}")
+    public String detail(@PathVariable String campingName,Model model){
+        System.out.println("searchController");
+         CampingDetailDTO campingDetailDTO = cs.findByCampingName(campingName);
+         model.addAttribute("campingDetail",campingDetailDTO);
+
+
+
+         return "single_listing";
     }
 
 
