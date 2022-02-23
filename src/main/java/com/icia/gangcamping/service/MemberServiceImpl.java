@@ -35,7 +35,7 @@ public class MemberServiceImpl implements MemberService{
     public boolean login(MemberLoginDTO memberLoginDTO) {
         MemberEntity memberEntity = mr.findByMemberEmail(memberLoginDTO.getMemberEmail());
         if(memberEntity != null){
-            if (memberEntity.getMemberPw().equals(memberLoginDTO.getMemberPW())){
+            if (memberEntity.getMemberPw().equals(memberLoginDTO.getMemberPw())){
                 return true;
             }else {
                 return false;

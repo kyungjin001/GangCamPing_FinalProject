@@ -333,7 +333,7 @@
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form action="/review/save" name="myform" id="myform" method="post" >
+						<form action="/comment/campingReviewSave" name="myform" id="myform" method="post" >
 							<fieldset>
 								<input type="radio" name="reviewStar" value="5" id="rate1"><label for="rate1">★</label>
 								<input type="radio" name="reviewStar" value="4" id="rate2"><label for="rate2">★</label>
@@ -342,7 +342,7 @@
 								<input type="radio" name="reviewStar" value="1" id="rate5"><label for="rate5">★</label>
 							</fieldset>
 							<br>
-							<input type="hidden" id="reviewWriter" name="reviewWriter" th:value="${session[loginEmail]}">
+							<input type="hidden" id="reviewWriter" name="reviewWriter" th:value="${session['loginEmail']}">
 							<div class="mb-3">
 								<textarea name="reviewContents" id="reviewContents" class="form-control"></textarea>
 							</div>
@@ -350,7 +350,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary" onclick="comment()">Comment</button>
+						<button type="submit" class="btn btn-primary">Comment</button>
 					</div>
 					</form>
 				</div>

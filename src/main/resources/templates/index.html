@@ -138,7 +138,10 @@
                             <!--                            </ul>-->
                         </div>
                         <div class="user_box ml-auto">
-
+                            <div class="user_box_login user_box_link">	<a class="nav-link" th:href="@{|/member/${session.loginId}|}"
+                                                                             style="font-size: 15px">
+                                myPage</a>
+                            </div>
 
                            <span th:if="(${session.loginEmail}==null) and (${session.userId}==null)">
                             <div class="user_box_login user_box_link">	<a class="nav-link" href="#"
@@ -1520,16 +1523,16 @@
             <!-- Modal body -->
             <div class="modal-body">
 
-                <form action="">
+                <form action="/member/login" method="post">
                     <div class="form-group">
                         <label for="loginId" style="margin-left: 200px">ID </label> <br>
-                        <input type="text" class="form-control" id="loginId" placeholder="Enter ID" name="loginId"
+                        <input type="text" class="form-control" id="loginId" placeholder="Enter ID" name="memberEmail"
                                required>
                     </div>
                     <div class="form-group">
                         <label for="loginPw" style="margin-left: 200px">비밀번호 </label>
                         <input type="password" class="form-control" id="loginPw" placeholder="Enter Password"
-                               name="loginPw" required>
+                               name="memberPw" required>
                     </div>
                     <button type="submit" class="btn btn-primary" style="margin-left:200px">로그인</button>
                     <br>
@@ -1582,7 +1585,7 @@
                     <div class="form-group">
                         <label for="registerPw">비밀번호 </label>
                         <input type="password" class="form-control" id="registerPw" placeholder="비밀번호를 입력해주세요."
-                               name="memberPW" required>
+                               name="memberPw" required>
                         <input type="password" class="form-control" id="registerPwCheck"
                                placeholder="비밀번호를 다시 입력해주세요." required>
 
