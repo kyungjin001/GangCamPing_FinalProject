@@ -36,14 +36,17 @@
                     }
                 },
                 error: function () {
+
                     console.log("다시 확인해주세요.")
                 }
             });
         }
 
+
     </script>
     <script>
         function codeSend() {
+
 
             const mail = document.getElementById("memberEmail").value;
             const codeInput = document.getElementById("codeInput");
@@ -58,9 +61,11 @@
                 url: '/mail/mailCode',
                 data: {"memberEmail": mail},
                 dataType: 'json',
+
                 success: function (result) {
 
                     if (result != null) {
+
                         emailcancel.type = "hidden";
                         emailSend.type = "hidden";
                         codeInput.type = "text";
@@ -69,10 +74,11 @@
                         check.type = "button";
                         useremail.value = result.memberId;
 
+
                     } else {
+
                         console.log('안되지롱 안되지롱 에베베베베베')
                     }
-
                 },
                 error: function () {
                     console.log("다시 확인해주세요.")
@@ -87,15 +93,16 @@
             console.log(mail2);
             const codeInput = document.getElementById("codeInput").value;
             console.log(codeInput);
-
             $.ajax({
                 type: 'post',
                 url: '/mail/codeCheck',
                 data: {"memberEmail": mail2, "emailCode": codeInput},
                 dataType: 'text',
+
                 success: function (result) {
 
                     if (result == "ok") {
+
                         alert("비밀번호를 변경해주세요.");
                     } else {
                         alert("인증코드를 다시 확인해주세요.");
@@ -106,22 +113,13 @@
                 }
             });
         }
-
     </script>
-
-
 </head>
-
 <body>
-
 <div class="super_container">
-
     <!-- Header -->
-
     <header class="header">
-
         <!-- Top Bar -->
-
         <div class="top_bar">
             <div class="container">
                 <div class="row">
@@ -138,6 +136,7 @@
                             <!--                            </ul>-->
                         </div>
                         <div class="user_box ml-auto">
+
                             <div class="user_box_login user_box_link">	<a class="nav-link" th:href="@{|/member/${session.loginId}|}"
                                                                              style="font-size: 15px">
                                 myPage</a>
@@ -147,6 +146,7 @@
                             <div class="user_box_login user_box_link">	<a class="nav-link" href="#"
                                                                              data-toggle="modal" data-target="#login"
                                                                              style="font-size: 15px">
+
                                 LogIn</a>
                             </div>
                             <div class="user_box_register user_box_link"><a class="nav-link" href="#"
@@ -156,8 +156,10 @@
                             </div>
                             </span>
                             <span th:if="(${session.loginEmail}!=null) ">
+
                             <div class="user_box_login user_box_link">	<a class="nav-link" href="/member/logOut"
                                                                              style="font-size: 15px">
+
                                 LogOut
                             </a></div>
                             </span>
@@ -169,11 +171,14 @@
                                </div>
                             </span>
 
+
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
+
 
         <!-- Main Navigation -->
 
@@ -304,10 +309,11 @@
                                 <div class="button_bcg"></div>
                                 <a href="#">explore now<span></span><span></span><span></span></a></div>
                         </div>
+
                     </div>
                 </div>
-
             </div>
+
 
             <!-- Home Slider Nav - Prev -->
             <div class="home_slider_nav home_slider_prev">
@@ -368,9 +374,10 @@
                 </ul>
             </div>
 
-        </div>
 
+        </div>
     </div>
+
 
     <!-- Search -->
 
@@ -629,28 +636,232 @@
                             </div>
                             <button class="button search_button">search<span></span><span></span><span></span></button>
                         </form>
+
                     </div>
+                </div>
+                <!-- Search Panel -->
+                <div class="search_panel active">
+                    <form action="/search/camping" method="get" id="search_form_1" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
+                        <div class="search_item" style="margin:auto; ">
+                            <div>keyword</div>
+                            <input type="text" name="keyword" id="keyword" class="destination search_input" required="required">
+                        </div>
+                        <!--                            <div class="search_item">-->
+                        <!--                                <div>check in</div>-->
+                        <!--                                <input type="text" class="check_in search_input" placeholder="YYYY-MM-DD">-->
+                        <!--                            </div>-->
+                        <!--                            <div class="search_item">-->
+                        <!--                                <div>check out</div>-->
+                        <!--                                <input type="text" class="check_out search_input" placeholder="YYYY-MM-DD">-->
+                        <!--                            </div>-->
+                        <!--                            <div class="search_item">-->
+                        <!--                                <div>adults</div>-->
+                        <!--                                <select name="adults" id="adults_1" class="dropdown_item_select search_input">-->
+                        <!--                                    <option>01</option>-->
+                        <!--                                    <option>02</option>-->
+                        <!--                                    <option>03</option>-->
+                        <!--                                </select>-->
+                        <!--                            </div>-->
+                        <!--                            <div class="search_item">-->
+                        <!--                                <div>children</div>-->
+                        <!--                                <select name="children" id="children_1" class="dropdown_item_select search_input">-->
+                        <!--                                    <option>01</option>-->
+                        <!--                                    <option>02</option>-->
+                        <!--                                    <option>03</option>-->
+                        <!--                                </select>-->
+                        <!--                            </div>-->
+                        <button class="button search_button" type="submit">search<span></span><span></span><span></span></button>
+                    </form>
+                </div>
+                <!-- Search Panel -->
+                <div class="search_panel">
+                    <form action="/search/glamping" method="get" id="search_form_2" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
+                        <div class="search_item">
+                            <div>destination</div>
+                            <input type="text" class="destination search_input" required="required">
+                        </div>
+                        <div class="search_item">
+                            <div>check in</div>
+                            <input type="text" class="check_in search_input" placeholder="YYYY-MM-DD">
+                        </div>
+                        <div class="search_item">
+                            <div>check out</div>
+                            <input type="text" class="check_out search_input" placeholder="YYYY-MM-DD">
+                        </div>
+                        <div class="search_item">
+                            <div>adults</div>
+                            <select name="adults" id="adults_2" class="dropdown_item_select search_input">
+                                <option>01</option>
+                                <option>02</option>
+                                <option>03</option>
+                            </select>
+                        </div>
+                        <div class="search_item">
+                            <div>children</div>
+                            <select name="children" id="children_2" class="dropdown_item_select search_input">
+                                <option>01</option>
+                                <option>02</option>
+                                <option>03</option>
+                            </select>
+                        </div>
+                        <button class="button search_button">search<span></span><span></span><span></span></button>
+                    </form>
+                </div>
+                <!-- Search Panel -->
+                <div class="search_panel">
+                    <form action="/search/caravan" method="get" id="search_form_3" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
+                        <div class="search_item">
+                            <div>destination</div>
+                            <input type="text" class="destination search_input" required="required">
+                        </div>
+                        <div class="search_item">
+                            <div>check in</div>
+                            <input type="text" class="check_in search_input" placeholder="YYYY-MM-DD">
+                        </div>
+                        <div class="search_item">
+                            <div>check out</div>
+                            <input type="text" class="check_out search_input" placeholder="YYYY-MM-DD">
+                        </div>
+                        <div class="search_item">
+                            <div>adults</div>
+                            <select name="adults" id="adults_3" class="dropdown_item_select search_input">
+                                <option>01</option>
+                                <option>02</option>
+                                <option>03</option>
+                            </select>
+                        </div>
+                        <div class="search_item">
+                            <div>children</div>
+                            <select name="children" id="children_3" class="dropdown_item_select search_input">
+                                <option>0</option>
+                                <option>02</option>
+                                <option>03</option>
+                            </select>
+                        </div>
+                        <button class="button search_button">search<span></span><span></span><span></span></button>
+                    </form>
+                </div>
+                <!-- Search Panel -->
+                <div class="search_panel">
+                    <form action="/search/carCamping" method="get" id="search_form_4" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
+                        <div class="search_item">
+                            <div>destination</div>
+                            <input type="text" class="destination search_input" required="required">
+                        </div>
+                        <div class="search_item">
+                            <div>check in</div>
+                            <input type="text" class="check_in search_input" placeholder="YYYY-MM-DD">
+                        </div>
+                        <div class="search_item">
+                            <div>check out</div>
+                            <input type="text" class="check_out search_input" placeholder="YYYY-MM-DD">
+                        </div>
+                        <div class="search_item">
+                            <div>adults</div>
+                            <select name="adults" id="adults_4" class="dropdown_item_select search_input">
+                                <option>01</option>
+                                <option>02</option>
+                                <option>03</option>
+                            </select>
+                        </div>
+                        <div class="search_item">
+                            <div>children</div>
+                            <select name="children" id="children_4" class="dropdown_item_select search_input">
+                                <option>0</option>
+                                <option>02</option>
+                                <option>03</option>
+                            </select>
+                        </div>
+                        <button class="button search_button">search<span></span><span></span><span></span></button>
+                    </form>
+                </div>
+                <!-- Search Panel -->
+                <div class="search_panel">
+                    <form action="/search/pension" method="get" id="search_form_5" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
+                        <div class="search_item">
+                            <div>destination</div>
+                            <input type="text" class="destination search_input" required="required">
+                        </div>
+                        <div class="search_item">
+                            <div>check in</div>
+                            <input type="text" class="check_in search_input" placeholder="YYYY-MM-DD">
+                        </div>
+                        <div class="search_item">
+                            <div>check out</div>
+                            <input type="text" class="check_out search_input" placeholder="YYYY-MM-DD">
+                        </div>
+                        <div class="search_item">
+                            <div>adults</div>
+                            <select name="adults" id="adults_5" class="dropdown_item_select search_input">
+                                <option>01</option>
+                                <option>02</option>
+                                <option>03</option>
+                            </select>
+                        </div>
+                        <div class="search_item">
+                            <div>children</div>
+                            <select name="children" id="children_5" class="dropdown_item_select search_input">
+                                <option>0</option>
+                                <option>02</option>
+                                <option>03</option>
+                            </select>
+                        </div>
+                        <button class="button search_button">search<span></span><span></span><span></span></button>
+                    </form>
+                </div>
+                <!-- Search Panel -->
+                <div class="search_panel">
+                    <form action="/search/activity" method="get" id="search_form_6" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
+                        <div class="search_item">
+                            <div>destination</div>
+                            <input type="text" class="destination search_input" required="required">
+                        </div>
+                        <div class="search_item">
+                            <div>check in</div>
+                            <input type="text" class="check_in search_input" placeholder="YYYY-MM-DD">
+                        </div>
+                        <div class="search_item">
+                            <div>check out</div>
+                            <input type="text" class="check_out search_input" placeholder="YYYY-MM-DD">
+                        </div>
+                        <div class="search_item">
+                            <div>adults</div>
+                            <select name="adults" id="adults_6" class="dropdown_item_select search_input">
+                                <option>01</option>
+                                <option>02</option>
+                                <option>03</option>
+                            </select>
+                        </div>
+                        <div class="search_item">
+                            <div>children</div>
+                            <select name="children" id="children_6" class="dropdown_item_select search_input">
+                                <option>0</option>
+                                <option>02</option>
+                                <option>03</option>
+                            </select>
+                        </div>
+                        <button class="button search_button">search<span></span><span></span><span></span></button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Intro -->
-
-    <div class="intro">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <h2 class="intro_title text-center">테마별 1위 캠핑장</h2>
+</div>
+<!-- Intro -->
+<div class="intro">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2 class="intro_title text-center">테마별 1위 캠핑장</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                <div class="intro_text text-center">
+                    <p>현재 테마별로 인기있는 캠핑장입니다. </p>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-10 offset-lg-1">
-                    <div class="intro_text text-center">
-                        <p>현재 테마별로 인기있는 캠핑장입니다. </p>
-                    </div>
-                </div>
-            </div>
+
             <div class="row intro_items">
 
                 <!-- Intro Item -->
@@ -675,10 +886,12 @@
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
+
 
                 <!-- Intro Item -->
 
@@ -702,10 +915,12 @@
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
+
 
                 <!-- Intro Item -->
 
@@ -729,14 +944,15 @@
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
+
 
     <!-- CTA -->
 
@@ -885,11 +1101,23 @@
                                         </ul>
                                     </div>
                                     <div class="offers_link"><a href="offers.html">read more</a></div>
+
                                 </div>
+                                <p class="offers_text">Suspendisse potenti. In faucibus massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu convallis tortor.</p>
+                                <div class="offers_icons">
+                                    <ul class="offers_icons_list">
+                                        <li class="offers_icons_item"><img src="/images/post.png" alt=""></li>
+                                        <li class="offers_icons_item"><img src="/images/compass.png" alt=""></li>
+                                        <li class="offers_icons_item"><img src="/images/bicycle.png" alt=""></li>
+                                        <li class="offers_icons_item"><img src="/images/sailboat.png" alt=""></li>
+                                    </ul>
+                                </div>
+                                <div class="offers_link"><a href="offers.html">read more</a></div>
                             </div>
                         </div>
                     </div>
                 </div>
+
 
                 <!-- Offers Item -->
                 <div class="col-lg-6 offers_col">
@@ -924,11 +1152,14 @@
                                         </ul>
                                     </div>
                                     <div class="offers_link"><a href="offers.html">read more</a></div>
+
                                 </div>
+                                <div class="offers_link"><a href="offers.html">read more</a></div>
                             </div>
                         </div>
                     </div>
                 </div>
+
 
                 <!-- Offers Item -->
                 <div class="col-lg-6 offers_col">
@@ -963,11 +1194,14 @@
                                         </ul>
                                     </div>
                                     <div class="offers_link"><a href="offers.html">read more</a></div>
+
                                 </div>
+                                <div class="offers_link"><a href="offers.html">read more</a></div>
                             </div>
                         </div>
                     </div>
                 </div>
+
 
                 <!-- Offers Item -->
                 <div class="col-lg-6 offers_col">
@@ -1002,15 +1236,17 @@
                                         </ul>
                                     </div>
                                     <div class="offers_link"><a href="offers.html">read more</a></div>
+
                                 </div>
+                                <div class="offers_link"><a href="offers.html">read more</a></div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
+
 
     <!-- Testimonials -->
 
@@ -1045,10 +1281,14 @@
                                             <div class="test_quote_title">" Best holliday ever "</div>
                                             <p class="test_quote_text">Nullam eu convallis tortor. Suspendisse potenti.
                                                 In faucibus massa arcu, vitae cursus mi hendrerit nec.</p>
+
                                         </div>
+                                        <div class="test_quote_title">" Best holliday ever "</div>
+                                        <p class="test_quote_text">Nullam eu convallis tortor. Suspendisse potenti. In faucibus massa arcu, vitae cursus mi hendrerit nec.</p>
                                     </div>
                                 </div>
                             </div>
+
 
                             <!-- Testimonial Item -->
                             <div class="owl-item">
@@ -1065,10 +1305,14 @@
                                             <div class="test_quote_title">" Best holliday ever "</div>
                                             <p class="test_quote_text">Nullam eu convallis tortor. Suspendisse potenti.
                                                 In faucibus massa arcu, vitae cursus mi hendrerit nec.</p>
+
                                         </div>
+                                        <div class="test_quote_title">" Best holliday ever "</div>
+                                        <p class="test_quote_text">Nullam eu convallis tortor. Suspendisse potenti. In faucibus massa arcu, vitae cursus mi hendrerit nec.</p>
                                     </div>
                                 </div>
                             </div>
+
 
                             <!-- Testimonial Item -->
                             <div class="owl-item">
@@ -1085,10 +1329,14 @@
                                             <div class="test_quote_title">" Best holliday ever "</div>
                                             <p class="test_quote_text">Nullam eu convallis tortor. Suspendisse potenti.
                                                 In faucibus massa arcu, vitae cursus mi hendrerit nec.</p>
+
                                         </div>
+                                        <div class="test_quote_title">" Best holliday ever "</div>
+                                        <p class="test_quote_text">Nullam eu convallis tortor. Suspendisse potenti. In faucibus massa arcu, vitae cursus mi hendrerit nec.</p>
                                     </div>
                                 </div>
                             </div>
+
 
                             <!-- Testimonial Item -->
                             <div class="owl-item">
@@ -1104,10 +1352,14 @@
                                             <div class="test_quote_title">" Best holliday ever "</div>
                                             <p class="test_quote_text">Nullam eu convallis tortor. Suspendisse potenti.
                                                 In faucibus massa arcu, vitae cursus mi hendrerit nec.</p>
+
                                         </div>
+                                        <div class="test_quote_title">" Best holliday ever "</div>
+                                        <p class="test_quote_text">Nullam eu convallis tortor. Suspendisse potenti. In faucibus massa arcu, vitae cursus mi hendrerit nec.</p>
                                     </div>
                                 </div>
                             </div>
+
 
                             <!-- Testimonial Item -->
                             <div class="owl-item">
@@ -1123,10 +1375,14 @@
                                             <div class="test_quote_title">" Best holliday ever "</div>
                                             <p class="test_quote_text">Nullam eu convallis tortor. Suspendisse potenti.
                                                 In faucibus massa arcu, vitae cursus mi hendrerit nec.</p>
+
                                         </div>
+                                        <div class="test_quote_title">" Best holliday ever "</div>
+                                        <p class="test_quote_text">Nullam eu convallis tortor. Suspendisse potenti. In faucibus massa arcu, vitae cursus mi hendrerit nec.</p>
                                     </div>
                                 </div>
                             </div>
+
 
                             <!-- Testimonial Item -->
                             <div class="owl-item">
@@ -1142,12 +1398,15 @@
                                             <div class="test_quote_title">" Best holliday ever "</div>
                                             <p class="test_quote_text">Nullam eu convallis tortor. Suspendisse potenti.
                                                 In faucibus massa arcu, vitae cursus mi hendrerit nec.</p>
+
                                         </div>
+                                        <div class="test_quote_title">" Best holliday ever "</div>
+                                        <p class="test_quote_text">Nullam eu convallis tortor. Suspendisse potenti. In faucibus massa arcu, vitae cursus mi hendrerit nec.</p>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
+
 
                         <!-- Testimonials Slider Nav - Prev -->
                         <div class="test_slider_nav test_slider_prev">
@@ -1178,24 +1437,22 @@
 								<defs>
 									<linearGradient id='test_grad_next'>
 										<stop offset='0%' stop-color='#fa9e1b'/>
+
                                         <stop offset='100%' stop-color='#8d4fff'/>
-									</linearGradient>
-								</defs>
-                                <path class="nav_path" fill="#F3F6F9" d="M19,0H9C4.029,0,0,4.029,0,9v15c0,4.971,4.029,9,9,9h10c4.97,0,9-4.029,9-9V9C28,4.029,23.97,0,19,0z
-							M26,23.091C26,27.459,22.545,31,18.285,31H9.714C5.454,31,2,27.459,2,23.091V9.909C2,5.541,5.454,2,9.714,2h8.571
-							C22.545,2,26,5.541,26,9.909V23.091z"/>
-                                <polygon class="nav_arrow" fill="#F3F6F9" points="13.044,11.551 11.71,12.885 15.714,16.888 11.71,20.891 13.044,22.224 18.379,16.888 17.048,15.554
-							17.046,15.554 "/>
-							</svg>
-                        </div>
-
+                                    </linearGradient>
+                                </defs>
+                            <path class="nav_path" fill="#F3F6F9" d="M19,0H9C4.029,0,0,4.029,0,9v15c0,4.971,4.029,9,9,9h10c4.97,0,9-4.029,9-9V9C28,4.029,23.97,0,19,0z
+                            M26,23.091C26,27.459,22.545,31,18.285,31H9.714C5.454,31,2,27.459,2,23.091V9.909C2,5.541,5.454,2,9.714,2h8.571
+                            C22.545,2,26,5.541,26,9.909V23.091z"/>
+                            <polygon class="nav_arrow" fill="#F3F6F9" points="13.044,11.551 11.71,12.885 15.714,16.888 11.71,20.891 13.044,22.224 18.379,16.888 17.048,15.554
+                            17.046,15.554 "/>
+                            </svg>
                     </div>
-
                 </div>
             </div>
-
         </div>
     </div>
+
 
     <!--    <div class="trending">-->
     <!--        <div class="container">-->
@@ -1362,9 +1619,25 @@
                                 <li class="footer_social_item"><a href="#"><i class="fa fa-dribbble"></i></a></li>
                                 <li class="footer_social_item"><a href="#"><i class="fa fa-behance"></i></a></li>
                             </ul>
+
                         </div>
+                        <p class="footer_about_text"><br>
+                            강캠핑입니다.
+                            여기는 프로젝트에 관한
+                            간단한 설명이나
+                            기타 사항이 들어갈 예정
+                            입니다.
+                        </p>
+                        <ul class="footer_social_list">
+                            <li class="footer_social_item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                            <li class="footer_social_item"><a href="https://fb.com"><i class="fa fa-facebook-f"></i></a></li>
+                            <li class="footer_social_item"><a href="https://twitter.com"><i class="fa fa-twitter"></i></a></li>
+                            <li class="footer_social_item"><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                            <li class="footer_social_item"><a href="#"><i class="fa fa-behance"></i></a></li>
+                        </ul>
                     </div>
                 </div>
+
 
                 <!-- Footer Column -->
                 <div class="col-lg-3 footer_column">
@@ -1401,28 +1674,26 @@
                                     <div class="footer_blog_title"><a href="https://www.icia.co.kr/">인천일보아카데미</a></div>
                                     <div class="footer_blog_date"></div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Footer Column -->
-                <div class="col-lg-3 footer_column">
-                    <div class="footer_col">
-                        <div class="footer_title">검색 태그</div>
-                        <div class="footer_content footer_tags">
-                            <ul class="tags_list clearfix">
-                                <li class="tag_item"><a href="#">차박</a></li>
-                                <li class="tag_item"><a href="#">오지캠핑</a></li>
-                                <li class="tag_item"><a href="#">오토캠핑장</a></li>
-                                <li class="tag_item"><a href="#">카라반</a></li>
-                                <li class="tag_item"><a href="#">캠핑카</a></li>
-                                <li class="tag_item"><a href="#">글램핑</a></li>
-                                <li class="tag_item"><a href="#">이부분은 검색쿼리로 링크</a></li>
-
-                            </ul>
-                        </div>
+            </div>
+            <!-- Footer Column -->
+            <div class="col-lg-3 footer_column">
+                <div class="footer_col">
+                    <div class="footer_title">검색 태그</div>
+                    <div class="footer_content footer_tags">
+                        <ul class="tags_list clearfix">
+                            <li class="tag_item"><a href="#">차박</a></li>
+                            <li class="tag_item"><a href="#">오지캠핑</a></li>
+                            <li class="tag_item"><a href="#">오토캠핑장</a></li>
+                            <li class="tag_item"><a href="#">카라반</a></li>
+                            <li class="tag_item"><a href="#">캠핑카</a></li>
+                            <li class="tag_item"><a href="#">글램핑</a></li>
+                            <li class="tag_item"><a href="#">이부분은 검색쿼리로 링크</a></li>
+                        </ul>
                     </div>
                 </div>
 
@@ -1460,11 +1731,12 @@
                                 </li>
                             </ul>
                         </div>
+
                     </div>
                 </div>
-
             </div>
         </div>
+
     </footer>
 
     <!-- Copyright -->
@@ -1493,24 +1765,20 @@
                             <!--                                <li class="footer_nav_item"><a href="contact.html">contact</a></li>-->
                             <!--                            </ul>-->
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
-
+</div>
 <!-- 모달 시작! -->
-
-
 <!-- Login Modal -->
-
 <div class="modal fade" tabindex="-1" id="login" aria-labelledby="loginModalLabel" aria-hidden="true">
 
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-
             <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title">로그인</h4>
@@ -1518,11 +1786,12 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-
             <!-- Modal body -->
             <div class="modal-body">
 
+
                 <form action="/member/login" method="post">
+
                     <div class="form-group">
                         <label for="loginId" style="margin-left: 200px">ID </label> <br>
                         <input type="text" class="form-control" id="loginId" placeholder="Enter ID" name="memberEmail"
@@ -1533,6 +1802,7 @@
                         <input type="password" class="form-control" id="loginPw" placeholder="Enter Password"
                                name="memberPw" required>
                     </div>
+
                     <button type="submit" class="btn btn-primary" style="margin-left:200px">로그인</button>
                     <br>
 
@@ -1542,13 +1812,14 @@
                         <a href="https://kauth.kakao.com/oauth/authorize?client_id=49e217f552e2a1352d3462543bc0a458&redirect_uri=http://localhost:8098/kakaologin&response_type=code">
                             <img src="/images/kakao_login_medium_narrow.png">
                         </a>
+
                     </span><br>
 
                     <a href="#" data-toggle="modal" data-target="#findPw" data-dismiss="modal">비밀번호 찾기</a><br>
                     <a href="#" data-toggle="modal" data-target="#signin" data-dismiss="modal">회원가입</a><br>
+
                 </div>
             </div>
-
             <!-- Modal footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -1561,7 +1832,6 @@
      aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog ">
         <div class="modal-content">
-
             <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title">회원가입</h4>
@@ -1569,80 +1839,87 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-
             <!-- Modal body -->
 
-            <div class="modal-body">
+            <div>
+                <div class="modal-body">
+                    <form action="/member/save" method="post">
+                        <div class="form-group">
+                            <label for="registerEmail">이메일 </label> <br>
+                            <input type="text" class="form-control" id="registerEmail" placeholder="이메일을 입력해주세요." name="memberEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPw">비밀번호 </label>
+                            <input type="password" class="form-control" id="registerPw" placeholder="비밀번호를 입력해주세요." name="memberPW" required>
+                            <input type="password" class="form-control" id="registerPwCheck" placeholder="비밀번호를 다시 입력해주세요."  required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPhone">핸드폰 </label> <br>
+                            <input type="text" class="form-control" id="registerPhone" placeholder="전화번호를 입력해주세요." name="memberPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPhone">주소</label> <br>
+                            <input type="text" id="sample6_postcode" placeholder="우편번호">
+                            <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+                            <input type="text" id="sample6_address" placeholder="주소"><br>
+                            <input type="text" id="sample6_detailAddress" placeholder="상세주소">
+                            <input type="text" id="sample6_extraAddress" placeholder="참고항목">
+                            <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+                            <script>
+                                function sample6_execDaumPostcode() {
+                                    new daum.Postcode({
+                                        oncomplete: function(data) {
+                                            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+                                            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                                            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                                            var addr = ''; // 주소 변수
+                                            var extraAddr = ''; // 참고항목 변수
+                                            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                                            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                                                addr = data.roadAddress;
+                                            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                                                addr = data.jibunAddress;
+                                            }
+                                            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                                            if(data.userSelectedType === 'R'){
+                                                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                                                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                                                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                                                    extraAddr += data.bname;
+                                                }
+                                                // 건물명이 있고, 공동주택일 경우 추가한다.
+                                                if(data.buildingName !== '' && data.apartment === 'Y'){
+                                                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                                                }
+                                                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                                                if(extraAddr !== ''){
+                                                    extraAddr = ' (' + extraAddr + ')';
+                                                }
+                                                // 조합된 참고항목을 해당 필드에 넣는다.
+                                                document.getElementById("sample6_extraAddress").value = extraAddr;
+                                            } else {
+                                                document.getElementById("sample6_extraAddress").value = '';
 
-                <form action="/member/save" method="post">
-                    <div class="form-group">
-                        <label for="registerEmail">이메일 </label> <br>
-                        <input type="text" class="form-control" id="registerEmail" placeholder="이메일을 입력해주세요."
-                               name="memberEmail" required>
-
-                    </div>
-                    <div class="form-group">
-                        <label for="registerPw">비밀번호 </label>
-                        <input type="password" class="form-control" id="registerPw" placeholder="비밀번호를 입력해주세요."
-                               name="memberPw" required>
-                        <input type="password" class="form-control" id="registerPwCheck"
-                               placeholder="비밀번호를 다시 입력해주세요." required>
-
-                    </div>
-                    <div class="form-group">
-                        <label for="registerPhone">핸드폰 </label> <br>
-                        <input type="text" class="form-control" id="registerPhone" placeholder="전화번호를 입력해주세요."
-                               name="memberPhone" required>
-
-                    </div>
-                    <div class="form-group">
-                        <label for="registerPhone">주소</label> <br>
-                        <input type="text" id="sample6_postcode" placeholder="우편번호">
-                        <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-                        <input type="text" id="sample6_address" placeholder="주소"><br>
-                        <input type="text" id="sample6_detailAddress" placeholder="상세주소">
-                        <input type="text" id="sample6_extraAddress" placeholder="참고항목">
-
-                        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-                        <script>
-                            function sample6_execDaumPostcode() {
-                                new daum.Postcode({
-                                    oncomplete: function (data) {
-                                        // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-                                        // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                                        // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                                        var addr = ''; // 주소 변수
-                                        var extraAddr = ''; // 참고항목 변수
-
-                                        //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                                        if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                                            addr = data.roadAddress;
-                                        } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                                            addr = data.jibunAddress;
+                                            }
+                                            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                                            document.getElementById('sample6_postcode').value = data.zonecode;
+                                            document.getElementById("sample6_address").value = addr;
+                                            // 커서를 상세주소 필드로 이동한다.
+                                            document.getElementById("sample6_detailAddress").focus();
                                         }
 
-                                        // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-                                        if (data.userSelectedType === 'R') {
-                                            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                                            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                                            if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
-                                                extraAddr += data.bname;
-                                            }
-                                            // 건물명이 있고, 공동주택일 경우 추가한다.
-                                            if (data.buildingName !== '' && data.apartment === 'Y') {
-                                                extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                                            }
-                                            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                                            if (extraAddr !== '') {
-                                                extraAddr = ' (' + extraAddr + ')';
-                                            }
-                                            // 조합된 참고항목을 해당 필드에 넣는다.
-                                            document.getElementById("sample6_extraAddress").value = extraAddr;
+                                    }).open();
+                                }
+                            </script>
+                        </div>
+                </div>
+                <div class="form-group" style="margin-left: 130px">
+                    <label style="margin-left: 80px">약관동의 </label> <br>
+                    <sapn  href="#"> 개인정보 이용수집동의(필수) <input type="checkbox"  id="check1"  name="check1"  required></sapn><br>
+                    <sapn  href="#">  강캠핑 이용약관 동의(필수) <input type="checkbox" href="#"  id="check2"  name="check2"  required></sapn>
+                </div>
+                </form>
 
-                                        } else {
-                                            document.getElementById("sample6_extraAddress").value = '';
-                                        }
 
                                         // 우편번호와 주소 정보를 해당 필드에 넣는다.
                                         document.getElementById('sample6_postcode').value = data.zonecode;
@@ -1665,73 +1942,69 @@
                                                                required></sapn>
                     </div>
 
-            </div>
 
+            </div>
             <!-- Modal footer -->
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" style="margin-left:20%;">등록</button>
-
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
             </div>
             </form>
         </div>
     </div>
 </div>
-    <!-- findpw Modal -->
-    <div class="modal fade" id="findPw" data-backdrop="static" data-keyboard="false" tabindex="-1"
-         aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">비밀번호 찾기</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <!-- Modal body -->
-                <div class="modal-body">
 
-                    <div class="form-group">
-                        <label for="memberEmail">이메일을 입력해주세요 </label> <br>
-                        <input type="text" class="form-control" id="memberEmail" th:onblur="emailCheck()"
-                               placeholder="Enter Your Email" required>
-                        <form action="/member/update" method="get" name="pwUpdate">
-                            <input type="text" id="members" name="memberId">
-                            <input type="hidden" class="form-control" id="codeInput" placeholder="이메일 인증코드를 입력해주세요."
-                                   required>
-                            <input type="hidden" th:onclick="codeCheck()" id="check" value="코드확인">
-                        </form>
-                    </div>
+<!-- findpw Modal -->
+<div class="modal fade" id="findPw" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">비밀번호 찾기</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="memberEmail">이메일을 입력해주세요 </label> <br>
+                    <input type="text" class="form-control" id="memberEmail" th:onblur="emailCheck()" placeholder="Enter Your Email" required>
+                    <form action="/member/update" method="get" name="pwUpdate">
+                        <input type="text" id="members" name="memberId">
+                        <input type="hidden" class="form-control" id="codeInput" placeholder="이메일 인증코드를 입력해주세요."required>
+                        <input type="hidden" th:onclick="codeCheck()" id="check" value="코드확인">
                 </div>
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <input type="button" id="emailSend" th:onclick="codeSend()" class="btn btn-primary"
-                           style="margin-left:20%;" value="전송하기" readonly>
-                    <input type="button" id="emailCancel" class="btn btn-secondary" data-dismiss="modal" value="취소"
-                           readonly>
-                </div>
+                </form>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <input type="button" id="emailSend" th:onclick="codeSend()" class="btn btn-primary" style="margin-left:20%;" value="전송하기" readonly>
+                <input type="button" id="emailCancel" class="btn btn-secondary" data-dismiss="modal" value="취소" readonly>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" id="send" class="btn btn-primary" style="margin-left:20%;" value="전송하기" readonly>
+                <input type="hidden" id="cancel"  class="btn btn-primary" data-dismiss="modal" value="취소" readonly>
             </div>
         </div>
+        </form>
     </div>
-
-    <script>
-        var myModal = document.getElementById('login')
-        var myInput = document.getElementById('loginId')
-
-        myModal.addEventListener('shown.bs.modal', function () {
-            myInput.focus()
-        })
-    </script>
-    <!-- 모달 끝 -->
-
-    <script src="/js/jquery-3.2.1.min.js"></script>
-    <script src="/styles/bootstrap4/popper.js"></script>
-    <script src="/styles/bootstrap4/bootstrap.min.js"></script>
-    <script src="/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-    <script src="/plugins/easing/easing.js"></script>
-    <script src="/js/custom.js"></script>
+</div>
+</div>
+<script>
+    var myModal = document.getElementById('login')
+    var myInput = document.getElementById('loginId')
+    myModal.addEventListener('shown.bs.modal', function () {
+        myInput.focus()
+    })
+</script>
+<!-- 모달 끝 -->
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/styles/bootstrap4/popper.js"></script>
+<script src="/styles/bootstrap4/bootstrap.min.js"></script>
+<script src="/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="/plugins/easing/easing.js"></script>
+<script src="/js/custom.js"></script>
 
 </body>
-
 </html>
