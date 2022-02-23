@@ -98,9 +98,10 @@ public class SearchController {
     @GetMapping("/searchDetail/{campingName}")
     public String detail(@PathVariable String campingName,Model model){
         System.out.println("searchController");
+
          CampingDetailDTO campingDetailDTO = cs.findByCampingName(campingName);
          model.addAttribute("campingDetail",campingDetailDTO);
-
+        System.out.println(campingDetailDTO.toString());
 
 
          return "single_listing";

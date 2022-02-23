@@ -1,13 +1,8 @@
 package com.icia.gangcamping.dto;
 
-import com.icia.gangcamping.entity.CampingEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
+import lombok.NoArgsConstructor;
 
 @Data
 public class RoomSaveDTO {
@@ -18,4 +13,18 @@ public class RoomSaveDTO {
     private String roomInfo;
     private String roomFileName;
     private String roomCategory;
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class MemberUpdateDTO {
+
+        private Long memberId;
+        private String memberEmail;
+        private String memberPw;
+        private String memberName;
+        private String memberAddr;
+        private String memberPhone;
+
+    }
 }

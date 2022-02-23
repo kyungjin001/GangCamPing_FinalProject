@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/camping")
 public class CampingController {
 
+    @GetMapping("/reservation")
+    public String reservation(){
+    return null;
+    }
+
     @GetMapping("/campingPay")
     public String campingPay_form(){
         return "/camping/campingPay";

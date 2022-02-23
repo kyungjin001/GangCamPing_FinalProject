@@ -98,6 +98,7 @@ public class ApiController {
                 dto.setAddr((String) item1.get("addr1"));
                 dto.setTel((String) item1.get("tel"));
                 dto.setName((String) item1.get("facltNm"));
+
                 this.saveCampingDB(item1);
                 list.add(dto);
             }

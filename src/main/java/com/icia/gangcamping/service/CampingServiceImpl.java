@@ -36,7 +36,8 @@ public class CampingServiceImpl implements CampingService {
     public CampingDetailDTO findByCampingName(String campingName) {
         CampingEntity entity = campingRepository.findByCampingName(campingName);
 
-        System.out.println(campingName);
+        System.out.println(campingName+"222222222222222222");
+        System.out.println(entity.toString());
         CampingDetailDTO campingDetailDTO = CampingDetailDTO.toCampingDetailDTO(entity);
 
         return campingDetailDTO;
