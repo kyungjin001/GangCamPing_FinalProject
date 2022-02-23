@@ -107,5 +107,20 @@ public class SearchController {
          return "single_listing";
     }
 
+    @GetMapping("/random")
+    public @ResponseBody List<CampingDetailDTO> random(Model model){
+        List campingDetailDTOList = new ArrayList();
+        for(int i=0;i<3;i++) {
+            CampingDetailDTO campingDetailDTO = CampingDetailDTO.toCampingDetailDTO(cs.findById((int) (Math.random() * 1000)).get());
+            if(campingDetailDTO.getCampingFileName()==null){
+                i= i-1;
+            }else {
+                campingDetailDTOList.add(i,campingDetailDTO);
+            }
+        }
+        model.addAttribute("resultList",campingDetailDTOList);
+
+         return campingDetailDTOList;
+    }
 
 }
