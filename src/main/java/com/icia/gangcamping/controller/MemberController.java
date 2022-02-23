@@ -31,16 +31,17 @@ public class MemberController {
 
     @PostMapping("save")
     public String save(@Validated @ModelAttribute("member") MemberSaveDTO memberSaveDTO, BindingResult bindingResult) throws IOException {
-        if(bindingResult.hasErrors()) {
+       /* if(bindingResult.hasErrors()) {
             return "member/save";
-        }
-        try {
+        }*/
+        /*try {
             Long memberId = ms.save(memberSaveDTO);
         } catch (IllegalStateException e) {
             bindingResult.reject("emailCheck", e.getMessage());
-            return "member/save";
-        }
-        return "redirect:/member/login";
+            return "index";
+        }*/
+        Long memberId = ms.save(memberSaveDTO);
+        return "index";
     }
 
 
@@ -57,7 +58,7 @@ public class MemberController {
             session.setAttribute(LOGIN_EMAIL, memberLoginDTO.getMemberEmail());
             Long loginId = ms.findByMemberId(memberLoginDTO.getMemberEmail());
             session.setAttribute("loginId", loginId);
-            // session.setAttribute("loginEmail", memberLoginDTO.getMemberEmail());
+             session.setAttribute("loginEmail", memberLoginDTO.getMemberEmail());
             System.out.println();
             System.out.println(loginId);
             return "index";
@@ -66,6 +67,7 @@ public class MemberController {
             return "index";
         }
     }
+
 
     // 이메일 중복 체크
     @PostMapping("emailDp")
@@ -76,13 +78,14 @@ public class MemberController {
         return result;
     }
 
-    //마이페이지
-    @GetMapping("mypage")
-    public String mypage() {
-
-        return "member/mypage";
-
-    }
+//    //마이페이지
+//    @GetMapping("{memberId}")
+//    public String findById(@PathVariable("memberId") Long memberId, Model model) {
+//        MemberDetailDTO member = ms.findById(memberId);
+//        model.addAttribute("member", member);
+//        return "member/mypage";
+//
+//    }
 
     @GetMapping("update")
     public String updateForm(Model model, HttpSession session) {
