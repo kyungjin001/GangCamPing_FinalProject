@@ -31,16 +31,17 @@ public class MemberController {
 
     @PostMapping("save")
     public String save(@Validated @ModelAttribute("member") MemberSaveDTO memberSaveDTO, BindingResult bindingResult) throws IOException {
-        if(bindingResult.hasErrors()) {
+       /* if(bindingResult.hasErrors()) {
             return "member/save";
-        }
-        try {
+        }*/
+        /*try {
             Long memberId = ms.save(memberSaveDTO);
         } catch (IllegalStateException e) {
             bindingResult.reject("emailCheck", e.getMessage());
-            return "member/save";
-        }
-        return "redirect:/member/login";
+            return "index";
+        }*/
+        Long memberId = ms.save(memberSaveDTO);
+        return "index";
     }
 
 
@@ -67,6 +68,7 @@ public class MemberController {
         }
     }
 
+
     // 이메일 중복 체크
     @PostMapping("emailDp")
     @ResponseBody
@@ -77,9 +79,10 @@ public class MemberController {
     }
 
     //마이페이지
-    @GetMapping("mypage")
-    public String mypage() {
-
+    @GetMapping("{memberId}")
+    public String findById(@PathVariable("memberId") Long memberId, Model model) {
+        MemberDetailDTO member = ms.findById(memberId);
+        model.addAttribute("member", member);
         return "member/mypage";
 
     }

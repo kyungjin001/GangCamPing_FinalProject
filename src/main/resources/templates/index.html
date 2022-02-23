@@ -138,7 +138,10 @@
                             <!--                            </ul>-->
                         </div>
                         <div class="user_box ml-auto">
-
+                            <div class="user_box_login user_box_link">	<a class="nav-link" th:href="@{|/member/${session.loginId}|}"
+                                                                             style="font-size: 15px">
+                                myPage</a>
+                            </div>
 
                            <span th:if="(${session.loginEmail}==null) and (${session.userId}==null)">
                             <div class="user_box_login user_box_link">	<a class="nav-link" href="#"
@@ -165,8 +168,6 @@
                                    LogOut</a>
                                </div>
                             </span>
-                            <div class="user_box_register user_box_link"><a href="/shopping/goods">Goods</a></div>
-
 
                         </div>
                     </div>
@@ -180,7 +181,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col main_nav_col d-flex flex-row align-items-center justify-content-start">
-
+                        <div class="logo_container">
+                            <div class="logo"><a href="/"><img src="/images/logo.png" alt=""></a></div>
+                        </div>
                         <div class="main_nav_container ml-auto">
                             <ul class="main_nav_list">
                                 <li class="main_nav_item"><a href="/">home</a></li>
@@ -234,7 +237,7 @@
             <div class="menu_close_container">
                 <div class="menu_close"></div>
             </div>
-            <div class="logo menu_logo"><a href="/"><img src="/images/logo.png" alt=""></a></div>
+            <div class="logo menu_logo"><a href="#"><img src="/images/logo.png" alt=""></a></div>
             <ul>
                 <li class="menu_item"><a href="#">home</a></li>
                 <li class="menu_item"><a href="about.html">about us</a></li>
@@ -1340,7 +1343,10 @@
                 <div class="col-lg-3 footer_column">
                     <div class="footer_col">
                         <div class="footer_content footer_about">
-
+                            <div class="logo_container footer_logo">
+                                <div class="logo"><a href="#"><img src="/images/logo.png" alt="">
+                                    <br></a></div>
+                            </div>
                             <p class="footer_about_text"><br>
                                 강캠핑입니다.
                                 여기는 프로젝트에 관한
@@ -1579,7 +1585,7 @@
                     <div class="form-group">
                         <label for="registerPw">비밀번호 </label>
                         <input type="password" class="form-control" id="registerPw" placeholder="비밀번호를 입력해주세요."
-                               name="memberPW" required>
+                               name="memberPw" required>
                         <input type="password" class="form-control" id="registerPwCheck"
                                placeholder="비밀번호를 다시 입력해주세요." required>
 
@@ -1659,6 +1665,7 @@
                         <sapn href="#"> 강캠핑 이용약관 동의(필수) <input type="checkbox" href="#" id="check2" name="check2"
                                                                required></sapn>
                     </div>
+                </form>
             </div>
 
             <!-- Modal footer -->
@@ -1667,7 +1674,6 @@
 
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
             </div>
-            </form>
 
         </div>
     </div>

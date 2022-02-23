@@ -9,6 +9,7 @@ import com.icia.gangcamping.entity.CampingDetailEntity;
 import com.icia.gangcamping.entity.CampingEntity;
 import com.icia.gangcamping.service.CampingService;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.codec.binary.StringUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -97,6 +98,7 @@ public class ApiController {
                 dto.setAddr((String) item1.get("addr1"));
                 dto.setTel((String) item1.get("tel"));
                 dto.setName((String) item1.get("facltNm"));
+
                 this.saveCampingDB(item1);
                 list.add(dto);
             }
@@ -189,7 +191,9 @@ public class ApiController {
             campingSaveDTO.setCampingAddr((String) item.get("addr1"));
            System.out.println((String) item.get("addr1")+item.get(("addr2")));
             campingSaveDTO.setCampingInfo((String) item.get("lineIntro"));
-            campingSaveDTO.setCampingName((String) item.get("facltNm"));
+            String campingName = (String) item.get("facltNm");
+            String name = campingName.replace(" ","");
+            campingSaveDTO.setCampingName(name);
             campingSaveDTO.setCampingLikeCount(0);
             campingSaveDTO.setCampingFileName((String) item.get("firstImageUrl"));
             CampingEntity entity = new CampingEntity();

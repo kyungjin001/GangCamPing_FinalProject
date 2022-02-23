@@ -1,10 +1,7 @@
 package com.icia.gangcamping.service;
 
 
-import com.icia.gangcamping.dto.MemberDetailDTO;
-import com.icia.gangcamping.dto.MemberLoginDTO;
-import com.icia.gangcamping.dto.MemberSaveDTO;
-import com.icia.gangcamping.dto.MemberUpdateDTO;
+import com.icia.gangcamping.dto.*;
 import com.icia.gangcamping.entity.MemberEntity;
 
 import java.util.Optional;
@@ -30,6 +27,7 @@ public interface MemberService {
 
 
     Long update(MemberUpdateDTO memberUpdateDTO);
+
 
     String emailDp(String memberEmail);
 }

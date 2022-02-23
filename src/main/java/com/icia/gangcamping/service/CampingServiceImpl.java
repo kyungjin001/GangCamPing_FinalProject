@@ -1,5 +1,6 @@
 package com.icia.gangcamping.service;
 
+import com.icia.gangcamping.dto.CampingDetailDTO;
 import com.icia.gangcamping.entity.CampingDetailEntity;
 import com.icia.gangcamping.entity.CampingEntity;
 import com.icia.gangcamping.repository.CampingDetailRepository;
@@ -29,5 +30,16 @@ public class CampingServiceImpl implements CampingService {
     @Override
     public void saveDetail(CampingDetailEntity entity) {
         cdr.save(entity);
+    }
+
+    @Override
+    public CampingDetailDTO findByCampingName(String campingName) {
+        CampingEntity entity = campingRepository.findByCampingName(campingName);
+
+        System.out.println(campingName+"222222222222222222");
+        System.out.println(entity.toString());
+        CampingDetailDTO campingDetailDTO = CampingDetailDTO.toCampingDetailDTO(entity);
+
+        return campingDetailDTO;
     }
 }
