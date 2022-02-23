@@ -10,16 +10,14 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class OrderSaveDTO {
+public class CommentSaveDTO {
 
 
-    private Long orderId;
     private Long memberId;
-    private int orderUnitNum;
-    private int orderTotalFee;
-    private String orderPayType;
-    private LocalDateTime orderTime;
-
+    private Long productId;
+    private String commentWriter;
+    private String questionContents;
+    private LocalDateTime commentTime;
 
 
 }
