@@ -26,12 +26,13 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public MemberEntity findByMemberEmail(String memberEmail) {
-        return null;
+        return mr.findByMemberEmail(memberEmail);
     }
 
     @Override
     public Optional<MemberEntity> findByMemberId(Long memberId) {
-        return Optional.empty();
+
+        return mr.findById(memberId);
     }
 
     @Override

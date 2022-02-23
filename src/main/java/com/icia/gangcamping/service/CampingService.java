@@ -17,4 +17,6 @@ public interface CampingService {
     CampingDetailDTO findByCampingName(String campingName);
 
     List findAll();
+
+    List findTop3AllOrderByCampingLikeCount();
 }

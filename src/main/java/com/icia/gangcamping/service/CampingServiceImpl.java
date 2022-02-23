@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,5 +48,20 @@ public class CampingServiceImpl implements CampingService {
     @Override
     public List findAll() {
         return campingRepository.findAll(Sort.by(Sort.Direction.DESC,"CampingName"));
+    }
+
+    @Override
+    public List<CampingDetailDTO> findTop3AllOrderByCampingLikeCount() {
+        List<CampingEntity> list = campingRepository.findTop4ByOrderByCampingLikeCountAsc();
+        List<CampingDetailDTO> dtoList = new ArrayList<>();
+        for( CampingEntity entity : list){
+            CampingDetailDTO camping = CampingDetailDTO.toCampingDetailDTO(entity);
+            if(camping.getCampingFileName()==null){
+                System.out.println("service null");
+                camping.setCampingFileName("/images/noImage.jpg");
+            }
+            dtoList.add(camping);
+        }
+        return dtoList;
     }
 }

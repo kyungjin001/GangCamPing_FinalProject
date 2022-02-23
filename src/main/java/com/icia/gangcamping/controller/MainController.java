@@ -60,9 +60,10 @@ public class MainController {
                 campingDetailDTOList.add(campingDetailDTO);
             }
         }
-        System.out.println(campingDetailDTOList);
-        model.addAttribute("resultList",campingDetailDTOList);
 
+        List<CampingDetailDTO> recommendList = cs.findTop3AllOrderByCampingLikeCount();
+        model.addAttribute("resultList",campingDetailDTOList);
+        model.addAttribute("recommendList",recommendList);
 
         return "index";
     }

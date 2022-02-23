@@ -279,14 +279,14 @@
 		</thead>
 		<tbody>
 		<tr th:each="book: ${bookList}">
-			<td class="tg-80qx" th:text="${book.bookId}"></td>
-			<td class="tg-80qx" th:text="${book.memberId}></td>
-			<td class="tg-80qx" th:text="${book.campingId}></td>
-			<td class="tg-80qx" th:text="${book.roomId}></td>
-			<td class="tg-80qx" th:text="${book.bookCheckIn}></td>
-			<td class="tg-80qx" th:text="${book.bookCheckOut}></td>
-			<td class="tg-80qx" th:text="${book.bookPeriod}></td>
-			<td class="tg-80qx" th:text="${book.bookPrice}></td>
+			<td class="tg-80qx" ><a th:text="${book.bookId}" th:href="@{|/booking/bookDetail/${book.bookId}|}"></a></td>
+			<td class="tg-80qx" th:text="${book.memberId}"></td>
+			<td class="tg-80qx" th:text="${book.campingId}"></td>
+			<td class="tg-80qx" th:text="${book.roomId}"></td>
+			<td class="tg-80qx" th:text="${book.bookCheckIn}"></td>
+			<td class="tg-80qx" th:text="${book.bookCheckOut}"></td>
+			<td class="tg-80qx" th:text="${book.bookPeriod}"></td>
+			<td class="tg-80qx" th:text="${book.bookPrice}"></td>
 		</tr>
 		<tr>
 			<td class="tg-80qx"></td>
