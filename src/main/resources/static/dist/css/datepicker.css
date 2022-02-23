@@ -21,6 +21,8 @@
 /* -------------------------------------------------
     Datepicker cells
    ------------------------------------------------- */
+
+
 .datepicker--cells {
   display: -webkit-flex;
   display: -ms-flexbox;
