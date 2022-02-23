@@ -63,7 +63,7 @@ public class MemberController {
             session.setAttribute(LOGIN_EMAIL, memberLoginDTO.getMemberEmail());
             Long loginId = ms.findByMemberId(memberLoginDTO.getMemberEmail());
             session.setAttribute("loginId", loginId);
-            session.setAttribute("loginEmail", LOGIN_EMAIL);
+            // session.setAttribute("loginEmail", memberLoginDTO.getMemberEmail());
             System.out.println();
             System.out.println(loginId);
             return "index";
