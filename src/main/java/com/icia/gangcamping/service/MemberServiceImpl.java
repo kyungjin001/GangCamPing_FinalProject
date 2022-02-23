@@ -38,7 +38,7 @@ public class MemberServiceImpl implements MemberService{
     public boolean login(MemberLoginDTO memberLoginDTO) {
         MemberEntity memberEntity = mr.findByMemberEmail(memberLoginDTO.getMemberEmail());
         if(memberEntity != null){
-            if (memberEntity.getMemberPw().equals(memberLoginDTO.getMemberPW())){
+            if (memberEntity.getMemberPw().equals(memberLoginDTO.getMemberPw())){
                 return true;
             }else {
                 return false;
@@ -63,11 +63,9 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public MemberDetailDTO findById(Long memberId) {
-        MemberEntity memberEntity = mr.findById(memberId).get();
-        MemberDetailDTO memberDetailDTO = MemberDetailDTO.toMemberDetailDTO(memberEntity);
+    public Optional<MemberEntity> findById(Long memberId) {
 
-        return memberDetailDTO;
+        return mr.findById(memberId);
     }
 
     @Override

@@ -1,11 +1,38 @@
 package com.icia.gangcamping.controller;
 
+import com.icia.gangcamping.dto.CommentDetailDTO;
+import com.icia.gangcamping.dto.CommentSaveDTO;
+import com.icia.gangcamping.service.CommentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
-@RequiredArgsConstructor
 @RequestMapping("/comment")
+@RequiredArgsConstructor //의존성주입
 public class CommentController {
+    private final CommentService cs;
+    @PostMapping("/save")
+    public @ResponseBody List<CommentDetailDTO> save(@ModelAttribute CommentSaveDTO commentSaveDTO){
+        Long commentId = cs.save(commentSaveDTO);
+        List<CommentDetailDTO> commentList = cs.findAll(commentSaveDTO.getProductId());
+        return commentList;
+    }
+
+    //댓글삭제
+    @DeleteMapping("{questionId}")
+    public ResponseEntity deleteById(@PathVariable Long questionId) {
+        cs.deleteById(questionId);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
 }
+
+
+
+
+

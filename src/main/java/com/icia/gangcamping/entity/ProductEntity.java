@@ -43,8 +43,6 @@ public class ProductEntity {
     @OneToMany(mappedBy = "productEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<CartEntity> cartEntityList = new ArrayList<>();
     @OneToMany(mappedBy = "productEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<OrderEntity> orderEntityList = new ArrayList<>();
-    @OneToMany(mappedBy = "productEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<ShoppingLikeEntity> shoppingLikeEntityArrayList = new ArrayList<>();
     @OneToMany(mappedBy = "productEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<QuestionEntity> questionEntityList = new ArrayList<>();
