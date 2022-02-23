@@ -5,6 +5,7 @@ import com.icia.gangcamping.dto.*;
 import com.icia.gangcamping.entity.CartEntity;
 import com.icia.gangcamping.entity.MemberEntity;
 import com.icia.gangcamping.entity.ProductEntity;
+import com.icia.gangcamping.repository.MemberRepository;
 import com.icia.gangcamping.service.MemberService;
 import com.icia.gangcamping.service.OrderService;
 import com.icia.gangcamping.service.ShoppingService;
@@ -33,7 +34,7 @@ public class ShoppingController {
      private final OrderService os;
     private final MemberService ms;
     private final HttpSession session;
-
+    private final MemberRepository mr;
 
 
     //상품목록
@@ -169,7 +170,7 @@ public class ShoppingController {
 
     @GetMapping("order")
     public String order(Model model,OrderDetailDTO orderDetailDTO){
-        Optional<MemberEntity> memberEntity = ms.findById(orderDetailDTO.getMemberId());
+        Optional<MemberEntity> memberEntity = mr.findById(orderDetailDTO.getMemberId());
         List<CartDetailDTO> cartDetailDTOList = ss.findByMemberEntity(memberEntity.get());
         model.addAttribute("cartList", cartDetailDTOList);
             int orderUnitNum = 0;

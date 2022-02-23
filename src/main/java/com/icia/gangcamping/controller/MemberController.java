@@ -67,10 +67,10 @@ public class MemberController {
             // session.setAttribute("loginEmail", memberLoginDTO.getMemberEmail());
             System.out.println();
             System.out.println(loginId);
-            return "index";
+            return "redirect:/";
         } else {
             System.out.println("???");
-            return "index";
+            return "redirect:/";
         }
     }
 

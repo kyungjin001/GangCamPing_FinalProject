@@ -92,10 +92,5 @@ public class MemberServiceImpl implements MemberService{
         return null;
     }
 
-    @Override
-    public String emailDp(String memberEmail) {
-        return null;
-    }
-
 
 }
