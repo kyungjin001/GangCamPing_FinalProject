@@ -1,6 +1,7 @@
 package com.icia.gangcamping.entity;
 
 import com.icia.gangcamping.dto.MemberSaveDTO;
+import com.icia.gangcamping.dto.MemberUpdateAddrDTO;
 import com.icia.gangcamping.dto.MemberUpdateDTO;
 import lombok.*;
 
@@ -86,8 +87,16 @@ public class MemberEntity {
         memberEntity.setMemberEmail(memberUpdateDTO.getMemberEmail());
         memberEntity.setMemberPw(memberUpdateDTO.getMemberPw());
         memberEntity.setMemberName(memberUpdateDTO.getMemberName());
-        memberEntity.setMemberAddr(memberUpdateDTO.getMemberAddr());
         memberEntity.setMemberPhone(memberUpdateDTO.getMemberPhone());
+        memberEntity.setMemberAddr(memberUpdateDTO.getMemberAddr());
         return memberEntity;
     }
+
+    public static MemberEntity updateAddr(MemberUpdateAddrDTO memberUpdateAddrDTO) {
+        MemberEntity memberEntity = new MemberEntity();
+
+        memberEntity.setMemberAddr(memberUpdateAddrDTO.getMemberAddr());
+        return memberEntity;
+    }
+
 }

@@ -6,14 +6,10 @@ import com.icia.gangcamping.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-
-import static com.icia.gangcamping.common.SessionConst.LOGIN_EMAIL;
 
 
 @Controller
@@ -23,52 +19,54 @@ public class MemberController {
 
     private final MemberService ms;
 
-    @GetMapping("save")
-    public String saveForm(Model model) {
-        model.addAttribute("member", new MemberSaveDTO());
-        return "member/save";
-    }
+//    @GetMapping("save")
+//    public String saveForm(Model model) {
+//        model.addAttribute("member", new MemberSaveDTO());
+//        return "member/save";
+//    }
 
-    @PostMapping("save")
-    public String save(@Validated @ModelAttribute("member") MemberSaveDTO memberSaveDTO, BindingResult bindingResult) throws IOException {
-        if(bindingResult.hasErrors()) {
-            return "member/save";
-        }
-        try {
+    @PostMapping("/save")
+    public String save(@Validated @ModelAttribute("member") MemberSaveDTO memberSaveDTO) {
+
             Long memberId = ms.save(memberSaveDTO);
-        } catch (IllegalStateException e) {
-            bindingResult.reject("emailCheck", e.getMessage());
-            return "member/save";
-        }
-        return "redirect:/member/login";
+        return "index";
     }
 
-    @GetMapping("login")
-    public String loginForm(Model model) {
-        model.addAttribute("login", new MemberLoginDTO());
-        return "member/login";
-    }
+//    @PostMapping("save")
+//    public String save(@Validated @ModelAttribute("member") MemberSaveDTO memberSaveDTO, BindingResult bindingResult) throws IOException {
+//        if(bindingResult.hasErrors()) {
+//            return "member/save";
+//        }
+//        try {
+//            Long memberId = ms.save(memberSaveDTO);
+//        } catch (IllegalStateException e) {
+//            bindingResult.reject("emailCheck", e.getMessage());
+//            return "member/save";
+//        }
+//        return "redirect:/member/login";
+//    }
+
+//    @GetMapping("/login")
+//    public String loginForm(Model model) {
+//        model.addAttribute("login", new MemberLoginDTO());
+//        return "login_!";
+//    }
 
     // 로그인 처리
-    @PostMapping("login")
-    public String login(@Validated @ModelAttribute("login") MemberLoginDTO memberLoginDTO, BindingResult bindingResult, HttpSession session){
+    @PostMapping("/login")
+    public String login(@Validated @ModelAttribute("login") MemberLoginDTO memberLoginDTO, HttpSession session){
 
-        if(bindingResult.hasErrors()){
-            return "member/login";
-        }
         boolean loginResult = ms.login(memberLoginDTO);
         if(ms.login(memberLoginDTO)){
-            session.setAttribute("memberEmail", memberLoginDTO.getMemberEmail());
+            session.setAttribute("loginEmail", memberLoginDTO.getMemberEmail());
             return "member/mypage";
         } else {
-            // 로그인 결과를 글로벌 오류(Global Error) : 전체적인 오류를 체크하는 것
-            bindingResult.reject("loginFail", "이메일 또는 비밀번호가 틀립니다!");
-            return "member/login";
+            return "index";
         }
     }
 
     // 이메일 중복 체크
-    @PostMapping("emailDp")
+    @PostMapping("/emailDp")
     @ResponseBody
     public String emailDp(@RequestParam("memberEmail") String memberEmail) {
         System.out.println("emailDP() :" + memberEmail);
@@ -77,75 +75,84 @@ public class MemberController {
     }
 
     //마이페이지
-    @GetMapping("mypage")
+    @GetMapping("/mypage")
     public String mypage() {
 
         return "member/mypage";
 
     }
 
-    @GetMapping("update")
+    @GetMapping("/update")
     public String updateForm(Model model, HttpSession session) {
-        System.out.println(session.getAttribute("memberEmail"));
-        String memberEmail = (String) session.getAttribute("memberEmail");
+        System.out.println(session.getAttribute("loginEmail"));
+        String memberEmail = (String) session.getAttribute("loginEmail");
         MemberDetailDTO member = ms.findByEmail(memberEmail);
         model.addAttribute("member", member);
         System.out.println(member);
         return "member/update";
     }
 
+    @PostMapping("/updateAddr")
+    public String updateAddr(@RequestParam String memberAddr, MemberUpdateAddrDTO memberUpdateAddrDTO){
+        Long memberId = ms.updateAddr(memberUpdateAddrDTO);
+        return "member/update";
+    }
+
+
 
     //로그아웃
-    @GetMapping("logout")
+    @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
         return "index";
     }
 
-    @GetMapping("bookList")
+    @GetMapping("/bookList")
     public String bookList() {
         return "member/bookList";
     }
 
 
-    @GetMapping("delete")
+    @GetMapping("/delete")
     public String delete() {
         return "member/delete";
 
     }
 
-    @GetMapping("shoppingDetail")
+    @GetMapping("/shoppingDetail")
     public String shoppingDetail() {
         return "member/shoppingDetail";
 
     }
 
 
-    @GetMapping("bookDetail")
+    @GetMapping("/bookDetail")
     public String bookDetail() {
         return "member/bookDetail";
 
     }
 
-    @GetMapping("addrChange")
+    @GetMapping("/addrChange")
     public String addrChange() {
         return "member/addrChange";
 
     }
 
 
-    @GetMapping("shoppingList")
+    @GetMapping("/shoppingList")
     public String shoppingList() {
         return "member/shoppingList";
     }
 
 
-    @GetMapping("shoppingLike")
+    @GetMapping("/shoppingLike")
     public String shoppingLike() {
         return "member/shoppingLike";
     }
 
-
-
+    @GetMapping("/confirmPW")
+    public String confirmPW() {
+        return "member/confirmPW";
+    }
 
 }
