@@ -128,16 +128,10 @@
                     <div class="col d-flex flex-row">
                         <div class="phone"></div>
                         <div class="social">
-                            <!--                            <ul class="social_list">-->
-                            <!--                                <li class="social_list_item"><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>-->
-                            <!--                                <li class="social_list_item"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>-->
-                            <!--                                <li class="social_list_item"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
-                            <!--                                <li class="social_list_item"><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>-->
-                            <!--                                <li class="social_list_item"><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>-->
-                            <!--                                <li class="social_list_item"><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>-->
-                            <!--                            </ul>-->
+
                         </div>
                         <div class="user_box ml-auto">
+
                             <div class="user_box_login user_box_link">	<a class="nav-link" th:href="@{|/member/${session.loginId}|}"
                                                                              style="font-size: 15px">
                                 myPage</a>
@@ -187,7 +181,7 @@
                         <div class="main_nav_container ml-auto">
                             <ul class="main_nav_list">
                                 <li class="main_nav_item"><a href="/">home</a></li>
-                                <li class="main_nav_item"><a href="booking">booking</a></li>
+                                <li class="main_nav_item"><a href="/search/camping">booking</a></li>
                                 <li class="main_nav_item"><a href="/shopping/shopping">shopping</a></li>
                                 <li class="main_nav_item"><a href="about">about us</a></li>
                                 <li class="main_nav_item"><a href="contact">contact</a></li>
@@ -1020,7 +1014,6 @@
             <div class="row">
                 <div class="col text-center">
                     <h2 class="section_title">고객리뷰 베스트</h2>
-                    세션값 : <p th:text="${session['loginEmail']}">
                 </div>
             </div>
             <div class="row">
@@ -1523,7 +1516,7 @@
             <!-- Modal body -->
             <div class="modal-body">
 
-                <form action="member/login" method="post">
+                <form action="/member/login" method="post">
                     <div class="form-group">
                         <label for="loginId" style="margin-left: 200px">ID </label> <br>
                         <input type="text" class="form-control" id="loginId" placeholder="Enter ID" name="memberEmail"
@@ -1665,7 +1658,7 @@
                         <sapn href="#"> 강캠핑 이용약관 동의(필수) <input type="checkbox" href="#" id="check2" name="check2"
                                                                required></sapn>
                     </div>
-                </form>
+
             </div>
 
             <!-- Modal footer -->
@@ -1674,7 +1667,7 @@
 
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
             </div>
-
+            </form>
         </div>
     </div>
 </div>

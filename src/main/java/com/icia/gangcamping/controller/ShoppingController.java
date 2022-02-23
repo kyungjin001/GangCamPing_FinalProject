@@ -6,6 +6,7 @@ import com.icia.gangcamping.entity.CartEntity;
 import com.icia.gangcamping.entity.MemberEntity;
 import com.icia.gangcamping.entity.ProductEntity;
 import com.icia.gangcamping.service.CommentService;
+import com.icia.gangcamping.repository.MemberRepository;
 import com.icia.gangcamping.service.MemberService;
 import com.icia.gangcamping.service.OrderService;
 import com.icia.gangcamping.service.ShoppingService;
