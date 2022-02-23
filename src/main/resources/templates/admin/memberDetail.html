@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>memberDetail.html</title>
+    <style>
+        body {
+            margin:30px auto;
+        }
+
+        .menu-wrapper {
+            text-align: center;
+            padding: 50px 0;
+            background-color: white;
+        }
+        .menu {
+            width: 100px;
+            height: 30px;
+            line-height : 30px;
+            background-color: whitesmoke;
+            border : solid 1px;
+            color :brown;
+            font-size: 0.75rem;
+            text-align: center;
+            display: inline-block;
+            border-radius: 20%;
+        }
+    </style>
+</head>
+<body>
+<p style="text-align:center; color :brown";>관리자 페이지</p>
+<div class="menu-wrapper">
+    <div class="menu" onclick="location.href='/admin/bookList'" style="cursor: pointer;">예약관리</div>
+    <div class="menu" onclick="location.href='/admin/memberList'" style="cursor: pointer;">회원관리</div>
+    <div class="menu" onclick="location.href='/admin/findAll'" style="cursor: pointer;">상품관리</div>
+    <div class="menu" onclick="location.href='/admin/campingSaleList'" style="cursor: pointer;">매출통계</div>
+    <div class="menu" onclick="location.href='/admin/chatList'" style="cursor: pointer;">캠핑장문의</div>
+    <div class="menu" onclick="location.href='/admin/shoppingAsk'" style="cursor: pointer;">상품문의</div>
+    <div class="menu" onclick="location.href='/admin/save'" style="cursor: pointer;">상품등록</div>
+    <div class="menu" onclick="location.href='/admin/stock'" style="cursor: pointer;">상품재고</div>
+</div>
+</body>
+</html>

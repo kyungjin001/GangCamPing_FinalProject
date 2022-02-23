@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-@ToString
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -54,7 +54,7 @@ public class CampingEntity {
         entity.setCampingFileName(campingSaveDTO.getCampingFileName());
         entity.setCampingName(campingSaveDTO.getCampingName());
         entity.setCampingLikeCount(campingSaveDTO.getCampingLikeCount());
-        System.out.println(entity.toString());
+        System.out.println("campingEntity="+entity.toString());
         return entity;
 
     }

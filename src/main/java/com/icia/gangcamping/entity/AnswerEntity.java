@@ -1,6 +1,7 @@
 package com.icia.gangcamping.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -8,9 +9,6 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Getter
 @Setter
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
 @Table(name = "answer_table")
 public class AnswerEntity {
     @Id

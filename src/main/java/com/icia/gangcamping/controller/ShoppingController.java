@@ -91,7 +91,7 @@ public class ShoppingController {
     // 장바구니 담기
     @GetMapping("cart")
     public String addCart(@ModelAttribute CartDetailDTO cartDetailDTO, Model model){
-        Optional<MemberEntity> memberEntity = ms.findById(cartDetailDTO.getMemberId());
+        Optional<MemberEntity> memberEntity = ms.findByMemberId(cartDetailDTO.getMemberId());
         Optional<ProductEntity> productEntity = ss.findById1(cartDetailDTO.getProductId());
         CartDetailDTO cart = ss.findByMemberEntityAndProductEntity(memberEntity.get(),productEntity.get());
         Long productId = cartDetailDTO.getProductId();
