@@ -64,4 +64,9 @@ public class CampingServiceImpl implements CampingService {
         }
         return dtoList;
     }
+
+    @Override
+    public CampingEntity findByCampingName1(String campingName) {
+        return campingRepository.findByCampingName(campingName);
+    }
 }

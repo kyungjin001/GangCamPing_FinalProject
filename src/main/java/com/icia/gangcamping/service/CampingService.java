@@ -19,4 +19,6 @@ public interface CampingService {
     List findAll();
 
     List findTop3AllOrderByCampingLikeCount();
+
+    CampingEntity findByCampingName1(String campingName);
 }
