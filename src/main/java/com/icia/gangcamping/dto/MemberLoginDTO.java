@@ -18,7 +18,4 @@ public class MemberLoginDTO {
     @Length(min = 2, max = 20, message = "5~20자 사이로 입력해주세요.")
     private String memberPw;
 
-    public String getMemberPW() {
-        return null;
-    }
 }

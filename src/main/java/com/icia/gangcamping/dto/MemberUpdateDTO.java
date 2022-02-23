@@ -15,5 +15,4 @@ public class MemberUpdateDTO {
     private String memberName;
     private String memberAddr;
     private String memberPhone;
-
 }

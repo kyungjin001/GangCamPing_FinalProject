@@ -45,7 +45,7 @@ public class MainController {
 
     @RequestMapping("index.html")
     public String cxczcof() {
-        return "indexs";
+        return "index";
     }
 
 

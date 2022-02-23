@@ -1,9 +1,6 @@
 package com.icia.gangcamping.service;
 
-import com.icia.gangcamping.dto.MemberDetailDTO;
-import com.icia.gangcamping.dto.MemberLoginDTO;
-import com.icia.gangcamping.dto.MemberSaveDTO;
-import com.icia.gangcamping.dto.MemberUpdateDTO;
+import com.icia.gangcamping.dto.*;
 import com.icia.gangcamping.entity.MemberEntity;
 import com.icia.gangcamping.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -38,7 +35,7 @@ public class MemberServiceImpl implements MemberService{
     public boolean login(MemberLoginDTO memberLoginDTO) {
         MemberEntity memberEntity = mr.findByMemberEmail(memberLoginDTO.getMemberEmail());
         if(memberEntity != null){
-            if (memberEntity.getMemberPw().equals(memberLoginDTO.getMemberPW())){
+            if (memberEntity.getMemberPw().equals(memberLoginDTO.getMemberPw())){
                 return true;
             }else {
                 return false;
@@ -83,9 +80,15 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public Long update(MemberUpdateDTO memberUpdateDTO) {
-        MemberEntity memberEntity = MemberEntity.toUpdateMember(memberUpdateDTO);
+       /* MemberEntity memberEntity = MemberEntity.toUpdateMember(memberUpdateDTO);
 
-        return mr.save(memberEntity).getMemberId();
+        return mr.save(memberEntity).getMemberId();*/
+        return null;
+    }
+
+    @Override
+    public String emailDp(String memberEmail) {
+        return null;
     }
 
     @Override
