@@ -14,4 +14,5 @@ public class TestDTO {
     private String name;
     private String mapX;
     private String mapY;
+
 }

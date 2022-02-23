@@ -6,6 +6,7 @@ import com.icia.gangcamping.entity.CartEntity;
 import com.icia.gangcamping.entity.MemberEntity;
 import com.icia.gangcamping.entity.ProductEntity;
 import com.icia.gangcamping.service.CommentService;
+import com.icia.gangcamping.repository.MemberRepository;
 import com.icia.gangcamping.service.MemberService;
 import com.icia.gangcamping.service.OrderService;
 import com.icia.gangcamping.service.ShoppingService;
@@ -35,7 +36,7 @@ private final OrderService os;
 private final CommentService cs;
 private final MemberService ms;
 private final HttpSession session;
-
+    private final MemberRepository mr;
 
 //상품목록
 @RequestMapping("shopping")
@@ -182,6 +183,7 @@ model.addAttribute("menu", menuList);
 model.addAttribute("orderTotalFee", orderTotalFee);
 model.addAttribute("GoodsName", GoodsName);
 model.addAttribute("orderDetailDTO", orderDetailDTO);
+
 
 
 return "shopping/order";

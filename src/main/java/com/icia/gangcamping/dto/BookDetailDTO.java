@@ -9,6 +9,7 @@ import com.icia.gangcamping.entity.RoomEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.tomcat.jni.Local;
 
 import java.time.LocalDateTime;
 
@@ -23,20 +24,25 @@ public class BookDetailDTO {
     private Long roomId;
     private LocalDateTime bookCheckIn;
     private LocalDateTime bookCheckOut;
+    private LocalDateTime createTime;
     private String bookPeriod;
+    private String campingName;
+    private String campingFileName;
     private int bookPrice;
 
-    public static BookDetailDTO toBookDetailDTO(BookEntity bookEntity, MemberEntity memberEntity, CampingEntity campingEntity, RoomEntity roomEntity) {
+    public static BookDetailDTO toBookDetailDTO(BookEntity bookEntity) {
         BookDetailDTO bookDetailDTO = new BookDetailDTO();
         bookDetailDTO.setBookId(bookEntity.getBookId());
-        bookDetailDTO.setMemberId(memberEntity.getMemberId());
-        bookDetailDTO.setCampingId(campingEntity.getCampingId());
-        bookDetailDTO.setRoomId(roomEntity.getRoomId());
+        bookDetailDTO.setMemberId(bookEntity.getMemberEntity().getMemberId());
+        bookDetailDTO.setCampingId(bookEntity.getCampingEntity().getCampingId());
+        bookDetailDTO.setRoomId(bookEntity.getRoomEntity().getRoomId());
         bookDetailDTO.setBookCheckIn(bookEntity.getBookCheckIn());
         bookDetailDTO.setBookCheckOut(bookEntity.getBookCheckOut());
         bookDetailDTO.setBookPeriod(bookEntity.getBookPeriod());
+        bookDetailDTO.setCreateTime(bookEntity.getCreateTime());
         return bookDetailDTO;
     }
+
 
 
 }

@@ -16,6 +16,7 @@ import java.io.IOException;
 import static com.icia.gangcamping.common.SessionConst.LOGIN_EMAIL;
 
 
+
 @Controller
 @RequestMapping("/member")
 @RequiredArgsConstructor
@@ -61,10 +62,10 @@ public class MemberController {
              session.setAttribute("loginEmail", memberLoginDTO.getMemberEmail());
             System.out.println();
             System.out.println(loginId);
-            return "index";
+            return "redirect:/";
         } else {
             System.out.println("???");
-            return "index";
+            return "redirect:/";
         }
     }
 

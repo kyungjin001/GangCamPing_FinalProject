@@ -30,6 +30,13 @@
 이후 실행한다음 네비게이션바에서 APITEST -> 버튼 두개 클릭후 yml update로 변경 -> 주석처리부분 해제 -> 다시실행 
 
 
+## 리턴관련 공지사항
+
+repository에서 리턴하는것은 entity 입니다. 
+service에서 리턴하는값은 DTO입니다.
+controller에서 entity return 이 필요한경우 controller->service->repository 순서가아니라
+                    controller -> repository로 바로 접근해주세요.
+작업부분들 확인하시고 다른부분 수정해주세요, 실행중 오류가 나는부분은 임의로 수정하였습니다.
 
 
 
