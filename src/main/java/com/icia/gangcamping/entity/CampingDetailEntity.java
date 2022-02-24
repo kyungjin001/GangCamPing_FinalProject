@@ -5,7 +5,7 @@ import lombok.*;
 import org.w3c.dom.Text;
 
 import javax.persistence.*;
-@ToString
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity

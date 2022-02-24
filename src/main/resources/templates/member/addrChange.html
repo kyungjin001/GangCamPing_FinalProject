@@ -261,15 +261,15 @@
 
 
 	</div>
-
+	<form action="/member/updateAddr" method="post" th:object="${member}" id="m_addr">
 	<div class="kick-wrapper">
 		<div class="form-group">
 			<!--		<label for="registerPhone">주소</label> <br>-->
-			<input type="text" id="sample6_postcode" placeholder="우편번호">
+			<input type="text" id="sample6_postcode" name="memberAddr" placeholder="우편번호">
 			<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-			<input type="text" id="sample6_address" placeholder="주소"><br>
-			<input type="text" id="sample6_detailAddress" onblur="addr1()" placeholder="상세주소">
-			<input type="text" id="sample6_extraAddress" placeholder="참고항목">
+			<input type="text" id="sample6_address" name="memberAddr" placeholder="주소"><br>
+			<input type="text" id="sample6_detailAddress" name="memberAddr" placeholder="상세주소">
+			<input type="text" id="sample6_extraAddress" name="memberAddr" placeholder="참고항목">
 			<input type="hidden" id="memberAddr" name="memberAddr" placeholder="합계주소">
 
 			<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -337,9 +337,12 @@
 			</script>
 <!--		<div class="kick" onclick="location.href='/member/addrChange'" style="cursor: pointer;">주소가 수정되었습니다.</div>-->
 	</div>
+	</div>
+	</form>
 
 	<div class="agreekick-wrapper">
-		<div class="kickokorno" onclick="location.href='/member/update'" style="cursor: pointer;">확인</div>
+		<div class="kickokorno"  button type="submit" form="m_addr" onclick="location.href='/member/updateAddr'" style="cursor: pointer;">확인</div>
+<!--		<div class="kickokorno" onclick="location.href='/member/updateAddr'" style="cursor: pointer;">확인</div>-->
 		<div class="kickokorno" onclick="location.href='/member/myinfo'" style="cursor: pointer;">취소</div>
 	</div>
 

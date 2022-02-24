@@ -89,23 +89,27 @@ public class SearchController {
     public String indexSearch(Model model, HttpSession session, @RequestParam(value = "keyword",required = false)String keyword,
                               @RequestParam(value = "checkInDate",required = false)String checkInDate, @RequestParam(value = "checkOutDate",required = false)String checkOutDate) throws IOException, ParseException {
         System.out.println(checkInDate+"/"+checkOutDate);
-        if(keyword==null){
-            keyword = "캠핑";
-            List<CampingDetailDTO> campingDetailDTOList = this.searchList(keyword);
-            model.addAttribute("searchList",campingDetailDTOList);
-        }else{
-            List<CampingDetailDTO> campingDetailDTOList = this.searchList(keyword);
-            model.addAttribute("searchList",campingDetailDTOList);
-            session.setAttribute("checkInDate" ,checkInDate);
-            session.setAttribute("checkOutDate" ,checkOutDate);
 
-        }
+         if(keyword==null){
+             keyword = "캠핑";
+             List<CampingDetailDTO> campingDetailDTOList = this.searchList(keyword);
+             model.addAttribute("searchList",campingDetailDTOList);
+         }else{
+            List<CampingDetailDTO> campingDetailDTOList = this.searchList(keyword);
+             model.addAttribute("searchList",campingDetailDTOList);
+             session.setAttribute("checkInDate" ,checkInDate);
+             session.setAttribute("checkOutDate" ,checkOutDate);
+
+         }
+
         return "offers";
     }
+
     @GetMapping("/searchDetail/{campingName}")
     public String detail(@PathVariable String campingName,Model model,HttpSession session) throws java.text.ParseException {
         System.out.println("searchController");
         String name = campingName.replace(" ","");
+
         CampingDetailDTO campingDetailDTO = cs.findByCampingName(name);
         if(campingDetailDTO.getCampingFileName()==null){
             campingDetailDTO.setCampingFileName("/images/noImage.jpg");
@@ -116,6 +120,8 @@ public class SearchController {
         long period = (checkOutDate.getTime()-checkInDate.getTime()) / 1000;
         long period1 = period/(24*60*60);
         long period2 = (period/(24*60*60))+1;
+
+
 
         campingDetailDTO.setCheckInDate(checkInDate);
         campingDetailDTO.setCheckOutDate(checkOutDate);

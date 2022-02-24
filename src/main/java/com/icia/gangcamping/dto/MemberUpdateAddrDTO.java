@@ -7,13 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemberUpdateDTO {
+public class MemberUpdateAddrDTO {
 
     private Long memberId;
-    private String memberEmail;
-    private String memberPw;
-    private String memberName;
     private String memberAddr;
-    private String memberPhone;
 
 }
