@@ -89,6 +89,7 @@ public class SearchController {
     public String indexSearch(Model model, HttpSession session, @RequestParam(value = "keyword",required = false)String keyword,
                               @RequestParam(value = "checkInDate",required = false)String checkInDate, @RequestParam(value = "checkOutDate",required = false)String checkOutDate) throws IOException, ParseException {
         System.out.println(checkInDate+"/"+checkOutDate);
+
          if(keyword==null){
              keyword = "캠핑";
              List<CampingDetailDTO> campingDetailDTOList = this.searchList(keyword);
@@ -100,6 +101,7 @@ public class SearchController {
              session.setAttribute("checkOutDate" ,checkOutDate);
 
          }
+
         return "offers";
     }
 
@@ -107,13 +109,21 @@ public class SearchController {
     public String detail(@PathVariable String campingName,Model model,HttpSession session) throws java.text.ParseException {
         System.out.println("searchController");
         String name = campingName.replace(" ","");
-         CampingDetailDTO campingDetailDTO = cs.findByCampingName(name);
-         if(campingDetailDTO.getCampingFileName()==null){
-             campingDetailDTO.setCampingFileName("/images/noImage.jpg");
-         }
+
+        CampingDetailDTO campingDetailDTO = cs.findByCampingName(name);
+        if(campingDetailDTO.getCampingFileName()==null){
+            campingDetailDTO.setCampingFileName("/images/noImage.jpg");
+        }
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date checkInDate = format.parse((String) session.getAttribute("checkInDate"));
         Date checkOutDate = format.parse((String) session.getAttribute("checkOutDate"));
+        long pried1 = (checkInDate.getTime()-checkOutDate.getTime()) / 1000;
+        long pried = pried1/(24*60*60);
+        long pried2 = pried+1;
+        System.out.println(pried+"박"+ pried2+"일");
+
+
+
 
         campingDetailDTO.setCheckInDate(checkInDate);
         campingDetailDTO.setCheckOutDate(checkOutDate);

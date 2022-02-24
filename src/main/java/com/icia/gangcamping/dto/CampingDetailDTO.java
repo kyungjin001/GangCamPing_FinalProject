@@ -9,6 +9,8 @@ import java.util.Date;
 @Data
 public class CampingDetailDTO {
 
+    private Long campingId;
+
     private String campingName;
 
     private String campingAddr;
@@ -24,6 +26,7 @@ public class CampingDetailDTO {
     public static CampingDetailDTO toCampingDetailDTO(CampingEntity entity) {
         CampingDetailDTO camping = new CampingDetailDTO();
         System.out.println("campingEntity : "+entity);
+        camping.setCampingId(entity.getCampingId());
         camping.setCampingAddr(entity.getCampingAddr());
         camping.setCampingInfo(entity.getCampingInfo());
         camping.setCampingName(entity.getCampingName());

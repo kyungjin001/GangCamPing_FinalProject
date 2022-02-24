@@ -1,6 +1,7 @@
 package com.icia.gangcamping.controller;
 
 import com.icia.gangcamping.dto.BookDetailDTO;
+import com.icia.gangcamping.dto.BookSaveDTO;
 import com.icia.gangcamping.dto.CampingDetailDTO;
 import com.icia.gangcamping.entity.CampingEntity;
 import com.icia.gangcamping.repository.CampingRepository;
@@ -9,9 +10,7 @@ import com.icia.gangcamping.service.CampingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +23,14 @@ public class BookController {
     private final CampingService cs;
     private final BookService bs;
     private final CampingRepository cr;
+
+    // 예약저장
+    @PostMapping("/reservation")
+    public String reservation(@ModelAttribute BookSaveDTO bookSaveDTO){
+       // Long bookId = bs.save(bookSaveDTO);
+
+        return "/camping/campingPay";
+    }
 
     //별점순으로 정렬 100개
     @GetMapping("/ranking")
