@@ -5,16 +5,14 @@ import com.icia.gangcamping.dto.*;
 import com.icia.gangcamping.entity.CartEntity;
 import com.icia.gangcamping.entity.MemberEntity;
 import com.icia.gangcamping.entity.ProductEntity;
-import com.icia.gangcamping.service.CommentService;
+import com.icia.gangcamping.service.*;
 import com.icia.gangcamping.repository.MemberRepository;
-import com.icia.gangcamping.service.MemberService;
-import com.icia.gangcamping.service.OrderService;
-import com.icia.gangcamping.service.ShoppingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +33,7 @@ private final ShoppingService ss;
 private final OrderService os;
 private final CommentService cs;
 private final MemberService ms;
+private final StockService ts;
 private final HttpSession session;
     private final MemberRepository mr;
 
@@ -63,10 +62,6 @@ return "shopping/shopdetail";
 
 
 
-
-
-
-
 // 상품등록 링크요청
 @GetMapping("goods")
 public String goodsForm() {
@@ -78,6 +73,10 @@ return "shopping/goods";
 @PostMapping("goods")
 public String goods(@ModelAttribute GoodsSaveDTO goodsSaveDTO) throws IOException {
 Long productId = ss.save(goodsSaveDTO);
+StockSaveDTO stockSaveDTO = new StockSaveDTO();
+stockSaveDTO.setStock(goodsSaveDTO.getProductStock());
+stockSaveDTO.setProductId(productId);
+ts.save(stockSaveDTO);
 System.out.println("goodsSaveDTO = " + goodsSaveDTO);
 return "redirect:/shopping/shopping";
 }
@@ -86,14 +85,14 @@ return "redirect:/shopping/shopping";
 // 장바구니 담기
 @GetMapping("cart")
 public String addCart(@ModelAttribute CartDetailDTO cartDetailDTO, Model model) {
-Optional<MemberEntity> memberEntity = ms.findById(cartDetailDTO.getMemberId());
+MemberEntity memberEntity = ms.findByMemberEmail((String) session.getAttribute("memberEmail"));
 Optional<ProductEntity> productEntity = ss.findById1(cartDetailDTO.getProductId());
-CartDetailDTO cart = ss.findByMemberEntityAndProductEntity(memberEntity.get(), productEntity.get());
+CartDetailDTO cart = ss.findByMemberEntityAndProductEntity(memberEntity, productEntity.get());
 Long productId = cartDetailDTO.getProductId();
 model.addAttribute("productId", productId);
 if (cart == null) {
-    CartDetailDTO CartDetailDTO = ss.addCart(cartDetailDTO, memberEntity.get(), productEntity.get());
-    List<CartDetailDTO> cartDetailDTOList = ss.findByMemberEntity(memberEntity.get());
+    CartDetailDTO CartDetailDTO = ss.addCart(cartDetailDTO, memberEntity, productEntity.get());
+    List<CartDetailDTO> cartDetailDTOList = ss.findByMemberEntity(memberEntity);
     model.addAttribute("cartList", cartDetailDTOList);
     int cartPriceSum = 0;
     int orderUnitNum = 0;
@@ -107,7 +106,7 @@ if (cart == null) {
     model.addAttribute("orderUnitNum", orderUnitNum);
     return "shopping/cart";
 } else {
-    List<CartDetailDTO> cartDetailDTOList = ss.findByMemberEntity(memberEntity.get());
+    List<CartDetailDTO> cartDetailDTOList = ss.findByMemberEntity(memberEntity);
     model.addAttribute("cartList", cartDetailDTOList);
     int cartPriceSum = 0;
     int orderUnitNum = 0;
@@ -124,16 +123,16 @@ if (cart == null) {
 }
 
 @GetMapping("cartview")
-public String cartview(Model model) {
+public String cartview(@ModelAttribute CartDetailDTO cartDetailDTO, Model model) {
 MemberEntity memberEntity = ms.findByMemberEmail((String) session.getAttribute("memberEmail"));
 List<CartDetailDTO> cartDetailDTOList = ss.findByMemberEntity(memberEntity);
 if (!cartDetailDTOList.isEmpty()) {
-    model.addAttribute("cartList", cartDetailDTOList);
     int cartPriceSum = 0;
     for (CartDetailDTO c : cartDetailDTOList) {
         cartPriceSum += (c.getProductPrice() * c.getCartAmount());
         System.out.println("c = " + c);
     }
+    model.addAttribute("cartList", cartDetailDTOList);
     model.addAttribute("totalPrice", cartPriceSum);
 }
 return "shopping/cart";
@@ -204,6 +203,33 @@ model.addAttribute("MemberDetailDTO", memberDetailDTO);
     System.out.println("제발 나와라잉"+orderDetailDTO);
 return "shopping/complete";
 }
+
+
+
+// 상품 재고
+    @RequestMapping("stock")
+    public String stock(Model model){
+        List<StockDetailDTO> stock = ts.findAll();
+        model.addAttribute("stock", stock);
+        return "shopping/stock";
+    }
+
+// 재고 카운팅
+    @PutMapping("stock")
+    @ResponseBody
+    public String stockUpDown(@RequestParam("stockId") Long stockId, @RequestParam("type") String type) {
+        String result = ts.stockUpDown(stockId, type);
+        System.out.println("제발 넘어와" + stockId);
+        return result;
+    }
+
+    //재고수정
+    @PutMapping("{stockId}") //에이작스는 @RequestBody로 받아줘야함
+    public ResponseEntity stockUpdate(@RequestBody StockUpdateDTO stockUpdateDTO){
+        ts.update(stockUpdateDTO);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
 
 
 }

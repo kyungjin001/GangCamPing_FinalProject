@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>About Us</title>
     <meta charset="utf-8">
@@ -15,6 +15,61 @@
     <link rel="stylesheet" type="text/css" href="/styles/about_responsive.css">
 
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+
+
+
+    <script>
+        const stockDown = (cartId) =>{
+            console.log('함수호출은 하냐?')
+            console.log(stockId);
+            $.ajax({
+                type:'put',
+                url:'/shopping/stock',
+                data:{"stockId":stockId,"type":"down"},
+                dataType:'text',
+                success:function (result){
+                    console.log(result);
+                    if(result=="ok"){
+                        location.reload();
+                    }
+                },
+                error:function (){
+                    alert('다시해라');
+                }
+            });
+
+        }
+
+
+        const stockUp = (stockId) =>{
+            console.log(stockId);
+            $.ajax({
+                type:'put',
+                url:'/shopping/stock',
+                data:{"stockId":stockId,"type":"up"},
+                dataType:'text',
+                success:function (result){
+                    console.log(result);
+                    if(result=="ok"){
+                        location.reload();
+                    }
+                },
+                error:function (){
+                    alert('다시해라');
+                }
+            });
+
+        }
+
+    </script>
+
+
+
+
+
+
+
 
 
     <style>
@@ -306,18 +361,24 @@
         <tr>
             <th class="tg-62r5">상품번호</th>
             <th class="tg-62r5">상품명</th>
-            <th class="tg-62r5">상품옵션</th>
+            <th class="tg-62r5">상품무게</th>
             <th class="tg-62r5">보유수량</th>
             <th class="tg-62r5">업데이트</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td class="tg-kwqo">00001</td>
-            <td class="tg-kwqo">장작</td>
-            <td class="tg-kwqo">大 10kg</td>
-            <td class="tg-kwqo"><input type="number"></td>
-            <td class="tg-kwqo">업데이트</td>
+        <tr th:each="stock:${stock}">
+            <td class="tg-kwqo" th:text="${stock.productId}"></td>
+            <td class="tg-kwqo" th:text="${stock.productName}"></td>
+            <td class="tg-kwqo" th:text="${stock.productWeight}"></td>
+            <td class="tg-kwqo">
+                <span th:switch="${stock.stock}">
+                    <span th:case="1"><button>-</button></span>
+                    <span th:case="*"><button th:onclick="stockDown([[${stock.stockId}]])">-</button></span>
+                </span>
+                <span th:text="${stock.stock}"></span>
+                <button th:onclick="stockUp([[${stock.stockId}]])">+</button>
+            </td>
         </tr>
         <tr>
             <td class="tg-kwqo"></td>

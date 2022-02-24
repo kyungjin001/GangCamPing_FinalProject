@@ -3,6 +3,7 @@ package com.icia.gangcamping.service;
 import com.icia.gangcamping.dto.CartDetailDTO;
 import com.icia.gangcamping.dto.GoodsDetailDTO;
 import com.icia.gangcamping.dto.GoodsSaveDTO;
+import com.icia.gangcamping.dto.StockDetailDTO;
 import com.icia.gangcamping.entity.MemberEntity;
 import com.icia.gangcamping.entity.ProductEntity;
 
@@ -17,6 +18,7 @@ public interface ShoppingService{
     Long save(GoodsSaveDTO goodsSaveDTO) throws IOException;
 
     List<GoodsDetailDTO> findAll();
+
 
     GoodsDetailDTO findById(Long productId);
 
