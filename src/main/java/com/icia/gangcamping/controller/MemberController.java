@@ -108,6 +108,8 @@ public class MemberController {
 
     @GetMapping("bookList")
     public String bookList() {
+
+
         return "member/bookList";
     }
 

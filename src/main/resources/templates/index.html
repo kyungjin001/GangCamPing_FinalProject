@@ -283,7 +283,7 @@
                             <h1>the world</h1>
                             <div class="button home_slider_button">
                                 <div class="button_bcg"></div>
-                                <a href="#">explore now<span></span><span></span><span></span></a></div>
+                                <a href="/booking/ranking">Booking now<span></span><span></span><span></span></a></div>
                         </div>
                     </div>
                 </div>
@@ -299,7 +299,7 @@
                             <h1>the world</h1>
                             <div class="button home_slider_button">
                                 <div class="button_bcg"></div>
-                                <a href="#">explore now<span></span><span></span><span></span></a></div>
+                                <a href="/booking/ranking">Booking now<span></span><span></span><span></span></a></div>
                         </div>
                     </div>
                 </div>
@@ -412,6 +412,14 @@
                                 <div>keyword</div>
                                 <input type="text" name="keyword" id="keyword" class="destination search_input"
                                        required="required">
+                            </div>
+                            <div class="search_item">
+                                <div>check in</div>
+                                <input type="date" class="check_in search_input" placeholder="YYYY-MM-DD" name="checkInDate" id="checkInDate" required="required">
+                            </div>
+                            <div class="search_item">
+                                <div>check out</div>
+                                <input type="date" class="check_out search_input" placeholder="YYYY-MM-DD" name="checkOutDate" id="checkOutDate" required="required">
                             </div>
 
                             <button class="button search_button" type="submit">
@@ -552,7 +560,6 @@
             <div class="row">
                 <div class="col text-center">
                     <h2 class="section_title">고객리뷰 베스트</h2>
-                    세션값 : <p th:text="${session['loginEmail']}">
                 </div>
             </div>
             <div class="row">
@@ -562,7 +569,13 @@
 
                     <div class="test_slider_container">
                         <div class="owl-carousel owl-theme test_slider">
-                            <th:block th:each="result : ${recommendList}">
+                            <th:block  th:if="!${reviewList}">
+                                <div>
+                                    <span> 등록된 리뷰가 없습니다.</span>
+                                </div>
+                            </th:block>
+                            <th:block  th:if="${reviewList}">
+                            <th:block th:each="result : ${reviewList}">
                                 <!-- Testimonial Item -->
                                 <div class="owl-item">
                                     <div class="test_item">
@@ -571,18 +584,17 @@
                                         <div class="test_content_container">
                                             <div class="test_content">
                                                 <div class="test_item_info">
-                                                    <div class="test_name">carla smith</div>
-                                                    <div class="test_date">May 24, 2017</div>
+                                                    <div class="test_name" th:text="${result.reviewWriter}">carla smith</div>
+                                                    <div class="test_date" th:text="${result.reviewStar}"></div>
                                                 </div>
-                                                <div class="test_quote_title">" Best holliday ever "</div>
-                                                <p class="test_quote_text">Nullam eu convallis tortor. Suspendisse
-                                                    potenti.
-                                                    In faucibus massa arcu, vitae cursus mi hendrerit nec.</p>
+                                                <div class="test_quote_title"><a th:text="${result.campingName}"></a> </div>
+                                                <p class="test_quote_text" th:text="${result.reviewContents}"></p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
+                            </th:block>
                             </th:block>
                         </div>
 
@@ -745,13 +757,13 @@
                             <div class="footer_title">검색 태그</div>
                             <div class="footer_content footer_tags">
                                 <ul class="tags_list clearfix">
-                                    <li class="tag_item"><a href="#">차박</a></li>
-                                    <li class="tag_item"><a href="#">오지캠핑</a></li>
-                                    <li class="tag_item"><a href="#">오토캠핑장</a></li>
-                                    <li class="tag_item"><a href="#">카라반</a></li>
-                                    <li class="tag_item"><a href="#">캠핑카</a></li>
-                                    <li class="tag_item"><a href="#">글램핑</a></li>
-                                    <li class="tag_item"><a href="#">이부분은 검색쿼리로 링크</a></li>
+                                    <li class="tag_item"><a th:href="@{|/search/camping?keword=야영|}">야영</a></li>
+                                    <li class="tag_item"><a href="/search/camping?keyword=오지">오지캠핑</a></li>
+                                    <li class="tag_item"><a href="/search/camping?keyword=오토">오토캠핑장</a></li>
+                                    <li class="tag_item"><a href="/search/camping?keyword=카라반">카라반</a></li>
+                                    <li class="tag_item"><a href="/search/camping?keyword=캠핑카">캠핑카</a></li>
+                                    <li class="tag_item"><a href="/search/camping?keyword=글램핑">글램핑</a></li>
+
 
                                 </ul>
                             </div>
@@ -791,7 +803,7 @@
                                             <div class="contact_info_icon"><img src="/images/planet-earth.svg" alt="">
                                             </div>
                                         </div>
-                                        <div class="contact_info_text"><a href="https://colorlib.com">https://github.com/kyungjin001/GangCamPing_FinalProject</a>
+                                        <div class="contact_info_text"><a href="https://github.com/kyungjin001/GangCamPing_FinalProject">https://github.com/kyungjin001/GangCamPing_FinalProject</a>
                                         </div>
                                     </li>
                                 </ul>
@@ -837,7 +849,29 @@
         </div>
 
     </div>
+<!-- top button -->
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+<script>
+    //Get the button:
+    mybutton = document.getElementById("myBtn");
 
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
+</script>
     <!-- 모달 시작! -->
 
 

@@ -682,7 +682,11 @@
 								<div class="hotel_title_button ml-lg-auto text-lg-right">
 									<div class="button book_button trans_200"><a data-toggle="modal" data-target="#dateChoice">book<span></span><span></span><span></span></a></div>
 									<div class="hotel_map_link_container">
-<!--										지도연동부분-->
+										<div>
+											<span>체크인 : <a th:text="${campingDetail.checkInDate}"></a></span><br>
+											<span>체크아웃 : <a th:text="${campingDetail.checkOutDate}"></a></span>
+
+										</div>
 										<div class="hotel_map_link"><a href="#location">Location On Map</a></div>
 									</div>
 								</div>
