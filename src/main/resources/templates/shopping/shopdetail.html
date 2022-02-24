@@ -29,9 +29,34 @@
 	<link rel="stylesheet" href="/css/style.css" type="text/css">
 
 
+<script>
+	var name = sessionStorage.getItem('memberEmail');
+	console.log(name);
+</script>
 
 
 
+
+
+	<script>
+		function deleteById(questionId){
+			const reqUrl = "/comment/" + questionId;
+
+			$.ajax({
+				type: 'delete',
+				url: reqUrl,
+				success: function (){
+					location.reload(); // reload는 새로고침
+
+				},
+				error:function (){
+					alert('ajax 실패');
+				}
+
+			});
+		}
+
+	</script>
 
 
 
@@ -255,11 +280,39 @@
 							</div>
 							<div class="tab-pane" id="tabs-3" role="tabpanel">
 								<div class="product__details__tab__desc">
-									<h6>Products Infomation</h6>
-									<p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
-										Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.
-										Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam
-									.</p>
+									<div id="comment-write">
+										<input type="text" id="commentWriter" placeholder="작성자" th:value="${session.loginEmail}"><br>
+										<input type="text" id="questionContents" placeholder="내용"><br>
+										<button id="comment-write-btn">댓글등록</button>
+									</div>
+
+									<div id="comment-area">
+										<table>
+											<thead>
+											<tr>
+												<th>댓글번호</th>
+												<th>상품번호</th>
+												<th>작성자</th>
+												<th>내용</th>
+												<th>작성시간</th>
+												<th>삭제</th>
+												<th th:if="${#strings.equals(session['loginEmail'], 'admin')}">삭제(관리자용)</th>
+											</tr>
+											</thead>
+											<tbody>
+											<tr th:each="comment: ${commentList}">
+												<td th:text="${comment.questionId}"></td>
+												<td th:text="${comment.productId}"></td>
+												<td th:text="${comment.commentWriter}"></td>
+												<td th:text="${comment.questionContents}"></td>
+												<td th:text="${#temporals.format(comment.commentTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+												<td><button th:if="${comment.commentWriter.equals(session['loginEmail'])}" th:onclick="deleteById([[${comment.questionId}]])">삭제</button></td>
+												<td><button th:if="${#strings.equals(session['loginEmail'], 'admin')}" th:onclick="deleteById([[${comment.questionId}]])">삭제</button></td>
+
+											</tr>
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -345,21 +398,6 @@
 		</div>
 	</section>
 	<!-- Related Product Section End -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -542,5 +580,34 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 
 </body>
+
+
+<script>
+	$("#comment-write-btn").click(function (){
+		var name = sessionStorage.getItem('loginEmail');
+		console.log(name);
+		console.log('댓글등록 버튼 클릭');
+		const commentWriter = $("#commentWriter").val();
+		console.log(commentWriter);
+		const questionContents = $("#questionContents").val();
+		const productId = '[[${goods.productId}]]';
+		$.ajax({
+			type: 'post',
+			url: '/comment/save',
+			data: {
+				'commentWriter': commentWriter,
+				'questionContents': questionContents,
+				'productId': productId
+			},
+			dataType: 'json',
+			success: function (result) {
+				console.log(result);
+			},
+			error: function () {
+				alert('ajax 실패');
+			}
+		});
+	});
+</script>
 
 </html>

@@ -132,10 +132,13 @@
                         </div>
                         <div class="user_box ml-auto">
 
+
+
                             <div class="user_box_login user_box_link">	<a class="nav-link" th:href="@{|/member/${session.loginId}|}"
                                                                              style="font-size: 15px">
                                 myPage</a>
                             </div>
+
 
                            <span th:if="(${session.loginEmail}==null) and (${session.userId}==null)">
                             <div class="user_box_login user_box_link">	<a class="nav-link" href="#"
@@ -162,6 +165,8 @@
                                    LogOut</a>
                                </div>
                             </span>
+                            <div class="user_box_register user_box_link"><a href="/shopping/goods">Goods</a></div>
+
 
                         </div>
                     </div>
@@ -175,13 +180,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col main_nav_col d-flex flex-row align-items-center justify-content-start">
-                        <div class="logo_container">
-                            <div class="logo"><a href="/"><img src="/images/logo.png" alt=""></a></div>
-                        </div>
+
                         <div class="main_nav_container ml-auto">
                             <ul class="main_nav_list">
                                 <li class="main_nav_item"><a href="/">home</a></li>
-                                <li class="main_nav_item"><a href="/search/camping">booking</a></li>
+                                <li class="main_nav_item"><a href="booking">booking</a></li>
                                 <li class="main_nav_item"><a href="/shopping/shopping">shopping</a></li>
                                 <li class="main_nav_item"><a href="about">about us</a></li>
                                 <li class="main_nav_item"><a href="contact">contact</a></li>
@@ -231,7 +234,7 @@
             <div class="menu_close_container">
                 <div class="menu_close"></div>
             </div>
-            <div class="logo menu_logo"><a href="#"><img src="/images/logo.png" alt=""></a></div>
+            <div class="logo menu_logo"><a href="/"><img src="/images/logo.png" alt=""></a></div>
             <ul>
                 <li class="menu_item"><a href="#">home</a></li>
                 <li class="menu_item"><a href="about.html">about us</a></li>
@@ -651,6 +654,29 @@
             <div class="container">
                 <div class="row">
 
+
+                <!-- Footer Column -->
+                <div class="col-lg-3 footer_column">
+                    <div class="footer_col">
+                        <div class="footer_content footer_about">
+
+                            <p class="footer_about_text"><br>
+                                강캠핑입니다.
+                                여기는 프로젝트에 관한
+                                간단한 설명이나
+                                기타 사항이 들어갈 예정
+                                입니다.
+                            </p>
+                            <ul class="footer_social_list">
+                                <li class="footer_social_item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                <li class="footer_social_item"><a href="https://fb.com"><i class="fa fa-facebook-f"></i></a>
+                                </li>
+                                <li class="footer_social_item"><a href="https://twitter.com"><i
+                                        class="fa fa-twitter"></i></a></li>
+                                <li class="footer_social_item"><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                <li class="footer_social_item"><a href="#"><i class="fa fa-behance"></i></a></li>
+                            </ul>
+
                     <!-- Footer Column -->
                     <div class="col-lg-3 footer_column">
                         <div class="footer_col">
@@ -677,6 +703,7 @@
                                     <li class="footer_social_item"><a href="#"><i class="fa fa-behance"></i></a></li>
                                 </ul>
                             </div>
+
                         </div>
                     </div>
 
@@ -865,7 +892,9 @@
             <div class="modal-body">
 
 
+
                 <form action="/member/login" method="post">
+
 
                     <div class="form-group">
                         <label for="loginId" style="margin-left: 200px">ID </label> <br>
@@ -914,6 +943,28 @@
                 </button>
             </div>
             <!-- Modal body -->
+
+            <div class="modal-body">
+
+                <form action="/member/save" method="post">
+                    <div class="form-group">
+                        <label for="registerEmail">이메일 </label> <br>
+                        <input type="text" class="form-control" id="registerEmail" placeholder="이메일을 입력해주세요."
+                               name="memberEmail" required>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPw">비밀번호 </label>
+                        <input type="password" class="form-control" id="registerPw" placeholder="비밀번호를 입력해주세요."
+                               name="memberPW" required>
+                        <input type="password" class="form-control" id="registerPwCheck"
+                               placeholder="비밀번호를 다시 입력해주세요." required>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPhone">핸드폰 </label> <br>
+                        <input type="text" class="form-control" id="registerPhone" placeholder="전화번호를 입력해주세요."
+                               name="memberPhone" required>
 
             <div>
                 <div class="modal-body">
@@ -974,6 +1025,7 @@
                                             } else {
                                                 document.getElementById("sample6_extraAddress").value = '';
 
+
                                             }
                                             // 우편번호와 주소 정보를 해당 필드에 넣는다.
                                             document.getElementById('sample6_postcode').value = data.zonecode;
@@ -1016,6 +1068,10 @@
                                                                required></sapn>
                     </div>
 
+            </div>
+
+
+
 
             </div>
             <!-- Modal footer -->
@@ -1024,6 +1080,7 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
             </div>
             </form>
+
         </div>
     </div>
 </div>

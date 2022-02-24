@@ -1,6 +1,5 @@
 package com.icia.gangcamping.entity;
 
-import com.icia.gangcamping.dto.GoodsSaveDTO;
 import com.icia.gangcamping.dto.OrderSaveDTO;
 import lombok.*;
 
@@ -20,9 +19,6 @@ public class OrderEntity extends BaseEntity{
     @GeneratedValue
     @Column(name = "orderId")
     private Long orderId;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "productId")
-    private ProductEntity productEntity;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId")
     private MemberEntity memberEntity;
@@ -46,9 +42,9 @@ public class OrderEntity extends BaseEntity{
         orderEntity.setOrderPayType(orderSaveDTO.getOrderPayType());
         orderEntity.setOrderTotalFee(orderSaveDTO.getOrderTotalFee());
         orderEntity.setOrderUnitNum(orderSaveDTO.getOrderUnitNum());
+        orderEntity.setOrderPayType("카카오페이");
         orderEntity.setOrderId(orderSaveDTO.getOrderId());
         orderEntity.setMemberEntity(memberEntity);
-//        orderEntity.setProductEntity(productEntity);
         return orderEntity;
     }
 

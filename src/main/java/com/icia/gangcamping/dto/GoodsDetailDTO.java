@@ -25,6 +25,7 @@ public class GoodsDetailDTO {
 
 
 
+
     public static GoodsDetailDTO toGoodsDetailDTO(ProductEntity goods){
         GoodsDetailDTO goodsDetailDTO = new GoodsDetailDTO();
         goodsDetailDTO.setProductId(goods.getProductId());
