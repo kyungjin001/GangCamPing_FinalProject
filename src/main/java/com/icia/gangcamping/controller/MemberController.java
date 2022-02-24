@@ -2,6 +2,7 @@ package com.icia.gangcamping.controller;
 
 
 import com.icia.gangcamping.dto.*;
+import com.icia.gangcamping.entity.MemberEntity;
 import com.icia.gangcamping.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Optional;
 
 import static com.icia.gangcamping.common.SessionConst.LOGIN_EMAIL;
 
@@ -93,7 +95,7 @@ public class MemberController {
 
     @GetMapping("{memberId}")
     public String findById(@PathVariable("memberId") Long memberId, Model model) {
-        MemberDetailDTO member = ms.findById(memberId);
+        Optional<MemberEntity> member = ms.findById(memberId);
         model.addAttribute("member", member);
         return "member/mypage";
 

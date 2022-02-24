@@ -207,15 +207,12 @@
                             </span>
                             <span th:if="(${session.loginEmail}!=null) ">
 
-
-                            <div class="user_box_login user_box_link">	<a class="nav-link" href="/member/logout"
-
                             <div class="user_box_login user_box_link">	<a class="nav-link" href="/member/logOut"
 
                                                                              style="font-size: 15px">
                                 LogOut
                             </a></div>
-                            </span>
+                                </span>
                             <span th:if="${session['userId'] != null}">
                                <div class="user_box_login user_box_link"> <a class="nav-link"
                                                                              href="http://localhost:8098/member/logout"
@@ -508,7 +505,7 @@
             </div>
             <div class="row intro_items">
 
-                <th:block th:each="result : ${resultList}">
+               <th:block th:each="result : ${resultList}">
 
 
                     <div class="col-lg-4 intro_col">
@@ -636,7 +633,7 @@
                             </th:block>
                             <th:block  th:if="${reviewList}">
                             <th:block th:each="result : ${reviewList}">
-                                <!-- Testimonial Item -->
+                                &lt;!&ndash; Testimonial Item &ndash;&gt;
                                 <div class="owl-item">
                                     <div class="test_item">
                                         <div class="test_image"><img th:src="${result.campingFileName}"></div>
