@@ -2,7 +2,10 @@ package com.icia.gangcamping.controller;
 
 
 import com.icia.gangcamping.dto.CampingDetailDTO;
+import com.icia.gangcamping.dto.ReviewDetailDTO;
+import com.icia.gangcamping.repository.ReviewRepository;
 import com.icia.gangcamping.service.CampingService;
+import com.icia.gangcamping.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +20,8 @@ import java.util.List;
 @Controller
 public class MainController {
     private final CampingService cs;
+    private final ReviewService rs;
+    private final ReviewRepository rr;
 
     @RequestMapping("about.html")
     public String osf() {
@@ -60,8 +65,21 @@ public class MainController {
                 campingDetailDTOList.add(campingDetailDTO);
             }
         }
+        List<ReviewDetailDTO> reviewList = new ArrayList<>();
+        int max = rr.findAll().size();
+        for(int i=0;i<5;i++){
+            int rnd = (int) (Math.random()*10)+1;
+            if(rnd>max){
+                i = i-1;
+            }else {
+                System.out.println(rnd+"/"+max);
+                ReviewDetailDTO dto = rs.findById(rnd);
+                reviewList.add(dto);
+            }
+        }
 
         List<CampingDetailDTO> recommendList = cs.findTop3AllOrderByCampingLikeCount();
+        model.addAttribute("reviewList",reviewList);
         model.addAttribute("resultList",campingDetailDTOList);
         model.addAttribute("recommendList",recommendList);
 

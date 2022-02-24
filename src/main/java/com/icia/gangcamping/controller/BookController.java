@@ -3,6 +3,7 @@ package com.icia.gangcamping.controller;
 import com.icia.gangcamping.dto.BookDetailDTO;
 import com.icia.gangcamping.dto.CampingDetailDTO;
 import com.icia.gangcamping.entity.CampingEntity;
+import com.icia.gangcamping.repository.CampingRepository;
 import com.icia.gangcamping.service.BookService;
 import com.icia.gangcamping.service.CampingService;
 import lombok.RequiredArgsConstructor;
@@ -22,11 +23,12 @@ import java.util.Optional;
 public class BookController {
     private final CampingService cs;
     private final BookService bs;
+    private final CampingRepository cr;
 
     //별점순으로 정렬 100개
     @GetMapping("/ranking")
     public String ranking(Model model){
-        List<CampingEntity>  entityList= cs.findAll();
+        List<CampingEntity>  entityList= cr.findAll();
         List searchList = new ArrayList();
         int i=0;
         while (i<100){
@@ -40,7 +42,7 @@ public class BookController {
     @GetMapping("/bookDetail/{bookId}")
     public String bookDetail(@PathVariable Long bookId,Model model){
         BookDetailDTO book = bs.findById(bookId);
-        Optional<CampingEntity> camping = cs.findById(book.getCampingId());
+        Optional<CampingEntity> camping = cr.findById(book.getCampingId());
         book.setCampingName(camping.get().getCampingName());
         if(camping.get().getCampingFileName()==null){
             book.setCampingFileName("/images/noImage.jpg");

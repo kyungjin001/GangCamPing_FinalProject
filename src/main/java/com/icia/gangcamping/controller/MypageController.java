@@ -28,28 +28,25 @@ public class MypageController {
     private final MemberService ms;
 
     @GetMapping("/shoppingList")
-    public String shoppingList(){
+    public String shoppingList() {
         return "/member/shoppingList";
     }
 
     @GetMapping("/bookList")
-    public String bookList(HttpSession session, Model model){
-//        원래코드
-//        String memberEmail = (String) session.getAttribute("memberEmail");
-//        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
+    public String bookList(HttpSession session, Model model) {
+        String memberEmail = (String) session.getAttribute("memberEmail");
+        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
 
-//        테스트용 멤버
-        Optional<MemberEntity> memberEntity = ms.findByMemberId(1L);
-        System.out.println(memberEntity.get());
-        List<BookDetailDTO> list = bs.findByMemberEntity(memberEntity.get());
-        model.addAttribute("bookList",list);
+        System.out.println(memberEntity);
+        List<BookDetailDTO> list = bs.findByMemberEntity(memberEntity);
+        model.addAttribute("bookList", list);
 
 
         return "/member/bookList";
     }
 
     @GetMapping("/campingList")
-    public String campingList(){
+    public String campingList() {
         return "/member/campingList";
     }
 }
