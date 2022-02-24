@@ -32,7 +32,7 @@ public class CartDetailDTO {
         CartDetailDTO cartDetailDTO = new CartDetailDTO();
         cartDetailDTO.setProductId(cart.getProductEntity().getProductId());
         cartDetailDTO.setCartId(cart.getCartId());
-        cartDetailDTO.setMemberId(cart.getMemberEntity().getMemberId());
+//        cartDetailDTO.setMemberId(cart.getMemberEntity().getMemberId());
         cartDetailDTO.setCartPriceSum(cart.getCartPriceSum());
         cartDetailDTO.setCartAmount(cart.getCartAmount());
         cartDetailDTO.setProductName(cart.getProductEntity().getProductName());
@@ -51,7 +51,7 @@ public class CartDetailDTO {
         CartDetailDTO cartDetailDTO = new CartDetailDTO();
         cartDetailDTO.setProductId(cart.getProductEntity().getProductId());
         cartDetailDTO.setCartId(cart.getCartId());
-        cartDetailDTO.setMemberId(cart.getMemberEntity().getMemberId());
+//        cartDetailDTO.setMemberId(cart.getMemberEntity().getMemberId());
         cartDetailDTO.setCartPriceSum(cart.getCartPriceSum());
         cartDetailDTO.setCartAmount(cart.getCartAmount());
         cartDetailDTO.setProductName(cart.getProductEntity().getProductName());
