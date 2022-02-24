@@ -5,6 +5,8 @@ import com.icia.gangcamping.dto.*;
 import com.icia.gangcamping.entity.CartEntity;
 import com.icia.gangcamping.entity.MemberEntity;
 import com.icia.gangcamping.entity.ProductEntity;
+import com.icia.gangcamping.service.CommentService;
+import com.icia.gangcamping.repository.MemberRepository;
 import com.icia.gangcamping.service.MemberService;
 import com.icia.gangcamping.service.OrderService;
 import com.icia.gangcamping.service.ShoppingService;
@@ -29,141 +31,158 @@ import java.util.Optional;
 public class ShoppingController {
 
 
-     private final ShoppingService ss;
-     private final OrderService os;
-    private final MemberService ms;
-    private final HttpSession session;
+private final ShoppingService ss;
+private final OrderService os;
+private final CommentService cs;
+private final MemberService ms;
+private final HttpSession session;
+    private final MemberRepository mr;
+
+//상품목록
+@RequestMapping("shopping")
+public String shopping(@ModelAttribute GoodsDetailDTO goodsDetailDTO, Model model) {
+List<GoodsDetailDTO> goodsList = ss.findAll();
+model.addAttribute("goodsList", goodsList);
+//    Optional<MemberEntity> memberEntityOptional = ms.findById(goodsDetailDTO.getMemberId());
+//    MemberEntity memberEntity = memberEntityOptional.get();
+//    MemberDetailDTO memberDetailDTO = MemberDetailDTO.toMemberDetailDTO(memberEntity);
+//    model.addAttribute("memberDetailDTO", memberDetailDTO);
+return "shopping/shopping";
+}
+
+//상품 상세조회
+@GetMapping("{productId}")
+public String findById(@PathVariable("productId") Long productId, Model model) {
+GoodsDetailDTO goods = ss.findById(productId);
+model.addAttribute("goods", goods);
+List<CommentDetailDTO> commentList = cs.findAll(productId);
+model.addAttribute("commentList", commentList);
+return "shopping/shopdetail";
+}
 
 
 
-    //상품목록
-    @RequestMapping("shopping")
-    public String shopping(Model model) {
-        List<GoodsDetailDTO> goodsList = ss.findAll();
-        model.addAttribute("goodsList", goodsList);
-        return "shopping/shopping";
+
+
+
+
+
+// 상품등록 링크요청
+@GetMapping("goods")
+public String goodsForm() {
+return "shopping/goods";
+}
+
+
+//상품등록
+@PostMapping("goods")
+public String goods(@ModelAttribute GoodsSaveDTO goodsSaveDTO) throws IOException {
+Long productId = ss.save(goodsSaveDTO);
+System.out.println("goodsSaveDTO = " + goodsSaveDTO);
+return "redirect:/shopping/shopping";
+}
+
+
+// 장바구니 담기
+@GetMapping("cart")
+public String addCart(@ModelAttribute CartDetailDTO cartDetailDTO, Model model) {
+Optional<MemberEntity> memberEntity = ms.findById(cartDetailDTO.getMemberId());
+Optional<ProductEntity> productEntity = ss.findById1(cartDetailDTO.getProductId());
+CartDetailDTO cart = ss.findByMemberEntityAndProductEntity(memberEntity.get(), productEntity.get());
+Long productId = cartDetailDTO.getProductId();
+model.addAttribute("productId", productId);
+if (cart == null) {
+    CartDetailDTO CartDetailDTO = ss.addCart(cartDetailDTO, memberEntity.get(), productEntity.get());
+    List<CartDetailDTO> cartDetailDTOList = ss.findByMemberEntity(memberEntity.get());
+    model.addAttribute("cartList", cartDetailDTOList);
+    int cartPriceSum = 0;
+    int orderUnitNum = 0;
+    for (CartDetailDTO c : cartDetailDTOList) {
+        cartPriceSum += (c.getProductPrice() * c.getCartAmount());
+        orderUnitNum += c.getCartAmount();
+
+        System.out.println("c = " + c);
     }
-
-    //상품 상세조회
-    @GetMapping("{productId}")
-    public String findById(@PathVariable("productId") Long productId, Model model) {
-        GoodsDetailDTO goods = ss.findById(productId);
-        model.addAttribute("goods", goods);
-        return "shopping/shopdetail";
+    model.addAttribute("totalPrice", cartPriceSum);
+    model.addAttribute("orderUnitNum", orderUnitNum);
+    return "shopping/cart";
+} else {
+    List<CartDetailDTO> cartDetailDTOList = ss.findByMemberEntity(memberEntity.get());
+    model.addAttribute("cartList", cartDetailDTOList);
+    int cartPriceSum = 0;
+    int orderUnitNum = 0;
+    for (CartDetailDTO c : cartDetailDTOList) {
+        cartPriceSum += (c.getProductPrice() * c.getCartAmount());
+        orderUnitNum += c.getCartAmount();
+        System.out.println("c = " + c);
     }
+    model.addAttribute("totalPrice", cartPriceSum);
+    model.addAttribute("orderUnitNum", orderUnitNum);
 
+    return "shopping/cart";
+}
+}
 
-    @RequestMapping("shopdetail")
-    public String shopDetail() {
-        return "shopping/shopdetail";
+@GetMapping("cartview")
+public String cartview(Model model) {
+MemberEntity memberEntity = ms.findByMemberEmail((String) session.getAttribute("memberEmail"));
+List<CartDetailDTO> cartDetailDTOList = ss.findByMemberEntity(memberEntity);
+if (!cartDetailDTOList.isEmpty()) {
+    model.addAttribute("cartList", cartDetailDTOList);
+    int cartPriceSum = 0;
+    for (CartDetailDTO c : cartDetailDTOList) {
+        cartPriceSum += (c.getProductPrice() * c.getCartAmount());
+        System.out.println("c = " + c);
     }
+    model.addAttribute("totalPrice", cartPriceSum);
+}
+return "shopping/cart";
+}
 
 
-
-    @RequestMapping("order")
-    public String order() {
-        return "shopping/order";
-    }
-
-    @RequestMapping("complete")
-    public String complete() {
-        return "shopping/complete";
-    }
-
-    // 상품등록 링크요청
-    @GetMapping("goods")
-    public String goodsForm() {
-        return "shopping/goods";
-    }
+//장바구니삭제
+@DeleteMapping("{cartId}")
+public ResponseEntity cartDelete(@PathVariable Long cartId) {
+System.out.println("cartId = " + cartId);
+ss.deleteById(cartId);
+return new ResponseEntity(HttpStatus.OK);
+}
 
 
-    //상품등록
-    @PostMapping("goods")
-    public String goods(@ModelAttribute GoodsSaveDTO goodsSaveDTO) throws IOException {
-        Long productId = ss.save(goodsSaveDTO);
-        System.out.println("goodsSaveDTO = " + goodsSaveDTO);
-        return "redirect:/shopping/shopping";
-    }
+//장바구니 수량카운트
+@PutMapping("menu")
+@ResponseBody
+public String meunUpDown(@RequestParam("cartId") Long cartId, @RequestParam("type") String type) {
+String result = ss.meunUpDown(cartId, type);
+System.out.println("제발 넘어와" + cartId);
+return result;
+}
 
 
-
-
-    // 장바구니 담기
-    @GetMapping("cart")
-    public String addCart(@ModelAttribute CartDetailDTO cartDetailDTO, Model model){
-        Optional<MemberEntity> memberEntity = ms.findByMemberId(cartDetailDTO.getMemberId());
-        Optional<ProductEntity> productEntity = ss.findById1(cartDetailDTO.getProductId());
-        CartDetailDTO cart = ss.findByMemberEntityAndProductEntity(memberEntity.get(),productEntity.get());
-        Long productId = cartDetailDTO.getProductId();
-        model.addAttribute("productId",productId);
-        if(cart == null){
-            CartDetailDTO CartDetailDTO = ss.addCart(cartDetailDTO, memberEntity.get(), productEntity.get());
-            List<CartDetailDTO> cartDetailDTOList = ss.findByMemberEntity(memberEntity.get());
-            model.addAttribute("cartList", cartDetailDTOList);
-        int cartPriceSum = 0;
-        int orderUnitNum = 0;
-            for (CartDetailDTO c : cartDetailDTOList) {
-                cartPriceSum += (c.getProductPrice() * c.getCartAmount());
-                orderUnitNum += c.getCartAmount();
-
-                System.out.println("c = " + c);
-            }
-            model.addAttribute("totalPrice",cartPriceSum);
-            model.addAttribute("orderUnitNum",orderUnitNum);
-            return "shopping/cart";
-        }else {
-            List<CartDetailDTO> cartDetailDTOList = ss.findByMemberEntity(memberEntity.get());
-            model.addAttribute("cartList", cartDetailDTOList);
-            int cartPriceSum = 0;
-            int orderUnitNum = 0;
-            for (CartDetailDTO c : cartDetailDTOList) {
-                cartPriceSum += (c.getProductPrice() * c.getCartAmount());
-                orderUnitNum += c.getCartAmount();
-                System.out.println("c = " + c);
-            }
-            model.addAttribute("totalPrice",cartPriceSum);
-            model.addAttribute("orderUnitNum",orderUnitNum);
-
-            return "shopping/cart";
-        }
-    }
-
-    @GetMapping("cartview")
-    public String cartview(Model model){
-        MemberEntity memberEntity = ms.findByMemberEmail((String) session.getAttribute("memberEmail"));
-        List<CartDetailDTO> cartDetailDTOList = ss.findByMemberEntity(memberEntity);
-        if (!cartDetailDTOList.isEmpty()) {
-            model.addAttribute("cartList", cartDetailDTOList);
-            int cartPriceSum = 0;
-            for (CartDetailDTO c : cartDetailDTOList) {
-                cartPriceSum += (c.getProductPrice() * c.getCartAmount());
-                System.out.println("c = " + c);
-            }
-            model.addAttribute("totalPrice",cartPriceSum);
-        }
-        return "shopping/cart";
-    }
-
-
-
-    //장바구니삭제
-    @DeleteMapping("{cartId}")
-    public ResponseEntity cartDelete(@PathVariable Long cartId) {
-        System.out.println("cartId = " + cartId);
-        ss.deleteById(cartId);
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
-
-
-    //장바구니 수량카운트
-    @PutMapping("menu")
-    @ResponseBody
-        public String meunUpDown(@RequestParam("cartId") Long cartId, @RequestParam("type") String type){
-        String result = ss.meunUpDown(cartId, type);
-        System.out.println("제발 넘어와" + cartId);
-        return  result;
-    }
+@GetMapping("order")
+public String order(@ModelAttribute OrderDetailDTO orderDetailDTO,Model model) {
+    System.out.println(orderDetailDTO);
+Optional<MemberEntity> memberEntity = ms.findById(orderDetailDTO.getMemberId());
+List<CartDetailDTO> cartDetailDTOList = ss.findByMemberEntity(memberEntity.get());
+model.addAttribute("cartList", cartDetailDTOList);
+    MemberDetailDTO memberDetailDTO = MemberDetailDTO.toMemberDetailDTO(memberEntity.get());
+    model.addAttribute("memberDetailDTO", memberDetailDTO);
+int orderUnitNum = 0;
+int orderTotalFee = 0;
+String orderPayType = "";
+String menuList = "";
+String GoodsName = "";
+for (CartDetailDTO c : cartDetailDTOList) {
+    orderTotalFee += (c.getProductPrice() * c.getCartAmount());
+    System.out.println("c = " + c);
+    menuList += c.getProductName();
+    orderUnitNum += c.getCartAmount();
+    GoodsName += c.getProductName();
+}
+model.addAttribute("menu", menuList);
+model.addAttribute("orderTotalFee", orderTotalFee);
+model.addAttribute("GoodsName", GoodsName);
+model.addAttribute("orderDetailDTO", orderDetailDTO);
 
 
 
@@ -190,15 +209,25 @@ public class ShoppingController {
 //        return "shopping/order";
 //    }
 
+return "shopping/order";
+}
 
-    // 카카오페이 구매
-	@PostMapping("pay")
-	public String pay(@ModelAttribute OrderSaveDTO orderSaveDTO, Model model) {
-		Long result = os.save(orderSaveDTO);
-        OrderDetailDTO orderDetailDTO = os.findById(result);
-        model.addAttribute("order", orderDetailDTO);
-		return "redirect:/shopping/complete";
-	}
+
+
+// 카카오페이 구매
+@PostMapping("pay")
+public String pay(@ModelAttribute OrderSaveDTO orderSaveDTO, Model model) {
+    Long result = os.save(orderSaveDTO);
+OrderDetailDTO orderDetailDTO = os.findById(result);
+    Optional<MemberEntity> memberEntityOptional = ms.findById(orderDetailDTO.getMemberId());
+    MemberEntity memberEntity = memberEntityOptional.get();
+    MemberDetailDTO memberDetailDTO = MemberDetailDTO.toMemberDetailDTO(memberEntity);
+    model.addAttribute("memberDetailDTO", memberDetailDTO);
+model.addAttribute("orderDetailDTO", orderDetailDTO);
+model.addAttribute("MemberDetailDTO", memberDetailDTO);
+    System.out.println("제발 나와라잉"+orderDetailDTO);
+return "shopping/complete";
+}
 
 
 }

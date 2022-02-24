@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-//@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -42,8 +41,6 @@ public class ProductEntity {
     private List<StockEntity> stockEntityList = new ArrayList<>();
     @OneToMany(mappedBy = "productEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<CartEntity> cartEntityList = new ArrayList<>();
-    @OneToMany(mappedBy = "productEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<OrderEntity> orderEntityList = new ArrayList<>();
     @OneToMany(mappedBy = "productEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<ShoppingLikeEntity> shoppingLikeEntityArrayList = new ArrayList<>();
     @OneToMany(mappedBy = "productEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)

@@ -1,17 +1,18 @@
 package com.icia.gangcamping.entity;
 
+import com.icia.gangcamping.dto.CommentSaveDTO;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-@ToString
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Getter
 @Setter
 @Table(name = "question_table")
-public class QuestionEntity {
+public class QuestionEntity extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name = "questionId")
@@ -31,6 +32,20 @@ public class QuestionEntity {
 
     @OneToOne(mappedBy = "questionEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private AnswerEntity answerEntity;
+
+
+    public static QuestionEntity toSaveEntity(CommentSaveDTO commentSaveDTO,MemberEntity memberEntity,ProductEntity productEntity) {
+        QuestionEntity questionEntity = new QuestionEntity();
+        questionEntity.setMemberEntity(memberEntity);
+        questionEntity.setProductEntity(productEntity);
+        questionEntity.setQuestionContents(commentSaveDTO.getQuestionContents());
+        return questionEntity;
+    }
+
+
+
+
+
 
 
 }

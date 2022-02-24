@@ -1,10 +1,11 @@
 package com.icia.gangcamping.entity;
 
+import com.icia.gangcamping.dto.ReviewSaveDTO;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-@ToString
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -24,14 +25,19 @@ public class ReviewEntity extends BaseEntity{
     private MemberEntity memberEntity;
     @Column
     @NotNull
-    private String reviewTitle;
-    @Column
-    @NotNull
     private String reviewContents;
     @Column
     @NotNull
     private double reviewStar;
-    @Column
-    @NotNull
-    private String reviewFileName;
+
+    public static ReviewEntity toReviewEntity(ReviewSaveDTO reviewSaveDTO,CampingEntity campingEntity,MemberEntity memberEntity) {
+        ReviewEntity entity = new ReviewEntity();
+        entity.setCampingEntity(campingEntity);
+        entity.setMemberEntity(memberEntity);
+        entity.setReviewContents(reviewSaveDTO.getReviewContents());
+        entity.setReviewStar(reviewSaveDTO.getReviewStar());
+        entity.setReviewContents(reviewSaveDTO.getReviewContents());
+
+        return entity;
+    }
 }

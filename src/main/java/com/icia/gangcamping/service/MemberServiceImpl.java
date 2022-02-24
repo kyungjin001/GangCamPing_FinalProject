@@ -24,12 +24,13 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public MemberEntity findByMemberEmail(String memberEmail) {
-        return null;
+        return mr.findByMemberEmail(memberEmail);
     }
 
     @Override
     public Optional<MemberEntity> findByMemberId(Long memberId) {
-        return Optional.empty();
+
+        return mr.findById(memberId);
     }
 
     @Override
@@ -61,11 +62,9 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public MemberDetailDTO findById(Long memberId) {
-        MemberEntity memberEntity = mr.findById(memberId).get();
-        MemberDetailDTO memberDetailDTO = MemberDetailDTO.toMemberDetailDTO(memberEntity);
+    public Optional<MemberEntity> findById(Long memberId) {
 
-        return memberDetailDTO;
+        return mr.findById(memberId);
     }
 
     @Override
@@ -111,6 +110,7 @@ public class MemberServiceImpl implements MemberService{
 //        MemberEntity memberEntity = MemberEntity.toUpdateMember(memberUpdateDTO);
 //        return mr.save(memberEntity).getMemberId();
 //    }
+
 
 
 }

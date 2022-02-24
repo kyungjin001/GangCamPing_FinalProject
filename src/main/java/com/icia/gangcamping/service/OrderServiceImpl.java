@@ -1,5 +1,6 @@
 package com.icia.gangcamping.service;
 
+import com.icia.gangcamping.dto.MemberDetailDTO;
 import com.icia.gangcamping.dto.OrderDetailDTO;
 import com.icia.gangcamping.dto.OrderSaveDTO;
 import com.icia.gangcamping.entity.MemberEntity;
@@ -29,7 +30,7 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public Long save(OrderSaveDTO orderSaveDTO) {
-
+        System.out.println(orderSaveDTO);
         Optional<MemberEntity> memberEntity = mr.findById(orderSaveDTO.getMemberId());
         OrderEntity orderEntity = OrderEntity.toSaveEntity(orderSaveDTO,memberEntity.get());
         Long result =  or.save(orderEntity).getOrderId();
@@ -42,6 +43,8 @@ public class OrderServiceImpl implements OrderService{
         OrderDetailDTO orderDetailDTO = OrderDetailDTO.toOrderDetailDTO(orderEntity);
         return orderDetailDTO;
     }
+
+
 
 
 }

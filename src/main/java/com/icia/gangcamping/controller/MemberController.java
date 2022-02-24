@@ -39,6 +39,7 @@ public class MemberController {
         return "index";
     }
 
+
 //    @PostMapping("save")
 //    public String save(@Validated @ModelAttribute("member") MemberSaveDTO memberSaveDTO, BindingResult bindingResult) throws IOException {
 //        if(bindingResult.hasErrors()) {
@@ -64,11 +65,13 @@ public class MemberController {
     public String login(@Validated @ModelAttribute("login") MemberLoginDTO memberLoginDTO, HttpSession session){
 
         boolean loginResult = ms.login(memberLoginDTO);
+
         if(ms.login(memberLoginDTO)){
             session.setAttribute("loginEmail", memberLoginDTO.getMemberEmail());
             return "member/mypage";
         } else {
             return "index";
+
         }
     }
 
@@ -80,6 +83,7 @@ public class MemberController {
         String result = ms.emailDp(memberEmail);
         return result;
     }
+
 
     //마이페이지
     @GetMapping("/mypage")
@@ -94,6 +98,8 @@ public class MemberController {
         return "member/mypage";
 
     }
+
+
 
     @GetMapping("/update")
     public String updateForm(Model model, HttpSession session) {
@@ -166,6 +172,8 @@ public class MemberController {
 
     @GetMapping("/bookList")
     public String bookList() {
+
+
         return "member/bookList";
     }
 
