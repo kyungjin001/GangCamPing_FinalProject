@@ -17,7 +17,7 @@ public interface MemberService {
     Long save(MemberSaveDTO memberSaveDTO);
 
     Long findByMemberId(String memberEmail);
-    Optional<MemberEntity> findById(Long memberId);
+    MemberDetailDTO findById(Long memberId);
 
 
     MemberDetailDTO findByEmail(String memberEmail);

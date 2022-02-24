@@ -161,7 +161,7 @@ return result;
 @GetMapping("order")
 public String order(@ModelAttribute OrderDetailDTO orderDetailDTO,Model model) {
     System.out.println(orderDetailDTO);
-Optional<MemberEntity> memberEntity = ms.findById(orderDetailDTO.getMemberId());
+Optional<MemberEntity> memberEntity = mr.findById(orderDetailDTO.getMemberId());
 List<CartDetailDTO> cartDetailDTOList = ss.findByMemberEntity(memberEntity.get());
 model.addAttribute("cartList", cartDetailDTOList);
     MemberDetailDTO memberDetailDTO = MemberDetailDTO.toMemberDetailDTO(memberEntity.get());
@@ -218,7 +218,7 @@ return "shopping/order";
 public String pay(@ModelAttribute OrderSaveDTO orderSaveDTO, Model model) {
     Long result = os.save(orderSaveDTO);
 OrderDetailDTO orderDetailDTO = os.findById(result);
-    Optional<MemberEntity> memberEntityOptional = ms.findById(orderDetailDTO.getMemberId());
+    Optional<MemberEntity> memberEntityOptional = mr.findById(orderDetailDTO.getMemberId());
     MemberEntity memberEntity = memberEntityOptional.get();
     MemberDetailDTO memberDetailDTO = MemberDetailDTO.toMemberDetailDTO(memberEntity);
     model.addAttribute("memberDetailDTO", memberDetailDTO);

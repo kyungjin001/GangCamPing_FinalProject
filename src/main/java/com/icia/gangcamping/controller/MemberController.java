@@ -68,9 +68,9 @@ public class MemberController {
 
         if(ms.login(memberLoginDTO)){
             session.setAttribute("loginEmail", memberLoginDTO.getMemberEmail());
-            return "member/mypage";
+            return "redirect:/";
         } else {
-            return "index";
+            return "redirect:/";
 
         }
     }

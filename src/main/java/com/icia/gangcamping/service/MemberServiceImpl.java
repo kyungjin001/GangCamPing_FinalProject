@@ -62,9 +62,9 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public Optional<MemberEntity> findById(Long memberId) {
-
-        return mr.findById(memberId);
+    public MemberDetailDTO findById(Long memberId) {
+        MemberDetailDTO member = MemberDetailDTO.toMemberDetailDTO(mr.findById(memberId).get());
+        return member;
     }
 
     @Override
