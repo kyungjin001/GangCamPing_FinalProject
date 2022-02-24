@@ -1,12 +1,10 @@
 package com.icia.gangcamping.service;
 
 
-import com.icia.gangcamping.dto.MemberDetailDTO;
-import com.icia.gangcamping.dto.MemberLoginDTO;
-import com.icia.gangcamping.dto.MemberSaveDTO;
-import com.icia.gangcamping.dto.MemberUpdateDTO;
+import com.icia.gangcamping.dto.*;
 import com.icia.gangcamping.entity.MemberEntity;
 
+import java.io.IOException;
 import java.util.Optional;
 
 public interface MemberService {
@@ -27,11 +25,13 @@ public interface MemberService {
 
     String pwMailCheck(String memberEmail);
 
-
-    Long update(MemberUpdateDTO memberUpdateDTO);
+    Long update(MemberUpdateDTO memberUpdateDTO) throws IllegalStateException, IOException;
 
     String emailDp(String memberEmail);
 
+    void deleteById(Long memberId);
 
-    Long updateAddr(MemberUpdateAddrDTO memberUpdateAddrDTO);
+//    Long updateAddr(MemberUpdateAddrDTO memberUpdateAddrDTO);
+
+//    Long confirmPW(MemberUpdateDTO memberUpdateDTO);
 }

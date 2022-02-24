@@ -35,4 +35,5 @@ public interface ShoppingService{
     CartDetailDTO findByMemberEntityAndProductEntity(MemberEntity memberEntity, ProductEntity productEntity);
 
     String meunUpDown(Long cartId, String type);
+
 }

@@ -4,6 +4,8 @@ package com.icia.gangcamping.controller;
 import com.icia.gangcamping.dto.*;
 import com.icia.gangcamping.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+
+import static com.icia.gangcamping.common.SessionConst.LOGIN_EMAIL;
+
 
 
 @Controller
@@ -79,7 +84,13 @@ public class MemberController {
     //마이페이지
     @GetMapping("/mypage")
     public String mypage() {
+        return "member/mypage";
+    }
 
+    @GetMapping("{memberId}")
+    public String findById(@PathVariable("memberId") Long memberId, Model model) {
+        MemberDetailDTO member = ms.findById(memberId);
+        model.addAttribute("member", member);
         return "member/mypage";
 
     }
@@ -94,12 +105,56 @@ public class MemberController {
         return "member/update";
     }
 
-    @PostMapping("/updateAddr")
-    public String updateAddr(@RequestParam String memberAddr, MemberUpdateAddrDTO memberUpdateAddrDTO){
-        Long memberId = ms.updateAddr(memberUpdateAddrDTO);
-        return "member/update";
+//    @PostMapping("/updateAddr")
+//    public String updateAddr(@RequestParam String memberAddr, MemberUpdateAddrDTO memberUpdateAddrDTO){
+//        Long memberId = ms.updateAddr(memberUpdateAddrDTO);
+//        return "member/update";
+//    }
+
+//    @PostMapping("/update")
+//    public String update(@ModelAttribute MemberUpdateDTO memberUpdateDTO) {
+//        Long memberId = ms.update(memberUpdateDTO);
+//        return "member/update";
+//        return "redirect:/member/" + memberUpdateDTO.getMemberId();
+//    }
+
+
+    @PutMapping("/{memberId}")
+    public ResponseEntity update(@ModelAttribute MemberUpdateDTO memberUpdateDTO) throws IllegalStateException, IOException{
+        System.out.println(memberUpdateDTO);
+        Long memberId = ms.update(memberUpdateDTO);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
+
+    @GetMapping("/confirmPW")
+    public String confirmPWForm(Model model, HttpSession session) {
+        System.out.println(session.getAttribute("loginEmail"));
+        String memberEmail = (String) session.getAttribute("loginEmail");
+        MemberDetailDTO member = ms.findByEmail(memberEmail);
+        model.addAttribute("member", member);
+        System.out.println(member);
+        return "member/confirmPW";
+    }
+
+//    @PutMapping("/{memberId}")
+//    public ResponseEntity confirmPW(@ModelAttribute MemberUpdateDTO memberUpdateDTO) throws IllegalStateException, IOException{
+//        System.out.println(memberUpdateDTO);
+//        Long memberId = ms.update(memberUpdateDTO);
+//        return new ResponseEntity(HttpStatus.OK);
+//    }
+
+    @DeleteMapping("/{memberId}")
+    public String deleteById(@PathVariable("memberId") Long memberId){
+        ms.deleteById(memberId);
+        return "index";
+    }
+
+//    @DeleteMapping("/{memberId}")
+//    public ResponseEntity deleteById(@PathVariable("memberId") Long memberId){
+//        ms.deleteById(memberId);
+//        return new ResponseEntity(HttpStatus.OK);
+//    }
 
 
     //로그아웃
@@ -152,9 +207,5 @@ public class MemberController {
         return "member/shoppingLike";
     }
 
-    @GetMapping("/confirmPW")
-    public String confirmPW() {
-        return "member/confirmPW";
-    }
 
 }

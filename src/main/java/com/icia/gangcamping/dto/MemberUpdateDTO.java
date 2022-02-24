@@ -13,7 +13,7 @@ public class MemberUpdateDTO {
     private String memberEmail;
     private String memberPw;
     private String memberName;
-    private String memberPhone;
     private String memberAddr;
+    private String memberPhone;
 
 }

@@ -1,14 +1,12 @@
 package com.icia.gangcamping.service;
 
-import com.icia.gangcamping.dto.MemberDetailDTO;
-import com.icia.gangcamping.dto.MemberLoginDTO;
-import com.icia.gangcamping.dto.MemberSaveDTO;
-import com.icia.gangcamping.dto.MemberUpdateDTO;
+import com.icia.gangcamping.dto.*;
 import com.icia.gangcamping.entity.MemberEntity;
 import com.icia.gangcamping.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @Service
@@ -42,8 +40,8 @@ public class MemberServiceImpl implements MemberService{
                 return true;
             }else {
                 return false;
-            }
-        } else {
+            }}
+        else {
             return false;
         }
     }
@@ -81,8 +79,10 @@ public class MemberServiceImpl implements MemberService{
         }
     }
 
+
+
     @Override
-    public Long update(MemberUpdateDTO memberUpdateDTO) {
+    public Long update(MemberUpdateDTO memberUpdateDTO) throws IllegalStateException, IOException {
         MemberEntity memberEntity = MemberEntity.toUpdateMember(memberUpdateDTO);
         return mr.save(memberEntity).getMemberId();
     }
@@ -97,9 +97,20 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public Long updateAddr(MemberUpdateAddrDTO memberUpdateAddrDTO) {
-        return null;
+    public void deleteById(Long memberId) {
+        mr.deleteById(memberId);
     }
+
+//    @Override
+//    public Long updateAddr(MemberUpdateAddrDTO memberUpdateAddrDTO) {
+//        return null;
+//    }
+
+//    @Override
+//    public Long confirmPW(MemberUpdateDTO memberUpdateDTO) {
+//        MemberEntity memberEntity = MemberEntity.toUpdateMember(memberUpdateDTO);
+//        return mr.save(memberEntity).getMemberId();
+//    }
 
 
 }
