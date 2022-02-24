@@ -23,7 +23,7 @@ public class MainController {
     private final ReviewService rs;
     private final ReviewRepository rr;
 
-    @RequestMapping("about.html")
+    @RequestMapping("about")
     public String osf() {
         return "about";
     }
@@ -33,7 +33,7 @@ public class MainController {
         return "elements";
     }
 
-    @RequestMapping("contact.html")
+    @RequestMapping("contact")
     public String cof() {
         return "contact";
     }
@@ -74,7 +74,11 @@ public class MainController {
             }else {
                 System.out.println(rnd+"/"+max);
                 ReviewDetailDTO dto = rs.findById(rnd);
-                reviewList.add(dto);
+                if(dto.getCampingFileName()==null){
+                    i = i-1;
+                }else {
+                    reviewList.add(dto);
+                }
             }
         }
 

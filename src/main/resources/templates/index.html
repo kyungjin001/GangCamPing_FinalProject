@@ -730,13 +730,13 @@
                             <div class="footer_title">검색 태그</div>
                             <div class="footer_content footer_tags">
                                 <ul class="tags_list clearfix">
-                                    <li class="tag_item"><a href="#">차박</a></li>
-                                    <li class="tag_item"><a href="#">오지캠핑</a></li>
-                                    <li class="tag_item"><a href="#">오토캠핑장</a></li>
-                                    <li class="tag_item"><a href="#">카라반</a></li>
-                                    <li class="tag_item"><a href="#">캠핑카</a></li>
-                                    <li class="tag_item"><a href="#">글램핑</a></li>
-                                    <li class="tag_item"><a href="#">이부분은 검색쿼리로 링크</a></li>
+                                    <li class="tag_item"><a th:href="@{|/search/camping?keword=야영|}">야영</a></li>
+                                    <li class="tag_item"><a href="/search/camping?keyword=오지">오지캠핑</a></li>
+                                    <li class="tag_item"><a href="/search/camping?keyword=오토">오토캠핑장</a></li>
+                                    <li class="tag_item"><a href="/search/camping?keyword=카라반">카라반</a></li>
+                                    <li class="tag_item"><a href="/search/camping?keyword=캠핑카">캠핑카</a></li>
+                                    <li class="tag_item"><a href="/search/camping?keyword=글램핑">글램핑</a></li>
+
 
                                 </ul>
                             </div>
@@ -776,7 +776,7 @@
                                             <div class="contact_info_icon"><img src="/images/planet-earth.svg" alt="">
                                             </div>
                                         </div>
-                                        <div class="contact_info_text"><a href="https://colorlib.com">https://github.com/kyungjin001/GangCamPing_FinalProject</a>
+                                        <div class="contact_info_text"><a href="https://github.com/kyungjin001/GangCamPing_FinalProject">https://github.com/kyungjin001/GangCamPing_FinalProject</a>
                                         </div>
                                     </li>
                                 </ul>
@@ -822,7 +822,29 @@
         </div>
 
     </div>
+<!-- top button -->
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+<script>
+    //Get the button:
+    mybutton = document.getElementById("myBtn");
 
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
+</script>
     <!-- 모달 시작! -->
 
 
