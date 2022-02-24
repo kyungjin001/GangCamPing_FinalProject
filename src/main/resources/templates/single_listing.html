@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Single Listing</title>
 <meta charset="utf-8">
@@ -14,12 +14,6 @@
 <link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/animate.css">
 <link rel="stylesheet" type="text/css" href="/styles/single_listing_styles.css">
 <link rel="stylesheet" type="text/css" href="/styles/single_listing_responsive.css">
-	<link rel="stylesheet" href="/dist/css/datepicker.min.css">
-	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-	<script src="/jquery-3.1.1.min.js"></script>
-	<script src="/dist/js/datepicker.min.js"></script>
-	<script src="/dist/js/i18n/datepicker.ko.js"></script>
-
 </head>
 
 <body>
@@ -670,19 +664,22 @@
 							<!-- Title -->
 							<div class="hotel_title_container d-flex flex-lg-row flex-column">
 								<div class="hotel_title_content">
-									<h1 class="hotel_title"><a th:text="${campingDetail.campingName}"></a></h1>
-									<div class="rating_r rating_r_4 hotel_rating">
-										<i></i>
-										<i></i>
-										<i></i>
-										<i></i>
-										<i></i>
-									</div>
+									<form action="/book/reservation" method="post">
+									<h1 class="hotel_title" ><a th:text="${campingDetail.campingName}"></a></h1>
 									<div class="hotel_location"><a th:text="${campingDetail.campingAddr}"></a></div>
+									<div class="review_title" name="bookPrice">per night: 170,000</div>
 								</div>
 								<div class="hotel_title_button ml-lg-auto text-lg-right">
-									<div class="button book_button trans_200"><a data-toggle="modal" data-target="#dateChoice">book<span></span><span></span><span></span></a></div>
+									<div class="button book_button trans_200"><a type="submit" href="#">book<span></span><span></span><span></span></a></div>
+
 									<div class="hotel_map_link_container">
+										<div>
+											<span>체크인 : <p type="hidden" name="bookCheckIn" th:text="|${#dates.format(campingDetail.checkInDate,'yyyy-MM-dd')}|"></p></span>
+											<span>체크아웃 : <p type="hidden" name="bookCheckOut" th:text="|${#dates.format(campingDetail.checkOutDate, 'yyyy-MM-dd')}|"></p></span>
+											<p type="hidden"  th:value="${campingDetail.getCampingId()}"></p>
+											<p type="hidden" th:value="${session.loginId}"></p>
+										</div>
+										</form>
 <!--										지도연동부분-->
 										<div class="hotel_map_link"><a href="#location">Location On Map</a></div>
 									</div>
@@ -816,7 +813,7 @@
 							<!-- Hotel Info Text  가능하면 api로 기능구현해봄-->
 
 							<div class="hotel_info_text" onload="">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu convallis tortor. Suspendisse potenti. In faucibus massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu convallis tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis vulputate eros, iaculis consequat nisl. Nunc et suscipit urna. Integer elementum orci eu vehicula pretium. Donec bibendum tristique condimentum. Aenean in lacus ligula. Phasellus euismod gravida eros. Aenean nec ipsum aliquet, pharetra magna id, interdum sapien. Etiam id lorem eu nisl pellentesque semper. Nullam tincidunt metus placerat, suscipit leo ut, tempus nulla. Fusce at eleifend tellus. Ut eleifend dui nunc, non fermentum quam placerat non. Etiam venenatis nibh augue, sed eleifend justo tristique eu</p>
+								<p type="text" th:value="${campingDetail.getCampingInfo()}"></p>
 							</div>
 
 							<!-- Hotel Info Tags 이미지만 수정 -->
@@ -834,12 +831,12 @@
 						
 						<!-- Rooms 객실정보 디비에 데이터부터 입력필요-->
 
-						<div class="rooms">
+						<!--<div class="rooms">
 
-							<!-- Room -->
+							&lt;!&ndash; Room &ndash;&gt;
 							<div class="room">
 
-								<!-- Room -->
+								&lt;!&ndash; Room &ndash;&gt;
 								<div class="row">
 									<div class="col-lg-2">
 										<div class="room_image"><img src="/images/room_1.jpg" alt="https://unsplash.com/@grovemade"></div>
@@ -860,10 +857,10 @@
 								</div>	
 							</div>
 
-							<!-- Room -->
+							&lt;!&ndash; Room &ndash;&gt;
 							<div class="room">
 
-								<!-- Room -->
+								&lt;!&ndash; Room &ndash;&gt;
 								<div class="row">
 									<div class="col-lg-2">
 										<div class="room_image"><img src="/images/room_2.jpg" alt="https://unsplash.com/@oowgnuj"></div>
@@ -884,7 +881,7 @@
 								</div>	
 							</div>
 
-						</div>
+						</div>-->
 
 						<!-- Reviews -->
 
@@ -1124,107 +1121,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="modal fade" id="dateChoice" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title"style="" id="exampleModalLabel">예약하기</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body" id="ui-datepicker-div">
-					<form action="/comment/campingReviewSave" method="post" >
-						<div class="double">
-							<input id="datepicker1" type="text" placeholder="체크인" readonly>
-							<input id="datepicker2" type="text" placeholder="체크아웃" readonly>
-						</div>
-
-						<script>
-							//한개만 단순하게 만들때
-							$("#datepicker").datepicker({
-								language: 'ko'
-							});
-
-							//두개짜리 제어 연결된거 만들어주는 함수
-							datePickerSet($("#datepicker1"), $("#datepicker2"), true); //다중은 시작하는 달력 먼저, 끝달력 2번째
-
-							function datePickerSet(sDate, eDate, flag) {
-
-								//시작 ~ 종료 2개 짜리 달력 datepicker
-								if (!isValidStr(sDate) && !isValidStr(eDate) && sDate.length > 0 && eDate.length > 0) {
-									var sDay = sDate.val();
-									var eDay = eDate.val();
-
-									if (flag && !isValidStr(sDay) && !isValidStr(eDay)) { //처음 입력 날짜 설정, update...
-										var sdp = sDate.datepicker().data("datepicker");
-										sdp.selectDate(new Date(sDay.replace(/-/g, "/")));  //익스에서는 그냥 new Date하면 -을 인식못함 replace필요
-
-										var edp = eDate.datepicker().data("datepicker");
-										edp.selectDate(new Date(eDay.replace(/-/g, "/")));  //익스에서는 그냥 new Date하면 -을 인식못함 replace필요
-									}
-
-									//시작일자 세팅하기 날짜가 없는경우엔 제한을 걸지 않음
-									if (!isValidStr(eDay)) {
-										sDate.datepicker({
-											maxDate: new Date(eDay.replace(/-/g, "/"))
-										});
-									}
-									sDate.datepicker({
-										language: 'ko',
-										autoClose: true,
-										onSelect: function () {
-											datePickerSet(sDate, eDate);
-										}
-									});
-
-									//종료일자 세팅하기 날짜가 없는경우엔 제한을 걸지 않음
-									if (!isValidStr(sDay)) {
-										eDate.datepicker({
-											minDate: new Date(sDay.replace(/-/g, "/"))
-										});
-									}
-									eDate.datepicker({
-										language: 'ko',
-										autoClose: true,
-										onSelect: function () {
-											datePickerSet(sDate, eDate);
-										}
-									});
-
-									//한개짜리 달력 datepicker
-								} else if (!isValidStr(sDate)) {
-									var sDay = sDate.val();
-									if (flag && !isValidStr(sDay)) { //처음 입력 날짜 설정, update...
-										var sdp = sDate.datepicker().data("datepicker");
-										sdp.selectDate(new Date(sDay.replace(/-/g, "/"))); //익스에서는 그냥 new Date하면 -을 인식못함 replace필요
-									}
-
-									sDate.datepicker({
-										language: 'ko',
-										autoClose: true
-									});
-								}
-
-
-								function isValidStr(str) {
-									if (str == null || str == undefined || str == "")
-										return true;
-									else
-										return false;
-								}
-							}
-						</script>
-
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary">Comment</button>
-				</div>
-				</form>
 			</div>
 		</div>
 	</div>

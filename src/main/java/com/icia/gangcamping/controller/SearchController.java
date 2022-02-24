@@ -11,13 +11,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -83,24 +86,43 @@ public class SearchController {
     }
 
     @GetMapping("/camping")
-    public String indexSearch(Model model, @RequestParam(value = "keyword",required = false)String keyword) throws IOException, ParseException {
-        System.out.println(keyword);
-         if(keyword==null){
-             keyword = "캠핑";
-             List<CampingDetailDTO> campingDetailDTOList = this.searchList(keyword);
-             model.addAttribute("searchList",campingDetailDTOList);
-         }else{
+    public String indexSearch(Model model, HttpSession session, @RequestParam(value = "keyword",required = false)String keyword,
+                              @RequestParam(value = "checkInDate",required = false)String checkInDate, @RequestParam(value = "checkOutDate",required = false)String checkOutDate) throws IOException, ParseException {
+        System.out.println(checkInDate+"/"+checkOutDate);
+        if(keyword==null){
+            keyword = "캠핑";
             List<CampingDetailDTO> campingDetailDTOList = this.searchList(keyword);
-             model.addAttribute("searchList",campingDetailDTOList);
-         }
+            model.addAttribute("searchList",campingDetailDTOList);
+        }else{
+            List<CampingDetailDTO> campingDetailDTOList = this.searchList(keyword);
+            model.addAttribute("searchList",campingDetailDTOList);
+            session.setAttribute("checkInDate" ,checkInDate);
+            session.setAttribute("checkOutDate" ,checkOutDate);
+
+        }
         return "offers";
     }
     @GetMapping("/searchDetail/{campingName}")
-    public String detail(@PathVariable String campingName,Model model){
+    public String detail(@PathVariable String campingName,Model model,HttpSession session) throws java.text.ParseException {
         System.out.println("searchController");
+        String name = campingName.replace(" ","");
+        CampingDetailDTO campingDetailDTO = cs.findByCampingName(name);
+        if(campingDetailDTO.getCampingFileName()==null){
+            campingDetailDTO.setCampingFileName("/images/noImage.jpg");
+        }
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date checkInDate = format.parse((String) session.getAttribute("checkInDate"));
+        Date checkOutDate = format.parse((String) session.getAttribute("checkOutDate"));
+        long pried1 = (checkInDate.getTime()-checkOutDate.getTime()) / 1000;
+        long pried = pried1/(24*60*60);
+        long pried2 = pried+1;
+        System.out.println(pried+"박"+ pried2+"일");
 
-         CampingDetailDTO campingDetailDTO = cs.findByCampingName(campingName);
-         model.addAttribute("campingDetail",campingDetailDTO);
+
+        campingDetailDTO.setCheckInDate(checkInDate);
+        campingDetailDTO.setCheckOutDate(checkOutDate);
+
+        model.addAttribute("campingDetail",campingDetailDTO);
         System.out.println(campingDetailDTO.toString());
 
 
