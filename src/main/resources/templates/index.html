@@ -14,6 +14,8 @@
     <link rel="stylesheet" type="text/css" href="/styles/main_styles.css">
     <link rel="stylesheet" type="text/css" href="/styles/responsive.css">
 
+
+
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
         let id = "";
@@ -26,12 +28,11 @@
             $.ajax({
                 type: 'post',
                 url: '/mail/pwMailCheck',
-                data: {"memberEmail": mail},
+                data: {"memberEmail":mail},
                 dataType: 'text',
-                success: function (result) {
-                    if (result == 'ok') {
-
-                    } else {
+                success: function (result){
+                    if(result=='ok'){
+                    }else{
                         alert("이메일을 다시 확인해주세요.")
                     }
                 },
@@ -110,6 +111,58 @@
     </script>
 
 
+    <script>
+        /* 아이디 입력을 하는 동안에 idDuplicate() 함수를 호출하고 입력된 값을 콘솔에 출력 */
+        function emailDp(){
+            const id = document.getElementById('memberEmail').value;
+            console.log(id);
+            const checkResult = document.getElementById('email_Dp');
+            $.ajax({
+                type: 'post', // 전송방식(get, post, put 등)
+                url: '/member/emailDp', // 요청주소(controller로 요청하는 주소)
+                data: {'memberEmail': id},  // 전송할 데이터
+                dataType: 'text', // 요청 후 리턴받을 때의 데이터 형식
+                success: function(result) { // 요청이 성공적으로 처리됐을때 실행 할 함수
+                    console.log('ajax 성공');
+                    console.log(result); // MemberController에서 넘어온 result값 찍어보기(ok or no)
+                    if(result=="ok"){
+                        checkResult.style.color = 'green';
+                        checkResult.innerHTML = '멋진 아이디네요!!';
+                    } else {
+                        checkResult.style.color = 'red';
+                        checkResult.innerHTML = '이미 사용중인 아이디입니다.';
+                    }
+                },
+                error: function() { // 요청이 실패했을때 실행 할 함수
+                    console.log('오타 찾으세요.');
+                }
+            });
+        }
+    </script>
+    <script type="text/javascript">
+        $(function(){
+            $("#alert-success").hide();
+            $("#alert-danger").hide();
+            $("input").keyup(function(){
+                var pwd1=$("#pwd1").val();
+                var pwd2=$("#pwd2").val();
+                if(pwd1 != "" || pwd2 != ""){
+                    if(pwd1 == pwd2){
+                        $("#alert-success").show();
+                        $("#alert-danger").hide();
+                        $("#submit").removeAttr("disabled");
+                    }else{
+                        $("#alert-success").hide();
+                        $("#alert-danger").show();
+                        $("#submit").attr("disabled", "disabled");
+                    }
+                }
+            });
+        });
+    </script>
+
+
+
 </head>
 
 <body>
@@ -153,14 +206,19 @@
                             </div>
                             </span>
                             <span th:if="(${session.loginEmail}!=null) ">
+
+
+                            <div class="user_box_login user_box_link">	<a class="nav-link" href="/member/logout"
+
                             <div class="user_box_login user_box_link">	<a class="nav-link" href="/member/logOut"
+
                                                                              style="font-size: 15px">
                                 LogOut
                             </a></div>
                             </span>
                             <span th:if="${session['userId'] != null}">
                                <div class="user_box_login user_box_link"> <a class="nav-link"
-                                                                             href="http://localhost:8098/logout"
+                                                                             href="http://localhost:8098/member/logout"
                                                                              style="font-size: 15px">
                                    LogOut</a>
                                </div>
@@ -552,6 +610,7 @@
         </div>
     </div>
 
+
     <!-- Testimonials -->
 
     <div class="testimonials">
@@ -561,6 +620,7 @@
                 <div class="col text-center">
                     <h2 class="section_title">고객리뷰 베스트</h2>
                 </div>
+
             </div>
             <div class="row">
                 <div class="col">
@@ -849,6 +909,7 @@
         </div>
 
     </div>
+
 <!-- top button -->
 <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 <script>
@@ -879,8 +940,10 @@
 
     <div class="modal fade" tabindex="-1" id="login" aria-labelledby="loginModalLabel" aria-hidden="true">
 
+
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
+
             <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title">로그인</h4>
@@ -888,13 +951,12 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
             <!-- Modal body -->
             <div class="modal-body">
 
 
-
-                <form action="/member/login" method="post">
-
+                <form action="/member/login" method="post" th:object="${login}">
 
                     <div class="form-group">
                         <label for="loginId" style="margin-left: 200px">ID </label> <br>
@@ -906,7 +968,6 @@
                         <input type="password" class="form-control" id="loginPw" placeholder="Enter Password"
                                name="memberPw" required>
                     </div>
-
                     <button type="submit" class="btn btn-primary" style="margin-left:200px">로그인</button>
                     <br>
 
@@ -916,13 +977,16 @@
                         <a href="https://kauth.kakao.com/oauth/authorize?client_id=49e217f552e2a1352d3462543bc0a458&redirect_uri=http://localhost:8098/kakaologin&response_type=code">
                             <img src="/images/kakao_login_medium_narrow.png">
                         </a>
+
                     </span><br>
 
                     <a href="#" data-toggle="modal" data-target="#findPw" data-dismiss="modal">비밀번호 찾기</a><br>
                     <a href="#" data-toggle="modal" data-target="#signin" data-dismiss="modal">회원가입</a><br>
 
+
                 </div>
             </div>
+
             <!-- Modal footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -935,6 +999,7 @@
      aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog ">
         <div class="modal-content">
+
             <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title">회원가입</h4>
@@ -942,113 +1007,80 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
+
             <!-- Modal body -->
-
             <div class="modal-body">
-
-                <form action="/member/save" method="post">
+                <form action="/member/save" method="post" th:object="${member}" id="memberSave">
+                    <!--                <form action="/member/save" method="post">-->
                     <div class="form-group">
-                        <label for="registerEmail">이메일 </label> <br>
-                        <input type="text" class="form-control" id="registerEmail" placeholder="이메일을 입력해주세요."
-                               name="memberEmail" required>
-
+                        <label for="memberEmail">이메일 </label> <br>
+                        <input type="text" class="form-control" onblur="emailDp()" id="memberEmail" placeholder="이메일을 입력해주세요." name="memberEmail" required>
+                        <span id="email_Dp"></span><br>
                     </div>
                     <div class="form-group">
-                        <label for="registerPw">비밀번호 </label>
-                        <input type="password" class="form-control" id="registerPw" placeholder="비밀번호를 입력해주세요."
-                               name="memberPW" required>
-                        <input type="password" class="form-control" id="registerPwCheck"
-                               placeholder="비밀번호를 다시 입력해주세요." required>
-
+                        <label for="pwd1">비밀번호 </label>
+                        <input type="password" class="form-control" id="pwd1" placeholder="비밀번호를 입력해주세요." name="memberPw" required>
+                        <input type="password" class="form-control" id="pwd2" placeholder="비밀번호를 다시 입력해주세요." required>
+                        <div class="alert alert-success" id="alert-success" style="color : green">비밀번호가 일치합니다.</div>
+                        <div class="alert alert-danger" id="alert-danger" style="color : red">비밀번호가 일치하지 않습니다.</div>
                     </div>
                     <div class="form-group">
-                        <label for="registerPhone">핸드폰 </label> <br>
-                        <input type="text" class="form-control" id="registerPhone" placeholder="전화번호를 입력해주세요."
-                               name="memberPhone" required>
-
-            <div>
-                <div class="modal-body">
-                    <form action="/member/save" method="post">
-                        <div class="form-group">
-                            <label for="registerEmail">이메일 </label> <br>
-                            <input type="text" class="form-control" id="registerEmail" placeholder="이메일을 입력해주세요." name="memberEmail" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="registerPw">비밀번호 </label>
-                            <input type="password" class="form-control" id="registerPw" placeholder="비밀번호를 입력해주세요." name="memberPW" required>
-                            <input type="password" class="form-control" id="registerPwCheck" placeholder="비밀번호를 다시 입력해주세요."  required>
-                        </div>
-                        <div class="form-group">
-                            <label for="registerPhone">핸드폰 </label> <br>
-                            <input type="text" class="form-control" id="registerPhone" placeholder="전화번호를 입력해주세요." name="memberPhone" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="registerPhone">주소</label> <br>
-                            <input type="text" id="sample6_postcode" placeholder="우편번호">
-                            <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-                            <input type="text" id="sample6_address" placeholder="주소"><br>
-                            <input type="text" id="sample6_detailAddress" placeholder="상세주소">
-                            <input type="text" id="sample6_extraAddress" placeholder="참고항목">
-                            <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-                            <script>
-                                function sample6_execDaumPostcode() {
-                                    new daum.Postcode({
-                                        oncomplete: function(data) {
-                                            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-                                            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                                            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                                            var addr = ''; // 주소 변수
-                                            var extraAddr = ''; // 참고항목 변수
-                                            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                                            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                                                addr = data.roadAddress;
-                                            } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                                                addr = data.jibunAddress;
-                                            }
-                                            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-                                            if(data.userSelectedType === 'R'){
-                                                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                                                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                                                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                                                    extraAddr += data.bname;
-                                                }
-                                                // 건물명이 있고, 공동주택일 경우 추가한다.
-                                                if(data.buildingName !== '' && data.apartment === 'Y'){
-                                                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                                                }
-                                                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                                                if(extraAddr !== ''){
-                                                    extraAddr = ' (' + extraAddr + ')';
-                                                }
-                                                // 조합된 참고항목을 해당 필드에 넣는다.
-                                                document.getElementById("sample6_extraAddress").value = extraAddr;
-                                            } else {
-                                                document.getElementById("sample6_extraAddress").value = '';
-
-
-                                            }
-                                            // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                                            document.getElementById('sample6_postcode').value = data.zonecode;
-                                            document.getElementById("sample6_address").value = addr;
-                                            // 커서를 상세주소 필드로 이동한다.
-                                            document.getElementById("sample6_detailAddress").focus();
+                        <label for="registerName">이름 </label> <br>
+                        <input type="text" class="form-control" id="registerName" placeholder="이름을 입력해주세요." name="memberName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPhone">전화번호 </label> <br>
+                        <input type="text" class="form-control" id="registerPhone" placeholder="전화번호를 입력해주세요." name="memberPhone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPhone">주소</label> <br>
+                        <input type="text" id="sample6_postcode" name="memberAddr" placeholder="우편번호">
+                        <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+                        <input type="text" id="sample6_address" name="memberAddr" placeholder="주소"><br>
+                        <input type="text" id="sample6_detailAddress" name="memberAddr" placeholder="상세주소">
+                        <input type="text" id="sample6_extraAddress"  name="memberAddr" placeholder="참고항목">
+                        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+                        <script>
+                            function sample6_execDaumPostcode() {
+                                new daum.Postcode({
+                                    oncomplete: function(data) {
+                                        // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+                                        // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                                        // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                                        let addr = ''; // 주소 변수
+                                        let extraAddr = ''; // 참고항목 변수
+                                        //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                                        if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                                            addr = data.roadAddress;
+                                        } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                                            addr = data.jibunAddress;
                                         }
+                                        // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                                        if(data.userSelectedType === 'R'){
+                                            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                                            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                                            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                                                extraAddr += data.bname;
+                                            }
+                                            // 건물명이 있고, 공동주택일 경우 추가한다.
+                                            if(data.buildingName !== '' && data.apartment === 'Y'){
+                                                extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
 
-                                    }).open();
-                                }
-                            </script>
-                        </div>
-                </div>
-                <div class="form-group" style="margin-left: 130px">
-                    <label style="margin-left: 80px">약관동의 </label> <br>
-                    <sapn  href="#"> 개인정보 이용수집동의(필수) <input type="checkbox"  id="check1"  name="check1"  required></sapn><br>
-                    <sapn  href="#">  강캠핑 이용약관 동의(필수) <input type="checkbox" href="#"  id="check2"  name="check2"  required></sapn>
-                </div>
-                </form>
-
-
+                                            }
+                                            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                                            if(extraAddr !== ''){
+                                                extraAddr = ' (' + extraAddr + ')';
+                                            }
+                                            // 조합된 참고항목을 해당 필드에 넣는다.
+                                            document.getElementById("sample6_extraAddress").value = extraAddr;
+                                            console.log(extraAddr);
+                                        } else {
+                                            document.getElementById("sample6_extraAddress").value = '';
+                                        }
                                         // 우편번호와 주소 정보를 해당 필드에 넣는다.
                                         document.getElementById('sample6_postcode').value = data.zonecode;
+                                        console.log()
                                         document.getElementById("sample6_address").value = addr;
                                         // 커서를 상세주소 필드로 이동한다.
                                         document.getElementById("sample6_detailAddress").focus();
@@ -1056,7 +1088,15 @@
                                 }).open();
                             }
                         </script>
+                        <div class="form-group" style="margin-left: 130px">
+                            <label style="margin-left: 80px">약관동의 </label> <br>
+                            <sapn  href="#"> 개인정보 이용수집동의(필수) <input type="checkbox"  id="check1"  name="check1"  required></sapn><br>
+                            <sapn  href="#">  강캠핑 이용약관 동의(필수) <input type="checkbox" href="#"  id="check2"  name="check2"  required></sapn>
+                        </div>
                     </div>
+                </form>
+            </div>
+
 
 
                     <div class="form-group" style="margin-left: 130px">
@@ -1074,17 +1114,19 @@
 
 
             </div>
+
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" style="margin-left:20%;">등록</button>
+                <button type="submit" form="memberSave" class="btn btn-primary" style="margin-left:20%;">등록</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
             </div>
+
             </form>
+
 
         </div>
     </div>
 </div>
-
 <!-- findpw Modal -->
 <div class="modal fade" id="findPw" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -1097,6 +1139,8 @@
                 </button>
             </div>
             <!-- Modal body -->
+
+
             <div class="modal-body">
                 <div class="form-group">
                     <label for="memberEmail">이메일을 입력해주세요 </label> <br>

@@ -68,3 +68,6 @@ create database gangcamping; </br>
 drop user gangcamping@localhost;</br>
 create user gangcamping@localhost identified by '1234';</br>
 grant all privileges on gangcamping.* to gangcamping@localhost;</br>
+
+
+### 02/23

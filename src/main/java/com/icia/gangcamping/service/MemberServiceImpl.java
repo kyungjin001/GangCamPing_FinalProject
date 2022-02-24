@@ -6,6 +6,7 @@ import com.icia.gangcamping.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @Service
@@ -77,18 +78,39 @@ public class MemberServiceImpl implements MemberService{
         }
     }
 
-    @Override
-    public Long update(MemberUpdateDTO memberUpdateDTO) {
-       /* MemberEntity memberEntity = MemberEntity.toUpdateMember(memberUpdateDTO);
 
-        return mr.save(memberEntity).getMemberId();*/
-        return null;
+
+    @Override
+    public Long update(MemberUpdateDTO memberUpdateDTO) throws IllegalStateException, IOException {
+        MemberEntity memberEntity = MemberEntity.toUpdateMember(memberUpdateDTO);
+        return mr.save(memberEntity).getMemberId();
     }
 
     @Override
     public String emailDp(String memberEmail) {
-        return null;
+        MemberEntity result = mr.findByMemberEmail(memberEmail);
+        if(result == null)
+            return "ok";
+        else
+            return "no";
     }
+
+    @Override
+    public void deleteById(Long memberId) {
+        mr.deleteById(memberId);
+    }
+
+//    @Override
+//    public Long updateAddr(MemberUpdateAddrDTO memberUpdateAddrDTO) {
+//        return null;
+//    }
+
+//    @Override
+//    public Long confirmPW(MemberUpdateDTO memberUpdateDTO) {
+//        MemberEntity memberEntity = MemberEntity.toUpdateMember(memberUpdateDTO);
+//        return mr.save(memberEntity).getMemberId();
+//    }
+
 
 
 }
