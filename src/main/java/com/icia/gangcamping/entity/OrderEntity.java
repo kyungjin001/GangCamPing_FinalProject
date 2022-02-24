@@ -1,12 +1,13 @@
 package com.icia.gangcamping.entity;
 
+import com.icia.gangcamping.dto.OrderSaveDTO;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-@ToString
+//@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -18,9 +19,6 @@ public class OrderEntity extends BaseEntity{
     @GeneratedValue
     @Column(name = "orderId")
     private Long orderId;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "productId")
-    private ProductEntity productEntity;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId")
     private MemberEntity memberEntity;
@@ -36,4 +34,20 @@ public class OrderEntity extends BaseEntity{
 
     @OneToMany(mappedBy = "orderEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<ShoppingListEntity> shoppingListEntityList = new ArrayList<>();
+
+
+
+    public static OrderEntity toSaveEntity(OrderSaveDTO orderSaveDTO, MemberEntity memberEntity) {
+        OrderEntity orderEntity = new OrderEntity();
+        orderEntity.setOrderPayType(orderSaveDTO.getOrderPayType());
+        orderEntity.setOrderTotalFee(orderSaveDTO.getOrderTotalFee());
+        orderEntity.setOrderUnitNum(orderSaveDTO.getOrderUnitNum());
+        orderEntity.setOrderPayType("카카오페이");
+        orderEntity.setOrderId(orderSaveDTO.getOrderId());
+        orderEntity.setMemberEntity(memberEntity);
+        return orderEntity;
+    }
+
+
+
 }

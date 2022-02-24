@@ -16,6 +16,7 @@ import java.io.IOException;
 import static com.icia.gangcamping.common.SessionConst.LOGIN_EMAIL;
 
 
+
 @Controller
 @RequestMapping("/member")
 @RequiredArgsConstructor
@@ -44,13 +45,8 @@ public class MemberController {
         return "index";
     }
 
-    @GetMapping("login")
-    public String loginForm(Model model) {
-        model.addAttribute("login", new MemberLoginDTO());
-        return "member/login";
-    }
 
-    // 로그인 처리
+
     @PostMapping("login")
     public String login(@Validated @ModelAttribute("login") MemberLoginDTO memberLoginDTO, BindingResult bindingResult, HttpSession session) {
 
@@ -63,13 +59,13 @@ public class MemberController {
             session.setAttribute(LOGIN_EMAIL, memberLoginDTO.getMemberEmail());
             Long loginId = ms.findByMemberId(memberLoginDTO.getMemberEmail());
             session.setAttribute("loginId", loginId);
-            // session.setAttribute("loginEmail", memberLoginDTO.getMemberEmail());
+             session.setAttribute("loginEmail", memberLoginDTO.getMemberEmail());
             System.out.println();
             System.out.println(loginId);
-            return "index";
+            return "redirect:/";
         } else {
             System.out.println("???");
-            return "index";
+            return "redirect:/";
         }
     }
 
@@ -83,14 +79,14 @@ public class MemberController {
         return result;
     }
 
-    //마이페이지
-    @GetMapping("{memberId}")
-    public String findById(@PathVariable("memberId") Long memberId, Model model) {
-        MemberDetailDTO member = ms.findById(memberId);
-        model.addAttribute("member", member);
-        return "member/mypage";
-
-    }
+//    //마이페이지
+//    @GetMapping("{memberId}")
+//    public String findById(@PathVariable("memberId") Long memberId, Model model) {
+//        MemberDetailDTO member = ms.findById(memberId);
+//        model.addAttribute("member", member);
+//        return "member/mypage";
+//
+//    }
 
     @GetMapping("update")
     public String updateForm(Model model, HttpSession session) {
