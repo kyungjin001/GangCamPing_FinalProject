@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>About Us</title>
     <meta charset="utf-8">
@@ -15,6 +15,61 @@
     <link rel="stylesheet" type="text/css" href="/styles/about_responsive.css">
 
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+
+
+
+    <script>
+        const stockDown = (cartId) =>{
+            console.log('함수호출은 하냐?')
+            console.log(stockId);
+            $.ajax({
+                type:'put',
+                url:'/shopping/stock',
+                data:{"stockId":stockId,"type":"down"},
+                dataType:'text',
+                success:function (result){
+                    console.log(result);
+                    if(result=="ok"){
+                        location.reload();
+                    }
+                },
+                error:function (){
+                    alert('다시해라');
+                }
+            });
+
+        }
+
+
+        const stockUp = (stockId) =>{
+            console.log(stockId);
+            $.ajax({
+                type:'put',
+                url:'/shopping/stock',
+                data:{"stockId":stockId,"type":"up"},
+                dataType:'text',
+                success:function (result){
+                    console.log(result);
+                    if(result=="ok"){
+                        location.reload();
+                    }
+                },
+                error:function (){
+                    alert('다시해라');
+                }
+            });
+
+        }
+
+    </script>
+
+
+
+
+
+
+
 
 
     <style>
@@ -228,8 +283,8 @@
                                 <li class="main_nav_item"><a href="/">home</a></li>
                                 <li class="main_nav_item"><a href="/search/camping">booking</a></li>
                                 <li class="main_nav_item"><a href="/shopping/shopping">shopping</a></li>
-                                <li class="main_nav_item"><a href="/about">about us</a></li>
-                                <li class="main_nav_item"><a href="/contact">contact</a></li>
+                                <li class="main_nav_item"><a href="about">about us</a></li>
+                                <li class="main_nav_item"><a href="contact">contact</a></li>
                                 <li class="main_nav_item"><a href="/test">apiTest</a></li>
                             </ul>
                         </div>
@@ -286,51 +341,51 @@
     </div>
 
 
-    <p style="text-align:center";>회원 관리</p>
+    <p style="text-align:center; color :brown";>재고 관리</p>
 
-    <table class="tg" style="undefined; table-layout: fixed; width: 878px" table>
+    <table class="tg" style="undefined;table-layout: fixed; width: 865px">
         <colgroup>
-            <col style="width: 74px">
-            <col style="width: 83px">
-            <col style="width: 113px">
-            <col style="width: 295px">
-            <col style="width: 93px">
-            <col style="width: 100px">
-            <col style="width: 120px">
+            <col style="width: 104px">
+            <col style="width: 116px">
+            <col style="width: 115px">
+            <col style="width: 397px">
+            <col style="width: 133px">
         </colgroup>
         <thead>
         <tr>
-            <th class="tg-lstg">회원번호</th>
-            <th class="tg-lstg">가입일</th>
-            <th class="tg-lstg">회원명</th>
-            <th class="tg-lstg">회원 Email</th>
-            <th class="tg-lstg">전화번호</th>
-            <th class="tg-lstg">주소</th>
-            <th class="tg-lstg">비고</th>
+            <th class="tg-62r5">상품번호</th>
+            <th class="tg-62r5">상품명</th>
+            <th class="tg-62r5">상품무게</th>
+            <th class="tg-62r5">보유수량</th>
+            <th class="tg-62r5">업데이트</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td class="tg-80qx">00001</td>
-            <td class="tg-80qx">2022-02-22</td>
-            <td class="tg-80qx">가나다라마</td>
-            <td class="tg-80qx">aaaaa@aaa.com<br>옵션: 大 </td>
-            <td class="tg-80qx">01234567890</td>
-            <td class="tg-80qx">인천시 미추홀구 가나다동 123번지<br>나다라아파트 가동 101호</td>
-            <td class="tg-80qx"></td>
+        <tr th:each="stock:${stock}">
+            <td class="tg-kwqo" th:text="${stock.productId}"></td>
+            <td class="tg-kwqo" th:text="${stock.productName}"></td>
+            <td class="tg-kwqo" th:text="${stock.productWeight}"></td>
+            <td class="tg-kwqo">
+                <span th:switch="${stock.stock}">
+                    <span th:case="1"><button>-</button></span>
+                    <span th:case="*"><button th:onclick="stockDown([[${stock.stockId}]])">-</button></span>
+                </span>
+                <span th:text="${stock.stock}"></span>
+                <button th:onclick="stockUp([[${stock.stockId}]])">+</button>
+            </td>
         </tr>
         <tr>
-            <td class="tg-80qx"></td>
-            <td class="tg-80qx"></td>
-            <td class="tg-80qx"></td>
-            <td class="tg-80qx"></td>
-            <td class="tg-80qx"></td>
-            <td class="tg-80qx"></td>
-            <td class="tg-80qx"></td>
+            <td class="tg-kwqo"></td>
+            <td class="tg-kwqo"></td>
+            <td class="tg-kwqo"></td>
+            <td class="tg-kwqo"></td>
+            <td class="tg-kwqo"></td>
         </tr>
         </tbody>
     </table>
-
+    <br>
+    <br>
+    <br>
 
 
 

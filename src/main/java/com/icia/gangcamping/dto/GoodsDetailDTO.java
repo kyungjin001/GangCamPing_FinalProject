@@ -22,6 +22,8 @@ public class GoodsDetailDTO {
     private String productDescription;
     private MultipartFile productImage;
     private String productFileName;
+    private int productStock;
+
 
 
 
