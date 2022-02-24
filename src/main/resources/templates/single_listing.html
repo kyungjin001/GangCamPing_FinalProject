@@ -19,6 +19,7 @@
 	<script src="/jquery-3.1.1.min.js"></script>
 	<script src="/dist/js/datepicker.min.js"></script>
 	<script src="/dist/js/i18n/datepicker.ko.js"></script>
+
 </head>
 
 <body>
@@ -1134,7 +1135,7 @@
 					<h5 class="modal-title"style="" id="exampleModalLabel">예약하기</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body" id="ui-datepicker-div">
 					<form action="/comment/campingReviewSave" method="post" >
 						<div class="double">
 							<input id="datepicker1" type="text" placeholder="체크인" readonly>
