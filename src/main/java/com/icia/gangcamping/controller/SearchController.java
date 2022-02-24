@@ -113,19 +113,17 @@ public class SearchController {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date checkInDate = format.parse((String) session.getAttribute("checkInDate"));
         Date checkOutDate = format.parse((String) session.getAttribute("checkOutDate"));
-        long pried1 = (checkInDate.getTime()-checkOutDate.getTime()) / 1000;
-        long pried = pried1/(24*60*60);
-        long pried2 = pried+1;
-        System.out.println(pried+"박"+ pried2+"일");
-
+        long period = (checkOutDate.getTime()-checkInDate.getTime()) / 1000;
+        long period1 = period/(24*60*60);
+        long period2 = (period/(24*60*60))+1;
 
         campingDetailDTO.setCheckInDate(checkInDate);
         campingDetailDTO.setCheckOutDate(checkOutDate);
 
         model.addAttribute("campingDetail",campingDetailDTO);
+        model.addAttribute("period1", period1);
+        model.addAttribute("period2", period2);
         System.out.println(campingDetailDTO.toString());
-
-
          return "single_listing";
     }
 

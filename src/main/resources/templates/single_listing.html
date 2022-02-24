@@ -2,18 +2,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Single Listing</title>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="Travelix Project">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="/styles/bootstrap4/bootstrap.min.css">
-<link href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link href="/plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
-<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
-<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/animate.css">
-<link rel="stylesheet" type="text/css" href="/styles/single_listing_styles.css">
-<link rel="stylesheet" type="text/css" href="/styles/single_listing_responsive.css">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="Travelix Project">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="/styles/bootstrap4/bootstrap.min.css">
+	<link href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+	<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+	<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/animate.css">
+	<link rel="stylesheet" type="text/css" href="/styles/about_styles.css">
+	<link rel="stylesheet" type="text/css" href="/styles/about_responsive.css">
+
 </head>
 
 <body>
@@ -656,35 +656,32 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="single_listing">
-						
+
 						<!-- Hotel Info -->
-
 						<div class="hotel_info">
-
 							<!-- Title -->
+								<input type="hidden" th:value="${session.loginId}">
+								<intput type="hidden" th:value="${campingDetail.getCampingId()}">
 							<div class="hotel_title_container d-flex flex-lg-row flex-column">
 								<div class="hotel_title_content">
-									<form action="/book/reservation" method="post">
-									<h1 class="hotel_title" ><a th:text="${campingDetail.campingName}"></a></h1>
+									<h1 class="hotel_title"><a th:text="${campingDetail.campingName}"></a></h1>
+									<div class="review_title">per Night 170,000</div>
 									<div class="hotel_location"><a th:text="${campingDetail.campingAddr}"></a></div>
-									<div class="review_title" name="bookPrice">per night: 170,000</div>
 								</div>
 								<div class="hotel_title_button ml-lg-auto text-lg-right">
-									<div class="button book_button trans_200"><a type="submit" href="#">book<span></span><span></span><span></span></a></div>
-
+									<button class="button search_button" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">
+										book<span></span><span></span><span></span></button>
 									<div class="hotel_map_link_container">
+										<!--지도연동부분-->
 										<div>
-											<span>체크인 : <p type="hidden" name="bookCheckIn" th:text="|${#dates.format(campingDetail.checkInDate,'yyyy-MM-dd')}|"></p></span>
-											<span>체크아웃 : <p type="hidden" name="bookCheckOut" th:text="|${#dates.format(campingDetail.checkOutDate, 'yyyy-MM-dd')}|"></p></span>
-											<p type="hidden"  th:value="${campingDetail.getCampingId()}"></p>
-											<p type="hidden" th:value="${session.loginId}"></p>
+											<span>체크인 : <a th:text="|${#dates.format(campingDetail.checkInDate,'yyyy-MM-dd')}|"></a></span><br>
+											<span>체크아웃 : <a th:text="|${#dates.format(campingDetail.checkOutDate,'yyyy-MM-dd')}|"></a></span>
 										</div>
-										</form>
-<!--										지도연동부분-->
 										<div class="hotel_map_link"><a href="#location">Location On Map</a></div>
 									</div>
 								</div>
 							</div>
+
 
 							<!-- Listing Image -->
 
@@ -976,6 +973,41 @@
 			</div>
 		</div>		
 	</div>
+
+
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"style="" id="exampleModalLabel">리뷰등록</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form action="/comment/campingReviewSave" name="myform" id="myform" method="post" >
+						<fieldset>
+							<input type="radio" name="reviewStar" value="5" id="rate1"><label for="rate1">★</label>
+							<input type="radio" name="reviewStar" value="4" id="rate2"><label for="rate2">★</label>
+							<input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
+							<input type="radio" name="reviewStar" value="2" id="rate4"><label for="rate4">★</label>
+							<input type="radio" name="reviewStar" value="1" id="rate5"><label for="rate5">★</label>
+						</fieldset>
+						<br>
+						<input type="hidden" id="reviewWriter" name="reviewWriter" th:value="${session['loginEmail']}">
+						<input type="hidden" id="campingName" name="campingName" th:value="${book.campingName}">
+						<div class="mb-3">
+							<textarea name="reviewContents" id="reviewContents" class="form-control"></textarea>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="submit" form="myform" class="btn btn-primary">Comment</button>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
 
 	<!-- Footer -->
 

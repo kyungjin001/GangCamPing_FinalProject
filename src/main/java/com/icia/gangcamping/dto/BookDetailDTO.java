@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import org.apache.tomcat.jni.Local;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -22,8 +23,8 @@ public class BookDetailDTO {
     private Long memberId;
     private Long campingId;
     private Long roomId;
-    private LocalDateTime bookCheckIn;
-    private LocalDateTime bookCheckOut;
+    private Date bookCheckIn;
+    private Date bookCheckOut;
     private LocalDateTime createTime;
     private String bookPeriod;
     private String campingName;

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -24,8 +25,12 @@ public class BookController {
 
     // 예약저장
     @PostMapping("/reservation")
-    public String reservation(@ModelAttribute BookSaveDTO bookSaveDTO){
-       // Long bookId = bs.save(bookSaveDTO);
+    public String reservation(HttpSession session, @ModelAttribute BookSaveDTO bookSaveDTO){
+        System.out.println("asdfsdfasdf");
+        String period = (String)session.getAttribute("period")+"박 "+(String)session.getAttribute("period2")+"일";
+        System.out.println(period);
+        bookSaveDTO.setBookPeriod(period);
+       Long bookId = bs.save(bookSaveDTO);
 
         return "/camping/campingPay";
     }

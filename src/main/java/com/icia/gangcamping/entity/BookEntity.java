@@ -1,11 +1,13 @@
 package com.icia.gangcamping.entity;
 
+import com.icia.gangcamping.dto.BookSaveDTO;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @AllArgsConstructor
@@ -30,10 +32,10 @@ public class BookEntity extends BaseEntity{
     private RoomEntity roomEntity;
     @Column
     @NotNull
-    private LocalDateTime bookCheckIn;
+    private Date bookCheckIn;
     @Column
     @NotNull
-    private LocalDateTime bookCheckOut;
+    private Date bookCheckOut;
     @Column
     @NotNull
     private String bookPeriod;
@@ -46,5 +48,16 @@ public class BookEntity extends BaseEntity{
     @OneToMany(mappedBy = "bookEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<CampingSaleEntity> campingSaleEntityList = new ArrayList<>();
 
+    public static BookEntity toBookSave(BookSaveDTO bookSaveDTO, MemberEntity memberEntity, CampingEntity campingEntity) {
 
+        BookEntity bookEntity = new BookEntity();
+
+        bookEntity.setBookCheckIn(bookSaveDTO.getBookCheckIn());
+        bookEntity.setBookCheckOut(bookSaveDTO.getBookCheckOut());
+        bookEntity.setBookPrice(bookEntity.getBookPrice());
+        bookEntity.setBookPeriod(bookEntity.getBookPeriod());
+        bookEntity.setMemberEntity(memberEntity);
+        bookEntity.setCampingEntity(campingEntity);
+        return bookEntity;
+    }
 }
