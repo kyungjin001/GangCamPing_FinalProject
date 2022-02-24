@@ -204,6 +204,42 @@
 
     </style>
 
+    <script>
+        const ajaxUp = () => {
+
+            const pw=document.getElementById("memberPw").value;
+            const pwDB="[[${member.memberPw}]]";
+
+            if(pw==pwDB){
+                const id = document.getElementById("memberId").value;
+                const reqUrl = "/member/"+id;
+                var form = $('#memberUp')[0];
+                var data = new FormData(form);
+                console.log(data);
+
+                $.ajax({
+                    type: 'PUT',
+                    // enctype: 'multipart/form-data',
+                    url:reqUrl,
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    timeout: 600000,
+                    success: function(){
+                        location.href="/member/"+id;
+                    },
+                    error: function (){
+                        alert("Ajax 실패")
+                    }
+                });
+
+            }else{
+                alert("비밀번호를 확인해주세요.")
+            }
+        }
+    </script>
+
 </head>
 
 <body>
@@ -334,14 +370,15 @@
     </div>
 
     <h3>update.html</h3>
-    	<div style="text-align: center;" class="formWrapper" method="put">
-    		<form action="/member/update" name="updateForm">
-    			<input type="hidden" id="memberId" th:value="${member.memberId}">
-    			이   메  일<input type="text" id="input1" th:value="${member.memberEmail}"  placeholder="이메일"><br>
-    			이       름<input type="text" id="input2" th:value="${member.memberName}"  placeholder="닉네임"><br>
-    			핸드폰  번호<input type="text" id="input6" th:value="${member.memberPhone}" placeholder="핸드폰 번호"><br>
-    			주       소<input type="text" id="input7" th:value="${member.memberAddr}" placeholder="주소"><br>
-    			<input type="button" value="수정(put)" id="input8" th:onclick="update()">
+    	<div style="text-align: center;" class="formWrapper">
+            <form action="/member/confirmPW" id="memberUp" name="memberPw" >
+                <input th:type="hidden" th:name="memberId" id="memberId" th:value="${member.memberId}">
+                이메일:<input th:type="text"  th:name="memberEmail" th:value="${member.memberEmail}" readonly><br><br>
+                비밀번호:<input th:type="password"  id="memberPw" th:name="memberPw" th:value="${member.memberPw}" readonly><br><br>
+                이름:<input th:type="text" th:name="memberName"  th:value="${member.memberName}"><br><br>
+                주소:<input th:type="text" th:name="memberAddr"  th:value="${member.memberAddr}"><br><br>
+                핸드폰:<input th:type="text" th:name="memberPhone"  th:value="${member.memberPhone}"><br><br>
+                <input type="button" th:onclick="ajaxUp()" value="정보 수정">
             </form>
         </div>
 

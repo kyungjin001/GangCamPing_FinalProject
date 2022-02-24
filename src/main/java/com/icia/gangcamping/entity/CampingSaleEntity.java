@@ -5,7 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-@ToString
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity

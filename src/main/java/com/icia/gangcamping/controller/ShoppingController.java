@@ -186,8 +186,32 @@ model.addAttribute("orderDetailDTO", orderDetailDTO);
 
 
 
+//    @GetMapping("order")
+//    public String order(Model model,OrderDetailDTO orderDetailDTO){
+//        Optional<MemberEntity> memberEntity = ms.findById(orderDetailDTO.getMemberId());
+//        List<CartDetailDTO> cartDetailDTOList = ss.findByMemberEntity(memberEntity.get());
+//        model.addAttribute("cartList", cartDetailDTOList);
+//            int orderUnitNum = 0;
+//            int orderTotalFee = 0;
+//            String orderPayType = "";
+//            String menuList = "";
+//            for (CartDetailDTO c : cartDetailDTOList) {
+//                orderTotalFee += (c.getProductPrice() * c.getCartAmount());
+//                System.out.println("c = " + c);
+//                menuList += c.getProductName();
+//                orderUnitNum += c.getCartAmount();
+//            }
+//            model.addAttribute("menu",menuList);
+//            model.addAttribute("orderTotalFee",orderTotalFee);
+//            model.addAttribute("orderDetailDTO",orderDetailDTO);
+//
+//
+//        return "shopping/order";
+//    }
+
 return "shopping/order";
 }
+
 
 
 // 카카오페이 구매

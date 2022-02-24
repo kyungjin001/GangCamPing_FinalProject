@@ -674,6 +674,7 @@
 
 									<div class="hotel_map_link_container">
 										<div>
+
 											<span>체크인 : <p type="hidden" name="bookCheckIn" th:text="|${#dates.format(campingDetail.checkInDate,'yyyy-MM-dd')}|"></p></span>
 											<span>체크아웃 : <p type="hidden" name="bookCheckOut" th:text="|${#dates.format(campingDetail.checkOutDate, 'yyyy-MM-dd')}|"></p></span>
 											<p type="hidden"  th:value="${campingDetail.getCampingId()}"></p>
@@ -681,6 +682,7 @@
 										</div>
 										</form>
 <!--										지도연동부분-->
+
 										<div class="hotel_map_link"><a href="#location">Location On Map</a></div>
 									</div>
 								</div>

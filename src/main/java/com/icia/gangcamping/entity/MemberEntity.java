@@ -1,13 +1,14 @@
 package com.icia.gangcamping.entity;
 
 import com.icia.gangcamping.dto.MemberSaveDTO;
+import com.icia.gangcamping.dto.MemberUpdateDTO;
 import com.icia.gangcamping.dto.RoomSaveDTO;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-//@ToString
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -78,7 +79,7 @@ public class MemberEntity {
         return memberEntity;
     }
 
-    public static MemberEntity toUpdateMember(RoomSaveDTO.MemberUpdateDTO memberUpdateDTO) {
+    public static MemberEntity toUpdateMember(MemberUpdateDTO memberUpdateDTO) {
 
         MemberEntity memberEntity = new MemberEntity();
         memberEntity.setMemberId(memberUpdateDTO.getMemberId());
