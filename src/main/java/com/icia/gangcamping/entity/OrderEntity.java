@@ -1,6 +1,5 @@
 package com.icia.gangcamping.entity;
 
-import com.icia.gangcamping.dto.GoodsSaveDTO;
 import com.icia.gangcamping.dto.OrderSaveDTO;
 import lombok.*;
 

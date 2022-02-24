@@ -36,7 +36,7 @@ private final OrderService os;
 private final CommentService cs;
 private final MemberService ms;
 private final HttpSession session;
-
+    private final MemberRepository mr;
 
 //상품목록
 @RequestMapping("shopping")
@@ -185,6 +185,7 @@ model.addAttribute("GoodsName", GoodsName);
 model.addAttribute("orderDetailDTO", orderDetailDTO);
 
 
+<<<<<<<<< Temporary merge branch 1
 return "shopping/order";
 }
 
