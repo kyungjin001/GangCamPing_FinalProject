@@ -11,7 +11,6 @@ public interface BookService {
 
     BookDetailDTO findById(Long bookId);
 
-
     Long save(BookSaveDTO bookSaveDTO, String memberEmail);
 
     List<BookDetailDTO> findAll();

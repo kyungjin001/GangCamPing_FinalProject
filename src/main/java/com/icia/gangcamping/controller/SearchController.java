@@ -112,6 +112,7 @@ public class SearchController {
         String name = campingName.replace(" ","");
         System.out.println(name);
 
+
         CampingDetailDTO campingDetailDTO = cs.findByCampingName(name);
         if(campingDetailDTO.getCampingFileName()==null){
             campingDetailDTO.setCampingFileName("/images/noImage.jpg");

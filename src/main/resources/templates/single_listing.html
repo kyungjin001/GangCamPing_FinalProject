@@ -936,9 +936,9 @@
 							<input type="text" class="form-control" id="bookName" name="bookName" placeholder="예약자 성함을 입력해주세요." required><br>
 
 							<label for="checkIn">체크인 </label> <br>
-							<input class="form-control" id="checkIn" th:text="|${#dates.format(campingDetail.checkInDate,'yyyy-MM-dd')}|" readonly required><br>
+							<input class="form-control" id="checkIn" th:value="|${#dates.format(campingDetail.checkInDate,'yyyy-MM-dd')}|" readonly required><br>
 							<label for="checkOut">체크아웃 </label> <br>
-							<input class="form-control" id="checkOut" th:text="|${#dates.format(campingDetail.checkOutDate,'yyyy-MM-dd')}|" readonly required><br>
+							<input class="form-control" id="checkOut" th:value="|${#dates.format(campingDetail.checkOutDate,'yyyy-MM-dd')}|" readonly required><br>
 
 							<label>숙박기간 </label> <br>
 							<span th:text="${period1}"></span>박 <span th:text="${period2}"></span>일<br>
