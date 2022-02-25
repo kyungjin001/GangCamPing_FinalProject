@@ -9,4 +9,6 @@ public interface BookService {
     List<BookDetailDTO> findByMemberEntity(MemberEntity memberEntity);
 
     BookDetailDTO findById(Long bookId);
+
+    List<BookDetailDTO> findAll();
 }

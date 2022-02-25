@@ -1,15 +1,31 @@
 package com.icia.gangcamping.controller;
 
+import com.icia.gangcamping.dto.BookDetailDTO;
+import com.icia.gangcamping.repository.BookRepository;
+import com.icia.gangcamping.repository.CampingRepository;
+import com.icia.gangcamping.repository.MemberRepository;
+import com.icia.gangcamping.service.BookService;
+import com.icia.gangcamping.service.CampingService;
+import com.icia.gangcamping.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/admin/*")
 public class AdminController {
 
-    @RequestMapping("mypage")
+    private final BookService bs;
+    private final BookRepository br;
+    private  final MemberService ms;
+    private final MemberRepository mr;
+    private final CampingService cs;
+    private final CampingRepository cr;
+    @RequestMapping("admin")
     public String mypage() {
         return "admin/mypage";
 
@@ -34,7 +50,9 @@ public class AdminController {
     }
 
     @RequestMapping("bookList")
-    public String bookList() {
+    public String bookList(Model model) {
+        List<BookDetailDTO> bookList = bs.findAll();
+        model.addAttribute("bookList",bookList);
         return "admin/bookList";
 
     }
