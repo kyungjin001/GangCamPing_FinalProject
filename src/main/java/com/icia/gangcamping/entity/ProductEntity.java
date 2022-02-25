@@ -16,7 +16,7 @@ import java.util.Optional;
 @Getter
 @Setter
 @Table(name = "product_table")
-public class ProductEntity {
+public class ProductEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="productId")

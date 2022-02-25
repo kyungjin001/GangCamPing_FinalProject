@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="/styles/responsive.css">
 
 
+
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
         let id = "";
@@ -161,6 +162,7 @@
     </script>
 
 
+
 </head>
 
 <body>
@@ -193,10 +195,14 @@
                                     SignIn</a>
                                 </div>
                             </span>
-                            <span th:if="(${session.loginEmail}!=null)">
+                            <span th:if="(${session.loginEmail}!=null) and (${session.loginEmail}!='admin')">
                                 <div class="user_box_login user_box_link">
                                     <a class="nav-link" href="/member/logout" style="font-size: 15px">
                                     LogOut</a>
+                                </div>
+                                <div class="user_box_login user_box_link">
+                                    <a class="nav-link" href="/member/mypage" style="font-size: 15px">
+                                    MyPage</a>
                                 </div>
                             </span>
                             <span th:if="${session['userId'] != null}">
@@ -205,7 +211,24 @@
                                       style="font-size: 15px">
                                    LogOut</a>
                                </div>
+                               <div class="user_box_login user_box_link">
+                                    <a class="nav-link" href="/member/mypage" style="font-size: 15px">
+                                    MyPage</a>
+                               </div>
                             </span>
+                            <span th:if="(${session.loginEmail}=='admin')">
+                                <div class="user_box_login user_box_link">
+                                    <a class="nav-link" href="/member/logOut" style="font-size: 15px">
+                                    LogOut</a>
+                                </div>
+                                <div class="user_box_login user_box_link">
+                                    <a class="nav-link" href="/admin/admin" style="font-size: 15px">
+                                    MyPage</a>
+                                </div>
+                            </span>
+                            <div class="user_box_register user_box_link"><a href="/shopping/goods">Goods</a></div>
+
+
                         </div>
                     </div>
                 </div>
@@ -630,6 +653,7 @@
 							</svg>
                         </div>
                     </div>
+
                 </div>
             </div>
 

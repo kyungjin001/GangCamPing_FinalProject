@@ -17,9 +17,6 @@ public class BookListEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bookListId")
     private Long bookListId;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "roomId")
-    private RoomEntity roomEntity;
     @Column
     @NotNull
     private LocalDateTime bookListDate;

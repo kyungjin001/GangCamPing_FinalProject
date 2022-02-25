@@ -48,7 +48,6 @@ public class MailServiceImpl implements MailService {
         MailEntity mailEntity = MailEntity.saveMailCode(mailCodeDTO, memberEntity);
 
         return mar.save(mailEntity).getId();
-        // return key;
     }
 
     @Override
