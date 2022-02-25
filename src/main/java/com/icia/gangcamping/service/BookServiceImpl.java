@@ -35,4 +35,15 @@ public class BookServiceImpl implements BookService{
 
         return book;
     }
+
+    @Override
+    public List<BookDetailDTO> findAll() {
+        List<BookEntity> all = br.findAll();
+        List<BookDetailDTO> bookList = new ArrayList<>();
+        for(BookEntity book:all){
+            BookDetailDTO bookDetailDTO = BookDetailDTO.toBookDetailDTO(book);
+            bookList.add(bookDetailDTO);
+        }
+        return bookList;
+    }
 }
