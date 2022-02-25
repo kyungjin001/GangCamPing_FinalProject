@@ -84,7 +84,7 @@ public class MainController {
             }
         }
         List<CampingDetailDTO> recommendList = cs.findTop3AllOrderByCampingLikeCount();
-        model.addAttribute("reviewList",reviewList);
+       // model.addAttribute("reviewList",reviewList);
         model.addAttribute("resultList",campingDetailDTOList);
         model.addAttribute("recommendList",recommendList);
 
