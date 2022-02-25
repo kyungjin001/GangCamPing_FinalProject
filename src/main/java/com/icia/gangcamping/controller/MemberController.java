@@ -35,7 +35,7 @@ public class MemberController {
     @PostMapping("/save")
     public String save(@Validated @ModelAttribute("member") MemberSaveDTO memberSaveDTO) {
 
-            Long memberId = ms.save(memberSaveDTO);
+        Long memberId = ms.save(memberSaveDTO);
         return "index";
     }
 
@@ -62,11 +62,11 @@ public class MemberController {
 
     // 로그인 처리
     @PostMapping("/login")
-    public String login(@Validated @ModelAttribute("login") MemberLoginDTO memberLoginDTO, HttpSession session){
+    public String login(@Validated @ModelAttribute("login") MemberLoginDTO memberLoginDTO, HttpSession session) {
 
         boolean loginResult = ms.login(memberLoginDTO);
 
-        if(ms.login(memberLoginDTO)){
+        if (ms.login(memberLoginDTO)) {
             session.setAttribute("loginEmail", memberLoginDTO.getMemberEmail());
             return "redirect:/";
         } else {
@@ -74,6 +74,24 @@ public class MemberController {
 
         }
     }
+
+    // 로그인 처리 with Interceptor
+//    @PostMapping("/login")
+//    public String login(@Validated @ModelAttribute("login") MemberLoginDTO memberLoginDTO, HttpSession session){
+//        boolean loginResult = ms.login(memberLoginDTO);
+//        if(ms.login(memberLoginDTO)){
+//            session.setAttribute("loginEmail", memberLoginDTO.getMemberEmail());
+//            String redirectURL = (String) session.getAttribute("redirectURL");
+//            if (redirectURL != null) {
+//            return "redirect:" + redirectURL;
+//            } else {
+//               return "redirect:/";
+//            }
+//          } else{
+//            return"member/login";
+//          }
+
+
 
     // 이메일 중복 체크
     @PostMapping("/emailDp")
