@@ -23,6 +23,8 @@ public class GoodsDetailDTO {
     private MultipartFile productImage;
     private String productFileName;
     private int productStock;
+    private LocalDateTime productTime;
+    private int Stock;
 
 
 
@@ -36,6 +38,8 @@ public class GoodsDetailDTO {
         goodsDetailDTO.setProductWeight(goods.getProductWeight());
         goodsDetailDTO.setProductDescription(goods.getProductDescription());
         goodsDetailDTO.setProductFileName(goods.getProductFileName());
+        goodsDetailDTO.setProductTime(goods.getCreateTime());
+
         return goodsDetailDTO;
     }
 
