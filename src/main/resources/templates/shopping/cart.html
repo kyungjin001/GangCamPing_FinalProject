@@ -308,7 +308,7 @@
 			</div>
 			<button class="btn btn-default" type="submit">쇼핑하기<i class="fa fa-shopping-cart"></i></button>
 		<form th:id="aaa" action="/shopping/order">
-			<input type="hidden" th:name="memberId" th:value="1">
+			<input type="hidden" th:name="memberId" th:value="${memberId}">
 <!--			<input type="hidden" th:name="productId" th:value="${productId}">-->
 			<input type="hidden" th:name="orderUnitNum" th:value="${orderUnitNum}">
 			<button class="btn btn-primary"  type="submit">전체상품주문 <i class="fa fa-check"></i></button>
