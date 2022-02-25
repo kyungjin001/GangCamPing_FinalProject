@@ -19,24 +19,24 @@ public class CampingEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="campingId")
     private Long campingId;
-    @Column
 
+    @Column
     private String campingName;
-    @Column
 
+    @Column
     private String campingAddr;
-    @Column
 
+    @Column
     private String campingInfo;
-    @Column
 
+    @Column
     private String campingFileName;
+
     @Column
     @NotNull
     private int campingLikeCount;
 
-    @OneToMany(mappedBy = "campingEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<RoomEntity> roomEntityList = new ArrayList<>();
+
     @OneToMany(mappedBy = "campingEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<CampingDetailEntity> campingDetailEntityList = new ArrayList<>();
     @OneToMany(mappedBy = "campingEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
@@ -45,6 +45,7 @@ public class CampingEntity {
     private List<BookEntity> bookEntityList = new ArrayList<>();
     @OneToMany(mappedBy = "campingEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<ReviewEntity> reviewEntityList = new ArrayList<>();
+
 
     public CampingEntity dtoToEntity(CampingSaveDTO campingSaveDTO) {
         CampingEntity entity = new CampingEntity();

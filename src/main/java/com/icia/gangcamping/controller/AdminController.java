@@ -1,8 +1,16 @@
 package com.icia.gangcamping.controller;
 
+
 import com.icia.gangcamping.dto.GoodsDetailDTO;
 import com.icia.gangcamping.service.AdminService;
 import com.icia.gangcamping.service.ShoppingService;
+import com.icia.gangcamping.dto.BookDetailDTO;
+import com.icia.gangcamping.repository.BookRepository;
+import com.icia.gangcamping.repository.CampingRepository;
+import com.icia.gangcamping.repository.MemberRepository;
+import com.icia.gangcamping.service.BookService;
+import com.icia.gangcamping.service.CampingService;
+import com.icia.gangcamping.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +29,15 @@ public class AdminController {
 
     private final ShoppingService ss;
     private final AdminService as;
+    private final BookService bs;
+    private final BookRepository br;
+    private  final MemberService ms;
+    private final MemberRepository mr;
+    private final CampingService cs;
+    private final CampingRepository cr;
+    
+  @RequestMapping("mypage")
 
-    @RequestMapping("mypage")
     public String mypage() {
         return "admin/mypage";
 
@@ -47,7 +62,9 @@ public class AdminController {
     }
 
     @RequestMapping("bookList")
-    public String bookList() {
+    public String bookList(Model model) {
+        List<BookDetailDTO> bookList = bs.findAll();
+        model.addAttribute("bookList",bookList);
         return "admin/bookList";
 
     }
