@@ -27,9 +27,6 @@ public class BookEntity extends BaseEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "campingId")
     private CampingEntity campingEntity;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "roomId")
-    private RoomEntity roomEntity;
     @Column
     @NotNull
     private Date bookCheckIn;
@@ -38,7 +35,7 @@ public class BookEntity extends BaseEntity{
     private Date bookCheckOut;
     @Column
     @NotNull
-    private String bookPeriod;
+    private String bookName;
     @Column
     @NotNull
     private int bookPrice;
@@ -52,10 +49,10 @@ public class BookEntity extends BaseEntity{
 
         BookEntity bookEntity = new BookEntity();
 
+        bookEntity.setBookName(bookSaveDTO.getBookName());
         bookEntity.setBookCheckIn(bookSaveDTO.getBookCheckIn());
         bookEntity.setBookCheckOut(bookSaveDTO.getBookCheckOut());
-        bookEntity.setBookPrice(bookEntity.getBookPrice());
-        bookEntity.setBookPeriod(bookEntity.getBookPeriod());
+        bookEntity.setBookPrice(bookSaveDTO.getBookPrice());
         bookEntity.setMemberEntity(memberEntity);
         bookEntity.setCampingEntity(campingEntity);
         return bookEntity;

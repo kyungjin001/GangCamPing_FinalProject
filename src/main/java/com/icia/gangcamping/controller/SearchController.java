@@ -108,7 +108,9 @@ public class SearchController {
     @GetMapping("/searchDetail/{campingName}")
     public String detail(@PathVariable String campingName,Model model,HttpSession session) throws java.text.ParseException {
         System.out.println("searchController");
+        System.out.println(campingName);
         String name = campingName.replace(" ","");
+        System.out.println(name);
 
         CampingDetailDTO campingDetailDTO = cs.findByCampingName(name);
         if(campingDetailDTO.getCampingFileName()==null){
@@ -118,10 +120,8 @@ public class SearchController {
         Date checkInDate = format.parse((String) session.getAttribute("checkInDate"));
         Date checkOutDate = format.parse((String) session.getAttribute("checkOutDate"));
         long period = (checkOutDate.getTime()-checkInDate.getTime()) / 1000;
-        long period1 = period/(24*60*60);
-        long period2 = (period/(24*60*60))+1;
-
-
+        long period1 = period/(24*60*60); // 몇 박
+        long period2 = (period/(24*60*60))+1; // 몇 일
 
         campingDetailDTO.setCheckInDate(checkInDate);
         campingDetailDTO.setCheckOutDate(checkOutDate);

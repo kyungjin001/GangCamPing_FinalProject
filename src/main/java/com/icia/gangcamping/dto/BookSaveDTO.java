@@ -14,8 +14,8 @@ public class BookSaveDTO {
 
     private Long memberId;
     private Long campingId;
-    private String bookPrice;
+    private int bookPrice;
     private Date bookCheckIn;
     private Date bookCheckOut;
-    private String bookPeriod;
+    private String bookName;
 }

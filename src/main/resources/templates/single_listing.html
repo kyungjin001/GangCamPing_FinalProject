@@ -460,24 +460,20 @@
 						<div class="hotel_info">
 
 							<!-- Title -->
-								<input type="hidden" th:value="${session.loginId}">
+								<input type="hidden" th:value="${session.loginEmail}">
 								<intput type="hidden" th:value="${campingDetail.getCampingId()}">
 							<div class="hotel_title_container d-flex flex-lg-row flex-column">
 								<div class="hotel_title_content">
 									<h1 class="hotel_title"><a th:text="${campingDetail.campingName}"></a></h1>
 									<div class="review_title">per Night 170,000</div>
 									<div class="hotel_location"><a th:text="${campingDetail.campingAddr}"></a></div>
-									<div class="review_title" name="bookPrice">per night: 170,000</div>
+
 								</div>
 								<div class="hotel_title_button ml-lg-auto text-lg-right">
 									<button class="button search_button" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">
 										book<span></span><span></span><span></span></button>
 									<div class="hotel_map_link_container">
 										<!--지도연동부분-->
-										<div>
-											<span>체크인 : <a th:text="|${#dates.format(campingDetail.checkInDate,'yyyy-MM-dd')}|"></a></span><br>
-											<span>체크아웃 : <a th:text="|${#dates.format(campingDetail.checkOutDate,'yyyy-MM-dd')}|"></a></span>
-										</div>
 										<div class="hotel_map_link"><a href="#location">Location On Map</a></div>
 									</div>
 								</div>
@@ -922,6 +918,48 @@
 			</div>
 		</div>
 		<!-- 모달 시작! -->
+		<!-- 예약확인 모달-->
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title"style="" id="exampleModalLabel">예약정보확인</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+
+					<div class="modal-body">
+						<form action="/booking/reservation" id="reservation" method="post">
+							<label for="camping">캠핑장 </label> <br>
+							<input type="text" class="form-control" id="camping" name="campingName" th:value="${campingDetail.campingName}" readonly required><br>
+
+							<label for="bookName">이름 </label> <br>
+							<input type="text" class="form-control" id="bookName" name="bookName" placeholder="예약자 성함을 입력해주세요." required><br>
+
+							<label for="checkIn">체크인 </label> <br>
+							<input class="form-control" id="checkIn" th:text="|${#dates.format(campingDetail.checkInDate,'yyyy-MM-dd')}|" readonly required><br>
+							<label for="checkOut">체크아웃 </label> <br>
+							<input class="form-control" id="checkOut" th:text="|${#dates.format(campingDetail.checkOutDate,'yyyy-MM-dd')}|" readonly required><br>
+
+							<label>숙박기간 </label> <br>
+							<span th:text="${period1}"></span>박 <span th:text="${period2}"></span>일<br>
+
+							<label for="price">가격 </label>
+							<input type="text" class="form-control" name="bookPrice" id="price" th:value="170000*${period1}" readonly>
+							<input type="hidden" name="campingId" th:value="${campingDetail.getCampingId()}">
+							<input type="hidden" th:value="${campingDetail.checkInDate}">
+							<input type="hidden" th:value="${campingDetail.checkOutDate}">
+							<input type="hidden" th:value="${session.loginEmail}">
+					</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						<button type="submit" form="reservation" class="btn btn-primary">예약하기</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
 		<!-- Login Modal -->
 		<div class="modal fade" tabindex="-1" id="login" aria-labelledby="loginModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered">

@@ -11,5 +11,5 @@ public interface BookService {
 
     BookDetailDTO findById(Long bookId);
 
-    Long save(BookSaveDTO bookSaveDTO);
+    Long save(BookSaveDTO bookSaveDTO, String memberEmail);
 }

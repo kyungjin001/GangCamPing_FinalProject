@@ -95,7 +95,7 @@ public class MemberController {
 
     @GetMapping("{memberId}")
     public String findById(@PathVariable("memberId") Long memberId, Model model) {
-        Optional<MemberEntity> member = ms.findById(memberId);
+        MemberDetailDTO member = ms.findById(memberId);
         model.addAttribute("member", member);
         return "member/mypage";
 

@@ -6,13 +6,14 @@ import com.icia.gangcamping.entity.BookEntity;
 import com.icia.gangcamping.entity.CampingEntity;
 import com.icia.gangcamping.entity.MemberEntity;
 import com.icia.gangcamping.repository.BookRepository;
+import com.icia.gangcamping.repository.MemberRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 @AllArgsConstructor
@@ -41,11 +42,12 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public Long save(BookSaveDTO bookSaveDTO) {
-        MemberEntity memberEntity = ms.findByMemberId(bookSaveDTO.getMemberId()).get();
-        CampingEntity campingEntity = cs.findById(bookSaveDTO.getCampingId()).get();
-        BookEntity bookEntity = BookEntity.toBookSave(bookSaveDTO, memberEntity, campingEntity);
+    public Long save(BookSaveDTO bookSaveDTO, String memberEmail) {
 
+        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
+        CampingEntity campingEntity = cs.findById(bookSaveDTO.getCampingId()).get();
+
+        BookEntity bookEntity = BookEntity.toBookSave(bookSaveDTO, memberEntity, campingEntity);
         return br.save(bookEntity).getBookId();
     }
 }

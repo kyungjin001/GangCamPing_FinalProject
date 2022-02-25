@@ -65,7 +65,7 @@ public class MainController {
                 campingDetailDTOList.add(campingDetailDTO);
             }
         }
-        /*List<ReviewDetailDTO> reviewList = new ArrayList<>();
+        List<ReviewDetailDTO> reviewList = new ArrayList<>();
         int max = rr.findAll().size();
         for(int i=0;i<5;i++){
             int rnd = (int) (Math.random()*10)+1;
@@ -80,7 +80,7 @@ public class MainController {
                     reviewList.add(dto);
                 }
             }
-        }*/
+        }
 
         List<CampingDetailDTO> recommendList = cs.findTop3AllOrderByCampingLikeCount();
        // model.addAttribute("reviewList",reviewList);
