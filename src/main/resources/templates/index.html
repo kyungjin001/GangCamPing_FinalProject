@@ -197,7 +197,7 @@
                             </span>
                             <span th:if="(${session.loginEmail}!=null) and (${session.loginEmail}!='admin')">
                                 <div class="user_box_login user_box_link">
-                                    <a class="nav-link" href="/member/logOut" style="font-size: 15px">
+                                    <a class="nav-link" href="/member/logout" style="font-size: 15px">
                                     LogOut</a>
                                 </div>
                                 <div class="user_box_login user_box_link">
@@ -963,6 +963,7 @@
                                 <sapn href="#"> 강캠핑 이용약관 동의(필수) <input type="checkbox" href="#" id="check2" name="check2"
                                                                        required></sapn>
                             </div>
+
                         </form>
                     </div>
                     <!-- Modal footer -->
