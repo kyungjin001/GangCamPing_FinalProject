@@ -358,7 +358,7 @@
         </div>
         <div class="reservationLine"></div>
         <div class="row">
-            <form>
+
                     <div class="col-md-6">
                         <div class="reservationInfo">
                         <b style="font-size: 25px">예약자 이름</b>
@@ -401,9 +401,9 @@
                     <input type="hidden" name="campingPaySelect" value="카카오페이">
                 </form>
                 <div class="button">
-                    <button type="button" id="campingPay" class="btn btn-outline-info" form="pay">결제하기</button>
+                    <button type="button" id="campingPay" class="btn btn-outline-info">결제하기</button>
                 </div>
-            </form>
+
         </div>
     </div>
     <div class="endLine"></div>
@@ -827,18 +827,20 @@
             merchant_uid: '[[${book.memberId}]]' + new Date().getTime(),
 
             name: '[[${book.campingName}]]',
-            amount: '[[${book.getBookPrice()}]]',
+            amount: '[[${book.bookPrice}]]',
             buyer_name: '[[${book.bookName}]]',
 
             buyer_postcode: '123-456',// 이거는 왜 받음?
         }, function (rsp) {
             console.log(rsp);
             if (rsp.success) {
+                console.log("성공")
                 var msg = '결제가 완료되었습니다.';
                 msg += '결제 금액 : ' + rsp.paid_amount;
                 document.getElementById('pay').submit();
 
             } else {
+                console.log("실패")
                 var msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;
             }
