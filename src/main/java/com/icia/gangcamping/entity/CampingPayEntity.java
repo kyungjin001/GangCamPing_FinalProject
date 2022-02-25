@@ -32,9 +32,6 @@ public class CampingPayEntity extends BaseEntity{
     private BookEntity bookEntity;
 
     @Column
-    private LocalDateTime campingPayDate;
-
-    @Column
     @NotNull
     private int campingPayPrice;
     @Column
