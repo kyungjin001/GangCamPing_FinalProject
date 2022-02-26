@@ -1,5 +1,6 @@
 package com.icia.gangcamping.entity;
 
+import com.icia.gangcamping.dto.CampingLikeDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@Table(name = "board_table")
+@Table(name = "campingLike_table")
 public class CampingLikeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +26,12 @@ public class CampingLikeEntity {
     @JoinColumn(name = "memberId")
     private MemberEntity memberEntity;
 
-    @Column
-    @NotNull
-    private LocalDateTime campingLikeDate;
+    public static CampingLikeEntity toSaveCampingLike(CampingLikeDTO campingLikeDTO, MemberEntity memberEntity, CampingEntity campingEntity) {
 
+        CampingLikeEntity campingLikeEntity = new CampingLikeEntity();
+
+        campingLikeEntity.setCampingEntity(campingEntity);
+        campingLikeEntity.setMemberEntity(memberEntity);
+        return campingLikeEntity;
+    }
 }

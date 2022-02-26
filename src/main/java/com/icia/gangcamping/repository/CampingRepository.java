@@ -8,5 +8,6 @@ import java.util.List;
 public interface CampingRepository extends JpaRepository<CampingEntity,Long> {
     CampingEntity findByCampingName(String campingName);
 
-    List findTop4ByOrderByCampingLikeCountAsc();
+
+    List<CampingEntity> findTop4ByOrderByCampingLikeCountAsc();
 }

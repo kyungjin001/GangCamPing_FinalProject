@@ -1,22 +1,17 @@
 package com.icia.gangcamping.controller;
 
-import com.icia.gangcamping.dto.BookDetailDTO;
-import com.icia.gangcamping.dto.CampingPayDetailDTO;
-import com.icia.gangcamping.dto.CampingPaySaveDTO;
+import com.icia.gangcamping.dto.*;
 import com.icia.gangcamping.entity.CampingEntity;
+import com.icia.gangcamping.entity.MemberEntity;
 import com.icia.gangcamping.repository.BookRepository;
 import com.icia.gangcamping.repository.CampingRepository;
-import com.icia.gangcamping.service.BookService;
-import com.icia.gangcamping.service.CampingPayService;
-import com.icia.gangcamping.service.CampingService;
+import com.icia.gangcamping.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +23,8 @@ public class CampingController {
     private final CampingPayService cps;
     private final BookService bs;
     private final CampingRepository cr;
+    private final CampingLikeService cls;
+    private final MemberService ms;
 
     @GetMapping("/reservation")
     public String reservation(){
@@ -51,8 +48,20 @@ public class CampingController {
         }else {
             book.setCampingFileName(camping.get().getCampingFileName());
         }
-        model.addAttribute("book",book);
+        model.addAttribute("bookList",book);
 
         return "/member/bookList";
+    }
+
+    @PostMapping("/campingLike")
+    public CampingLikeDetailDTO campingLike(HttpSession session, CampingLikeDTO campingLikeDTO) {
+
+        String memberEmail = (String) session.getAttribute("loginEmail");
+        Long campingLike = cls.save(campingLikeDTO, memberEmail);
+
+        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
+        Optional<CampingEntity> camping = cr.findById(campingLikeDTO.getCampingId());
+        CampingLikeDetailDTO campingLikeDetailDTO = cls.findMemberEntityAndCampingEntity(memberEntity,camping);
+        return campingLikeDetailDTO;
     }
 }
