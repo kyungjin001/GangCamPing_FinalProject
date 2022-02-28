@@ -56,12 +56,20 @@ public class CampingController {
     @PostMapping("/campingLike")
     public CampingLikeDetailDTO campingLike(HttpSession session, CampingLikeDTO campingLikeDTO) {
 
+        System.out.println("campingLikeController");
         String memberEmail = (String) session.getAttribute("loginEmail");
+        System.out.println("campingLikeControllerMEmber="+memberEmail);
         Long campingLike = cls.save(campingLikeDTO, memberEmail);
+        System.out.println("campingLikeControllerLike="+campingLike);
 
         MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
+        System.out.println("campingLikeControllerME="+memberEntity);
+
         Optional<CampingEntity> camping = cr.findById(campingLikeDTO.getCampingId());
-        CampingLikeDetailDTO campingLikeDetailDTO = cls.findMemberEntityAndCampingEntity(memberEntity,camping);
+        System.out.println("campingLikeControllerCE="+camping);
+
+        CampingLikeDetailDTO campingLikeDetailDTO = cls.findByMemberEntityAndCampingEntity(memberEntity,camping);
+        System.out.println("campingLikeControllerCLD="+campingLikeDetailDTO.toString());
         return campingLikeDetailDTO;
     }
 }

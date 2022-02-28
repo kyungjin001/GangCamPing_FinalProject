@@ -22,9 +22,8 @@
 
         function emailCheck() {
 
-            const mail = document.getElementById("memberEmail").value;
-
-
+            const mail = document.getElementById("pwMemberEmail").value;
+            console.log(mail);
             $.ajax({
                 type: 'post',
                 url: '/mail/pwMailCheck',
@@ -46,7 +45,7 @@
     <script>
         function codeSend() {
 
-            const mail = document.getElementById("memberEmail").value;
+            const mail = document.getElementById("pwMemberEmail").value;
             const codeInput = document.getElementById("codeInput");
             const send = document.getElementById("send");
             const cancel = document.getElementById("cancel");
@@ -84,7 +83,7 @@
     <script>
         function codeCheck() {
             console.log("???");
-            const mail2 = document.getElementById("memberEmail").value;
+            const mail2 = document.getElementById("pwMemberEmail").value;
             console.log(mail2);
             const codeInput = document.getElementById("codeInput").value;
             console.log(codeInput);
@@ -989,10 +988,10 @@
                     <!-- Modal body -->
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="memberEmail">이메일을 입력해주세요 </label> <br>
-                            <input type="text" class="form-control" id="memberEmail" th:onblur="emailCheck()"
+                            <label for="pwMemberEmail">이메일을 입력해주세요 </label> <br>
+                            <input type="text" class="form-control" id="pwMemberEmail" th:onblur="emailCheck()"
                                    placeholder="Enter Your Email" required>
-                            <form action="/member/update" method="get" name="pwUpdate">
+                            <form action="/member/update" method="get"  id="updateGO" name="pwUpdate">
                                 <input type="text" id="members" name="memberId">
                                 <input type="hidden" class="form-control" id="codeInput" placeholder="이메일 인증코드를 입력해주세요."
                                        required>
@@ -1002,10 +1001,14 @@
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">
+                        <!-- 인증코드 보내는 버튼 -->
                         <input type="button" id="emailSend" th:onclick="codeSend()" class="btn btn-primary"
                                style="margin-left:20%;" value="전송하기" readonly>
                         <input type="button" id="emailCancel" class="btn btn-secondary" data-dismiss="modal" value="취소"
                                readonly>
+                        <!-- 인증코드 인증 후 멤버수정으로 가는 버튼 -->
+                        <button type="hidden" id="send" form="updateGO" class="btn btn-primary" style="margin-left:20%;">전송하기</button>
+                        <input type="hidden" id="cancel"  class="btn btn-primary" data-dismiss="modal" value="취소" readonly>
                     </div>
                 </div>
             </div>

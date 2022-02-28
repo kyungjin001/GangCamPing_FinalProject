@@ -23,14 +23,15 @@ public class CampingLikeServiceImpl implements CampingLikeService {
     public Long save(CampingLikeDTO campingLikeDTO, String memberEmail) {
         MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
         CampingEntity campingEntity = cs.findById(campingLikeDTO.getCampingId()).get();
+
         CampingLikeEntity campingLikeEntity = CampingLikeEntity.toSaveCampingLike(campingLikeDTO,memberEntity,campingEntity);
        return clr.save(campingLikeEntity).getCampingLikeId();
 
     }
 
     @Override
-    public CampingLikeDetailDTO findMemberEntityAndCampingEntity(MemberEntity memberEntity, Optional<CampingEntity> camping) {
-        CampingLikeEntity campingLike = clr.findMemberEntityAndCampingEntity(memberEntity, camping);
+    public CampingLikeDetailDTO findByMemberEntityAndCampingEntity(MemberEntity memberEntity, Optional<CampingEntity> camping) {
+        CampingLikeEntity campingLike = clr.findByMemberEntityAndCampingEntity(memberEntity, camping);
 
         if(campingLike != null){
             CampingLikeDetailDTO campingLikeDetailDTO = CampingLikeDetailDTO.CampingLikeDetailDTO(campingLike);

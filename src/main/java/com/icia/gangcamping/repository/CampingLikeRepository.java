@@ -9,5 +9,5 @@ import java.util.Optional;
 
 public interface CampingLikeRepository extends JpaRepository<CampingLikeEntity,Long> {
 
-    CampingLikeEntity findMemberEntityAndCampingEntity(MemberEntity memberEntity, Optional<CampingEntity> camping);
+    CampingLikeEntity findByMemberEntityAndCampingEntity(MemberEntity memberEntity, Optional<CampingEntity> camping);
 }

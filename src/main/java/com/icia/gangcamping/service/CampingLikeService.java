@@ -10,6 +10,5 @@ import java.util.Optional;
 public interface CampingLikeService {
     Long save(CampingLikeDTO campingLikeDTO, String memberEmail);
 
-
-    CampingLikeDetailDTO findMemberEntityAndCampingEntity(MemberEntity memberEntity, Optional<CampingEntity> camping);
+    CampingLikeDetailDTO findByMemberEntityAndCampingEntity(MemberEntity memberEntity, Optional<CampingEntity> camping);
 }
