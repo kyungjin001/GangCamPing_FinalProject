@@ -50,7 +50,8 @@ public class BookServiceImpl implements BookService{
 
         BookEntity bookEntity = BookEntity.toBookSave(bookSaveDTO, memberEntity, campingEntity);
         return br.save(bookEntity).getBookId();
-
+    }
+    @Override
     public List<BookDetailDTO> findAll() {
         List<BookEntity> all = br.findAll();
         List<BookDetailDTO> bookList = new ArrayList<>();
