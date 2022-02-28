@@ -15,4 +15,5 @@ public interface BookService {
 
     List<BookDetailDTO> findAll();
 
+
 }

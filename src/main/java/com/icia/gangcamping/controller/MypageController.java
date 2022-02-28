@@ -1,9 +1,13 @@
 package com.icia.gangcamping.controller;
 
 import com.icia.gangcamping.dto.BookDetailDTO;
+import com.icia.gangcamping.dto.BookSaveDTO;
+import com.icia.gangcamping.dto.CampingDetailDTO;
 import com.icia.gangcamping.dto.MemberDetailDTO;
+import com.icia.gangcamping.entity.CampingEntity;
 import com.icia.gangcamping.entity.MemberEntity;
 import com.icia.gangcamping.service.BookService;
+import com.icia.gangcamping.service.CampingService;
 import com.icia.gangcamping.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +30,7 @@ public class MypageController {
 
     private final BookService bs;
     private final MemberService ms;
+    private final CampingService cs;
 
     @GetMapping("/shoppingList")
     public String shoppingList() {
@@ -33,11 +38,15 @@ public class MypageController {
     }
 
     @GetMapping("/bookList")
-    public String bookList(HttpSession session, Model model) {
-        String memberEmail = (String) session.getAttribute("memberEmail");
+    public String bookList(HttpSession session, Model model, BookDetailDTO bookDetailDTO) {
+        String memberEmail = (String) session.getAttribute("loginEmail");
+        System.out.println("mpc="+memberEmail);
         MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
-
         System.out.println(memberEntity);
+
+        CampingEntity campingEntity = cs.findByCampingId(bookDetailDTO.getCampingId());
+        BookDetailDTO bookDetail = bs.findByMemberEntityAndCampingEntity(memberEntity, campingEntity);
+
         List<BookDetailDTO> list = bs.findByMemberEntity(memberEntity);
         model.addAttribute("bookList", list);
 

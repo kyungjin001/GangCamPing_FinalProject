@@ -40,5 +40,11 @@ public class CampingLikeServiceImpl implements CampingLikeService {
         return null;
     }
 
+    @Override
+    public void deleteById(Long campingLikeId) {
+        clr.deleteById(campingLikeId);
+    }
+
+
 
 }

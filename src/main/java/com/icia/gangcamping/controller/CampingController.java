@@ -7,6 +7,8 @@ import com.icia.gangcamping.repository.BookRepository;
 import com.icia.gangcamping.repository.CampingRepository;
 import com.icia.gangcamping.service.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -71,5 +73,11 @@ public class CampingController {
         CampingLikeDetailDTO campingLikeDetailDTO = cls.findByMemberEntityAndCampingEntity(memberEntity,camping);
         System.out.println("campingLikeControllerCLD="+campingLikeDetailDTO.toString());
         return campingLikeDetailDTO;
+    }
+
+    @DeleteMapping("{campingLikeId}")
+    public ResponseEntity campingLikeDelete(@PathVariable("campingLikeId") Long campingLikeId){
+        cls.deleteById(campingLikeId);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

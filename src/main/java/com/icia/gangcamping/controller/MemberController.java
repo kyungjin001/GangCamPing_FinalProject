@@ -3,6 +3,7 @@ package com.icia.gangcamping.controller;
 
 import com.icia.gangcamping.dto.*;
 import com.icia.gangcamping.entity.MemberEntity;
+import com.icia.gangcamping.service.BookService;
 import com.icia.gangcamping.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,7 @@ import static com.icia.gangcamping.common.SessionConst.LOGIN_EMAIL;
 public class MemberController {
 
     private final MemberService ms;
+    private final BookService bs;
 
 //    @GetMapping("save")
 //    public String saveForm(Model model) {
@@ -111,9 +113,10 @@ public class MemberController {
         return "member/mypage";
     }
 
-    @GetMapping("{memberId}")
-    public String findById(@PathVariable("memberId") Long memberId, Model model) {
-        MemberDetailDTO member = ms.findById(memberId);
+    @GetMapping("{memberEmail}")
+    public String findById(HttpSession session, @PathVariable("memberEmail") String memberEmail, Model model) {
+        String memberEmail1 = (String)session.getAttribute("loginEmail");
+        MemberDetailDTO member = MemberDetailDTO.toMemberDetailDTO(ms.findByMemberEmail(memberEmail1));
         model.addAttribute("member", member);
         return "member/mypage";
 
@@ -190,12 +193,14 @@ public class MemberController {
         return "index";
     }
 
-    @GetMapping("/bookList")
-    public String bookList() {
+   /* @GetMapping("/bookList/{memberEmail}")
+    public String bookList(@PathVariable("memberEmail") String memberEmail) {
 
+        MemberDetailDTO member = MemberDetailDTO.toMemberDetailDTO(ms.findByMemberEmail(memberEmail));
+        BookDetailDTO book = bs.findByMemberId(member.getMemberId());
 
         return "member/bookList";
-    }
+    }*/
 
 
     @GetMapping("/delete")

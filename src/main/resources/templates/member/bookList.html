@@ -261,24 +261,22 @@
 		</colgroup>
 		<thead>
 		<tr>
-			<th class="tg-lstg">주문번호</th>
-			<th class="tg-lstg">주문자</th>
+			<th class="tg-lstg">예약번호</th>
+			<th class="tg-lstg">예약자 이름</th>
 			<th class="tg-lstg">캠핑장명</th>
 			<th class="tg-lstg">입실일</th>
 			<th class="tg-lstg">퇴실일</th>
-			<th class="tg-lstg">투숙기간</th>
 			<th class="tg-lstg">결제액</th>
 		</tr>
 		</thead>
 		<tbody>
 		<tr th:each="book: ${bookList}">
-			<td class="tg-80qx" ><a th:text="${book.bookId}" th:href="@{|/booking/bookDetail/${book.bookId}|}"></a></td>
-			<td class="tg-80qx" th:text="${book.memberId}"></td>
-			<td class="tg-80qx" th:text="${book.campingId}"></td>
-			<td class="tg-80qx" th:text="${book.bookCheckIn}"></td>
-			<td class="tg-80qx" th:text="${book.bookCheckOut}"></td>
-			<td class="tg-80qx" th:text="${book.bookPeriod}"></td>
-			<td class="tg-80qx" th:text="${book.bookPrice}"></td>
+			<td class="tg-80qx" th:text="${book.bookId}"></td>
+			<td class="tg-80qx" th:text="${book.bookName}"><a th:href="@{|/booking/bookDetail/${book.bookId}|}"></a></td>
+			<td class="tg-80qx" th:text="${book.campingName}"></td>
+			<td class="tg-80qx" th:text="|${#dates.format(book.bookCheckIn, 'yyyy-MM-dd')}|"></td>
+			<td class="tg-80qx" th:text="|${#dates.format(book.bookCheckOut, 'yyyy-MM-dd')}|"></td>
+			<td class="tg-80qx" th:text="${book.bookPrice}"><span>원</span></td>
 		</tr>
 		<tr>
 			<td class="tg-80qx"></td>

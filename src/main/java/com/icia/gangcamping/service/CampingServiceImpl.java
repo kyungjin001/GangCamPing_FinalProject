@@ -75,4 +75,10 @@ public class CampingServiceImpl implements CampingService {
         return campingRepository.findByCampingName(campingName);
     }
 
+    @Override
+    public CampingEntity findByCampingId(Long campingId) {
+       CampingEntity campingEntity = campingRepository.findById(campingId).get();
+        return null;
+    }
+
 }

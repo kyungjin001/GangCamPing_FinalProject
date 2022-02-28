@@ -53,6 +53,22 @@
 	<script>
 
 		function likeDelete(){
+			document.getElementById("emptyHeart").style.display="";
+			document.getElementById("fullHeart").style.display="none";
+			const campingLike = document.getElementById("campingLikeId").value;
+			const reqUrl = "/camping/"+campingLike;
+			console.log(campingLike);
+			$.ajax({
+				type: 'delete',
+				url: reqUrl,
+				data: {'campingLikeId': campingLike},
+				success: function (){
+					console.log("성공")
+				},
+				error: function (){
+					console.log("됐어 돌아가")
+				}
+			});
 
 		}
 	</script>

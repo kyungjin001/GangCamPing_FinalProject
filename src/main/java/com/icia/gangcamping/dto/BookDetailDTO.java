@@ -3,6 +3,7 @@ package com.icia.gangcamping.dto;
 import com.icia.gangcamping.entity.BookEntity;
 
 
+import com.icia.gangcamping.entity.CampingEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

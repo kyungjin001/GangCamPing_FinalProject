@@ -11,4 +11,7 @@ public interface CampingLikeService {
     Long save(CampingLikeDTO campingLikeDTO, String memberEmail);
 
     CampingLikeDetailDTO findByMemberEntityAndCampingEntity(MemberEntity memberEntity, Optional<CampingEntity> camping);
+
+
+    void deleteById(Long campingLikeId);
 }
