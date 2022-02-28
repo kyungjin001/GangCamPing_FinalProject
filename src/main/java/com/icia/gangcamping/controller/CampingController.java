@@ -54,7 +54,7 @@ public class CampingController {
     }
 
     @PostMapping("/campingLike")
-    public CampingLikeDetailDTO campingLike(HttpSession session, CampingLikeDTO campingLikeDTO) {
+    public @ResponseBody CampingLikeDetailDTO campingLike(HttpSession session, CampingLikeDTO campingLikeDTO) {
 
         System.out.println("campingLikeController");
         String memberEmail = (String) session.getAttribute("loginEmail");
