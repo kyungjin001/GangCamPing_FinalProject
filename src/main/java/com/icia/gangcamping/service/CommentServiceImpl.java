@@ -2,6 +2,7 @@ package com.icia.gangcamping.service;
 
 import com.icia.gangcamping.dto.CommentDetailDTO;
 import com.icia.gangcamping.dto.CommentSaveDTO;
+import com.icia.gangcamping.dto.GoodsDetailDTO;
 import com.icia.gangcamping.entity.MemberEntity;
 import com.icia.gangcamping.entity.ProductEntity;
 import com.icia.gangcamping.entity.QuestionEntity;
@@ -46,5 +47,19 @@ public class CommentServiceImpl implements CommentService{
     @Override
     public void deleteById(Long questionId) {
         qr.deleteById(questionId);
+    }
+
+    @Override
+    public List<CommentDetailDTO> findAll1() {
+        List<QuestionEntity> questionEntityList = qr.findAll();
+        List<CommentDetailDTO> commentList = new ArrayList<>();
+        for (QuestionEntity q : questionEntityList)
+        {
+            commentList.add(CommentDetailDTO.toCommentDetailDTO(q )); //한줄로 가능
+
+        }
+        return commentList;
+
+
     }
 }

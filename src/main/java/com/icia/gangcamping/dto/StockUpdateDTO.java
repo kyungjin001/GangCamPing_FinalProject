@@ -1,6 +1,7 @@
 package com.icia.gangcamping.dto;
 
 
+import com.icia.gangcamping.entity.ProductEntity;
 import com.icia.gangcamping.entity.StockEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,20 +18,21 @@ public class StockUpdateDTO {
     private int Stock;
     private String productName;
     private int productWeight;
+    private ProductEntity productEntity;
 
 
+    public static StockUpdateDTO toStockUpdateDTO(StockEntity stock) {
+        System.out.println("sss" + stock);
+        StockUpdateDTO stockUpdateDTO = new StockUpdateDTO();
+        stockUpdateDTO.setStockId(stock.getStockId());
+        stockUpdateDTO.setProductId(stock.getProductEntity().getProductId());
+        stockUpdateDTO.setStock(stock.getStock());
+        stockUpdateDTO.setProductName(stock.getProductEntity().getProductName());
+        stockUpdateDTO.setProductWeight(stock.getProductEntity().getProductWeight());
+        stockUpdateDTO.setProductEntity(stock.getProductEntity());
 
-    public static StockUpdateDTO toStockDetailDTO (StockEntity stock){
-        StockUpdateDTO stockDetailDTO = new StockUpdateDTO();
-        stockDetailDTO.setProductId(stock.getProductEntity().getProductId());
-        stockDetailDTO.setProductName(stock.getProductEntity().getProductName());
-        stockDetailDTO.setProductWeight(stock.getProductEntity().getProductWeight());
-        stockDetailDTO.setStock(stock.getStock());
-        stockDetailDTO.setProductId(stock.getProductEntity().getProductId());
-        stockDetailDTO.setStockId(stock.getStockId());
-//
-        return stockDetailDTO;
-    }}
-
+    return stockUpdateDTO;
+    }
+}
 
 

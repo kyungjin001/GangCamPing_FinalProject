@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class BookServiceImpl implements BookService{
+public class BookServiceImpl implements BookService {
     private final BookRepository br;
     private final MemberService ms;
     private final CampingService cs;
@@ -26,7 +26,7 @@ public class BookServiceImpl implements BookService{
     public List<BookDetailDTO> findByMemberEntity(MemberEntity memberEntity) {
         List<BookEntity> list = br.findByMemberEntity(memberEntity);
         List<BookDetailDTO> bList = new ArrayList<>();
-        for(BookEntity entity : list){
+        for (BookEntity entity : list) {
             BookDetailDTO dto = BookDetailDTO.toBookDetailDTO(entity);
             bList.add(dto);
         }
@@ -35,7 +35,7 @@ public class BookServiceImpl implements BookService{
 
     @Override
     public BookDetailDTO findById(Long bookId) {
-        Optional<BookEntity> entity= br.findById(bookId);
+        Optional<BookEntity> entity = br.findById(bookId);
         BookDetailDTO book = BookDetailDTO.toBookDetailDTO(entity.get());
 
         return book;
@@ -51,14 +51,15 @@ public class BookServiceImpl implements BookService{
         BookEntity bookEntity = BookEntity.toBookSave(bookSaveDTO, memberEntity, campingEntity);
         return br.save(bookEntity).getBookId();
 
-    public List<BookDetailDTO> findAll() {
-        List<BookEntity> all = br.findAll();
-        List<BookDetailDTO> bookList = new ArrayList<>();
-        for(BookEntity book:all){
-            BookDetailDTO bookDetailDTO = BookDetailDTO.toBookDetailDTO(book);
-            bookList.add(bookDetailDTO);
-        }
-        return bookList;
-
+//        public List<BookDetailDTO> findAll() {
+//            List<BookEntity> all = br.findAll();
+//            List<BookDetailDTO> bookList = new ArrayList<>();
+//            for (BookEntity book : all) {
+//                BookDetailDTO bookDetailDTO = BookDetailDTO.toBookDetailDTO(book);
+//                bookList.add(bookDetailDTO);
+//            }
+//
+//            return bookList;
+//        }
     }
 }

@@ -19,8 +19,9 @@
 		function newaddr() {
 			document.getElementById("aa").value ='';
 			document.getElementById("bb").value ='';
-			document.getElementById("cc").value ='';
-			document.getElementById("dd").value ='';
+			document.getElementById("sample6_postcode").value ='';
+			document.getElementById("sample6_address").value ='';
+			document.getElementById("sample6_detailAddress").value ='';
 		}
 	</script>
 
@@ -28,13 +29,18 @@
 		function baseaddr() {
 			var name = '[(${memberDetailDTO.memberName})]';
 			var phone = '[(${memberDetailDTO.memberPhone})]';
+			var a1 = '[(${#strings.substring(memberDetailDTO.memberAddr,0, 5)})]';
+			var a2 = '[(${#strings.substring(memberDetailDTO.memberAddr,6, 25)})]';
+			var a3 = '[(${#strings.substring(memberDetailDTO.memberAddr,26, 44)})]';
 			console.log(name);
 			document.getElementById("aa").value = name;
 			document.getElementById("bb").value = phone;
-			document.getElementById("cc").value ='';
-			document.getElementById("dd").value ='';
+			document.getElementById("sample6_postcode").value =a1;
+			document.getElementById("sample6_address").value =a2;
+			document.getElementById("sample6_detailAddress").value =a3;
 		}
 	</script>
+
 
 
 
@@ -450,9 +456,9 @@
 				<span id="phone-check-result"></span><br>
 
 				우편번호 확인<br>
-				<input type="text" class="a1 form-control shadow-sm" id="sample6_postcode" placeholder="우편번호">
-				<input type="text" class="a1 form-control shadow-sm" id="sample6_address" placeholder="주소"><br>
-				<input type="text" class="a1 form-control shadow-sm" id="sample6_detailAddress" placeholder="상세주소">
+				<input type="text" class="a1 form-control shadow-sm" th:value="${#strings.substring(memberDetailDTO.memberAddr,0, 5)}" id="sample6_postcode" placeholder="우편번호">
+				<input type="text" class="a1 form-control shadow-sm"  th:value="${#strings.substring(memberDetailDTO.memberAddr,6, 25)}"  id="sample6_address" placeholder="주소"><br>
+				<input type="text" class="a1 form-control shadow-sm" th:value="${#strings.substring(memberDetailDTO.memberAddr,26,44)}" id="sample6_detailAddress" placeholder="상세주소">
 				<input type="text" class="a1 form-control shadow-sm" id="sample6_extraAddress" placeholder="참고항목">
 				<input type="button" class="btn btn-primary" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
 				<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script><br>

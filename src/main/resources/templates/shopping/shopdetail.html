@@ -36,6 +36,68 @@
 
 
 
+	<script>
+		function like(){
+			document.getElementById("emptyHeart").style.display="none";
+			document.getElementById("fullHeart").style.display="";
+
+			const productId = '[[${goods.productId}]]';
+			const shoppingLike = document.getElementById("shoppingLikeId");
+			console.log(shoppingLike);
+			console.log(productId);
+
+			$.ajax({
+				type: 'post',
+				url: '/shopping/shoppingLike',
+				data: {'productId': productId},
+				dataType: 'json',
+				success: function (result){
+					console.log("성공");
+					if(result != null){
+						shoppingLike.value = result.shoppingLikeId;
+						alert("찜하기에 성공하셨습니다!");
+						console.log(shoppingLike);
+					}else{
+
+					}
+				},
+				error: function (){
+					console.log("재시도 찜하기")
+				}
+
+			});
+		}
+	</script>
+
+
+
+	<script>
+
+		function likeDelete(){
+			document.getElementById("emptyHeart").style.display="";
+			document.getElementById("fullHeart").style.display="none";
+			const shoppingLike = document.getElementById("shoppingLikeId").value;
+			const reqUrl = "/shopping/delete/"+shoppingLike;
+			console.log(shoppingLike);
+			$.ajax({
+				type: 'delete',
+				url: reqUrl,
+				data: {'shoppingLikeId': shoppingLike},
+				success: function (){
+					console.log("성공")
+					alert("찜하기를 취소하셨습니다!");
+				},
+				error: function (){
+					console.log("재시도 취소")
+				}
+			});
+
+		}
+	</script>
+
+
+
+
 
 
 	<script>
@@ -225,7 +287,15 @@
 						<button type="submit" class="primary-btn">ADD TO CARD</button>
 						</form>
 						</span>
-						<a href="#ddd" class="heart-icon"><span>♡</span></a>
+						<div>
+							<form action="/shopping/shoppingLike" method="post">
+								<input type="hidden" id="productId" th:value="${goods.productId}">
+								<input type="hidden"  name="shoppingLikeId" id="shoppingLikeId">
+							</form>
+
+							<img src="/images/emptyHeart32.png"  id="emptyHeart" th:onclick="like()">
+							<img id="fullHeart" src="/images/fullHeart32.png" style="display:none" th:onclick="likeDelete()">
+						</div>
 						<ul>
 							<li><b>Availability</b> <span>In Stock</span></li>
 							<li><b>Shipping</b> <span>무료배송 <samp>산간,제주도 배송비 추가</samp></span></li>

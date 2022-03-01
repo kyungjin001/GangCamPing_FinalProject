@@ -1,13 +1,11 @@
 package com.icia.gangcamping.service;
 
-import com.icia.gangcamping.dto.CartDetailDTO;
-import com.icia.gangcamping.dto.GoodsDetailDTO;
-import com.icia.gangcamping.dto.GoodsSaveDTO;
-import com.icia.gangcamping.entity.CartEntity;
-import com.icia.gangcamping.entity.MemberEntity;
-import com.icia.gangcamping.entity.ProductEntity;
+import com.icia.gangcamping.dto.*;
+import com.icia.gangcamping.entity.*;
 import com.icia.gangcamping.repository.CartRepository;
+import com.icia.gangcamping.repository.OrderRepository;
 import com.icia.gangcamping.repository.ProductRepositroy;
+import com.icia.gangcamping.repository.StockRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,6 +22,10 @@ public class ShoppingServiceImpl implements ShoppingService{
 
     private final ProductRepositroy pr;
     private final CartRepository cr;
+    private final OrderRepository or;
+    private  final StockRepository tr;
+    private  final  MemberService ms;
+
 
 
 
@@ -72,7 +74,9 @@ public class ShoppingServiceImpl implements ShoppingService{
     public GoodsDetailDTO findById(Long productId) {
         Optional<ProductEntity> productEntityOptional = pr.findById(productId);
         ProductEntity productEntity = productEntityOptional.get();
+        StockEntity stockEntity = tr.findByProductEntity(productEntity);
         GoodsDetailDTO goodsDetailDTO = GoodsDetailDTO.toGoodsDetailDTO(productEntity); //변환 모습
+        goodsDetailDTO.setProductStock(stockEntity.getStock());
         return goodsDetailDTO;
     }
 
@@ -137,4 +141,35 @@ public class ShoppingServiceImpl implements ShoppingService{
         }
         return "ok";
     }
+
+    @Override
+    public Long update(ShoppingUpdateDTO shoppingUpdateDTO) throws IOException {
+        MultipartFile productImage = shoppingUpdateDTO.getProductImage();
+        String productFileName = productImage.getOriginalFilename();
+        productFileName = System.currentTimeMillis() + "-" + productFileName;
+        String savePath = "C:\\development\\source\\springboot\\GangCamPing_FinalProjects\\src\\main\\resources\\static\\upload\\"+productFileName;
+        if(!productImage.isEmpty()) {
+            productImage.transferTo(new File(savePath));
+        }
+        shoppingUpdateDTO.setProductFileName(productFileName);
+        ProductEntity productEntity = ProductEntity.toUpdateBoard(shoppingUpdateDTO);
+        return pr.save(productEntity).getProductId();
     }
+
+    @Override
+    public List<OrderDetailDTO> findByMemberEntity1(MemberEntity memberEntity) {
+        List<OrderDetailDTO> oList = new ArrayList<>();
+        List<OrderEntity> order = or.findByMemberEntity(memberEntity);
+        for(OrderEntity orders : order) {
+            oList.add(OrderDetailDTO.toOrderDetailDTO1(orders));
+        }
+        return oList;
+    }
+
+    @Override
+    public ProductEntity findById2(Long productId) {
+        return pr.findById(productId).get();
+    }
+
+
+}

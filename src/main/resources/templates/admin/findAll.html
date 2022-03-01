@@ -309,7 +309,7 @@
         <div class="menu5" onclick="location.href='/admin/chatList'" style="cursor: pointer;">캠핑장문의</div>
         <div class="menu6" onclick="location.href='/admin/shoppingAsk'" style="cursor: pointer;">상품문의</div>
         <div class="menu7" onclick="location.href='/admin/save'" style="cursor: pointer;">상품등록</div>
-        <div class="menu8" onclick="location.href='/admin/stock'" style="cursor: pointer;">상품재고</div>
+        <div class="menu8" onclick="location.href='/shopping/stock'" style="cursor: pointer;">상품재고</div>
     </div>
 
 
@@ -324,6 +324,7 @@
             <col style="width: 93px">
             <col style="width: 100px">
             <col style="width: 120px">
+            <col style="width: 120px">
         </colgroup>
         <thead>
         <tr>
@@ -334,6 +335,7 @@
             <th class="tg-lstg">상품 상세정보</th>
             <th class="tg-lstg">판매가격</th>
             <th class="tg-lstg">삭제</th>
+            <th class="tg-lstg">수정</th>
         </tr>
         </thead>
         <tbody>
@@ -345,6 +347,9 @@
             <td class="tg-80qx" th:text="${goodsList.productDescription}"></td>
             <td class="tg-80qx" th:text="${goodsList.productPrice}"></td>
             <td><button th:onclick="deleteById([[${goodsList.productId}]])">삭제(ajax)</button></td>
+            <td><button th:onclick="'location.href=\''+ @{|/shopping/update/${goodsList.productId}|} + '\''">정보수정</button></td>
+
+
         </tr>
 
         </tbody>

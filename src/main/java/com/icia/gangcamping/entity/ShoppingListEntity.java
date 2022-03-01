@@ -1,5 +1,7 @@
 package com.icia.gangcamping.entity;
 
+import com.icia.gangcamping.dto.GoodsSaveDTO;
+import com.icia.gangcamping.dto.ShoppingListSaveDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,5 +28,22 @@ public class ShoppingListEntity {
     @Column
     @NotNull
     private LocalDateTime shoppingListDate;
+
+
+
+
+    public static ShoppingListEntity toSaveEntity(ShoppingListSaveDTO shoppingListSaveDTO,OrderEntity orderEntity) {
+        System.out.println(shoppingListSaveDTO);
+        System.out.println(orderEntity);
+        ShoppingListEntity shoppingListEntity = new ShoppingListEntity();
+        shoppingListEntity.setShoppingListId(shoppingListSaveDTO.getShoppingListId());
+        shoppingListEntity.setOrderEntity(orderEntity);
+        shoppingListEntity.setShoppingListPrice(shoppingListSaveDTO.getShoppingListPrice());
+        shoppingListEntity.setShoppingListDate(shoppingListSaveDTO.getShoppingListDate());
+        return shoppingListEntity;
+    }
+
+
+
 
 }

@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@Table(name = "board_table")
+@Table(name = "campingLike_table")
 public class CampingLikeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +25,5 @@ public class CampingLikeEntity {
     @JoinColumn(name = "memberId")
     private MemberEntity memberEntity;
 
-    @Column
-    @NotNull
-    private LocalDateTime campingLikeDate;
 
 }

@@ -42,26 +42,27 @@
             <h4 class="mb-3">상품등록</h4>
             <form class="validation-form"  action="/shopping/update" method="post" enctype="multipart/form-data">
 
-                <input type="hidden" name="productId" th:value="${board.boardId}" id="boardId" ><br>
+                <input type="hidden" name="productId" th:value="${goods.productId}" id="productId" ><br>
 
 
                 <div class="mb-3">
                     <label>상품이름</label> <input type="text"
-                                                          class="form-control" name="productName" placeholder="상품명을 입력해주세요." value="" required>
+                                                          class="form-control" name="productName" th:value="${goods.productName}"required>
                 </div>
+
                 <div class="mb-3">
                     <label>상품수량</label> <input type="text"
-                                               class="form-control" name="productStock" placeholder="재고수 입력해주세요." value="" required>
+                                               class="form-control" name="productStock" th:value="${goods.productStock}" required>
                 </div>
 
                 <div class="mb-3">
                     <label>상품무게</label> <input type="text"
-                                               class="form-control" name="productWeight" placeholder="상품무게를 입력해주세요." value="" required>
+                                               class="form-control" name="productWeight" th:value="${goods.productWeight}" required>
                 </div>
 
                 <div class="mb-3">
                     <label>상품가격(단위 : 원)</label> <input type="text"
-                                                                  class="form-control" name="productPrice"  placeholder="상품가격을 입력해주세요." value="" required>
+                                                                  class="form-control" name="productPrice" th:value="${goods.productPrice}" required>
                 </div>
 
 
@@ -79,7 +80,7 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label>상품 설명</label>
-                        <textarea name="productDescription" rows="5" class="form-control"></textarea><br>
+                        <textarea name="productDescription" rows="5" class="form-control" th:text="${goods.productDescription}" th:value="${goods.productDescription}"></textarea><br>
                     </div>
 
                 </div>

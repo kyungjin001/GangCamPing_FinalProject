@@ -58,7 +58,6 @@
 
 <script>
 	const menuDown = (cartId) =>{
-		console.log('함수호출은 하냐?')
 		console.log(cartId);
 		$.ajax({
 			type:'put',
@@ -113,6 +112,7 @@
 				type: 'delete',
 				url: reqUrl,
 				success: function (){
+					alert("장바구니 삭제가 완료되었습니다!")
 					location.href= "/shopping/cartview";
 				},
 				error:function (){
