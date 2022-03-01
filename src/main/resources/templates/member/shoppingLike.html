@@ -298,18 +298,19 @@
 		<thead>
 		<tr>
 			<th class="tg-62r5">찜번호</th>
-			<th class="tg-62r5">찜한 일자</th>
 			<th class="tg-62r5">상품명</th>
 			<th class="tg-62r5">상품 상세내용</th>
+			<th class="tg-62r5">상품 가격</th>
 			<th class="tg-62r5">비고</th>
 		</tr>
 		</thead>
 		<tbody>
 		<tr th:each="slList:${slList}">
-			<th class="tg-62r5" th:text="${slList.shoppingLikeId}">찜번호</th>
-			<th class="tg-62r5" th:text="${slList.productName}">상품명</th>
-			<th class="tg-62r5" th:text="${slList.productDescription}">상품 상세내용</th>
-			<th class="tg-62r5">비고</th>
+			<td class="tg-kwqo" th:text="${slList.shoppingLikeId}"></td>
+			<td class="tg-kwqo" th:text="${slList.productName}"></td>
+			<td class="tg-kwqo" th:text="${slList.productDescription}" ></td>
+			<td class="tg-kwqo" th:text="${slList.productPrice}" ></td>
+			<td class="tg-kwqo"></td>
 		</tr>
 		<tr>
 			<td class="tg-kwqo"></td>

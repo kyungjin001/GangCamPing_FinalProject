@@ -19,6 +19,8 @@ public class ShoppingLikeDetailDTO {
     private Long productId;
     private String productName;
     private String productDescription;
+    private int productPrice;
+
 
 
 
@@ -26,7 +28,8 @@ public class ShoppingLikeDetailDTO {
         ShoppingLikeDetailDTO shoppingLikeDetailDTO = new ShoppingLikeDetailDTO();
         shoppingLikeDetailDTO.setShoppingLikeId(shoppingLike.getShoppingLikeId());
         shoppingLikeDetailDTO.setProductName(shoppingLike.getProductEntity().getProductName());
-        shoppingLikeDetailDTO.setProductName(shoppingLike.getProductEntity().getProductDescription());
+        shoppingLikeDetailDTO.setProductPrice(shoppingLike.getProductEntity().getProductPrice());
+        shoppingLikeDetailDTO.setProductDescription(shoppingLike.getProductEntity().getProductDescription());
         shoppingLikeDetailDTO.setMemberId(shoppingLike.getMemberEntity().getMemberId());
         shoppingLikeDetailDTO.setProductId(shoppingLike.getProductEntity().getProductId());
         return shoppingLikeDetailDTO;

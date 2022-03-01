@@ -233,9 +233,20 @@ public class MemberController {
     }
 
 
-    @GetMapping("/shoppingList/{memberEmail}")
-    public String shoppingList(@PathVariable("memberEmail") String memberEmail, Model model) {
+//    @GetMapping("/shoppingList/{memberEmail}")
+//    public String shoppingList(@PathVariable("memberEmail") String memberEmail, Model model) {
+//
+//        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
+//        List<OrderDetailDTO> oList = ss.findByMemberEntity1(memberEntity);
+//        System.out.println(oList);
+//        model.addAttribute("oList", oList);
+//
+//        return "member/shoppingList";
+//    }
 
+    @GetMapping("/shoppingList")
+    public String shoppingList( Model model) {
+        String memberEmail = (String) session.getAttribute("loginEmail");
         MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
         List<OrderDetailDTO> oList = ss.findByMemberEntity1(memberEntity);
         System.out.println(oList);
@@ -245,8 +256,9 @@ public class MemberController {
     }
 
 
-    @GetMapping("/shoppingLike/{memberEmail}")
-    public String shoppingLike(@PathVariable("memberEmail") String memberEmail, Model model) {
+    @GetMapping("/shoppingLike")
+    public String shoppingLike(Model model) {
+        String memberEmail = (String) session.getAttribute("loginEmail");
         MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
         List<ShoppingLikeDetailDTO> slList = sls.findByMemberEntity(memberEntity);
         System.out.println(slList);
