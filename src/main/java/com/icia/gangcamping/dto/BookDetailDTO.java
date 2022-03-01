@@ -37,9 +37,8 @@ public class BookDetailDTO {
         bookDetailDTO.setBookCheckIn(bookEntity.getBookCheckIn());
         bookDetailDTO.setBookCheckOut(bookEntity.getBookCheckOut());
         bookDetailDTO.setCreateTime(bookEntity.getCreateTime());
+        bookDetailDTO.setCampingName(bookEntity.getCampingEntity().getCampingName());
         return bookDetailDTO;
     }
-
-
 
 }

@@ -1,7 +1,9 @@
 package com.icia.gangcamping.controller;
 
 import com.icia.gangcamping.dto.CampingDetailDTO;
+import com.icia.gangcamping.dto.ReviewDetailDTO;
 import com.icia.gangcamping.service.CampingService;
+import com.icia.gangcamping.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -28,6 +30,7 @@ import java.util.List;
 @RequestMapping("/search")
 public class SearchController {
     private final CampingService cs;
+    private final ReviewService rs;
 
      public List searchList(String keyword) throws IOException, ParseException {
 
@@ -127,6 +130,11 @@ public class SearchController {
         campingDetailDTO.setCheckInDate(checkInDate);
         campingDetailDTO.setCheckOutDate(checkOutDate);
 
+        List<ReviewDetailDTO> review = rs.findAll(campingDetailDTO.getCampingId());
+        double reviewAvg = rs.avg(campingDetailDTO.getCampingId());
+        session.setAttribute("avg", reviewAvg);
+
+        model.addAttribute("review",review);
         model.addAttribute("campingDetail",campingDetailDTO);
         model.addAttribute("period1", period1);
         model.addAttribute("period2", period2);

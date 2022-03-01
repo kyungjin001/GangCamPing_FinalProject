@@ -5,6 +5,8 @@ import com.icia.gangcamping.entity.MemberEntity;
 import com.icia.gangcamping.entity.ReviewEntity;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 
 @Data
 public class ReviewDetailDTO {
@@ -15,7 +17,9 @@ public class ReviewDetailDTO {
     private double reviewStar;
     private String reviewWriter;
     private String campingName;
+    private String reviewTitle;
     private String campingFileName;
+    private LocalDateTime createTime;
 
     public static ReviewDetailDTO toDetailDTO(ReviewEntity reviewEntity) {
         ReviewDetailDTO reviewDetailDTO = new ReviewDetailDTO();
@@ -25,6 +29,8 @@ public class ReviewDetailDTO {
         reviewDetailDTO.setReviewWriter(reviewEntity.getMemberEntity().getMemberEmail());
         reviewDetailDTO.setCampingName(reviewEntity.getCampingEntity().getCampingName());
         reviewDetailDTO.setCampingFileName(reviewEntity.getCampingEntity().getCampingFileName());
+        reviewDetailDTO.setCreateTime(reviewEntity.getCreateTime());
+        reviewDetailDTO.setReviewTitle(reviewEntity.getReviewTitle());
         return reviewDetailDTO;
     }
 }

@@ -2,6 +2,7 @@ package com.icia.gangcamping.service;
 
 import com.icia.gangcamping.dto.BookDetailDTO;
 import com.icia.gangcamping.dto.BookSaveDTO;
+import com.icia.gangcamping.entity.CampingEntity;
 import com.icia.gangcamping.entity.MemberEntity;
 
 import java.util.List;
@@ -15,5 +16,5 @@ public interface BookService {
 
     List<BookDetailDTO> findAll();
 
-
+    void deleteById(Long bookId);
 }

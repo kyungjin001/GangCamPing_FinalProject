@@ -4,6 +4,7 @@ import com.icia.gangcamping.dto.BookDetailDTO;
 import com.icia.gangcamping.dto.BookSaveDTO;
 import com.icia.gangcamping.dto.CampingDetailDTO;
 import com.icia.gangcamping.dto.MemberDetailDTO;
+import com.icia.gangcamping.entity.BookEntity;
 import com.icia.gangcamping.entity.CampingEntity;
 import com.icia.gangcamping.entity.MemberEntity;
 import com.icia.gangcamping.service.BookService;
@@ -42,20 +43,16 @@ public class MypageController {
         String memberEmail = (String) session.getAttribute("loginEmail");
         System.out.println("mpc="+memberEmail);
         MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
-        System.out.println(memberEntity);
 
-        CampingEntity campingEntity = cs.findByCampingId(bookDetailDTO.getCampingId());
-        BookDetailDTO bookDetail = bs.findByMemberEntityAndCampingEntity(memberEntity, campingEntity);
+       /* CampingEntity campingEntity = cs.findByCampingId(bookDetailDTO1.getCampingId());
+        bookDetailDTO.setCampingName(campingEntity.getCampingName());*/
 
         List<BookDetailDTO> list = bs.findByMemberEntity(memberEntity);
-        model.addAttribute("bookList", list);
 
+        model.addAttribute("bookList", list);
 
         return "/member/bookList";
     }
 
-    @GetMapping("/campingList")
-    public String campingList() {
-        return "/member/campingList";
-    }
+
 }

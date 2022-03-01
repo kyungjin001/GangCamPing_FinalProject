@@ -129,6 +129,24 @@
 		}
 	</style>
 
+	<script>
+		const deleteById = (bookId)=>{
+
+			const reqUrl = "/booking/"+bookId;
+
+			$.ajax({
+				type: 'delete',
+				url:reqUrl,
+				success: function (){
+					location.href="redirect:/member/bookList";
+				},
+				error: function (){
+
+				}
+			});
+		}
+	</script>
+
 </head>
 
 <body>
@@ -271,12 +289,13 @@
 		</thead>
 		<tbody>
 		<tr th:each="book: ${bookList}">
-			<td class="tg-80qx" th:text="${book.bookId}"></td>
-			<td class="tg-80qx" th:text="${book.bookName}"><a th:href="@{|/booking/bookDetail/${book.bookId}|}"></a></td>
-			<td class="tg-80qx" th:text="${book.campingName}"></td>
+			<td class="tg-80qx" id="bookId" th:text="${book.bookId}"></td>
+			<td class="tg-80qx" th:text="${book.bookName}"></td>
+			<td class="tg-80qx" ><a th:text="${book.campingName}" th:href="@{|/booking/bookDetail/${book.bookId}|}"></a></td>
 			<td class="tg-80qx" th:text="|${#dates.format(book.bookCheckIn, 'yyyy-MM-dd')}|"></td>
 			<td class="tg-80qx" th:text="|${#dates.format(book.bookCheckOut, 'yyyy-MM-dd')}|"></td>
 			<td class="tg-80qx" th:text="${book.bookPrice}"><span>원</span></td>
+			<td class="tg-80qx"><a th:onclick="deleteById([[${book.bookId}]])">예약취소</a></td>
 		</tr>
 		<tr>
 			<td class="tg-80qx"></td>

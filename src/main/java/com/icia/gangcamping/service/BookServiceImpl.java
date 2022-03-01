@@ -26,7 +26,7 @@ public class BookServiceImpl implements BookService{
     public List<BookDetailDTO> findByMemberEntity(MemberEntity memberEntity) {
         List<BookEntity> list = br.findByMemberEntity(memberEntity);
         List<BookDetailDTO> bList = new ArrayList<>();
-        for(BookEntity entity : list){
+        for(BookEntity entity : list) {
             BookDetailDTO dto = BookDetailDTO.toBookDetailDTO(entity);
             bList.add(dto);
         }
@@ -64,4 +64,8 @@ public class BookServiceImpl implements BookService{
 
     }
 
+    @Override
+    public void deleteById(Long bookId) {
+        br.deleteById(bookId);
+    }
 }

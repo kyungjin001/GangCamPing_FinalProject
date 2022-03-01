@@ -22,5 +22,5 @@ public interface CampingService {
 
     CampingEntity findByCampingName1(String campingName);
 
-    CampingEntity findByCampingId(Long campingId);
+ /*   CampingEntity findByCampingId(Long campingId);*/
 }

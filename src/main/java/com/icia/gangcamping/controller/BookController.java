@@ -13,6 +13,8 @@ import com.icia.gangcamping.service.BookService;
 import com.icia.gangcamping.service.CampingService;
 import com.icia.gangcamping.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -94,5 +96,11 @@ public class BookController {
         model.addAttribute("book",book);
 
         return "member/bookDetail";
+    }
+
+    @DeleteMapping("/{bookId}")
+    private ResponseEntity deleteById(@PathVariable("bookId") Long bookId){
+        bs.deleteById(bookId);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }
