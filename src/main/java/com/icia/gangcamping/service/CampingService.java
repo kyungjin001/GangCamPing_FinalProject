@@ -1,6 +1,7 @@
 package com.icia.gangcamping.service;
 
 import com.icia.gangcamping.dto.CampingDetailDTO;
+import com.icia.gangcamping.dto.CampingDetailSaveDTO;
 import com.icia.gangcamping.entity.CampingDetailEntity;
 import com.icia.gangcamping.entity.CampingEntity;
 
@@ -22,5 +23,6 @@ public interface CampingService {
 
     CampingEntity findByCampingName1(String campingName);
 
- /*   CampingEntity findByCampingId(Long campingId);*/
+
+    CampingDetailSaveDTO findByCampingEntity(CampingEntity campingEntity);
 }

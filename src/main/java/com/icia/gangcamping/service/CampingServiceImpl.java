@@ -1,8 +1,7 @@
 package com.icia.gangcamping.service;
 
-import com.icia.gangcamping.dto.BookSaveDTO;
 import com.icia.gangcamping.dto.CampingDetailDTO;
-import com.icia.gangcamping.entity.BookEntity;
+import com.icia.gangcamping.dto.CampingDetailSaveDTO;
 import com.icia.gangcamping.entity.CampingDetailEntity;
 import com.icia.gangcamping.entity.CampingEntity;
 import com.icia.gangcamping.repository.CampingDetailRepository;
@@ -75,10 +74,11 @@ public class CampingServiceImpl implements CampingService {
         return campingRepository.findByCampingName(campingName);
     }
 
-    /*@Override
-    public CampingEntity findByCampingId(Long campingId) {
-       CampingEntity campingEntity = campingRepository.findById(campingId).get();
-        return campingEntity;
-    }*/
+    @Override
+    public CampingDetailSaveDTO findByCampingEntity(CampingEntity campingEntity) {
+        CampingDetailEntity campingDetailEntity = cdr.findByCampingEntity(campingEntity);
+        CampingDetailSaveDTO campingDetailSaveDTO = CampingDetailSaveDTO.toSaveDTO(campingDetailEntity);
+        return campingDetailSaveDTO;
+    }
 
 }

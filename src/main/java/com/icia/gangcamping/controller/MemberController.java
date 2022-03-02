@@ -4,6 +4,7 @@ package com.icia.gangcamping.controller;
 import com.icia.gangcamping.dto.*;
 import com.icia.gangcamping.entity.MemberEntity;
 import com.icia.gangcamping.service.BookService;
+import com.icia.gangcamping.service.CampingLikeService;
 import com.icia.gangcamping.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import static com.icia.gangcamping.common.SessionConst.LOGIN_EMAIL;
@@ -29,6 +31,7 @@ public class MemberController {
 
     private final MemberService ms;
     private final BookService bs;
+    private final CampingLikeService cls;
 
 //    @GetMapping("save")
 //    public String saveForm(Model model) {
@@ -202,6 +205,22 @@ public class MemberController {
         return "member/bookList";
     }*/
 
+    @GetMapping("/shoppingLike")
+    public String shoppingLike(Model model, HttpSession session) {
+
+        String memberEmail = (String) session.getAttribute("loginEmail");
+        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
+        /*List<ShoppingLikeDetailDTO> slList = sls.findByMemberEntity(memberEntity);
+        System.out.println(slList);
+        model.addAttribute("slList", slList);*/
+
+        List<CampingLikeDetailDTO> campingLike = cls.findByMemberEntity(memberEntity);
+        System.out.println(campingLike.toString());
+        model.addAttribute("campingLike", campingLike);
+
+        return "member/shoppingLike";
+    }
+
 
     @GetMapping("/delete")
     public String delete() {
@@ -233,12 +252,5 @@ public class MemberController {
     public String shoppingList() {
         return "member/shoppingList";
     }
-
-
-    @GetMapping("/shoppingLike")
-    public String shoppingLike() {
-        return "member/shoppingLike";
-    }
-
 
 }

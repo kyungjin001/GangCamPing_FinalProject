@@ -5,6 +5,7 @@ import com.icia.gangcamping.dto.CampingLikeDetailDTO;
 import com.icia.gangcamping.entity.CampingEntity;
 import com.icia.gangcamping.entity.MemberEntity;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface CampingLikeService {
@@ -14,4 +15,6 @@ public interface CampingLikeService {
 
 
     void deleteById(Long campingLikeId);
+
+    List<CampingLikeDetailDTO> findByMemberEntity(MemberEntity memberEntity);
 }

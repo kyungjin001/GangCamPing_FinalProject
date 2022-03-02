@@ -9,6 +9,8 @@ import com.icia.gangcamping.repository.CampingLikeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,6 +37,7 @@ public class CampingLikeServiceImpl implements CampingLikeService {
 
         if(campingLike != null){
             CampingLikeDetailDTO campingLikeDetailDTO = CampingLikeDetailDTO.CampingLikeDetailDTO(campingLike);
+
             return campingLikeDetailDTO;
         }
         return null;
@@ -45,6 +48,16 @@ public class CampingLikeServiceImpl implements CampingLikeService {
         clr.deleteById(campingLikeId);
     }
 
+    @Override
+    public List<CampingLikeDetailDTO> findByMemberEntity(MemberEntity memberEntity) {
+
+        List<CampingLikeDetailDTO> campingLikeDTO = new ArrayList<>();
+        List<CampingLikeEntity> campingLikeEntity = clr.findByMemberEntity(memberEntity);
+        for(CampingLikeEntity campingLike: campingLikeEntity){
+            campingLikeDTO.add(CampingLikeDetailDTO.CampingLikeDetailDTO(campingLike));
+        }
+        return campingLikeDTO;
+    }
 
 
 }

@@ -130,7 +130,7 @@
 	</style>
 
 	<script>
-		const deleteById = (bookId)=>{
+		const deleteById = (bookId) => {
 
 			const reqUrl = "/booking/"+bookId;
 
@@ -138,7 +138,7 @@
 				type: 'delete',
 				url:reqUrl,
 				success: function (){
-					location.href="redirect:/member/bookList";
+					location.reload();
 				},
 				error: function (){
 
@@ -295,7 +295,7 @@
 			<td class="tg-80qx" th:text="|${#dates.format(book.bookCheckIn, 'yyyy-MM-dd')}|"></td>
 			<td class="tg-80qx" th:text="|${#dates.format(book.bookCheckOut, 'yyyy-MM-dd')}|"></td>
 			<td class="tg-80qx" th:text="${book.bookPrice}"><span>원</span></td>
-			<td class="tg-80qx"><a th:onclick="deleteById([[${book.bookId}]])">예약취소</a></td>
+			<td class="tg-80qx"><button data-toggle="modal" th:onclick="deleteById([[${book.bookId}]])"  data-target="#bookCancle">예약취소</button></td>
 		</tr>
 		<tr>
 			<td class="tg-80qx"></td>
@@ -473,6 +473,47 @@
 			</div>
 		</div>
 		<!-- 모달 시작! -->
+
+		<!-- bookCancle Modal -->
+		<div class="modal fade" tabindex="-1" id="bookCancle" aria-labelledby="loginModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title">예약취소</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+					<!-- Modal body -->
+					<div class="modal-body">
+						<form >
+
+							<div class="form-group">
+								<label for="loginId" style="margin-left: 200px">취소사유 </label> <br>
+								<select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" style="margin-left: 30%">
+									<option selected>취소사유를 선택해주세요.</option>
+									<option value="1">다른 일정이 생겼어요.</option>
+									<option value="2">가격이 다른곳보다 비싸요.</option>
+									<option value="3">단순변심</option>
+									<option value="4">기타</option>
+								</select>
+							</div>
+						</form>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
 		<!-- Login Modal -->
 		<div class="modal fade" tabindex="-1" id="login" aria-labelledby="loginModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered">

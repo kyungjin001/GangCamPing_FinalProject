@@ -1,7 +1,9 @@
 package com.icia.gangcamping.controller;
 
 import com.icia.gangcamping.dto.CampingDetailDTO;
+import com.icia.gangcamping.dto.CampingDetailSaveDTO;
 import com.icia.gangcamping.dto.ReviewDetailDTO;
+import com.icia.gangcamping.entity.CampingEntity;
 import com.icia.gangcamping.service.CampingService;
 import com.icia.gangcamping.service.ReviewService;
 import lombok.RequiredArgsConstructor;
@@ -134,10 +136,16 @@ public class SearchController {
         double reviewAvg = rs.avg(campingDetailDTO.getCampingId());
         session.setAttribute("avg", reviewAvg);
 
+        CampingEntity campingEntity = cs.findById(campingDetailDTO.getCampingId()).get();
+        CampingDetailSaveDTO campingDetailSaveDTOS = cs.findByCampingEntity(campingEntity);
+        System.out.println(campingDetailSaveDTOS.toString());
+
         model.addAttribute("review",review);
         model.addAttribute("campingDetail",campingDetailDTO);
         model.addAttribute("period1", period1);
         model.addAttribute("period2", period2);
+        model.addAttribute("cds",campingDetailSaveDTOS);
+
         System.out.println(campingDetailDTO.toString());
          return "single_listing";
     }

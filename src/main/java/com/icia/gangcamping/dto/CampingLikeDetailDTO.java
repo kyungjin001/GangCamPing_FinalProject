@@ -13,6 +13,8 @@ public class CampingLikeDetailDTO {
     private Long campingLikeId;
     private Long memberId;
     private Long campingId;
+    private String campingName;
+    private String campingInfo;
 
 
     public static CampingLikeDetailDTO CampingLikeDetailDTO(CampingLikeEntity campingLike) {
@@ -21,6 +23,8 @@ public class CampingLikeDetailDTO {
         campingLikeDetailDTO.setCampingLikeId(campingLike.getCampingLikeId());
         campingLikeDetailDTO.setCampingId(campingLike.getCampingEntity().getCampingId());
         campingLikeDetailDTO.setMemberId(campingLike.getMemberEntity().getMemberId());
+        campingLikeDetailDTO.setCampingName(campingLike.getCampingEntity().getCampingName());
+        campingLikeDetailDTO.setCampingInfo(campingLike.getCampingEntity().getCampingInfo());
         return campingLikeDetailDTO;
     }
 }
