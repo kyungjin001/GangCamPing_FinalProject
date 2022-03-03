@@ -253,6 +253,7 @@ public class MemberController {
     }
 
 
+
     @GetMapping("/bookDetail")
     public String bookDetail() {
         return "member/bookDetail";
@@ -276,7 +277,6 @@ public class MemberController {
 
         return "member/shoppingList";
     }
-
 
 
     @GetMapping("/shoppingLike")
