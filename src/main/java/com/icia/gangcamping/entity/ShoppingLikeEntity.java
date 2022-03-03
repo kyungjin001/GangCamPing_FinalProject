@@ -1,5 +1,7 @@
 package com.icia.gangcamping.entity;
 
+import com.icia.gangcamping.dto.ShoppingLikeSaveDTO;
+import com.icia.gangcamping.dto.ShoppingListSaveDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,7 +14,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Table(name = "shoppingLike_table")
-public class ShoppingLikeEntity extends BaseEntity{
+public class ShoppingLikeEntity{
     @Id
     @GeneratedValue
     @Column(name = "shoppingLikeId")
@@ -23,9 +25,15 @@ public class ShoppingLikeEntity extends BaseEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId")
     private MemberEntity memberEntity;
-    @Column
-    @NotNull
-    private LocalDateTime shoppingLikeDate;
+
+
+
+    public static ShoppingLikeEntity toSaveEntity(ShoppingLikeSaveDTO shoppingLikeSaveDTO, MemberEntity memberEntity,ProductEntity ProductEntity) {
+        ShoppingLikeEntity shoppingLike = new ShoppingLikeEntity();
+        shoppingLike.setMemberEntity(memberEntity);
+        shoppingLike.setProductEntity(ProductEntity);
+        return shoppingLike;
+    }
 
 
 }

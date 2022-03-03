@@ -23,8 +23,10 @@ public class StockDetailDTO {
 
 
     public static StockDetailDTO toStockDetailDTO (StockEntity stock){
+        System.out.println("sss"+ stock);
         StockDetailDTO stockDetailDTO = new StockDetailDTO();
         stockDetailDTO.setProductId(stock.getProductEntity().getProductId());
+        stockDetailDTO.setStockId(stock.getStockId());
         stockDetailDTO.setProductName(stock.getProductEntity().getProductName());
         stockDetailDTO.setProductWeight(stock.getProductEntity().getProductWeight());
         stockDetailDTO.setStock(stock.getStock());
@@ -32,7 +34,19 @@ public class StockDetailDTO {
         stockDetailDTO.setStockId(stock.getStockId());
 //
         return stockDetailDTO;
-    }}
+    }
+
+
+
+
+
+
+
+
+
+
+
+}
 
 
 

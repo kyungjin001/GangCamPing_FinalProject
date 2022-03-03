@@ -22,6 +22,8 @@ public class CommentDetailDTO {
     private String commentWriter;
     private String questionContents;
     private LocalDateTime commentTime;
+    private String memberEmail;
+    private String productName;
 
 
 
@@ -34,9 +36,12 @@ public class CommentDetailDTO {
         commentDetailDTO.setProductId(questionEntity.getProductEntity().getProductId());
         commentDetailDTO.setCommentWriter(questionEntity.getMemberEntity().getMemberEmail());
         commentDetailDTO.setQuestionContents(questionEntity.getQuestionContents());
+        commentDetailDTO.setProductName(questionEntity.getProductEntity().getProductName());
+        commentDetailDTO.setMemberEmail(questionEntity.getMemberEntity().getMemberEmail());
         if(questionEntity.getUpdateTime()==null){
             commentDetailDTO.setCommentTime(questionEntity.getCreateTime());
         }else {
+            commentDetailDTO.setCommentTime(questionEntity.getUpdateTime());
             commentDetailDTO.setCommentTime(questionEntity.getUpdateTime());
         }
         return commentDetailDTO;

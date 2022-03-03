@@ -21,6 +21,12 @@
 	background-color: #cccccc;
 }
 
+	/*.info{*/
+	/*	margin-left: 200px;*/
+	/*	margin-top: 300px;*/
+	/*}*/
+
+
 	b{
 		font-size: 30px;
 	}
@@ -40,7 +46,7 @@
 		.complete{
 			width: 1000px;
 			height: 1000px;
-			border: solid 1px black;
+			border: solid 1px #cccccc;
 			margin-left: 300px;
 			margin-bottom: 100px;
 			margin-top: 100px;
@@ -291,6 +297,7 @@
 			<h2 style="color: #1c7430">결제완료</h2>
 		</div>
 		<div class="complete">
+			<div class="info">
 			<ul>
 				<b>배송지 정보</b><br><br>
 				<li th:text="수령인 + |${memberDetailDTO.memberName}|"></li><br>
@@ -301,12 +308,8 @@
 				<b>결제정보</b><br><br>
 				<h3 th:text="결제금액+|${orderDetailDTO.orderTotalFee}|+ 원"> </h3>
 				<h3 th:text="결제수단+|${orderDetailDTO.orderPayType}|"> </h3>
-
-
-
-
-
 			</ul>
+			</div>
 
 
 

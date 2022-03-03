@@ -1,22 +1,20 @@
 package com.icia.gangcamping.controller;
 
 
+import com.icia.gangcamping.dto.CommentDetailDTO;
 import com.icia.gangcamping.dto.GoodsDetailDTO;
-import com.icia.gangcamping.service.AdminService;
-import com.icia.gangcamping.service.ShoppingService;
+import com.icia.gangcamping.service.*;
 import com.icia.gangcamping.dto.BookDetailDTO;
 import com.icia.gangcamping.repository.BookRepository;
 import com.icia.gangcamping.repository.CampingRepository;
 import com.icia.gangcamping.repository.MemberRepository;
-import com.icia.gangcamping.service.BookService;
-import com.icia.gangcamping.service.CampingService;
-import com.icia.gangcamping.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -34,6 +32,7 @@ public class AdminController {
     private  final MemberService ms;
     private final MemberRepository mr;
     private final CampingService cs;
+    private final CommentService rs;
     private final CampingRepository cr;
     
   @RequestMapping("mypage")
@@ -61,13 +60,13 @@ public class AdminController {
 
     }
 
-    @RequestMapping("bookList")
-    public String bookList(Model model) {
-        List<BookDetailDTO> bookList = bs.findAll();
-        model.addAttribute("bookList",bookList);
-        return "admin/bookList";
-
-    }
+//    @RequestMapping("bookList")
+//    public String bookList(Model model) {
+//        List<BookDetailDTO> bookList = bs.findAll();
+//        model.addAttribute("bookList",bookList);
+//        return "admin/bookList";
+//
+//    }
     @RequestMapping("findAll")
     public String findAll(Model model) {
         List<GoodsDetailDTO> goodsList = ss.findAll();
@@ -101,22 +100,31 @@ public class AdminController {
         return "admin/save";
 
     }
-    @RequestMapping("stock")
-    public String stock() {
-        return "admin/stock";
+//    @RequestMapping("stock")
+//    public String stock() {
+//        return "admin/stock";
+//
+//    }
 
-    }
-
-    @RequestMapping("shoppingAsk")
-    public String shoppingAsk() {
-        return "admin/shoppingAsk";
-
-    }
+//    @RequestMapping("shoppingAsk")
+//    public String shoppingAsk() {
+//        return "admin/shoppingAsk";
+//
+//    }
 
     @DeleteMapping("{productId}")
     public ResponseEntity deleteById(@PathVariable Long productId) {
         as.deleteById(productId);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/shoppingAsk")
+    public String findAll1(Model model) {
+        List<CommentDetailDTO> cList = rs.findAll1();
+        System.out.println(cList);
+        model.addAttribute("cList", cList);
+        return "admin/shoppingAsk";
+
     }
 
 

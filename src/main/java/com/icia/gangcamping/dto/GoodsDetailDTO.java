@@ -24,7 +24,7 @@ public class GoodsDetailDTO {
     private String productFileName;
     private int productStock;
     private LocalDateTime productTime;
-    private int Stock;
+
 
 
 
@@ -39,7 +39,11 @@ public class GoodsDetailDTO {
         goodsDetailDTO.setProductDescription(goods.getProductDescription());
         goodsDetailDTO.setProductFileName(goods.getProductFileName());
         goodsDetailDTO.setProductTime(goods.getCreateTime());
-
+        if(goods.getUpdateTime()==null){
+            goodsDetailDTO.setProductTime(goods.getCreateTime());
+        }else {
+            goodsDetailDTO.setProductTime(goods.getUpdateTime());
+        }
         return goodsDetailDTO;
     }
 
