@@ -145,6 +145,139 @@
             display: inline-block;
             border-radius: 20%;
         }
+        ul, li {
+            list-style: none;
+        }
+
+        .blind {
+            position: absolute;
+            clip: rect(0 0 0 0);
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+
+        .vertical_chart_box {
+            position: relative;
+        }
+        .vertical_chart_box .chart_box {
+            position: relative;
+            margin-bottom: 45px;
+            padding-left: 20px;
+            box-sizing: border-box;
+            height: 200px;
+        }
+        .vertical_chart_box .axis_y {
+            display: -webkit-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            justify-content: space-between;
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 0;
+            padding: 0;
+            width: 20px;
+            height: 100%;
+            font-size: 12px;
+            color: #4a4a4a;
+        }
+        .vertical_chart_box .axis_y:before {
+            content: "";
+            position: absolute;
+            top: 5px;
+            bottom: 0;
+            right: 0;
+            width: 1px;
+            background: #d3d3d3;
+        }
+        .vertical_chart_box .axis_x {
+            display: -webkit-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            padding: 0;
+            box-sizing: border-box;
+            height: 100%;
+            border-bottom: 1px solid #d3d3d3;
+        }
+        .vertical_chart_box .axis_x .item {
+            flex: 1;
+            position: relative;
+        }
+        .vertical_chart_box .axis_x .item .text_box {
+            position: absolute;
+            bottom: -43px;
+            left: 50%;
+            text-align: center;
+            -webkit-transform: translate(-50%, 0);
+            -ms-transform: translate(-50%, 0);
+            -o-transform: translate(-50%, 0);
+            transform: translate(-50%, 0);
+        }
+        .vertical_chart_box .axis_x .item .text_box .day {
+            display: block;
+            font-size: 12px;
+            line-height: 19px;
+            color: #4a4a4a;
+        }
+        .vertical_chart_box .axis_x .item .text_box .day.sat {
+            color: #3475ed;
+        }
+        .vertical_chart_box .axis_x .item .text_box .day.sun {
+            color: #eb474a;
+        }
+        .vertical_chart_box .axis_x .item .text_box .time {
+            display: block;
+            margin-top: 3px;
+            font-size: 12px;
+            color: #999;
+        }
+        .vertical_chart_box .axis_x .graph {
+            display: -webkit-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            flex-direction: column-reverse;
+            position: relative;
+            margin: 0 auto;
+            padding: 0;
+            width: 35px;
+            height: 100%;
+            background: #e8e8e8;
+            border-radius: 3px 3px 0 0;
+            overflow: hidden;
+        }
+        .vertical_chart_box .axis_x .graph .time {
+            display: block;
+            position: relative;
+            margin-bottom: -4px;
+            padding-top: 4px;
+            box-sizing: content-box;
+            width: 100%;
+            border-radius: 3px 3px 0 0;
+        }
+        .vertical_chart_box .axis_x .graph .time.data1 {
+            background: #e73ea9;
+            z-index: 3;
+        }
+        .vertical_chart_box .axis_x .graph .time.data2 {
+            background: #30d97d;
+            z-index: 2;
+        }
+        .vertical_chart_box .axis_x .graph .time.data3 {
+            background: #f5dc12;
+            z-index: 1;
+        }
+        .vertical_chart_box .axis_x button.graph {
+            border: 0;
+        }
+
     </style>
 
     <style type="text/css">
@@ -283,106 +416,111 @@
         <div class="menu6" onclick="location.href='/admin/shoppingAsk'" style="cursor: pointer;">상품문의</div>
         <div class="menu8" onclick="location.href='/shopping/stock'" style="cursor: pointer;">상품재고</div>
     </div>
+    <div>
+        <h3 align="center"> 매출 비율 통계 </h3>
+    </div>
+    <div align="center">
+        <div class="search_item">
+            <span>원하시는 기간을 선택해주세요. </span>><br>
 
+            <input type="date" onchange="saveCheckIn();" class="check_in search_input"
+                   placeholder="YYYY-MM-DD" name="checkInDate" id="checkInDate"
+                   required="required">
+            <input type="date" onchange="saveCheckOut();" class="check_out search_input"
+                   placeholder="YYYY-MM-DD" name="checkOutDate" id="checkOutDate"
+                   required="required">
+        </div>
+        <br>
+        <button class="btn btn-primary">search<span></span><span></span><span></span>
+        </button>
+        <br><br><br><br>
+    </div>
+    <div class="vertical_chart_box">
+        <div class="chart_box">
+            <ul class="axis_y">
+                <li class="item">0<span class="blind">시간</span></li>
+                <li class="item"><span class="blind">시간</span></li>
+                <li class="item">50<span class="blind">시간</span></li>
+                <li class="item"><span class="blind">시간</span></li>
+                <li class="item">100<span class="blind">시간</span></li>
+            </ul>
+            <ul class="axis_x">
+                <li class="item">
+                    <div class="text_box">
+                        <strong class="day">14(월)</strong>
+                        <span class="time"></span>
+                    </div>
+                    <button type="button" class="graph" onclick="window.open('/admin/salesList','sales','width = 1000, height = 500, top = 100, left = 300, location= no')">
+                        <span class="time data1" style="height:80%;"><span class="blind">data 타입 1</span></span>
+                        <span class="time data3" style="height:20%;"><span class="blind">data 타입 2</span></span>
+                    </button>
+                </li>
+                <li class="item">
+                    <div class="text_box">
+                        <strong class="day">15(화)</strong>
+                        <span class="time"></span>
+                    </div>
+                    <button type="button" class="graph" onclick="window.open('/admin/salesList','sales','width = 1000, height = 500, top = 100, left = 300, location= no')">
+                        <span class="time data1" style="height:40%;"><span class="blind">data 타입 1</span></span>
+                        <span class="time data3" style="height:60%;"><span class="blind">data 타입 3</span></span>
+                    </button>
+                </li>
+                <li class="item">
+                    <div class="text_box">
+                        <strong class="day">16(수)</strong>
+                        <span class="time"></span>
+                    </div>
+                    <button type="button" class="graph" onclick="window.open('/admin/salesList','sales','width = 1000, height = 500, top = 100, left = 300, location= no')">
+                        <span class="time data1" style="height:40%;"><span class="blind">data 타입 1</span></span>
+                        <span class="time data3" style="height:60%;"><span class="blind">data 타입 3</span></span>
+                    </button>
+                </li>
+                <li class="item">
+                    <div class="text_box">
+                        <strong class="day">17(목)</strong>
+                        <span class="time"></span>
+                    </div>
+                    <button type="button" class="graph" onclick="window.open('/admin/salesList','sales','width = 1000, height = 500, top = 100, left = 300, location= no')">
+                        <span class="time data1" style="height:55%;"><span class="blind">data 타입 1</span></span>
+                        <span class="time data3" style="height:45%;"><span class="blind">data 타입 3</span></span>
+                    </button>
+                </li>
+                <li class="item">
+                    <div class="text_box">
+                        <strong class="day">18(금)</strong>
+                        <span class="time"></span>
+                    </div>
+                    <button type="button" class="graph" onclick="window.open('/admin/salesList','sales','width = 1000, height = 500, top = 100, left = 300, location= no')">
+                        <span class="time data1" style="height:50%;"><span class="blind">data 타입 1</span></span>
+                        <span class="time data3" style="height:50%;"><span class="blind">data 타입 3</span></span>
+                    </button>
+                </li>
+                <li class="item">
+                    <div class="text_box">
+                        <strong class="day sat">19(토)</strong>
+                        <span class="time"></span>
+                    </div>
+                    <button type="button" class="graph" onclick="window.open('/admin/salesList','sales','width = 1000, height = 500, top = 100, left = 300, location= no')">
+                        <span class="time data2" style="height:0%;"><span class="blind">data 타입 2</span></span>
+                    </button>
+                </li>
+                <li class="item">
+                    <div class="text_box">
+                        <strong class="day sun">20(일)</strong>
+                        <span class="time"></span>
+                    </div>
+                    <button type="button" class="graph" onclick="window.open('/admin/salesList','sales','width = 1000, height = 500, top = 100, left = 300, location= no')">
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div>
 
+        <span > * 각 항목을 클릭하시면 매출 상세를 확인하실수있습니다.</span><br>
+        <span style="color: #e73ea9"> * 캠핑 예약 관련 매출.</span><br>
+        <span style="color: #f5dc12"> * 쇼핑 관련 매출.</span><br>
 
-    <table class="tg" style="undefined; table-layout: fixed; width: 878px" table>
-        <colgroup>
-            <col style="width: 74px">
-            <col style="width: 83px">
-            <col style="width: 113px">
-            <col style="width: 295px">
-            <col style="width: 93px">
-            <col style="width: 100px">
-            <col style="width: 120px">
-        </colgroup>
-        <thead>
-        <tr>
-            <th class="tg-lstg">주문번호</th>
-            <th class="tg-lstg">주문일</th>
-            <th class="tg-lstg">캠핑장명</th>
-            <th class="tg-lstg">캠핑장 상세내용</th>
-            <th class="tg-lstg">결제액</th>
-            <th class="tg-lstg">상태</th>
-            <th class="tg-lstg">비고</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td class="tg-80qx">00001</td>
-            <td class="tg-80qx">2022-02-22</td>
-            <td class="tg-80qx">강따라캠핑장</td>
-            <td class="tg-80qx">오토캠핑 <br>옵션: 大 </td>
-            <td class="tg-80qx">50,000원</td>
-            <td class="tg-80qx">결제 완료</td>
-            <td class="tg-80qx"></td>
-        </tr>
-        <tr>
-            <td class="tg-80qx"></td>
-            <td class="tg-80qx"></td>
-            <td class="tg-80qx"></td>
-            <td class="tg-80qx"></td>
-            <td class="tg-80qx"></td>
-            <td class="tg-80qx"></td>
-            <td class="tg-80qx"></td>
-        </tr>
-        </tbody>
-    </table>
-
-
-
-
-
-
-
-
-    <h1>Hello Analytics Reporting API V4</h1>
-
-    <!-- The Sign-in button. This will run `queryReports()` on success. -->
-    <p class="g-signin2" data-onsuccess="queryReports"></p>
-
-    <!-- The API response will be printed here. -->
-    <textarea cols="80" rows="20" id="query-output"></textarea>
-
-    <script>
-        // Replace with your view ID.
-        var VIEW_ID = '<REPLACE_WITH_VIEW_ID>';
-
-        // Query the API and print the results to the page.
-        function queryReports() {
-            gapi.client.request({
-                path: '/v4/reports:batchGet',
-                root: 'https://analyticsreporting.googleapis.com/',
-                method: 'POST',
-                body: {
-                    reportRequests: [
-                        {
-                            viewId: VIEW_ID,
-                            dateRanges: [
-                                {
-                                    startDate: '7daysAgo',
-                                    endDate: 'today'
-                                }
-                            ],
-                            metrics: [
-                                {
-                                    expression: 'ga:sessions'
-                                }
-                            ]
-                        }
-                    ]
-                }
-            }).then(displayResults, console.error.bind(console));
-        }
-
-        function displayResults(response) {
-            var formattedJson = JSON.stringify(response.result, null, 2);
-            document.getElementById('query-output').value = formattedJson;
-        }
-    </script>
-
-
-
+    </div>
 
 
 
