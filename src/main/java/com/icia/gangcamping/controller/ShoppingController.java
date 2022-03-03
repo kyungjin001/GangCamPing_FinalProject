@@ -143,7 +143,7 @@ if (cart == null) {
 
 @GetMapping("cartview")
 public String cartview(@ModelAttribute CartDetailDTO cartDetailDTO, Model model) {
-MemberEntity memberEntity = ms.findByMemberEmail((String) session.getAttribute("memberEmail"));
+MemberEntity memberEntity = ms.findByMemberEmail((String) session.getAttribute("loginEmail"));
 List<CartDetailDTO> cartDetailDTOList = ss.findByMemberEntity(memberEntity);
 if (!cartDetailDTOList.isEmpty()) {
     int cartPriceSum = 0;

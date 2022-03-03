@@ -121,6 +121,12 @@
 	</script>
 
 
+	<style>
+		.qna{
+			float: right;
+		}
+	</style>
+
 
 
 
@@ -226,12 +232,12 @@
 
 	<!-- Home -->
 
-	<div class="home">
-		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/blog_background.jpg"></div>
-		<div class="home_content">
-			<div class="home_title">the blog</div>
-		</div>
-	</div>
+<!--	<div class="home">-->
+<!--		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/blog_background.jpg"></div>-->
+<!--		<div class="home_content">-->
+<!--			<div class="home_title">the blog</div>-->
+<!--		</div>-->
+<!--	</div>-->
 
 	<!-- Product Details Section Begin -->
 	<section class="product-details spad">
@@ -245,13 +251,13 @@
 						</div>
 						<div class="product__details__pic__slider owl-carousel">
 							<img data-imgbigurl="img/product/details/product-details-2.jpg"
-								 src="/img/product/details/thumb-1.jpg" alt="">
+								 src="/img/캠핑1.png" alt="">
 							<img data-imgbigurl="img/product/details/product-details-3.jpg"
-								 src="/img/product/details/thumb-2.jpg" alt="">
+								 src="/img/캠핑2.png" alt="">
 							<img data-imgbigurl="img/product/details/product-details-5.jpg"
-								 src="/img/product/details/thumb-3.jpg" alt="">
+								 src="/img/캠핑3.png" alt="">
 							<img data-imgbigurl="img/product/details/product-details-4.jpg"
-								 src="/img/product/details/thumb-4.jpg" alt="">
+								 src="/img/캠핑4.png" alt="">
 						</div>
 					</div>
 				</div>
@@ -266,7 +272,7 @@
 							<i class="fa fa-star-half-o"></i>
 							<span>(18 reviews)</span>
 						</div>
-						<div class="product__details__price" th:text="${goods.productPrice}"></div>
+						<div class="product__details__price" th:text="|${goods.productPrice}|+원"></div>
 						<p th:text="${goods.productDescription}"></p>
 						<div class="product__details__quantity">
 							<div class="quantity">
@@ -316,49 +322,98 @@
 						<ul class="nav nav-tabs" role="tablist">
 							<li class="nav-item">
 								<a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
-								   aria-selected="true">Description</a>
+								   aria-selected="true">상품설명</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
-								   aria-selected="false">Information</a>
+								   aria-selected="false">상품정보</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
-								   aria-selected="false">Reviews <span>(1)</span></a>
+								   aria-selected="false">상품문의</a>
 							</li>
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane active" id="tabs-1" role="tabpanel">
 								<div class="product__details__tab__desc">
-									<h6>Products Infomation</h6>
-									<p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
-										Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus. Vivamus
-										suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam sit amet quam
-							</p>
+									<img src="/img/시연용 예시 사진.jpg">
+									<img src="/img/시연용2.jpg">
+									<img src="/img/시연용3.jpg">
+									<img src="/img/시연용4.jpg">
 								</div>
 							</div>
 							<div class="tab-pane" id="tabs-2" role="tabpanel">
 								<div class="product__details__tab__desc">
-									<h6>Products Infomation</h6>
-									<p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
-										Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.
-										Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam
-									</p>
-									<p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem
-										ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit aliquet
-										nar a.</p>
+									<img src="/img/시연용 예시 사진.jpg">
+									<img src="/img/시연용2.jpg">
+									<img src="/img/시연용3.jpg">
+									<img src="/img/시연용4.jpg">
 								</div>
 							</div>
 							<div class="tab-pane" id="tabs-3" role="tabpanel">
 								<div class="product__details__tab__desc">
-									<div id="comment-write">
-										<input type="text" id="commentWriter" placeholder="작성자" th:value="${session.loginEmail}"><br>
-										<input type="text" id="questionContents" placeholder="내용"><br>
-										<button id="comment-write-btn">댓글등록</button>
+<!--									<div id="comment-write">-->
+<!--										<div class="d-flex">-->
+<!--										<input type="text" id="commentWriter" placeholder="작성자" th:value="${session.loginEmail}" class="form-control shadow-sm" readonly><br>-->
+<!--										<input type="text" id="questionContents" placeholder="내용" class="a1 form-control shadow-sm"><br>-->
+<!--										<button id="comment-write-btn" class="form-control shadow-sm ">댓글등록</button>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--									<div class="qna">-->
+									<h3><b>상품문의</b></h3><br>
+									<button class="nav-link btn btn-outline-primary" href="#" data-toggle="modal" data-target="#logins" style="float: right">
+									문의작성
+									</button>
+									<ul>
+										<li style="list-style-type: square ">구매한 상품의 <strong>취소/반품은 강캠핑 구매내역에서 신청</strong>가능합니다.</li>
+										<li style="list-style-type: square ">상품문의 및 후기게시판을 통해 취소나 환불, 반품 등은 처리되지 않습니다.</li>
+										<li style="list-style-type: square "><strong>가격, 판매자, 교환/환불 및 배송 등 해당 상품 자체와 관련 없는 문의는 고객센터 내 1:1 문의하기</strong>를 이용해주세요.</li>
+										<li style="list-style-type: square "><strong>"해당 상품 자체"와 관계없는 글, 양도, 광고성, 욕설, 비방, 도배 등의 글은 예고 없이 이동, 노출제한, 삭제 등의 조치가 취해질 수 있습니다.</strong></li>
+										<li style="list-style-type: square ">공개 게시판이므로 전화번호, 메일 주소 등 고객님의 소중한 개인정보는 절대 남기지 말아주세요.</li>
+									</ul><br><br>
+
+
+
+
+
+<!--								</div>-->
+
+
+
+									<!-- The Modal -->
+									<div class="modal" id="logins">
+										<div class="modal-dialog">
+											<div class="modal-content">
+
+												<!-- Modal Header -->
+												<div class="modal-header">
+													<h4 class="modal-title">문의작성</h4>
+												</div>
+
+												<!-- Modal body -->
+												<div class="modal-body">
+													<div id="comment-write">
+														<div>
+															<input type="text" id="commentWriter" placeholder="작성자" th:value="${session.loginEmail}" class="form-control shadow-sm" readonly><br>
+															<input type="text" id="questionContents" placeholder="내용" class="a1 form-control shadow-sm"><br>
+															<button id="comment-write-btn" class="form-control shadow-sm ">문의등록</button>
+														</div>
+													</div>
+												</div>
+
+												<!-- Modal footer -->
+												<div class="modal-footer">
+													<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+												</div>
+
+											</div>
+										</div>
 									</div>
 
+
+
 									<div id="comment-area">
-										<table>
+										<table class="table">
 											<thead>
 											<tr>
 												<th>댓글번호</th>
@@ -366,8 +421,8 @@
 												<th>작성자</th>
 												<th>내용</th>
 												<th>작성시간</th>
-												<th>삭제</th>
-												<th th:if="${#strings.equals(session['loginEmail'], 'admin')}">삭제(관리자용)</th>
+												<th>문의삭제</th>
+												<th th:if="${#strings.equals(session['loginEmail'], 'admin')}" class="btn btn-outline-primary">삭제(관리자용)</th>
 											</tr>
 											</thead>
 											<tbody>
@@ -377,8 +432,8 @@
 												<td th:text="${comment.commentWriter}"></td>
 												<td th:text="${comment.questionContents}"></td>
 												<td th:text="${#temporals.format(comment.commentTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-												<td><button th:if="${comment.commentWriter.equals(session['loginEmail'])}" th:onclick="deleteById([[${comment.questionId}]])">삭제</button></td>
-												<td><button th:if="${#strings.equals(session['loginEmail'], 'admin')}" th:onclick="deleteById([[${comment.questionId}]])">삭제</button></td>
+												<td><button th:if="${comment.commentWriter.equals(session['loginEmail'])}" th:onclick="deleteById([[${comment.questionId}]])" class="btn btn-outline-primary">삭제</button></td>
+												<td><button th:if="${#strings.equals(session['loginEmail'], 'admin')}" th:onclick="deleteById([[${comment.questionId}]])" class="btn btn-outline-primary">삭제</button></td>
 
 											</tr>
 											</tbody>
@@ -394,6 +449,9 @@
 	</section>
 	<!-- Product Details Section End -->
 
+
+
+
 	<!-- Related Product Section Begin -->
 	<section class="related-product">
 		<div class="container">
@@ -407,7 +465,7 @@
 			<div class="row">
 				<div class="col-lg-3 col-md-4 col-sm-6">
 					<div class="product__item">
-						<div class="product__item__pic set-bg" data-setbg="/img/product/product-1.jpg">
+						<div class="product__item__pic set-bg" data-setbg="/img/랜1.jpg">
 							<ul class="product__item__pic__hover">
 								<li><a href="#"><i class="fa fa-heart"></i></a></li>
 								<li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -415,14 +473,14 @@
 							</ul>
 						</div>
 						<div class="product__item__text">
-							<h6><a href="#">Crab Pool Security</a></h6>
-							<h5>$30.00</h5>
+							<h6><a href="#">트윙클가스랜턴</a></h6>
+							<h5>69,000원</h5>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-4 col-sm-6">
 					<div class="product__item">
-						<div class="product__item__pic set-bg" data-setbg="/img/product/product-2.jpg">
+						<div class="product__item__pic set-bg" data-setbg="/img/랜2.jpg">
 							<ul class="product__item__pic__hover">
 								<li><a href="#"><i class="fa fa-heart"></i></a></li>
 								<li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -430,14 +488,14 @@
 							</ul>
 						</div>
 						<div class="product__item__text">
-							<h6><a href="#">Crab Pool Security</a></h6>
-							<h5>$30.00</h5>
+							<h6><a href="#">트리오랜턴</a></h6>
+							<h5>150,000원</h5>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-4 col-sm-6">
 					<div class="product__item">
-						<div class="product__item__pic set-bg" data-setbg="/img/product/product-3.jpg">
+						<div class="product__item__pic set-bg" data-setbg="/img/캠1.jpg">
 							<ul class="product__item__pic__hover">
 								<li><a href="#"><i class="fa fa-heart"></i></a></li>
 								<li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -445,14 +503,14 @@
 							</ul>
 						</div>
 						<div class="product__item__text">
-							<h6><a href="#">Crab Pool Security</a></h6>
-							<h5>$30.00</h5>
+							<h6><a href="#">프라임디럭스텐트</a></h6>
+							<h5>750,000원</h5>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-4 col-sm-6">
 					<div class="product__item">
-						<div class="product__item__pic set-bg" data-setbg="/img/product/product-7.jpg">
+						<div class="product__item__pic set-bg" data-setbg="/img/테1.png">
 							<ul class="product__item__pic__hover">
 								<li><a href="#"><i class="fa fa-heart"></i></a></li>
 								<li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -460,8 +518,8 @@
 							</ul>
 						</div>
 						<div class="product__item__text">
-							<h6><a href="#">Crab Pool Security</a></h6>
-							<h5>$30.00</h5>
+							<h6><a href="#">카트리나테이블</a></h6>
+							<h5>130,000원</h5>
 						</div>
 					</div>
 				</div>
@@ -928,6 +986,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			dataType: 'json',
 			success: function (result) {
 				console.log(result);
+				alert("문의등록이 완료되었습니다.")
 			},
 			error: function () {
 				alert('ajax 실패');

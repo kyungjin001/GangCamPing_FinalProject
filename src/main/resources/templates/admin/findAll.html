@@ -41,6 +41,10 @@
 
     <style>
 
+        .goods{
+            margin-left: 150px;
+        }
+
         img{
             width: 80px;
             height: 80px;
@@ -308,13 +312,12 @@
         <div class="menu4" onclick="location.href='/admin/campingSaleList'" style="cursor: pointer;">매출통계</div>
         <div class="menu5" onclick="location.href='/admin/chatList'" style="cursor: pointer;">캠핑장문의</div>
         <div class="menu6" onclick="location.href='/admin/shoppingAsk'" style="cursor: pointer;">상품문의</div>
-        <div class="menu7" onclick="location.href='/admin/save'" style="cursor: pointer;">상품등록</div>
         <div class="menu8" onclick="location.href='/shopping/stock'" style="cursor: pointer;">상품재고</div>
     </div>
 
 
     <p style="text-align:center";>상품 관리</p>
-
+    <div class="goods"> <button onclick="location.href='/shopping/goods'" style="cursor: pointer;" class="btn btn-light">상품등록</button></div>
     <table class="tg" style="undefined; table-layout: fixed; width: 878px" table>
         <colgroup>
             <col style="width: 74px">
@@ -334,20 +337,20 @@
             <th class="tg-lstg">상품명</th>
             <th class="tg-lstg">상품 상세정보</th>
             <th class="tg-lstg">판매가격</th>
-            <th class="tg-lstg">삭제</th>
-            <th class="tg-lstg">수정</th>
+            <th class="tg-lstg">상품삭제</th>
+            <th class="tg-lstg">상품수정</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="goodsList:${goodsList}">
+        <tr th:each="goodsList:${goodsList}" >
             <td class="tg-80qx" th:text="${goodsList.productId}"></td>
             <td class="tg-80qx" th:text="${#temporals.format(goodsList.productTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
             <td class="tg-80qx"><img th:src="@{/upload/} + ${goodsList.productFileName}"></td>
             <td class="tg-80qx" th:text="${goodsList.productName}"></td>
             <td class="tg-80qx" th:text="${goodsList.productDescription}"></td>
             <td class="tg-80qx" th:text="${goodsList.productPrice}"></td>
-            <td><button th:onclick="deleteById([[${goodsList.productId}]])">삭제(ajax)</button></td>
-            <td><button th:onclick="'location.href=\''+ @{|/shopping/update/${goodsList.productId}|} + '\''">정보수정</button></td>
+            <td><button th:onclick="deleteById([[${goodsList.productId}]])" class="btn btn-light" >삭제</button></td>
+            <td><button th:onclick="'location.href=\''+ @{|/shopping/update/${goodsList.productId}|} + '\''" class="btn btn-light">수정</button></td>
 
 
         </tr>

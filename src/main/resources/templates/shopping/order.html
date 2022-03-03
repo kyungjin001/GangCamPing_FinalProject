@@ -410,11 +410,6 @@
 							<td class="goods-page-total">
 								<strong th:text="|${cartList.cartAmount * cartList.productPrice}|+원"></strong>
 							</td>
-							<td class="del-goods-col">
-								<button th:onclick="deleteById([[${cartList.cartId}]])">삭제(ajax)</button>
-
-								</a>
-							</td>
 						</tr>
 					</table>
 				</div>
@@ -464,7 +459,6 @@
 				<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script><br>
 				<br>배송시 요청사항
 				<br><input type="text" class="a1 form-control shadow-sm" placeholder="요청사항 기재">
-				<br><input type="submit">
 <!--			</form>-->
 
 			</div>
