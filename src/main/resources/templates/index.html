@@ -160,7 +160,17 @@
         });
     </script>
 
+    <script>
+        window.onload = function (){
+            today = new Date();
 
+            today = today.toISOString().slice(0, 10);
+
+            bir = document.getElementById("checkInDate");
+
+            bir.value = today;
+        }
+    </script>
 
 </head>
 

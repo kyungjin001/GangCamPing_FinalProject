@@ -673,13 +673,12 @@
 							<div>
 							<div class="review_title">주변시설</div>
 							<span th:text="${cds.getFacility1()}"></span>
-								<div class="review_title">주변이용가능시설 기타</div>
-								<span th:text="${cds.getFacility3()}"></span>
+
 								<div class="review_title">구비사항</div>
-								<span th:text="${cds.getFacility4()}"></span>
-								<span th:text="${cds.getFacility5()}"></span>
-								<span th:text="${cds.getFacility6()}"></span>
-								<span th:text="${cds.getFacility7()}"></span>
+								<span th:text="${cds.getFacility4()}"></span><br>
+								<span th:text="${cds.getFacility5()}"></span><br>
+								<span th:text="${cds.getFacility6()}"></span><br>
+								<span th:text="${cds.getFacility7()}"></span><br>
 							</div>
 							<!-- Hotel Info Tags 이미지만 수정 -->
 
@@ -760,11 +759,7 @@
 										<div class="col-lg-11">
 											<div class="review_content">
 												<div th:each="review:${review}">
-												<div class="review_title_container">
-
 													<div class="review_rating"><p th:text="${review.reviewStar}"></p></div>
-												</div>
-
 													<div class="review_title">"<span th:text="${review.reviewTitle}"></span>"</div>
 													<div ><span class="review_text" th:text="${review.reviewContents}"> </span></div>
 													<div class="review_name"><span th:text="${review.reviewWriter}"></span></div>
