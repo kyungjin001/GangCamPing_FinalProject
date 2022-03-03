@@ -37,7 +37,7 @@ public class MemberController {
 
     private final BookService bs;
     private final CampingLikeService cls;
-
+    private final HttpSession session;
     private final ShoppingService ss;
     private final ShoppingLikeService sls;
     private final OrderService os;
@@ -54,6 +54,12 @@ public class MemberController {
     public String save(@Validated @ModelAttribute("member") MemberSaveDTO memberSaveDTO) {
 
         Long memberId = ms.save(memberSaveDTO);
+        return "index";
+    }
+
+    // 네이버 로그인
+    @RequestMapping(value="naverLogin", method=RequestMethod.GET)
+    public String naverLogin() {
         return "index";
     }
 
@@ -213,21 +219,21 @@ public class MemberController {
         return "member/bookList";
     }*/
 
-    @GetMapping("/shoppingLike")
-    public String shoppingLike(Model model, HttpSession session) {
-
-        String memberEmail = (String) session.getAttribute("loginEmail");
-        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
-        /*List<ShoppingLikeDetailDTO> slList = sls.findByMemberEntity(memberEntity);
-        System.out.println(slList);
-        model.addAttribute("slList", slList);*/
-
-        List<CampingLikeDetailDTO> campingLike = cls.findByMemberEntity(memberEntity);
-        System.out.println(campingLike.toString());
-        model.addAttribute("campingLike", campingLike);
-
-        return "member/shoppingLike";
-    }
+//    @GetMapping("/shoppingLike")
+//    public String shoppingLike(Model model, HttpSession session) {
+//
+//        String memberEmail = (String) session.getAttribute("loginEmail");
+//        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
+//        /*List<ShoppingLikeDetailDTO> slList = sls.findByMemberEntity(memberEntity);
+//        System.out.println(slList);
+//        model.addAttribute("slList", slList);*/
+//
+//        List<CampingLikeDetailDTO> campingLike = cls.findByMemberEntity(memberEntity);
+//        System.out.println(campingLike.toString());
+//        model.addAttribute("campingLike", campingLike);
+//
+//        return "member/shoppingLike";
+//    }
 
 
     @GetMapping("/delete")
@@ -261,28 +267,16 @@ public class MemberController {
     }
 
 
-//    @GetMapping("/shoppingList/{memberEmail}")
-//    public String shoppingList(@PathVariable("memberEmail") String memberEmail, Model model) {
-//
-//        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
-//        List<OrderDetailDTO> oList = ss.findByMemberEntity1(memberEntity);
-//        System.out.println(oList);
-//        model.addAttribute("oList", oList);
-//
-//        return "member/shoppingList";
-//    }
+    @GetMapping("/shoppingList")
+    public String shoppingList( Model model) {
+        String memberEmail = (String) session.getAttribute("loginEmail");
+        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
+        List<OrderDetailDTO> oList = ss.findByMemberEntity1(memberEntity);
+        System.out.println(oList);
+        model.addAttribute("oList", oList);
 
-//    @GetMapping("/shoppingList")
-//    public String shoppingList( Model model) {
-//        String memberEmail = (String) session.getAttribute("loginEmail");
-//        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
-//        List<OrderDetailDTO> oList = ss.findByMemberEntity1(memberEntity);
-//        System.out.println(oList);
-//        model.addAttribute("oList", oList);
-//
-//        return "member/shoppingList";
-//    }
-
+        return "member/shoppingList";
+    }
 
 
     @GetMapping("/shoppingLike")
@@ -290,6 +284,11 @@ public class MemberController {
         String memberEmail = (String) session.getAttribute("loginEmail");
         MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
         List<ShoppingLikeDetailDTO> slList = sls.findByMemberEntity(memberEntity);
+
+        List<CampingLikeDetailDTO> campingLike = cls.findByMemberEntity(memberEntity);
+        System.out.println(campingLike.toString());
+        model.addAttribute("campingLike", campingLike);
+
         System.out.println(slList);
         model.addAttribute("slList", slList);
         return "member/shoppingLike";
