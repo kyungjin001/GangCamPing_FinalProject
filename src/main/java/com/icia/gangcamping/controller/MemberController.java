@@ -37,7 +37,7 @@ public class MemberController {
 
     private final BookService bs;
     private final CampingLikeService cls;
-
+    private final HttpSession session;
     private final ShoppingService ss;
     private final ShoppingLikeService sls;
     private final OrderService os;
@@ -213,21 +213,21 @@ public class MemberController {
         return "member/bookList";
     }*/
 
-    @GetMapping("/shoppingLike")
-    public String shoppingLike(Model model, HttpSession session) {
-
-        String memberEmail = (String) session.getAttribute("loginEmail");
-        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
-        /*List<ShoppingLikeDetailDTO> slList = sls.findByMemberEntity(memberEntity);
-        System.out.println(slList);
-        model.addAttribute("slList", slList);*/
-
-        List<CampingLikeDetailDTO> campingLike = cls.findByMemberEntity(memberEntity);
-        System.out.println(campingLike.toString());
-        model.addAttribute("campingLike", campingLike);
-
-        return "member/shoppingLike";
-    }
+//    @GetMapping("/shoppingLike")
+//    public String shoppingLike(Model model, HttpSession session) {
+//
+//        String memberEmail = (String) session.getAttribute("loginEmail");
+//        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
+//        /*List<ShoppingLikeDetailDTO> slList = sls.findByMemberEntity(memberEntity);
+//        System.out.println(slList);
+//        model.addAttribute("slList", slList);*/
+//
+//        List<CampingLikeDetailDTO> campingLike = cls.findByMemberEntity(memberEntity);
+//        System.out.println(campingLike.toString());
+//        model.addAttribute("campingLike", campingLike);
+//
+//        return "member/shoppingLike";
+//    }
 
 
     @GetMapping("/delete")
