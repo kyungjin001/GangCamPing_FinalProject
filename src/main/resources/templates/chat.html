@@ -80,19 +80,16 @@
   </div>
   <div id="yourMsg">
     <table class="inputTable">
-      <form action="chatting/save">
       <tr>
         <th>메시지</th>
-        <th><input id="chatting" placeholder="보내실 메시지를 입력하세요." name="chattingContents"></th>
+        <th><input id="chatting" placeholder="보내실 메시지를 입력하세요."></th>
         <th><button th:onclick="send()" id="sendBtn">보내기</button></th>
       </tr>
       <tr>
         <th>사진</th>
-        <th><input type="file" id="fileUpload" name="chattingFileName"></th>
+        <th><input type="file" id="fileUpload"></th>
         <th><button th:onclick="fileSend()" id="sendFileBtn">첨부하기</button></th>
       </tr>
-        <input type="submit">
-      </form>
     </table>
   </div>
 

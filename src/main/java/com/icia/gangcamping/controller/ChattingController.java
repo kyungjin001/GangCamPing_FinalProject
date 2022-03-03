@@ -26,7 +26,7 @@ public class ChattingController {
 
 
 
-    @PostMapping("/save")
+    @PostMapping("/chatting/save")
     public void save(@ModelAttribute ChattingSaveDTO chattingSaveDTO){
         hs.save(chattingSaveDTO);
 //        List<ChattingDetailDTO> chatList = hs.findAll(chattingSaveDTO.);

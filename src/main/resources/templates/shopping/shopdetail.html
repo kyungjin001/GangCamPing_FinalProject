@@ -130,6 +130,10 @@
 
 
 
+
+
+
+
 </head>
 
 <body>
@@ -422,7 +426,7 @@
 												<th>내용</th>
 												<th>작성시간</th>
 												<th>문의삭제</th>
-												<th th:if="${#strings.equals(session['loginEmail'], 'admin')}" class="btn btn-outline-primary">삭제(관리자용)</th>
+												<th th:if="${#strings.equals(session['loginEmail'], 'admin')}">삭제(관리자용)</th>
 											</tr>
 											</thead>
 											<tbody>

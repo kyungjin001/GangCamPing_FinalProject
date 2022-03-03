@@ -57,6 +57,12 @@ public class MemberController {
         return "index";
     }
 
+    // 네이버 로그인
+    @RequestMapping(value="naverLogin", method=RequestMethod.GET)
+    public String naverLogin() {
+        return "index";
+    }
+
 
 //    @PostMapping("save")
 //    public String save(@Validated @ModelAttribute("member") MemberSaveDTO memberSaveDTO, BindingResult bindingResult) throws IOException {
