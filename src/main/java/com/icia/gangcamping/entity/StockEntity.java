@@ -15,9 +15,9 @@ import javax.validation.constraints.NotNull;
 public class StockEntity {
     @Id
     @GeneratedValue
-    @Column(name = "stockId")
+    @Column(name = "stock_Id")
     private Long stockId;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "productId")
     private ProductEntity productEntity;
     @Column
@@ -32,18 +32,14 @@ public class StockEntity {
     }
 
 
-//    public static StockEntity toUpdateStock(StockUpdateDTO stockUpdateDTO) {
-//        BoardEntity boardEntity = new BoardEntity();
-//
-//        boardEntity.setId(boardDetailDTO.getBoardId());
-//        boardEntity.setBoardWriter(boardDetailDTO.getBoardWriter());
-//        boardEntity.setBoardTitle(boardDetailDTO.getBoardTitle());
-//        boardEntity.setBoardContents(boardDetailDTO.getBoardContents());
-//        boardEntity.setBoardImageName(boardDetailDTO.getBoardImageName());
-////        boardEntity.setBoardDate(LocalDateTime.now());
-//
-//        return boardEntity;
-//    }
+    public static StockEntity toUpdateStock(StockUpdateDTO stockUpdateDTO) {
+        StockEntity stockEntity = new StockEntity();
+        stockEntity.setStock(stockUpdateDTO.getStock());
+        stockEntity.setStockId(stockUpdateDTO.getStockId());
+        stockEntity.setProductEntity(stockUpdateDTO.getProductEntity());
+
+        return stockEntity;
+    }
 
 
 

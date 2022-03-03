@@ -26,7 +26,9 @@ public class CampingLikeEntity {
     @JoinColumn(name = "memberId")
     private MemberEntity memberEntity;
 
+
     public static CampingLikeEntity toSaveCampingLike(CampingLikeDTO campingLikeDTO, MemberEntity memberEntity, CampingEntity campingEntity) {
+
 
         CampingLikeEntity campingLikeEntity = new CampingLikeEntity();
 

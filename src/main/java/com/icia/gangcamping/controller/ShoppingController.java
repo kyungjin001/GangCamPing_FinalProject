@@ -6,6 +6,7 @@ import com.icia.gangcamping.entity.CartEntity;
 import com.icia.gangcamping.entity.MemberEntity;
 import com.icia.gangcamping.entity.ProductEntity;
 import com.icia.gangcamping.entity.StockEntity;
+import com.icia.gangcamping.repository.ProductRepositroy;
 import com.icia.gangcamping.repository.StockRepository;
 import com.icia.gangcamping.service.*;
 import com.icia.gangcamping.repository.MemberRepository;
@@ -32,6 +33,7 @@ public class ShoppingController {
 
 
 private final ShoppingService ss;
+private final ShoppingLikeService sls;
 private final OrderService os;
 private final CommentService cs;
 private final MemberService ms;
@@ -39,6 +41,7 @@ private final StockService ts;
 private final HttpSession session;
     private final MemberRepository mr;
     private final StockRepository tr;
+    private final ProductRepositroy pr;
 
 //상품목록
 @RequestMapping("shopping")
@@ -63,8 +66,11 @@ MemberEntity memberEntity = ms.findByMemberEmail((String) session.getAttribute("
 MemberDetailDTO memberDetailDTO = MemberDetailDTO.toMemberDetailDTO(memberEntity);
 Long memberId = memberDetailDTO.getMemberId();
 model.addAttribute("memberId", memberId);
-Optional<StockEntity> stockEntity = tr.findById(productId);
-StockDetailDTO stockDetailDTO = StockDetailDTO.toStockDetailDTO(stockEntity.get());
+Optional<ProductEntity> productEntity = pr.findById(productId);
+StockEntity stockEntity = tr.findByProductEntity(productEntity.get());
+    System.out.println("sdfsf"+ stockEntity);
+    System.out.println("sdfsxxcccccccf"+ pr.findById(productId).get());
+StockDetailDTO stockDetailDTO = StockDetailDTO.toStockDetailDTO(stockEntity);
 model.addAttribute("stock", stockDetailDTO);
 return "shopping/shopdetail";
 }
@@ -137,7 +143,7 @@ if (cart == null) {
 
 @GetMapping("cartview")
 public String cartview(@ModelAttribute CartDetailDTO cartDetailDTO, Model model) {
-MemberEntity memberEntity = ms.findByMemberEmail((String) session.getAttribute("memberEmail"));
+MemberEntity memberEntity = ms.findByMemberEmail((String) session.getAttribute("loginEmail"));
 List<CartDetailDTO> cartDetailDTOList = ss.findByMemberEntity(memberEntity);
 if (!cartDetailDTOList.isEmpty()) {
     int cartPriceSum = 0;
@@ -243,14 +249,51 @@ return "shopping/complete";
         ts.update(stockUpdateDTO);
         return new ResponseEntity(HttpStatus.OK);
     }
+//
+//    //수정처리
+    @GetMapping("/update/{productId}")
+    public String updateForm(Model model, @PathVariable("productId") Long productId){
+        GoodsDetailDTO goods = ss.findById(productId);
 
-    //수정처리(post)
-   /* @PostMapping("update")
+        model.addAttribute("goods",goods);
+
+        return "shopping/update";
+    }
+
+    //수정(post)
+    @PostMapping("update")
     public String update(@ModelAttribute ShoppingUpdateDTO shoppingUpdateDTO) throws IOException {
+
+        StockUpdateDTO stockUpdateDTO = ts.findByProductEntity(pr.findById(shoppingUpdateDTO.getProductId()).get());
+        stockUpdateDTO.setStock(shoppingUpdateDTO.getProductStock());
+        stockUpdateDTO.setProductEntity(pr.findById(shoppingUpdateDTO.getProductId()).get());
+        System.out.println(shoppingUpdateDTO);
+        System.out.println(stockUpdateDTO);
         ss.update(shoppingUpdateDTO);
+        ts.update(stockUpdateDTO);
+        System.out.println("end update ts");
         //수정완료 후 해당글의 상세페이지 출력
-        return "redirect:/board/" + boardUpdateDTO.getBoardId();
-    } */
+        return "index";
+    }
+
+
+    @PostMapping("/shoppingLike")
+    public @ResponseBody ShoppingLikeDetailDTO shoppingLike(HttpSession session,  ShoppingLikeSaveDTO shoppingLikeSaveDTO) {
+
+        String memberEmail = (String) session.getAttribute("loginEmail");
+        Long shoppingLike = sls.save(shoppingLikeSaveDTO, memberEmail);
+        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
+        Optional<ProductEntity> product = pr.findById(shoppingLikeSaveDTO.getProductId());
+        ShoppingLikeDetailDTO shoppingLikeDetailDTO = sls.findByMemberEntityAndProductEntity(memberEntity,product);
+        return shoppingLikeDetailDTO;
+    }
+
+
+    @DeleteMapping("/delete/{shoppingLikeId}")
+    public ResponseEntity shoppingLikeDelete(@PathVariable("shoppingLikeId") Long shoppingLikeId){
+        sls.deleteById(shoppingLikeId);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 
 
 

@@ -28,6 +28,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -206,7 +207,18 @@ public class ApiController {
             System.out.println(i+"넘버링테스트");
             saveDTO.setCampingEntity(cs.findById(i).get());
             saveDTO.setFacility1((String) item.get("posblFcltyCl"));
-            saveDTO.setFacility2((String) item.get("featureNm"));
+            String fuc2 = (String) item.get("featureNm");
+
+            if(item.get("featureNm")==null){
+                saveDTO.setFacility2(null);
+            }
+            else if(fuc2.length()>255){
+                fuc2 = fuc2.substring(0,255);
+                saveDTO.setFacility2(fuc2);
+            }else{
+                saveDTO.setFacility2((String) item.get("featureNm"));
+            }
+
             saveDTO.setFacility3((String) item.get("posblFcltyEtc"));
             saveDTO.setFacility4((String) item.get("sbrsCl"));
             saveDTO.setFacility5((String) "애완동물 출입여부 :"+item.get("animalCmgCl"));

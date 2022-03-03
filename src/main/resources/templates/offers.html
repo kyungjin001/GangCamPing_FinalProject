@@ -181,8 +181,10 @@
                                 </form>
                                 <script>
                                     function saveCheckIn() {
+                                        console.log('changeDate')
                                         const checkin = document.getElementById('checkInDate').value;
                                         sessionStorage.setItem("checkInDate", checkin);
+                                        console.log(sessionStorage.getItem("checkInDate"));
                                     }
 
                                     function saveCheckOut() {

@@ -14,7 +14,7 @@ public interface BookService {
 
     Long save(BookSaveDTO bookSaveDTO, String memberEmail);
 
-    List<BookDetailDTO> findAll();
+//    List<BookDetailDTO> findAll();
 
     void deleteById(Long bookId);
 }

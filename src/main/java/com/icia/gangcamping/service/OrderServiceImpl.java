@@ -1,8 +1,6 @@
 package com.icia.gangcamping.service;
 
-import com.icia.gangcamping.dto.MemberDetailDTO;
-import com.icia.gangcamping.dto.OrderDetailDTO;
-import com.icia.gangcamping.dto.OrderSaveDTO;
+import com.icia.gangcamping.dto.*;
 import com.icia.gangcamping.entity.MemberEntity;
 import com.icia.gangcamping.entity.OrderEntity;
 import com.icia.gangcamping.entity.ProductEntity;
@@ -13,6 +11,8 @@ import com.icia.gangcamping.repository.ProductRepositroy;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -44,7 +44,17 @@ public class OrderServiceImpl implements OrderService{
         return orderDetailDTO;
     }
 
+    @Override
+    public List<ShoppingListDetailDTO> findAll() {
+        List<OrderEntity> orderEntityList = or.findAll();
+        List<ShoppingListDetailDTO> sList = new ArrayList<>();
+        for (OrderEntity o : orderEntityList)
+        {
+            sList.add(ShoppingListDetailDTO.toShopDetailDTO(o)); //한줄로 가능
 
+        }
+        return sList;
+    }
 
 
 }

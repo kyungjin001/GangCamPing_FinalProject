@@ -1,6 +1,11 @@
 # GangCamPing_FinalProject
 
 ## 실행전 확인 
+
+2022.02.26 추가
+campingLikeEntity 테이블 명 board_table로 되어있어서 campingLikeEntity로 변경
+sql에서 25일에 했던것 처럼 직접ㅈ drop table board_table 후 create 
+
 엔티티에 변경사항이있어서 create로 변경한 이후 재실행하면 에러뜸
 
 메인컨트롤러에서 

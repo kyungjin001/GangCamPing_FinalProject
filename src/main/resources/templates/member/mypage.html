@@ -26,7 +26,7 @@
 
 		.menu-wrapper {
 			margin-bottom: 100px;
-			margin-left: 100px;
+			margin-left: 40px;
 			width: 1200px;
 			height: 500px;
 			text-align: center;
@@ -211,9 +211,10 @@
 	<div class="menu-wrapper">
 		<div class="menu1" onclick="location.href='/member/update'" >나의정보</div>
 		<div class="menu2" onclick="location.href='/mypage/bookList'" style="cursor: pointer;">캠핑내역</div>
-		<div class="menu3" onclick="location.href='/member/shoppingList'" style="cursor: pointer;">쇼핑내역</div>
+<!--		<div class="menu3" th:onclick="'location.href=\''+ @{|/member/shoppingList/${session['loginEmail']}|} + '\''" style="cursor: pointer;">쇼핑내역</div>-->
+		<div class="menu4" onclick="location.href='/member/shoppingList'" style="cursor: pointer;">쇼핑내역</div>
 		<div class="menu4" onclick="location.href='/member/shoppingLike'" style="cursor: pointer;">찜</div>
-		<div class="menu5" onclick="location.href='/member/chat'" style="cursor: pointer;">예약변경</div>
+		<div class="menu5" onclick="location.href='/room'" style="cursor: pointer;">예약변경</div>
 	</div>
 
 	<a href="/member/logout">로그아웃</a><br><br><br>
