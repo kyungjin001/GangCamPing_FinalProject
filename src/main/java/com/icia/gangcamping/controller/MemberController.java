@@ -271,16 +271,16 @@ public class MemberController {
 //        return "member/shoppingList";
 //    }
 
-    @GetMapping("/shoppingList")
-    public String shoppingList( Model model) {
-        String memberEmail = (String) session.getAttribute("loginEmail");
-        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
-        List<OrderDetailDTO> oList = ss.findByMemberEntity1(memberEntity);
-        System.out.println(oList);
-        model.addAttribute("oList", oList);
-
-        return "member/shoppingList";
-    }
+//    @GetMapping("/shoppingList")
+//    public String shoppingList( Model model) {
+//        String memberEmail = (String) session.getAttribute("loginEmail");
+//        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
+//        List<OrderDetailDTO> oList = ss.findByMemberEntity1(memberEntity);
+//        System.out.println(oList);
+//        model.addAttribute("oList", oList);
+//
+//        return "member/shoppingList";
+//    }
 
 
 
