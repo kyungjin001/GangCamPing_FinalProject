@@ -204,41 +204,6 @@
 
     </style>
 
-    <script>
-        const ajaxUp = () => {
-
-            const pw=document.getElementById("memberPw").value;
-            const pwDB="[[${member.memberPw}]]";
-
-            if(pw==pwDB){
-                const id = document.getElementById("memberId").value;
-                const reqUrl = "/member/"+id;
-                var form = $('#memberUp')[0];
-                var data = new FormData(form);
-                console.log(data);
-
-                $.ajax({
-                    type: 'PUT',
-                    // enctype: 'multipart/form-data',
-                    url:reqUrl,
-                    data: data,
-                    processData: false,
-                    contentType: false,
-                    cache: false,
-                    timeout: 600000,
-                    success: function(){
-                        location.href="/member/"+id;
-                    },
-                    error: function (){
-                        alert("Ajax 실패")
-                    }
-                });
-
-            }else{
-                alert("비밀번호를 확인해주세요.")
-            }
-        }
-    </script>
 
 </head>
 
@@ -810,6 +775,42 @@
 <script src="/plugins/easing/easing.js"></script>
 <script src="/plugins/parallax-js-master/parallax.min.js"></script>
 <script src="/js/about_custom.js"></script>
+
+<script>
+    const ajaxUp = () => {
+
+        const pw=document.getElementById("memberPw").value;
+        const pwDB="[[${member.memberPw}]]";
+
+        if(pw==pwDB){
+            const id = document.getElementById("memberId").value;
+            const reqUrl = "/member/"+id;
+            var form = $('#memberUp')[0];
+            var data = new FormData(form);
+            console.log(data);
+
+            $.ajax({
+                type: 'PUT',
+                // enctype: 'multipart/form-data',
+                url:reqUrl,
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 600000,
+                success: function(){
+                    location.href="/member/"+id;
+                },
+                error: function (){
+                    alert("Ajax 실패")
+                }
+            });
+
+        }else{
+            alert("비밀번호를 확인해주세요.")
+        }
+    }
+</script>
 
 </body>
 

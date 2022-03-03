@@ -299,9 +299,9 @@
 	<p style="text-align:center; color :brown";>비밀번호 재설정</p>
 
 	<div style="text-align: center;" class="formWrapper">
-		<form action="/member/confirmPW" id="memberUp" name="memberPw" >
+		<form id="memberUp" name="memberPw" >
 			<input th:type="hidden" th:name="memberId" id="memberId" th:value="${member.memberId}">
-			<input th:type="hidden"  th:name="memberEmail" th:value="${member.memberEmail}" readonly>
+			<input th:type="hidden"  th:name="memberEmail" id="memberEmail" th:value="${member.memberEmail}" readonly>
 <!--			<input th:type="password"  id="memberPw" th:name="memberPw" th:value="${member.memberPw}">-->
 <!--			새로운  비밀번호<input th:type="password"  id="memberPw" th:name="memberPw">-->
 <!--			새 비밀번호 확인<input th:type="password"  id="memberPw1" th:name="memberPw"}>-->
@@ -314,9 +314,9 @@
 				<div class="alert alert-success" id="alert-success" style="color : green">비밀번호가 일치합니다.</div>
 				<div class="alert alert-danger" id="alert-danger" style="color : red">비밀번호가 일치하지 않습니다.</div>
 			</div>
-			<input th:type="hidden" th:name="memberName"  th:value="${member.memberName}">
-			<input th:type="hidden" th:name="memberAddr"  th:value="${member.memberAddr}">
-			<input th:type="hidden" th:name="memberPhone"  th:value="${member.memberPhone}">
+			<input th:type="hidden" th:name="memberName" id="memberName" th:value="${member.memberName}">
+			<input th:type="hidden" th:name="memberAddr"  id="memberAddr" th:value="${member.memberAddr}">
+			<input th:type="hidden" th:name="memberPhone" id="memberPhone" th:value="${member.memberPhone}">
 			<input type="button" th:onclick="ajaxUp()" value="비밀번호 수정"><br><br>
 		</form>
 	</div>

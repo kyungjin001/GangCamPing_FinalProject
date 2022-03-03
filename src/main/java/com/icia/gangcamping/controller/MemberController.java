@@ -132,10 +132,13 @@ public class MemberController {
     }
 
 //    @PostMapping("/updateAddr")
-//    public String updateAddr(@RequestParam String memberAddr, MemberUpdateAddrDTO memberUpdateAddrDTO){
-//        Long memberId = ms.updateAddr(memberUpdateAddrDTO);
-//        return "member/update";
-//    }
+//   public String updateAddr(HttpSession session, @ModelAttribute MemberUpdateDTO memberUpdateDTO, Model model){
+//        String memberEmail = (String) session.getAttribute("loginEmail");
+//        MemberDetailDTO member = ms.findByEmail(memberEmail);
+//       ms.updateAddr(memberUpdateDTO);
+//       model.addAttribute("member", member);
+//       return "member/update";
+//   }
 
 //    @PostMapping("/update")
 //    public String update(@ModelAttribute MemberUpdateDTO memberUpdateDTO) {
@@ -163,24 +166,18 @@ public class MemberController {
         return "member/confirmPW";
     }
 
-//    @PutMapping("/{memberId}")
-//    public ResponseEntity confirmPW(@ModelAttribute MemberUpdateDTO memberUpdateDTO) throws IllegalStateException, IOException{
-//        System.out.println(memberUpdateDTO);
-//        Long memberId = ms.update(memberUpdateDTO);
-//        return new ResponseEntity(HttpStatus.OK);
+//    @DeleteMapping("/{memberId}")
+//    public String deleteById(@PathVariable("memberId") Long memberId){
+//        ms.deleteById(memberId);
+//        return "index";
 //    }
 
     @DeleteMapping("/{memberId}")
-    public String deleteById(@PathVariable("memberId") Long memberId){
+    public ResponseEntity deleteById(HttpSession session, @PathVariable("memberId") Long memberId){
         ms.deleteById(memberId);
-        return "index";
+        session.invalidate();
+        return new ResponseEntity(HttpStatus.OK);
     }
-
-//    @DeleteMapping("/{memberId}")
-//    public ResponseEntity deleteById(@PathVariable("memberId") Long memberId){
-//        ms.deleteById(memberId);
-//        return new ResponseEntity(HttpStatus.OK);
-//    }
 
 
     //로그아웃
@@ -199,7 +196,11 @@ public class MemberController {
 
 
     @GetMapping("/delete")
-    public String delete() {
+    public String delete(HttpSession session, Model model) {
+        String member = (String) session.getAttribute("loginEmail");
+        MemberDetailDTO memberDetailDTO = MemberDetailDTO.toMemberDetailDTO(ms.findByMemberEmail(member));
+        model.addAttribute("member",memberDetailDTO);
+
         return "member/delete";
 
     }

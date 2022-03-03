@@ -101,9 +101,11 @@ public class MemberServiceImpl implements MemberService{
     }
 
 //    @Override
-//    public Long updateAddr(MemberUpdateAddrDTO memberUpdateAddrDTO) {
-//        return null;
+//    public MemberDetailDTO updateAddr(MemberUpdateDTO memberUpdateDTO) {
+//        MemberEntity memberEntity = MemberEntity.toUpdateMember(memberUpdateDTO);
+//        return mr.save(memberEntity);
 //    }
+
 
 //    @Override
 //    public Long confirmPW(MemberUpdateDTO memberUpdateDTO) {
