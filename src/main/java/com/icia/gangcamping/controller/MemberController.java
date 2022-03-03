@@ -3,7 +3,12 @@ package com.icia.gangcamping.controller;
 
 import com.icia.gangcamping.dto.*;
 import com.icia.gangcamping.entity.MemberEntity;
+import com.icia.gangcamping.service.BookService;
+import com.icia.gangcamping.service.CampingLikeService;
 import com.icia.gangcamping.service.MemberService;
+import com.icia.gangcamping.service.OrderService;
+import com.icia.gangcamping.service.ShoppingLikeService;
+import com.icia.gangcamping.service.ShoppingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,8 +18,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.Fetch;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import static com.icia.gangcamping.common.SessionConst.LOGIN_EMAIL;
@@ -27,6 +34,15 @@ import static com.icia.gangcamping.common.SessionConst.LOGIN_EMAIL;
 public class MemberController {
 
     private final MemberService ms;
+
+    private final BookService bs;
+    private final CampingLikeService cls;
+
+    private final ShoppingService ss;
+    private final ShoppingLikeService sls;
+    private final OrderService os;
+    
+
 
 //    @GetMapping("save")
 //    public String saveForm(Model model) {
@@ -111,9 +127,10 @@ public class MemberController {
         return "member/mypage";
     }
 
-    @GetMapping("{memberId}")
-    public String findById(@PathVariable("memberId") Long memberId, Model model) {
-        MemberDetailDTO member = ms.findById(memberId);
+    @GetMapping("{memberEmail}")
+    public String findById(HttpSession session, @PathVariable("memberEmail") String memberEmail, Model model) {
+        String memberEmail1 = (String)session.getAttribute("loginEmail");
+        MemberDetailDTO member = MemberDetailDTO.toMemberDetailDTO(ms.findByMemberEmail(memberEmail1));
         model.addAttribute("member", member);
         return "member/mypage";
 
@@ -187,11 +204,29 @@ public class MemberController {
         return "index";
     }
 
-    @GetMapping("/bookList")
-    public String bookList() {
+   /* @GetMapping("/bookList/{memberEmail}")
+    public String bookList(@PathVariable("memberEmail") String memberEmail) {
 
+        MemberDetailDTO member = MemberDetailDTO.toMemberDetailDTO(ms.findByMemberEmail(memberEmail));
+        BookDetailDTO book = bs.findByMemberId(member.getMemberId());
 
         return "member/bookList";
+    }*/
+
+    @GetMapping("/shoppingLike")
+    public String shoppingLike(Model model, HttpSession session) {
+
+        String memberEmail = (String) session.getAttribute("loginEmail");
+        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
+        /*List<ShoppingLikeDetailDTO> slList = sls.findByMemberEntity(memberEntity);
+        System.out.println(slList);
+        model.addAttribute("slList", slList);*/
+
+        List<CampingLikeDetailDTO> campingLike = cls.findByMemberEntity(memberEntity);
+        System.out.println(campingLike.toString());
+        model.addAttribute("campingLike", campingLike);
+
+        return "member/shoppingLike";
     }
 
 
@@ -225,16 +260,40 @@ public class MemberController {
     }
 
 
+//    @GetMapping("/shoppingList/{memberEmail}")
+//    public String shoppingList(@PathVariable("memberEmail") String memberEmail, Model model) {
+//
+//        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
+//        List<OrderDetailDTO> oList = ss.findByMemberEntity1(memberEntity);
+//        System.out.println(oList);
+//        model.addAttribute("oList", oList);
+//
+//        return "member/shoppingList";
+//    }
+
     @GetMapping("/shoppingList")
-    public String shoppingList() {
+    public String shoppingList( Model model) {
+        String memberEmail = (String) session.getAttribute("loginEmail");
+        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
+        List<OrderDetailDTO> oList = ss.findByMemberEntity1(memberEntity);
+        System.out.println(oList);
+        model.addAttribute("oList", oList);
+
         return "member/shoppingList";
     }
 
 
+
     @GetMapping("/shoppingLike")
-    public String shoppingLike() {
+    public String shoppingLike(Model model) {
+        String memberEmail = (String) session.getAttribute("loginEmail");
+        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
+        List<ShoppingLikeDetailDTO> slList = sls.findByMemberEntity(memberEntity);
+        System.out.println(slList);
+        model.addAttribute("slList", slList);
         return "member/shoppingLike";
     }
+
 
 
 }

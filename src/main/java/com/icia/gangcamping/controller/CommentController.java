@@ -2,6 +2,7 @@ package com.icia.gangcamping.controller;
 
 import com.icia.gangcamping.dto.CommentDetailDTO;
 import com.icia.gangcamping.dto.CommentSaveDTO;
+import com.icia.gangcamping.dto.GoodsDetailDTO;
 import com.icia.gangcamping.service.CommentService;
 import com.icia.gangcamping.dto.ReviewSaveDTO;
 import com.icia.gangcamping.service.ReviewService;
@@ -45,6 +46,16 @@ public class CommentController {
         rs.save(reviewSaveDTO);
         return "redirect:/mypage/bookList";
     }
+
+
+//    @GetMapping("/shoppingAsk")
+//    public String findAll(Model model) {
+//        List<CommentDetailDTO> cList = cs.findAll1();
+//        System.out.println(cList);
+//        model.addAttribute("cList", cList);
+//        return "redirect:/admin/shoppingAsk";
+//
+//    }
 }
 
 

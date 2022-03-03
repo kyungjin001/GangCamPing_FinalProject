@@ -17,6 +17,7 @@ public class OrderDetailDTO {
 
     private Long orderId;
     private Long memberId;
+//    private Long productId;
     private int orderUnitNum;
     private int orderTotalFee;
     private String orderPayType;
@@ -36,6 +37,16 @@ public class OrderDetailDTO {
         return orderDetailDTO;
     }
 
+    public static OrderDetailDTO toOrderDetailDTO1 (OrderEntity order){
+        OrderDetailDTO orderDetailDTO = new OrderDetailDTO();
+        orderDetailDTO.setMemberId(order.getMemberEntity().getMemberId());
+        orderDetailDTO.setOrderId(order.getOrderId());
+        orderDetailDTO.setOrderUnitNum(order.getOrderUnitNum());
+        orderDetailDTO.setOrderTotalFee(order.getOrderTotalFee());
+        orderDetailDTO.setOrderPayType("카카오페이");
+        orderDetailDTO.setOrderTime(order.getCreateTime());
+        return orderDetailDTO;
+    }
 
 
 

@@ -2,6 +2,7 @@ package com.icia.gangcamping.entity;
 
 import com.icia.gangcamping.dto.GoodsDetailDTO;
 import com.icia.gangcamping.dto.GoodsSaveDTO;
+import com.icia.gangcamping.dto.ShoppingUpdateDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -37,8 +38,8 @@ public class ProductEntity extends BaseEntity {
     @NotNull
     private String productFileName;
 
-    @OneToMany(mappedBy = "productEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<StockEntity> stockEntityList = new ArrayList<>();
+    @OneToOne(mappedBy = "productEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    private StockEntity stockEntity;
     @OneToMany(mappedBy = "productEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<CartEntity> cartEntityList = new ArrayList<>();
     @OneToMany(mappedBy = "productEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
@@ -55,6 +56,18 @@ public class ProductEntity extends BaseEntity {
         productEntity.setProductPrice(goodsSaveDTO.getProductPrice());
         productEntity.setProductDescription(goodsSaveDTO.getProductDescription());
         productEntity.setProductFileName(goodsSaveDTO.getProductFileName());
+        return productEntity;
+    }
+
+
+    public static ProductEntity toUpdateBoard(ShoppingUpdateDTO shoppingUpdateDTO) {
+        ProductEntity productEntity = new ProductEntity();
+        productEntity.setProductName(shoppingUpdateDTO.getProductName());
+        productEntity.setProductId(shoppingUpdateDTO.getProductId());
+        productEntity.setProductWeight(shoppingUpdateDTO.getProductWeight());
+        productEntity.setProductPrice(shoppingUpdateDTO.getProductPrice());
+        productEntity.setProductDescription(shoppingUpdateDTO.getProductDescription());
+        productEntity.setProductFileName(shoppingUpdateDTO.getProductFileName());
         return productEntity;
     }
 

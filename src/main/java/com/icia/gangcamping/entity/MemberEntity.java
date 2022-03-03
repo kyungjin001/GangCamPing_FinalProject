@@ -2,7 +2,6 @@ package com.icia.gangcamping.entity;
 
 import com.icia.gangcamping.dto.MemberSaveDTO;
 import com.icia.gangcamping.dto.MemberUpdateDTO;
-import com.icia.gangcamping.dto.RoomSaveDTO;
 import lombok.*;
 
 import javax.persistence.*;

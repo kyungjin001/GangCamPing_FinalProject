@@ -1,9 +1,6 @@
 package com.icia.gangcamping.service;
 
-import com.icia.gangcamping.dto.CartDetailDTO;
-import com.icia.gangcamping.dto.GoodsDetailDTO;
-import com.icia.gangcamping.dto.GoodsSaveDTO;
-import com.icia.gangcamping.dto.StockDetailDTO;
+import com.icia.gangcamping.dto.*;
 import com.icia.gangcamping.entity.MemberEntity;
 import com.icia.gangcamping.entity.ProductEntity;
 
@@ -38,4 +35,9 @@ public interface ShoppingService{
 
     String meunUpDown(Long cartId, String type);
 
+    Long update(ShoppingUpdateDTO shoppingUpdateDTO) throws IOException;
+
+    List<OrderDetailDTO> findByMemberEntity1(MemberEntity memberEntity);
+
+    ProductEntity findById2(Long productId);
 }

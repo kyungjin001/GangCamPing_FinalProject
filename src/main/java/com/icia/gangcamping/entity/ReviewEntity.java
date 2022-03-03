@@ -29,6 +29,8 @@ public class ReviewEntity extends BaseEntity{
     @Column
     @NotNull
     private double reviewStar;
+    @Column
+    private String reviewTitle;
 
     public static ReviewEntity toReviewEntity(ReviewSaveDTO reviewSaveDTO,CampingEntity campingEntity,MemberEntity memberEntity) {
         ReviewEntity entity = new ReviewEntity();
@@ -37,7 +39,7 @@ public class ReviewEntity extends BaseEntity{
         entity.setReviewContents(reviewSaveDTO.getReviewContents());
         entity.setReviewStar(reviewSaveDTO.getReviewStar());
         entity.setReviewContents(reviewSaveDTO.getReviewContents());
-
+        entity.setReviewTitle(reviewSaveDTO.getReviewTitle());
         return entity;
     }
 }

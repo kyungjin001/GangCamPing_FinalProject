@@ -11,4 +11,6 @@ public interface CommentService {
     List<CommentDetailDTO> findAll(Long productId);
 
     void deleteById(Long questionId);
+
+    List<CommentDetailDTO> findAll1();
 }

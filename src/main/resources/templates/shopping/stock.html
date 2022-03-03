@@ -17,24 +17,22 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 
-
-
     <script>
-        const stockDown = (stockId) =>{
+        const stockDown = (stockId) => {
             console.log('함수호출은 하냐?')
             console.log(stockId);
             $.ajax({
-                type:'put',
-                url:'/shopping/stock',
-                data:{"stockId":stockId,"type":"down"},
-                dataType:'text',
-                success:function (result){
+                type: 'put',
+                url: '/shopping/stock',
+                data: {"stockId": stockId, "type": "down"},
+                dataType: 'text',
+                success: function (result) {
                     console.log(result);
-                    if(result=="ok"){
+                    if (result == "ok") {
                         location.reload();
                     }
                 },
-                error:function (){
+                error: function () {
                     alert('다시해라');
                 }
             });
@@ -42,20 +40,20 @@
         }
 
 
-        const stockUp = (stockId) =>{
+        const stockUp = (stockId) => {
             console.log(stockId);
             $.ajax({
-                type:'put',
-                url:'/shopping/stock',
-                data:{"stockId":stockId,"type":"up"},
-                dataType:'text',
-                success:function (result){
+                type: 'put',
+                url: '/shopping/stock',
+                data: {"stockId": stockId, "type": "up"},
+                dataType: 'text',
+                success: function (result) {
                     console.log(result);
-                    if(result=="ok"){
+                    if (result == "ok") {
                         location.reload();
                     }
                 },
-                error:function (){
+                error: function () {
                     alert('다시해라');
                 }
             });
@@ -65,16 +63,16 @@
     </script>
 
 
-
-
-
-
-
+    <script>
+        function myFunction() {
+            console.log("사라져라")
+        document.getElementById("close").style.display = "none";
+    } </script>
 
 
     <style>
 
-        h4{
+        h4 {
             margin-top: 15px;
         }
 
@@ -83,61 +81,66 @@
             text-align: center;
             padding: 50px 0;
         }
+
         .menu1 {
             width: 100px;
             height: 30px;
-            line-height : 30px;
+            line-height: 30px;
             background-color: whitesmoke;
-            border : solid 1px;
-            color :black;
+            border: solid 1px;
+            color: black;
             font-size: 0.75rem;
             text-align: center;
             display: inline-block;
             border-radius: 20%;
         }
+
         .menu2 {
             width: 100px;
             height: 30px;
-            line-height : 30px;
+            line-height: 30px;
             background-color: whitesmoke;
-            border : solid 1px;
-            color :black;
+            border: solid 1px;
+            color: black;
             font-size: 0.75rem;
             text-align: center;
             display: inline-block;
             border-radius: 20%;
         }
+
         .menu3 {
             width: 100px;
             height: 30px;
-            line-height : 30px;
+            line-height: 30px;
             background-color: whitesmoke;
-            border : solid 1px;
-            color :black;
+            border: solid 1px;
+            color: black;
             font-size: 0.75rem;
             text-align: center;
             display: inline-block;
             border-radius: 20%;
         }
+
         .menu4 {
             width: 100px;
             height: 30px;
-            line-height : 30px;
+            line-height: 30px;
             background-color: whitesmoke;
-            border : solid 1px;
-            color :black;
+            border: solid 1px;
+            color: black;
             font-size: 0.75rem;
             text-align: center;
             display: inline-block;
             border-radius: 20%;
         }
+
         .menu5 {
             width: 100px;
             height: 30px;
-            line-height : 30px;
+            line-height: 30px;
             background-color: whitesmoke;
-            border : solid 1px;
-            color :black;
+            border: solid 1px;
+            color: black;
             font-size: 0.75rem;
             text-align: center;
             display: inline-block;
@@ -147,10 +150,10 @@
         .menu6 {
             width: 100px;
             height: 30px;
-            line-height : 30px;
+            line-height: 30px;
             background-color: whitesmoke;
-            border : solid 1px;
-            color :black;
+            border: solid 1px;
+            color: black;
             font-size: 0.75rem;
             text-align: center;
             display: inline-block;
@@ -160,10 +163,10 @@
         .menu7 {
             width: 100px;
             height: 30px;
-            line-height : 30px;
+            line-height: 30px;
             background-color: whitesmoke;
-            border : solid 1px;
-            color :black;
+            border: solid 1px;
+            color: black;
             font-size: 0.75rem;
             text-align: center;
             display: inline-block;
@@ -173,10 +176,10 @@
         .menu8 {
             width: 100px;
             height: 30px;
-            line-height : 30px;
+            line-height: 30px;
             background-color: whitesmoke;
-            border : solid 1px;
-            color :black;
+            border: solid 1px;
+            color: black;
             font-size: 0.75rem;
             text-align: center;
             display: inline-block;
@@ -193,8 +196,8 @@
         .kickout {
             width: 100px;
             height: 30px;
-            line-height : 30px;
-            border : solid 1px;
+            line-height: 30px;
+            border: solid 1px;
             font-size: 0.75rem;
             text-align: center;
             display: inline-block;
@@ -203,18 +206,59 @@
     </style>
 
     <style type="text/css">
-        .tg  {border-collapse:collapse;border-color:#ccc;border-spacing:0;}
-        .tg td{background-color:#fff;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
-            font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
-        .tg th{background-color:#f0f0f0;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
-            font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-        .tg .tg-lstg{border-color:inherit;font-family:"Arial Black", Gadget, sans-serif !important;font-size:11px;font-weight:bold;
-            text-align:center;vertical-align:middle}
-        .tg .tg-80qx{border-color:inherit;font-family:Arial, Helvetica, sans-serif !important;font-size:11px;text-align:center;
-            vertical-align:middle}
         .tg {
-            margin-left:auto;
-            margin-right:auto;
+            border-collapse: collapse;
+            border-color: #ccc;
+            border-spacing: 0;
+        }
+
+        .tg td {
+            background-color: #fff;
+            border-color: #ccc;
+            border-style: solid;
+            border-width: 0px;
+            color: #333;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg th {
+            background-color: #f0f0f0;
+            border-color: #ccc;
+            border-style: solid;
+            border-width: 0px;
+            color: #333;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg .tg-lstg {
+            border-color: inherit;
+            font-family: "Arial Black", Gadget, sans-serif !important;
+            font-size: 11px;
+            font-weight: bold;
+            text-align: center;
+            vertical-align: middle
+        }
+
+        .tg .tg-80qx {
+            border-color: inherit;
+            font-family: Arial, Helvetica, sans-serif !important;
+            font-size: 11px;
+            text-align: center;
+            vertical-align: middle
+        }
+
+        .tg {
+            margin-left: auto;
+            margin-right: auto;
         }
     </style>
 
@@ -306,7 +350,9 @@
 
     <div class="menu trans_500">
         <div class="menu_content d-flex flex-column align-items-center justify-content-center text-center">
-            <div class="menu_close_container"><div class="menu_close"></div></div>
+            <div class="menu_close_container">
+                <div class="menu_close"></div>
+            </div>
             <div class="logo menu_logo"><a href="#"><img src="/images/logo.png" alt=""></a></div>
             <ul>
                 <li class="menu_item"><a href="index.html">home</a></li>
@@ -321,14 +367,15 @@
     <!-- Home -->
 
     <div class="home">
-        <div class="home_background parallax-window" data-parallax="scroll" data-image-src="/images/about_background.jpg"></div>
+        <div class="home_background parallax-window" data-parallax="scroll"
+             data-image-src="/images/about_background.jpg"></div>
         <div class="home_content">
             <div class="home_title">My page</div>
         </div>
     </div>
     <br>
     <br>
-    <p style="text-align:center";>관리자 페이지</p>
+    <p style="text-align:center" ;>관리자 페이지</p>
     <div class="menu-wrapper">
         <div class="menu1" onclick="location.href='/admin/bookList'" style="cursor: pointer;">예약관리</div>
         <div class="menu2" onclick="location.href='/admin/memberList'" style="cursor: pointer;">회원관리</div>
@@ -336,12 +383,11 @@
         <div class="menu4" onclick="location.href='/admin/campingSaleList'" style="cursor: pointer;">매출통계</div>
         <div class="menu5" onclick="location.href='/admin/chatList'" style="cursor: pointer;">캠핑장문의</div>
         <div class="menu6" onclick="location.href='/admin/shoppingAsk'" style="cursor: pointer;">상품문의</div>
-        <div class="menu7" onclick="location.href='/admin/save'" style="cursor: pointer;">상품등록</div>
-        <div class="menu8" onclick="location.href='/admin/stock'" style="cursor: pointer;">상품재고</div>
+        <div class="menu8" onclick="location.href='/shopping/stock'" style="cursor: pointer;">상품재고</div>
     </div>
 
 
-    <p style="text-align:center; color :brown";>재고 관리</p>
+    <p style="text-align:center; color :brown" ;>재고 관리</p>
 
     <table class="tg" style="undefined;table-layout: fixed; width: 865px">
         <colgroup>
@@ -353,26 +399,28 @@
         </colgroup>
         <thead>
         <tr>
-            <th class="tg-62r5">상품번호</th>
-            <th class="tg-62r5">상품명</th>
-            <th class="tg-62r5">상품무게</th>
-            <th class="tg-62r5">보유수량</th>
-            <th class="tg-62r5">업데이트</th>
+            <th class="tg-62r5" style="text-align: center">상품번호</th>
+            <th class="tg-62r5" style="text-align: center">상품명</th>
+            <th class="tg-62r5" style="text-align: center">상품무게</th>
+            <th class="tg-62r5" style="text-align: center">보유수량</th>
+            <th class="tg-62r5" style="text-align: center">상품관리</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="stock:${stock}">
-            <td class="tg-kwqo" th:text="${stock.productId}"></td>
-            <td class="tg-kwqo" th:text="${stock.productName}"></td>
-            <td class="tg-kwqo" th:text="${stock.productWeight}"></td>
-            <td class="tg-kwqo">
+        <tr th:each="stock:${stock}" th:id="close">
+            <td class="tg-kwqo" th:text="${stock.productId}" style="text-align: center"></td>
+            <td class="tg-kwqo" th:text="${stock.productName}" style="text-align: center"></td>
+            <td class="tg-kwqo" th:text="${stock.productWeight}" style="text-align: center"></td>
+            <td class="tg-kwqo" style="text-align: center">
                 <span th:switch="${stock.stock}">
-                    <span th:case="0"><button>-</button></span>
-                    <span th:case="*"><button th:onclick="stockDown([[${stock.stockId}]])">-</button></span>
+                    <span th:case="0"><button class="btn btn-secondary">-</button></span>
+                    <span th:case="*"><button th:onclick="stockDown([[${stock.stockId}]])" class="btn btn-secondary">-</button></span>
                 </span>
                 <span th:text="${stock.stock}"></span>
-                <button th:onclick="stockUp([[${stock.stockId}]])">+</button>
+                <button th:onclick="stockUp([[${stock.stockId}]])" class="btn btn-secondary">+</button>
             </td>
+            <td class="tg-kwqo"><button th:onclick="myFunction()" style="text-align: right" class="btn btn-light">숨김</button></td>
+
         </tr>
         <tr>
             <td class="tg-kwqo"></td>
@@ -386,20 +434,6 @@
     <br>
     <br>
     <br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     <!-- Footer -->
@@ -629,8 +663,10 @@
                                        name="memberPw" required>
                                 <input type="password" class="form-control" id="pwd2" placeholder="비밀번호를 다시 입력해주세요."
                                        required>
-                                <div class="alert alert-success" id="alert-success" style="color : green">비밀번호가 일치합니다.</div>
-                                <div class="alert alert-danger" id="alert-danger" style="color : red">비밀번호가 일치하지 않습니다.</div>
+                                <div class="alert alert-success" id="alert-success" style="color : green">비밀번호가 일치합니다.
+                                </div>
+                                <div class="alert alert-danger" id="alert-danger" style="color : red">비밀번호가 일치하지 않습니다.
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="registerName">이름 </label> <br>
@@ -700,25 +736,30 @@
                             </div>
                             <div class="form-group" style="margin-left: 130px">
                                 <label style="margin-left: 80px">약관동의 </label> <br>
-                                <sapn href="#"> 개인정보 이용수집동의(필수) <input type="checkbox" id="check1" name="check1" required>
+                                <sapn href="#"> 개인정보 이용수집동의(필수) <input type="checkbox" id="check1" name="check1"
+                                                                       required>
                                 </sapn>
                                 <br>
-                                <sapn href="#"> 강캠핑 이용약관 동의(필수) <input type="checkbox" href="#" id="check2" name="check2"
+                                <sapn href="#"> 강캠핑 이용약관 동의(필수) <input type="checkbox" href="#" id="check2"
+                                                                       name="check2"
                                                                        required></sapn>
                             </div>
                             <div class="form-group" style="margin-left: 130px">
                                 <label style="margin-left: 80px">약관동의 </label> <br>
-                                <sapn href="#"> 개인정보 이용수집동의(필수) <input type="checkbox" id="check1" name="check1" required>
+                                <sapn href="#"> 개인정보 이용수집동의(필수) <input type="checkbox" id="check1" name="check1"
+                                                                       required>
                                 </sapn>
                                 <br>
-                                <sapn href="#"> 강캠핑 이용약관 동의(필수) <input type="checkbox" href="#" id="check2" name="check2"
+                                <sapn href="#"> 강캠핑 이용약관 동의(필수) <input type="checkbox" href="#" id="check2"
+                                                                       name="check2"
                                                                        required></sapn>
                             </div>
                         </form>
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="submit" form="memberSave" class="btn btn-primary" style="margin-left:20%;">등록</button>
+                        <button type="submit" form="memberSave" class="btn btn-primary" style="margin-left:20%;">등록
+                        </button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
                     </div>
                 </div>
@@ -777,7 +818,10 @@
                 <div class="col-lg-3 order-lg-1 order-2  ">
                     <div class="copyright_content d-flex flex-row align-items-center">
                         <div><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                            All rights reserved | This template is made with <i class="fa fa-heart-o"
+                                                                                aria-hidden="true"></i> by <a
+                                    href="https://colorlib.com" target="_blank">Colorlib</a>
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
                     </div>
                 </div>

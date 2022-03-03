@@ -290,7 +290,7 @@
 		<div class="menu2" onclick="location.href='/member/bookList'" style="cursor: pointer;"><h4>캠핑내역</h4></div>
 		<div class="menu3" onclick="location.href='/member/shoppingList'" style="cursor: pointer;"><h4>쇼핑내역</h4></div>
 		<div class="menu4" onclick="location.href='/member/shoppingLike'" style="cursor: pointer;"><h4>찜</h4></div>
-		<div class="menu5" onclick="location.href='/member/chat'" style="cursor: pointer;"><h4>예약변경</h4></div>
+		<div class="menu5" onclick="location.href='/room'" style="cursor: pointer;">예약변경</div>
 	</div>
 
 
@@ -312,7 +312,6 @@
 			예약일 :<a th:text="${book.createTime}"></a> <br><br>
 			예약번호 : <a th:text="${book.bookId}"></a><br><br>
 			캠핑장명 : <a th:text="${book.campingName}"></a><br><br>
-			예약 상세정보 : <a th:text="${book.bookPeriod}"></a><br><br>
 			결제액 : <a th:text="${book.bookPrice}"></a><br><br>
 			체크인 :<a th:text="${book.bookCheckIn}"></a><br><br>
 			체크아웃 : <a th:text="${book.bookCheckOut}"></a><br><br>
@@ -339,7 +338,10 @@
 							<input type="hidden" id="reviewWriter" name="reviewWriter" th:value="${session['loginEmail']}">
 							<input type="hidden" id="campingName" name="campingName" th:value="${book.campingName}">
 							<div class="mb-3">
-								<textarea name="reviewContents" id="reviewContents" class="form-control"></textarea>
+								<textarea name="reviewTitle" id="reviewTitle" class="form-control" placeholder="제목을 입력해주세요."></textarea>
+							</div>
+							<div class="mb-3">
+								<textarea name="reviewContents" id="reviewContents" class="form-control" placeholder="내용을 입력해주세요."></textarea>
 							</div>
 						</form>
 					</div>

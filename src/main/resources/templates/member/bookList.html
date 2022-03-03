@@ -129,6 +129,24 @@
 		}
 	</style>
 
+	<script>
+		const deleteById = (bookId) => {
+
+			const reqUrl = "/booking/"+bookId;
+
+			$.ajax({
+				type: 'delete',
+				url:reqUrl,
+				success: function (){
+					location.reload();
+				},
+				error: function (){
+
+				}
+			});
+		}
+	</script>
+
 </head>
 
 <body>
@@ -243,7 +261,7 @@
 		<div class="menu2" onclick="location.href='/member/bookList'" style="cursor: pointer;">캠핑내역</div>
 		<div class="menu3" onclick="location.href='/member/shoppingList'" style="cursor: pointer;">쇼핑내역</div>
 		<div class="menu4" onclick="location.href='/member/shoppingLike'" style="cursor: pointer;">찜</div>
-		<div class="menu5" onclick="location.href='/member/chat'" style="cursor: pointer;">예약변경</div>
+		<div class="menu5" onclick="location.href='/room'" style="cursor: pointer;">예약변경</div>
 	</div>
 
 	<p style="text-align:center; color :brown";>캠핑 예약내역</p>
@@ -261,26 +279,23 @@
 		</colgroup>
 		<thead>
 		<tr>
-			<th class="tg-lstg">주문번호</th>
-			<th class="tg-lstg">주문자</th>
+			<th class="tg-lstg">예약번호</th>
+			<th class="tg-lstg">예약자 이름</th>
 			<th class="tg-lstg">캠핑장명</th>
-			<th class="tg-lstg">캠핑장 예약호실</th>
 			<th class="tg-lstg">입실일</th>
 			<th class="tg-lstg">퇴실일</th>
-			<th class="tg-lstg">투숙기간</th>
 			<th class="tg-lstg">결제액</th>
 		</tr>
 		</thead>
 		<tbody>
 		<tr th:each="book: ${bookList}">
-			<td class="tg-80qx" ><a th:text="${book.bookId}" th:href="@{|/booking/bookDetail/${book.bookId}|}"></a></td>
-			<td class="tg-80qx" th:text="${book.memberId}"></td>
-			<td class="tg-80qx" th:text="${book.campingId}"></td>
-			<td class="tg-80qx" th:text="${book.roomId}"></td>
-			<td class="tg-80qx" th:text="${book.bookCheckIn}"></td>
-			<td class="tg-80qx" th:text="${book.bookCheckOut}"></td>
-			<td class="tg-80qx" th:text="${book.bookPeriod}"></td>
-			<td class="tg-80qx" th:text="${book.bookPrice}"></td>
+			<td class="tg-80qx" id="bookId" th:text="${book.bookId}"></td>
+			<td class="tg-80qx" th:text="${book.bookName}"></td>
+			<td class="tg-80qx" ><a th:text="${book.campingName}" th:href="@{|/booking/bookDetail/${book.bookId}|}"></a></td>
+			<td class="tg-80qx" th:text="|${#dates.format(book.bookCheckIn, 'yyyy-MM-dd')}|"></td>
+			<td class="tg-80qx" th:text="|${#dates.format(book.bookCheckOut, 'yyyy-MM-dd')}|"></td>
+			<td class="tg-80qx" th:text="${book.bookPrice}"><span>원</span></td>
+			<td class="tg-80qx"><button data-toggle="modal" th:onclick="deleteById([[${book.bookId}]])"  data-target="#bookCancle">예약취소</button></td>
 		</tr>
 		<tr>
 			<td class="tg-80qx"></td>
@@ -458,6 +473,47 @@
 			</div>
 		</div>
 		<!-- 모달 시작! -->
+
+		<!-- bookCancle Modal -->
+		<div class="modal fade" tabindex="-1" id="bookCancle" aria-labelledby="loginModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title">예약취소</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+					<!-- Modal body -->
+					<div class="modal-body">
+						<form >
+
+							<div class="form-group">
+								<label for="loginId" style="margin-left: 200px">취소사유 </label> <br>
+								<select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" style="margin-left: 30%">
+									<option selected>취소사유를 선택해주세요.</option>
+									<option value="1">다른 일정이 생겼어요.</option>
+									<option value="2">가격이 다른곳보다 비싸요.</option>
+									<option value="3">단순변심</option>
+									<option value="4">기타</option>
+								</select>
+							</div>
+						</form>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
 		<!-- Login Modal -->
 		<div class="modal fade" tabindex="-1" id="login" aria-labelledby="loginModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered">

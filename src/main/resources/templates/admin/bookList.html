@@ -282,7 +282,7 @@
 		<div class="menu5" onclick="location.href='/admin/chatList'" style="cursor: pointer;">캠핑장문의</div>
 		<div class="menu6" onclick="location.href='/admin/shoppingAsk'" style="cursor: pointer;">상품문의</div>
 		<div class="menu7" onclick="location.href='/admin/save'" style="cursor: pointer;">상품등록</div>
-		<div class="menu8" onclick="location.href='/admin/stock'" style="cursor: pointer;">상품재고</div>
+		<div class="menu8" onclick="location.href='/shopping/stock'" style="cursor: pointer;">상품재고</div>
 	</div>
 
 
@@ -307,7 +307,7 @@
 
 			<th class="tg-lstg">결제액</th>
 
-			<th class="tg-lstg">예약취소</th>
+			<th class="tg-lstg">예약자 이름</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -316,8 +316,7 @@
 			<td class="tg-80qx"><a th:text="${result.createTime}"></a></td>
 			<td class="tg-80qx"><a th:text="${result.campingName}"></a></td>
 			<td class="tg-80qx"><a th:text="${result.bookPrice}"></a></td>
-
-			<td class="tg-80qx"><a th:href="@{|/admin/bookDetail/${result.bookId}|}">예약취소</td>
+			<td class="tg-80qx"><a th:text="${result.bookName}"></a></td>
 		</tr>
 		<tr>
 			<td class="tg-80qx"></td>
