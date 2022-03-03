@@ -284,6 +284,11 @@ public class MemberController {
         String memberEmail = (String) session.getAttribute("loginEmail");
         MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
         List<ShoppingLikeDetailDTO> slList = sls.findByMemberEntity(memberEntity);
+
+        List<CampingLikeDetailDTO> campingLike = cls.findByMemberEntity(memberEntity);
+        System.out.println(campingLike.toString());
+        model.addAttribute("campingLike", campingLike);
+
         System.out.println(slList);
         model.addAttribute("slList", slList);
         return "member/shoppingLike";
