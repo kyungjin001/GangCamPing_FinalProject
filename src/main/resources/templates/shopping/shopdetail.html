@@ -130,6 +130,10 @@
 
 
 
+
+
+
+
 </head>
 
 <body>
@@ -395,7 +399,7 @@
 													<div id="comment-write">
 														<div>
 															<input type="text" id="commentWriter" placeholder="작성자" th:value="${session.loginEmail}" class="form-control shadow-sm" readonly><br>
-															<input type="text" id="questionContents" placeholder="내용" class="a1 form-control shadow-sm"><br>
+															<textarea type="text" id="questionContents" placeholder="내용" class="a1 form-control shadow-sm"></textarea><br>
 															<button id="comment-write-btn" class="form-control shadow-sm ">문의등록</button>
 														</div>
 													</div>
@@ -422,7 +426,7 @@
 												<th>내용</th>
 												<th>작성시간</th>
 												<th>문의삭제</th>
-												<th th:if="${#strings.equals(session['loginEmail'], 'admin')}" class="btn btn-outline-primary">삭제(관리자용)</th>
+												<th th:if="${#strings.equals(session['loginEmail'], 'admin')}">삭제(관리자용)</th>
 											</tr>
 											</thead>
 											<tbody>
