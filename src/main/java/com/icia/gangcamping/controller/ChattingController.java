@@ -1,11 +1,14 @@
 package com.icia.gangcamping.controller;
 
+import com.icia.gangcamping.dto.ChattingDetailDTO;
+import com.icia.gangcamping.dto.ChattingSaveDTO;
+import com.icia.gangcamping.dto.CommentDetailDTO;
+import com.icia.gangcamping.dto.CommentSaveDTO;
+import com.icia.gangcamping.service.ChattingService;
 import com.icia.gangcamping.vo.Room;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -18,6 +21,19 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Controller
 public class ChattingController {
+
+    private final ChattingService hs;
+
+
+
+    @PostMapping("/chatting/save")
+    public void save(@ModelAttribute ChattingSaveDTO chattingSaveDTO){
+        hs.save(chattingSaveDTO);
+//        List<ChattingDetailDTO> chatList = hs.findAll(chattingSaveDTO.);
+    }
+
+
+
     List<Room> roomList = new ArrayList<Room>();
     static int roomNumber = 0;
 

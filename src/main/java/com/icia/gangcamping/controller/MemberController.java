@@ -57,6 +57,12 @@ public class MemberController {
         return "index";
     }
 
+    // 네이버 로그인
+    @RequestMapping(value="naverLogin", method=RequestMethod.GET)
+    public String naverLogin() {
+        return "index";
+    }
+
 
 //    @PostMapping("save")
 //    public String save(@Validated @ModelAttribute("member") MemberSaveDTO memberSaveDTO, BindingResult bindingResult) throws IOException {
@@ -247,6 +253,7 @@ public class MemberController {
     }
 
 
+
     @GetMapping("/bookDetail")
     public String bookDetail() {
         return "member/bookDetail";
@@ -260,17 +267,6 @@ public class MemberController {
     }
 
 
-//    @GetMapping("/shoppingList/{memberEmail}")
-//    public String shoppingList(@PathVariable("memberEmail") String memberEmail, Model model) {
-//
-//        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
-//        List<OrderDetailDTO> oList = ss.findByMemberEntity1(memberEntity);
-//        System.out.println(oList);
-//        model.addAttribute("oList", oList);
-//
-//        return "member/shoppingList";
-//    }
-
     @GetMapping("/shoppingList")
     public String shoppingList( Model model) {
         String memberEmail = (String) session.getAttribute("loginEmail");
@@ -281,7 +277,6 @@ public class MemberController {
 
         return "member/shoppingList";
     }
-
 
 
     @GetMapping("/shoppingLike")
