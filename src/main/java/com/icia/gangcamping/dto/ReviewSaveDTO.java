@@ -9,7 +9,9 @@ public class ReviewSaveDTO {
     private int reviewStar;
     private String reviewWriter;
     private String reviewContents;
+    private String reviewTitle;
     private String campingName;
+
 
 
 

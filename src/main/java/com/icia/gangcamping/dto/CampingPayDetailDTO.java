@@ -5,18 +5,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookSaveDTO {
+public class CampingPayDetailDTO {
 
+    private Long campingPayId;
     private Long memberId;
     private Long campingId;
-    private String campingName;
-    private int bookPrice;
-    private Date bookCheckIn;
-    private Date bookCheckOut;
-    private String bookName;
+    private Long bookId;
+    private int campingPayPrice;
+    private String campingPaySelect;
+    private LocalDateTime boardDate;
 }

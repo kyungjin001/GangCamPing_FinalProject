@@ -26,7 +26,9 @@ public class BookServiceImpl implements BookService {
     public List<BookDetailDTO> findByMemberEntity(MemberEntity memberEntity) {
         List<BookEntity> list = br.findByMemberEntity(memberEntity);
         List<BookDetailDTO> bList = new ArrayList<>();
+
         for (BookEntity entity : list) {
+
             BookDetailDTO dto = BookDetailDTO.toBookDetailDTO(entity);
             bList.add(dto);
         }
@@ -50,8 +52,9 @@ public class BookServiceImpl implements BookService {
 
         BookEntity bookEntity = BookEntity.toBookSave(bookSaveDTO, memberEntity, campingEntity);
         return br.save(bookEntity).getBookId();
-
     }
+
+
     @Override
     public List<BookDetailDTO> findAll() {
         List<BookEntity> all = br.findAll();
@@ -63,5 +66,10 @@ public class BookServiceImpl implements BookService {
         return bookList;
 
 
+    }
+
+    @Override
+    public void deleteById(Long bookId) {
+        br.deleteById(bookId);
     }
 }

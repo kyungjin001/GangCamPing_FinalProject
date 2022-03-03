@@ -1,6 +1,7 @@
 package com.icia.gangcamping.service;
 
 import com.icia.gangcamping.dto.CampingDetailDTO;
+import com.icia.gangcamping.dto.CampingDetailSaveDTO;
 import com.icia.gangcamping.entity.CampingDetailEntity;
 import com.icia.gangcamping.entity.CampingEntity;
 
@@ -21,4 +22,7 @@ public interface CampingService {
     List findTop3AllOrderByCampingLikeCount();
 
     CampingEntity findByCampingName1(String campingName);
+
+
+    CampingDetailSaveDTO findByCampingEntity(CampingEntity campingEntity);
 }

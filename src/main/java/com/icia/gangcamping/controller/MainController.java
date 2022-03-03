@@ -88,7 +88,6 @@ public class MainController {
 //        model.addAttribute("resultList",campingDetailDTOList);
 //        model.addAttribute("recommendList",recommendList);
 
-
         return "index";
     }
 
