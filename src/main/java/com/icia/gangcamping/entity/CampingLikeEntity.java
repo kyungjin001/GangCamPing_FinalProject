@@ -1,5 +1,6 @@
 package com.icia.gangcamping.entity;
 
+import com.icia.gangcamping.dto.CampingLikeDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,4 +27,13 @@ public class CampingLikeEntity {
     private MemberEntity memberEntity;
 
 
+    public static CampingLikeEntity toSaveCampingLike(CampingLikeDTO campingLikeDTO, MemberEntity memberEntity, CampingEntity campingEntity) {
+
+
+        CampingLikeEntity campingLikeEntity = new CampingLikeEntity();
+
+        campingLikeEntity.setCampingEntity(campingEntity);
+        campingLikeEntity.setMemberEntity(memberEntity);
+        return campingLikeEntity;
+    }
 }

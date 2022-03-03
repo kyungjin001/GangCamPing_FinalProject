@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>About Us</title>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="Travelix Project">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="/styles/bootstrap4/bootstrap.min.css">
-<link href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
-<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
-<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/animate.css">
-<link rel="stylesheet" type="text/css" href="/styles/about_styles.css">
-<link rel="stylesheet" type="text/css" href="/styles/about_responsive.css">
+	<title>About Us</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="Travelix Project">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="/styles/bootstrap4/bootstrap.min.css">
+	<link href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+	<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+	<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/animate.css">
+	<link rel="stylesheet" type="text/css" href="/styles/about_styles.css">
+	<link rel="stylesheet" type="text/css" href="/styles/about_responsive.css">
 
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
@@ -111,7 +111,7 @@
 			display: inline-block;
 			border-radius: 20%;
 		}
-		</style>
+	</style>
 
 	<style type="text/css">
 		.tg  {border-collapse:collapse;border-color:#ccc;border-spacing:0;}
@@ -133,7 +133,7 @@
 <body>
 
 <div class="super_container">
-	
+
 	<!-- Header -->
 
 	<header class="header">
@@ -251,25 +251,22 @@
 		<colgroup>
 			<col style="width: 104px">
 			<col style="width: 116px">
-			<col style="width: 115px">
 			<col style="width: 397px">
 			<col style="width: 133px">
 		</colgroup>
 		<thead>
 		<tr>
 			<th class="tg-62r5">찜번호</th>
-			<th class="tg-62r5">찜한 일자</th>
-			<th class="tg-62r5">캠핑장</th>
+			<th class="tg-62r5">캠핑장 이름</th>
 			<th class="tg-62r5">캠핑장 상세내용</th>
 			<th class="tg-62r5">비고</th>
 		</tr>
 		</thead>
 		<tbody>
-		<tr>
-			<td class="tg-kwqo">00001</td>
-			<td class="tg-kwqo">2022-02-22</td>
-			<td class="tg-kwqo">강따라 캠핑장</td>
-			<td class="tg-kwqo">130개 사이트를 구축하고 있는 강따라 캠핑장은 홍천에 위치하고 있으며<br>오토캠핑과 일반캠핑 모두 즐길 수 있습니다.</td>
+		<tr th:each="campingLike:${campingLike}">
+			<td class="tg-kwqo" th:text="${campingLike.campingLikeId}"></td>
+			<td class="tg-kwqo" th:text="${campingLike.getCampingName()}"></td>
+			<td class="tg-kwqo" th:text="${campingLike.getCampingInfo()}" ></td>
 			<td class="tg-kwqo"></td>
 		</tr>
 		<tr>
@@ -701,8 +698,8 @@
 				<div class="col-lg-3 order-lg-1 order-2  ">
 					<div class="copyright_content d-flex flex-row align-items-center">
 						<div><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
+							Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
 					</div>
 				</div>
 				<div class="col-lg-9 order-lg-2 order-1">

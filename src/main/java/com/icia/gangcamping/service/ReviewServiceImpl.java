@@ -9,6 +9,8 @@ import com.icia.gangcamping.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,6 +19,8 @@ public class ReviewServiceImpl implements ReviewService{
     private final ReviewRepository rr;
     private final CampingService cs;
     private final MemberService ms;
+
+
     @Override
     public void save(ReviewSaveDTO reviewSaveDTO) {
         System.out.println("reviewController-save-reviewSaveDTO:" + reviewSaveDTO);
@@ -32,5 +36,38 @@ public class ReviewServiceImpl implements ReviewService{
        Optional<ReviewEntity> entity =  rr.findById((long) rnd);
        ReviewDetailDTO dto = ReviewDetailDTO.toDetailDTO(entity.get());
         return dto;
+    }
+
+    @Override
+    public List<ReviewDetailDTO> findAll(Long campingId) {
+
+        CampingEntity campingEntity = cs.findById(campingId).get();
+        List<ReviewEntity> reviewEntityList = campingEntity.getReviewEntityList();
+        List<ReviewDetailDTO> reviewDetailDTOS = new ArrayList<>();
+
+        for(ReviewEntity r: reviewEntityList){
+            ReviewDetailDTO reviewDetailDTO = ReviewDetailDTO.toDetailDTO(r);
+            reviewDetailDTOS.add(reviewDetailDTO);
+        }
+        return reviewDetailDTOS;
+    }
+
+    @Override
+    public double avg(Long campingId) {
+
+        double avg=0;
+        int sum=0;
+
+        CampingEntity campingEntity = cs.findById(campingId).get();
+        List<ReviewEntity> reviewEntityList = campingEntity.getReviewEntityList();
+        List<ReviewDetailDTO> reviewDetailDTOList = new ArrayList<>();
+        for(ReviewEntity r: reviewEntityList){
+            ReviewDetailDTO reviewDetailDTO = ReviewDetailDTO.toDetailDTO(r);
+            sum +=r.getReviewStar();
+        }
+        avg = (double) sum/reviewDetailDTOList.size();
+        avg=Math.round(avg*10)/10.0;
+        System.out.println(avg);
+        return avg;
     }
 }
