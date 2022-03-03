@@ -123,6 +123,7 @@ public class SearchController {
             campingDetailDTO.setCampingFileName("/images/noImage.jpg");
         }
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        System.out.println(session.getAttribute("checkInDate"));
         Date checkInDate = format.parse((String) session.getAttribute("checkInDate"));
         Date checkOutDate = format.parse((String) session.getAttribute("checkOutDate"));
         long period = (checkOutDate.getTime()-checkInDate.getTime()) / 1000;

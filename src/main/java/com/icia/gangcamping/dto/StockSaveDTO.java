@@ -1,6 +1,7 @@
 package com.icia.gangcamping.dto;
 
 
+import com.icia.gangcamping.entity.StockEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -18,5 +19,11 @@ public class StockSaveDTO {
     private int Stock;
 
 
+    public static StockSaveDTO toSaveDTO(StockEntity byProductEntity) {
 
+        StockSaveDTO stockSaveDTO = new StockSaveDTO();
+        stockSaveDTO.setStockId(byProductEntity.getStockId());
+        stockSaveDTO.setProductId(byProductEntity.getProductEntity().getProductId());
+        return stockSaveDTO;
+    };
 }

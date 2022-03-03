@@ -6,6 +6,9 @@ import com.icia.gangcamping.entity.MemberEntity;
 import com.icia.gangcamping.service.BookService;
 import com.icia.gangcamping.service.CampingLikeService;
 import com.icia.gangcamping.service.MemberService;
+import com.icia.gangcamping.service.OrderService;
+import com.icia.gangcamping.service.ShoppingLikeService;
+import com.icia.gangcamping.service.ShoppingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.Fetch;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
@@ -30,8 +34,15 @@ import static com.icia.gangcamping.common.SessionConst.LOGIN_EMAIL;
 public class MemberController {
 
     private final MemberService ms;
+
     private final BookService bs;
     private final CampingLikeService cls;
+    private final HttpSession session;
+    private final ShoppingService ss;
+    private final ShoppingLikeService sls;
+    private final OrderService os;
+    
+
 
 //    @GetMapping("save")
 //    public String saveForm(Model model) {
@@ -138,10 +149,13 @@ public class MemberController {
     }
 
 //    @PostMapping("/updateAddr")
-//    public String updateAddr(@RequestParam String memberAddr, MemberUpdateAddrDTO memberUpdateAddrDTO){
-//        Long memberId = ms.updateAddr(memberUpdateAddrDTO);
-//        return "member/update";
-//    }
+//   public String updateAddr(HttpSession session, @ModelAttribute MemberUpdateDTO memberUpdateDTO, Model model){
+//        String memberEmail = (String) session.getAttribute("loginEmail");
+//        MemberDetailDTO member = ms.findByEmail(memberEmail);
+//       ms.updateAddr(memberUpdateDTO);
+//       model.addAttribute("member", member);
+//       return "member/update";
+//   }
 
 //    @PostMapping("/update")
 //    public String update(@ModelAttribute MemberUpdateDTO memberUpdateDTO) {
@@ -169,24 +183,18 @@ public class MemberController {
         return "member/confirmPW";
     }
 
-//    @PutMapping("/{memberId}")
-//    public ResponseEntity confirmPW(@ModelAttribute MemberUpdateDTO memberUpdateDTO) throws IllegalStateException, IOException{
-//        System.out.println(memberUpdateDTO);
-//        Long memberId = ms.update(memberUpdateDTO);
-//        return new ResponseEntity(HttpStatus.OK);
+//    @DeleteMapping("/{memberId}")
+//    public String deleteById(@PathVariable("memberId") Long memberId){
+//        ms.deleteById(memberId);
+//        return "index";
 //    }
 
     @DeleteMapping("/{memberId}")
-    public String deleteById(@PathVariable("memberId") Long memberId){
+    public ResponseEntity deleteById(HttpSession session, @PathVariable("memberId") Long memberId){
         ms.deleteById(memberId);
-        return "index";
+        session.invalidate();
+        return new ResponseEntity(HttpStatus.OK);
     }
-
-//    @DeleteMapping("/{memberId}")
-//    public ResponseEntity deleteById(@PathVariable("memberId") Long memberId){
-//        ms.deleteById(memberId);
-//        return new ResponseEntity(HttpStatus.OK);
-//    }
 
 
     //로그아웃
@@ -205,25 +213,29 @@ public class MemberController {
         return "member/bookList";
     }*/
 
-    @GetMapping("/shoppingLike")
-    public String shoppingLike(Model model, HttpSession session) {
-
-        String memberEmail = (String) session.getAttribute("loginEmail");
-        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
-        /*List<ShoppingLikeDetailDTO> slList = sls.findByMemberEntity(memberEntity);
-        System.out.println(slList);
-        model.addAttribute("slList", slList);*/
-
-        List<CampingLikeDetailDTO> campingLike = cls.findByMemberEntity(memberEntity);
-        System.out.println(campingLike.toString());
-        model.addAttribute("campingLike", campingLike);
-
-        return "member/shoppingLike";
-    }
+//    @GetMapping("/shoppingLike")
+//    public String shoppingLike(Model model, HttpSession session) {
+//
+//        String memberEmail = (String) session.getAttribute("loginEmail");
+//        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
+//        /*List<ShoppingLikeDetailDTO> slList = sls.findByMemberEntity(memberEntity);
+//        System.out.println(slList);
+//        model.addAttribute("slList", slList);*/
+//
+//        List<CampingLikeDetailDTO> campingLike = cls.findByMemberEntity(memberEntity);
+//        System.out.println(campingLike.toString());
+//        model.addAttribute("campingLike", campingLike);
+//
+//        return "member/shoppingLike";
+//    }
 
 
     @GetMapping("/delete")
-    public String delete() {
+    public String delete(HttpSession session, Model model) {
+        String member = (String) session.getAttribute("loginEmail");
+        MemberDetailDTO memberDetailDTO = MemberDetailDTO.toMemberDetailDTO(ms.findByMemberEmail(member));
+        model.addAttribute("member",memberDetailDTO);
+
         return "member/delete";
 
     }
@@ -248,9 +260,40 @@ public class MemberController {
     }
 
 
+//    @GetMapping("/shoppingList/{memberEmail}")
+//    public String shoppingList(@PathVariable("memberEmail") String memberEmail, Model model) {
+//
+//        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
+//        List<OrderDetailDTO> oList = ss.findByMemberEntity1(memberEntity);
+//        System.out.println(oList);
+//        model.addAttribute("oList", oList);
+//
+//        return "member/shoppingList";
+//    }
+
     @GetMapping("/shoppingList")
-    public String shoppingList() {
+    public String shoppingList( Model model) {
+        String memberEmail = (String) session.getAttribute("loginEmail");
+        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
+        List<OrderDetailDTO> oList = ss.findByMemberEntity1(memberEntity);
+        System.out.println(oList);
+        model.addAttribute("oList", oList);
+
         return "member/shoppingList";
     }
+
+
+
+    @GetMapping("/shoppingLike")
+    public String shoppingLike(Model model) {
+        String memberEmail = (String) session.getAttribute("loginEmail");
+        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
+        List<ShoppingLikeDetailDTO> slList = sls.findByMemberEntity(memberEntity);
+        System.out.println(slList);
+        model.addAttribute("slList", slList);
+        return "member/shoppingLike";
+    }
+
+
 
 }

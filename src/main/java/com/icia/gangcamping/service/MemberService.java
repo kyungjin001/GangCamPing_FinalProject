@@ -32,7 +32,8 @@ public interface MemberService {
 
     void deleteById(Long memberId);
 
-//    Long updateAddr(MemberUpdateAddrDTO memberUpdateAddrDTO);
+//    MemberDetailDTO updateAddr(MemberUpdateDTO memberUpdateDTO);
+
 
 //    Long confirmPW(MemberUpdateDTO memberUpdateDTO);
 }
