@@ -24,6 +24,7 @@ public class GoodsDetailDTO {
     private String productFileName;
     private int productStock;
     private LocalDateTime productTime;
+    private int cartAmounts;
 
 
 
