@@ -63,7 +63,7 @@ public class MemberController {
         return "index";
     }
 
-
+//    회원가입 with Validation
 //    @PostMapping("save")
 //    public String save(@Validated @ModelAttribute("member") MemberSaveDTO memberSaveDTO, BindingResult bindingResult) throws IOException {
 //        if(bindingResult.hasErrors()) {
@@ -92,12 +92,31 @@ public class MemberController {
 
         if (ms.login(memberLoginDTO)) {
             session.setAttribute("loginEmail", memberLoginDTO.getMemberEmail());
+            Long loginId = ms.findByMemberId(memberLoginDTO.getMemberEmail());
+            session.setAttribute("loginId",loginId);
             return "redirect:/";
         } else {
             return "redirect:/";
 
         }
     }
+
+    // 로그인 처리 with Validation
+//    @PostMapping("login")
+//    public String login(@Validated @ModelAttribute("login") MemberLoginDTO memberLoginDTO, BindingResult bindingResult, HttpSession session){
+//        if(bindingResult.hasErrors()){
+//            return "redirect:/";
+//        }
+//        boolean loginResult = ms.login(memberLoginDTO);
+//        if(ms.login(memberLoginDTO)){
+//            session.setAttribute("loginEmail", memberLoginDTO.getMemberEmail());
+//            return "redirect:/";
+//        } else {
+//            bindingResult.reject("loginFail", "이메일 또는 비밀번호가 틀립니다!");
+//            return "redirect:/";
+//        }
+//    }
+
 
     // 로그인 처리 with Interceptor
 //    @PostMapping("/login")
@@ -128,19 +147,19 @@ public class MemberController {
 
 
     //마이페이지
-    @GetMapping("/mypage")
+    @GetMapping("/{memberId}")
     public String mypage() {
         return "member/mypage";
     }
 
-    @GetMapping("{memberEmail}")
+    /*@GetMapping("{memberEmail}")
     public String findById(HttpSession session, @PathVariable("memberEmail") String memberEmail, Model model) {
         String memberEmail1 = (String)session.getAttribute("loginEmail");
         MemberDetailDTO member = MemberDetailDTO.toMemberDetailDTO(ms.findByMemberEmail(memberEmail1));
         model.addAttribute("member", member);
         return "member/mypage";
 
-    }
+    }*/
 
 
 
@@ -161,14 +180,13 @@ public class MemberController {
         return "member/update";
     }
 
-//    @PostMapping("/updateAddr")
-//   public String updateAddr(HttpSession session, @ModelAttribute MemberUpdateDTO memberUpdateDTO, Model model){
-//        String memberEmail = (String) session.getAttribute("loginEmail");
-//        MemberDetailDTO member = ms.findByEmail(memberEmail);
-//       ms.updateAddr(memberUpdateDTO);
-//       model.addAttribute("member", member);
-//       return "member/update";
-//   }
+    @PostMapping("/updateAddr")
+   public String updateAddr(HttpSession session, @ModelAttribute MemberUpdateDTO memberUpdateDTO, Model model){
+
+       MemberDetailDTO member = ms.updateAddr(memberUpdateDTO);
+       model.addAttribute("member", member);
+       return "member/update";
+   }
 
 //    @PostMapping("/update")
 //    public String update(@ModelAttribute MemberUpdateDTO memberUpdateDTO) {
@@ -300,6 +318,8 @@ public class MemberController {
         model.addAttribute("slList", slList);
         return "member/shoppingLike";
     }
+
+
 
 
 

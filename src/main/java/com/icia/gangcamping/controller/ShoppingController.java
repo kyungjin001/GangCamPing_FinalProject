@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -57,11 +58,12 @@ return "shopping/shopping";
 
 //상품 상세조회
 @GetMapping("{productId}")
-public String findById(@PathVariable("productId") Long productId, Model model) {
+public String findById(@PathVariable("productId") Long productId, Model model) throws ParseException {
 GoodsDetailDTO goods = ss.findById(productId);
 model.addAttribute("goods", goods);
 List<CommentDetailDTO> commentList = cs.findAll(productId);
 model.addAttribute("commentList", commentList);
+
 MemberEntity memberEntity = ms.findByMemberEmail((String) session.getAttribute("loginEmail"));
 MemberDetailDTO memberDetailDTO = MemberDetailDTO.toMemberDetailDTO(memberEntity);
 Long memberId = memberDetailDTO.getMemberId();
@@ -101,6 +103,7 @@ return "redirect:/shopping/shopping";
 // 장바구니 담기
 @GetMapping("cart")
 public String addCart(@ModelAttribute CartDetailDTO cartDetailDTO, Model model) {
+    System.out.println(cartDetailDTO);
 MemberEntity memberEntity = ms.findByMemberEmail((String) session.getAttribute("loginEmail"));
 Optional<ProductEntity> productEntity = ss.findById1(cartDetailDTO.getProductId());
 CartDetailDTO cart = ss.findByMemberEntityAndProductEntity(memberEntity, productEntity.get());
@@ -110,7 +113,9 @@ model.addAttribute("productId", productId);
     System.out.println("아이디좀 찍혀라"+memberId);
     model.addAttribute("memberId", memberId);
 if (cart == null) {
-    CartDetailDTO CartDetailDTO = ss.addCart(cartDetailDTO, memberEntity, productEntity.get());
+    System.out.println(cartDetailDTO.getCartAmount());
+    CartDetailDTO cartDetailDTO0 = ss.addCart(cartDetailDTO, memberEntity, productEntity.get());
+    System.out.println(cartDetailDTO0+"aaaa");
     List<CartDetailDTO> cartDetailDTOList = ss.findByMemberEntity(memberEntity);
     model.addAttribute("cartList", cartDetailDTOList);
     int cartPriceSum = 0;
@@ -119,7 +124,7 @@ if (cart == null) {
         cartPriceSum += (c.getProductPrice() * c.getCartAmount());
         orderUnitNum += c.getCartAmount();
 
-        System.out.println("c = " + c);
+        System.out.println("c0 = " + c);
     }
     model.addAttribute("totalPrice", cartPriceSum);
     model.addAttribute("orderUnitNum", orderUnitNum);
@@ -273,7 +278,7 @@ return "shopping/complete";
         ts.update(stockUpdateDTO);
         System.out.println("end update ts");
         //수정완료 후 해당글의 상세페이지 출력
-        return "index";
+        return "redirect:/admin/findAll";
     }
 
 
@@ -294,6 +299,16 @@ return "shopping/complete";
         sls.deleteById(shoppingLikeId);
         return new ResponseEntity(HttpStatus.OK);
     }
+
+
+//    //장바구니 수량카운트
+//    @PutMapping("menu1")
+//    @ResponseBody
+//    public String meunUpDown1(@RequestParam("productId") Long productId, @RequestParam("type") String type) {
+//        String result = ss.meunUpDown1(productId, type);
+//        System.out.println("제발 넘어와" + productId);
+//        return result;
+//    }
 
 
 

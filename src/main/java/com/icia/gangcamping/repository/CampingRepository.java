@@ -10,6 +10,6 @@ public interface CampingRepository extends JpaRepository<CampingEntity,Long> {
     CampingEntity findByCampingName(String campingName);
 
 
-    List<CampingEntity> findTop4ByOrderByCampingLikeCountAsc();
+    List<CampingEntity> findTop4ByOrderByCampingLikeCountDesc();
 
 }

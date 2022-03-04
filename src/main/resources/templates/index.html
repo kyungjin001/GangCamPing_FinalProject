@@ -160,6 +160,11 @@
         });
     </script>
 
+<!--    <style>
+        .field-error {
+            color: red;
+        }
+    </style> -->
 
     <script>
         window.onload = function (){
@@ -220,7 +225,7 @@
                                     Logout</a>
                                 </div>
                                 <div class="user_box_login user_box_link">
-                                    <a class="nav-link" th:href="@{|/member/${session.loginEmail}|}" style="font-size: 15px">
+                                    <a class="nav-link" th:href="@{|/member/${session.loginId}|}" style="font-size: 15px">
                                     MyPage</a>
                                 </div>
                             </span>
@@ -237,7 +242,7 @@
                             </span>
                             <span th:if="(${session.loginEmail}=='admin')">
                                 <div class="user_box_login user_box_link">
-                                    <a class="nav-link" href="/member/logOut" style="font-size: 15px">
+                                    <a class="nav-link" href="/member/logout" style="font-size: 15px">
                                     LogOut</a>
                                 </div>
                                 <div class="user_box_login user_box_link">
@@ -245,7 +250,7 @@
                                     MyPage</a>
                                 </div>
                             </span>
-                            <div class="user_box_register user_box_link"><a href="/shopping/goods">Goods</a></div>
+
 
 
                         </div>
@@ -266,11 +271,11 @@
                         <div class="main_nav_container ml-auto">
                             <ul class="main_nav_list">
                                 <li class="main_nav_item"><a href="/">home</a></li>
-                                <li class="main_nav_item"><a href="/search/camping">booking</a></li>
+                                <li class="main_nav_item"><a href="/search/camping">camping</a></li>
                                 <li class="main_nav_item"><a href="/shopping/shopping">shopping</a></li>
                                 <li class="main_nav_item"><a href="about">about us</a></li>
                                 <li class="main_nav_item"><a href="contact">contact</a></li>
-                                <li class="main_nav_item"><a href="/test">apiTest</a></li>
+
                             </ul>
                         </div>
 
@@ -841,16 +846,25 @@
                     <!-- Modal body -->
                     <div class="modal-body">
                         <form action="/member/login" method="post" th:object="${login}">
-
                             <div class="form-group">
+
                                 <label for="loginId">ID </label> <br>
                                 <input type="text" class="form-control" id="loginId" placeholder="Enter ID"
+
+                                <label for="loginId" style="margin-left: 200px">ID </label> <br>
+                                <input type="text" class="form-control" id="loginId" placeholder="회원가입 시 이메일을 적어주세요"
+
                                        name="memberEmail"
                                        required>
                             </div>
                             <div class="form-group">
+
                                 <label for="loginPw">비밀번호 </label>
                                 <input type="password" class="form-control" id="loginPw" placeholder="Enter Password"
+
+                                <label for="loginPw" style="margin-left: 200px">비밀번호 </label>
+                                <input type="password" class="form-control" id="loginPw" placeholder="8~20자 사이로 입력해주세요."
+
                                        name="memberPw" required>
                             </div>
                             <button type="submit" class="btn btn-primary" style="margin-left:200px">로그인</button>
@@ -861,7 +875,13 @@
                         <a href="https://kauth.kakao.com/oauth/authorize?client_id=49e217f552e2a1352d3462543bc0a458&redirect_uri=http://localhost:8098/kakaologin&response_type=code">
                             <img src="/images/kakao_login_medium_narrow.png">
                         </a>
+
                     </span><br>
+
+
+                    </span>
+
+
                             <span th:if="${session['userId'] == null}" class="n1 d-flex">
 
                             <!--네이버 로그인 시작  -->
@@ -870,10 +890,12 @@
                                 <img src = "/img/btnG_완성형.png" width="222" height="48"></img>
                             </a>
 
+
                             <!-- 										<li onclick="naverLogout(); return false;">
-                             -->									      <a href="javascript:void(0)" onclick="naverLogout(); return false;">
+                             -->     <a href="javascript:void(0)" onclick="naverLogout(); return false;">
                             <img src = "/img/btnG_로그아웃.png" width="115" height="48"></img>
                         </a>
+
 
                             <!-- 네이버 스크립트 -->
                             <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
@@ -896,7 +918,10 @@
                                         if (status) {
                                             var email = naverLogin.user.getEmail(); // 필수로 설정할것을 받아와 아래처럼 조건문을 줍니다.
 
-                                            console.log(naverLogin.user);
+                                            console.log(naverLogin.user.getEmail());
+                                            sessionStorage.setItem("n_eamil",email);
+
+
 
                                             if( email == undefined || email == null) {
                                                 alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
@@ -918,19 +943,11 @@
                                     testPopUp.close();
                                 }
 
-                                function naverLogout() {
-                                    openPopUp();
-                                    setTimeout(function() {
-                                        closePopUp();
-                                    }, 1000);
-
-
-                                }
                             </script>
                             <!--네이버 로그인 끝  -->
                             </span>
 
-                            <br> <br><br><button  onclick="location.href='#'" data-toggle="modal" data-target="#findPw" data-dismiss="modal" class="btn btn-primary">비밀번호 찾기</button><br>
+                            <br> <br><br><button  onclick="location.href='#'" data-toggle="modal" data-target="#findPw" data-dismiss="modal" class="btn btn-primary">비밀번호 찾기</button>
                             <button onclick="location.href='#'" data-toggle="modal" data-target="#signin" data-dismiss="modal" class="btn btn-primary">회원가입</button><br>
 
 
@@ -961,27 +978,27 @@
                         <form action="/member/save" method="post" th:object="${member}" id="memberSave">
                             <div class="form-group">
                                 <label for="memberEmail">이메일 </label> <br>
-                                <input type="text" class="form-control" onblur="emailDp()" id="memberEmail"
-                                       placeholder="이메일을 입력해주세요." name="memberEmail" required>
+                                <input type="email" class="form-control" minlength='5' maxlength='30' onblur="emailDp()" id="memberEmail"
+                                       placeholder="이메일을 5~30자로 입력해주세요." name="memberEmail" required>
                                 <span id="email_Dp"></span><br>
                             </div>
                             <div class="form-group">
                                 <label for="pwd1">비밀번호 </label>
-                                <input type="password" class="form-control" id="pwd1" placeholder="비밀번호를 입력해주세요."
+                                <input type="password" class="form-control" minlength='8' maxlength='20' id="pwd1" placeholder="비밀번호를 8~20자로 입력해주세요."
                                        name="memberPw" required>
                                 <input type="password" class="form-control" id="pwd2" placeholder="비밀번호를 다시 입력해주세요."
                                        required>
-                                <div class="alert alert-success" id="alert-success" style="color : green">비밀번호가 일치합니다.</div>
-                                <div class="alert alert-danger" id="alert-danger" style="color : red">비밀번호가 일치하지 않습니다.</div>
+                                <div class="alert alert-success" id="alert-success" style="color : green; background-color : transparent">비밀번호가 일치합니다.</div>
+                                <div class="alert alert-danger" id="alert-danger" style="color : red; background-color : transparent">비밀번호가 일치하지 않습니다.</div>
                             </div>
                             <div class="form-group">
-                                <label for="registerName">이름 </label> <br>
-                                <input type="text" class="form-control" id="registerName" placeholder="이름을 입력해주세요."
+                                <label for="memberName">이름 </label> <br>
+                                <input type="text" class="form-control" minlength='5' maxlength='30' id="memberName" placeholder="이름을 5~30자로 입력해주세요."
                                        name="memberName" required>
                             </div>
                             <div class="form-group">
                                 <label for="registerPhone">전화번호 </label> <br>
-                                <input type="text" class="form-control" id="registerPhone" placeholder="전화번호를 입력해주세요."
+                                <input type="text" class="form-control" minlength='10' maxlength='11' pattern="^[0-9]+$" id="registerPhone" placeholder="전화번호(10~11자 숫자)를 입력해주세요."
                                        name="memberPhone" required>
                             </div>
                             <div class="form-group">
