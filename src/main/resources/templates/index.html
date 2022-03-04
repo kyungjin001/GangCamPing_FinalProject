@@ -872,10 +872,6 @@
                                 <img src = "/img/btnG_완성형.png" width="222" height="48"></img>
                             </a>
 
-                            <!-- 										<li onclick="naverLogout(); return false;">
-                             -->									      <a href="javascript:void(0)" onclick="naverLogout(); return false;">
-                            <img src = "/img/btnG_로그아웃.png" width="115" height="48"></img>
-                        </a>
 
                             <!-- 네이버 스크립트 -->
                             <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
@@ -898,7 +894,10 @@
                                         if (status) {
                                             var email = naverLogin.user.getEmail(); // 필수로 설정할것을 받아와 아래처럼 조건문을 줍니다.
 
-                                            console.log(naverLogin.user);
+                                            console.log(naverLogin.user.getEmail());
+                                            sessionStorage.setItem("n_eamil",email);
+
+
 
                                             if( email == undefined || email == null) {
                                                 alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
@@ -920,14 +919,6 @@
                                     testPopUp.close();
                                 }
 
-                                function naverLogout() {
-                                    openPopUp();
-                                    setTimeout(function() {
-                                        closePopUp();
-                                    }, 1000);
-
-
-                                }
                             </script>
                             <!--네이버 로그인 끝  -->
                             </span>

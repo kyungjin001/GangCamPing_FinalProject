@@ -55,6 +55,7 @@ public class CartEntity {
         CartEntity cartEntity = new CartEntity();
         cartEntity.setMemberEntity(memberEntity);
         cartEntity.setProductEntity(productEntity);
+        cartEntity.setCartAmount(cartDetailDTO.getCartAmount());
         cartEntity.setCartPriceSum(cartDetailDTO.getCartPriceSum());
         cartEntity.setProductName(productEntity.getProductName());
         cartEntity.setProductDescription(productEntity.getProductDescription());

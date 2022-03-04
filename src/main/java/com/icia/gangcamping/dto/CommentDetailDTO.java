@@ -24,6 +24,7 @@ public class CommentDetailDTO {
     private LocalDateTime commentTime;
     private String memberEmail;
     private String productName;
+    private String commentT;
 
 
 

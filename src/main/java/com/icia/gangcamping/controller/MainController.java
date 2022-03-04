@@ -57,7 +57,8 @@ public class MainController {
     @RequestMapping("/")
     public String cxczcof(Model model) {
 
-       /* List campingDetailDTOList = new ArrayList();
+
+        List campingDetailDTOList = new ArrayList();
         for(int i=0;i<3;i++) {
             CampingDetailDTO campingDetailDTO = CampingDetailDTO.toCampingDetailDTO(cs.findById((int) (Math.random() * 1000)).get());
             if(campingDetailDTO.getCampingFileName()==null){
@@ -87,6 +88,7 @@ public class MainController {
         model.addAttribute("reviewList",reviewList);
         model.addAttribute("resultList",campingDetailDTOList);
         model.addAttribute("recommendList",recommendList);*/
+
 
         return "index";
     }
