@@ -148,9 +148,16 @@ public class MemberController {
     public String updateForm(Model model, HttpSession session) {
         System.out.println(session.getAttribute("loginEmail"));
         String memberEmail = (String) session.getAttribute("loginEmail");
-        MemberDetailDTO member = ms.findByEmail(memberEmail);
-        model.addAttribute("member", member);
-        System.out.println(member);
+        if(memberEmail != null){
+            System.out.println("bbfdsbdsfb="+memberEmail);
+            MemberDetailDTO member = ms.findByEmail(memberEmail);
+            model.addAttribute("member",member);
+        }else if(memberEmail == null){
+            MemberDetailDTO member = ms.findById((Long) session.getAttribute("memberId"));
+            model.addAttribute("member",member);
+
+            System.out.println("asdfadsf!!!@!@!@!@");
+        }
         return "member/update";
     }
 

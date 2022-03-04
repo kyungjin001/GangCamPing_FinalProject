@@ -1080,7 +1080,7 @@
                             <input type="text" class="form-control" id="pwMemberEmail" th:onblur="emailCheck()"
                                    placeholder="Enter Your Email" required>
                             <form action="/member/update" method="get"  id="updateGO" name="pwUpdate">
-                                <input type="text" id="members" name="memberId">
+                                <input type="hidden" id="members" name="memberId">
                                 <input type="hidden" class="form-control" id="codeInput" placeholder="이메일 인증코드를 입력해주세요."
                                        required>
                                 <input type="hidden" th:onclick="codeCheck()" id="check" value="코드확인">
@@ -1095,7 +1095,7 @@
                         <input type="button" id="emailCancel" class="btn btn-secondary" data-dismiss="modal" value="취소"
                                readonly>
                         <!-- 인증코드 인증 후 멤버수정으로 가는 버튼 -->
-                        <button type="hidden" id="send" form="updateGO" class="btn btn-primary" style="margin-left:20%;">전송하기</button>
+                        <input type="hidden" id="send" form="updateGO" class="btn btn-primary" style="margin-left:20%;" value="전송하기"></input>
                         <input type="hidden" id="cancel"  class="btn btn-primary" data-dismiss="modal" value="취소" readonly>
                     </div>
                 </div>
