@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -129,7 +130,7 @@ public class AdminController {
     }
 
     @GetMapping("/shoppingAsk")
-    public String findAll1(Model model) {
+    public String findAll1(Model model) throws ParseException {
         List<CommentDetailDTO> cList = rs.findAll1();
         System.out.println(cList);
         model.addAttribute("cList", cList);

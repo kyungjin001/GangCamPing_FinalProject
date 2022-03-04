@@ -2,136 +2,133 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Blog</title>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="Travelix Project">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="/styles/bootstrap4/bootstrap.min.css">
-<link href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link href="/plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="/styles/blog_styles.css">
-<link rel="stylesheet" type="text/css" href="/styles/blog_responsive.css">
+    <title>Blog</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Travelix Project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/styles/bootstrap4/bootstrap.min.css">
+    <link href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/styles/blog_styles.css">
+    <link rel="stylesheet" type="text/css" href="/styles/blog_responsive.css">
 
 
-			<!-- 상품 CSS 	-->
-	<!-- Google Font -->
-	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+    <!-- 상품 CSS 	-->
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
-	<!-- Css Styles -->
-	<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
-	<link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
-	<link rel="stylesheet" href="/css/elegant-icons.css" type="text/css">
-	<link rel="stylesheet" href="/css/nice-select.css" type="text/css">
-	<link rel="stylesheet" href="/css/jquery-ui.min.css" type="text/css">
-	<link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
-	<link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
-	<link rel="stylesheet" href="/css/style.css" type="text/css">
-
-
-<script>
-	var name = sessionStorage.getItem('memberEmail');
-	console.log(name);
-</script>
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
 
 
-
-	<script>
-		function like(){
-			document.getElementById("emptyHeart").style.display="none";
-			document.getElementById("fullHeart").style.display="";
-
-			const productId = '[[${goods.productId}]]';
-			const shoppingLike = document.getElementById("shoppingLikeId");
-			console.log(shoppingLike);
-			console.log(productId);
-
-			$.ajax({
-				type: 'post',
-				url: '/shopping/shoppingLike',
-				data: {'productId': productId},
-				dataType: 'json',
-				success: function (result){
-					console.log("성공");
-					if(result != null){
-						shoppingLike.value = result.shoppingLikeId;
-						alert("찜하기에 성공하셨습니다!");
-						console.log(shoppingLike);
-					}else{
-
-					}
-				},
-				error: function (){
-					console.log("재시도 찜하기")
-				}
-
-			});
-		}
-	</script>
+    <script>
+        var name = sessionStorage.getItem('memberEmail');
+        console.log(name);
+    </script>
 
 
+    <script>
+        function like() {
+            document.getElementById("emptyHeart").style.display = "none";
+            document.getElementById("fullHeart").style.display = "";
 
-	<script>
+            const productId = '[[${goods.productId}]]';
+            const shoppingLike = document.getElementById("shoppingLikeId");
+            console.log(shoppingLike);
+            console.log(productId);
 
-		function likeDelete(){
-			document.getElementById("emptyHeart").style.display="";
-			document.getElementById("fullHeart").style.display="none";
-			const shoppingLike = document.getElementById("shoppingLikeId").value;
-			const reqUrl = "/shopping/delete/"+shoppingLike;
-			console.log(shoppingLike);
-			$.ajax({
-				type: 'delete',
-				url: reqUrl,
-				data: {'shoppingLikeId': shoppingLike},
-				success: function (){
-					console.log("성공")
-					alert("찜하기를 취소하셨습니다!");
-				},
-				error: function (){
-					console.log("재시도 취소")
-				}
-			});
+            $.ajax({
+                type: 'post',
+                url: '/shopping/shoppingLike',
+                data: {'productId': productId},
+                dataType: 'json',
+                success: function (result) {
+                    console.log("성공");
+                    if (result != null) {
+                        shoppingLike.value = result.shoppingLikeId;
+                        alert("찜하기에 성공하셨습니다!");
+                        console.log(shoppingLike);
+                    } else {
 
-		}
-	</script>
+                    }
+                },
+                error: function () {
+                    console.log("재시도 찜하기")
+                }
 
-
-
-
-
-
-	<script>
-		function deleteById(questionId){
-			const reqUrl = "/comment/" + questionId;
-
-			$.ajax({
-				type: 'delete',
-				url: reqUrl,
-				success: function (){
-					location.reload(); // reload는 새로고침
-
-				},
-				error:function (){
-					alert('ajax 실패');
-				}
-
-			});
-		}
-
-	</script>
+            });
+        }
+    </script>
 
 
-	<style>
-		.qna{
-			float: right;
-		}
-	</style>
+    <script>
+
+        function likeDelete() {
+            document.getElementById("emptyHeart").style.display = "";
+            document.getElementById("fullHeart").style.display = "none";
+            const shoppingLike = document.getElementById("shoppingLikeId").value;
+            const reqUrl = "/shopping/delete/" + shoppingLike;
+            console.log(shoppingLike);
+            $.ajax({
+                type: 'delete',
+                url: reqUrl,
+                data: {'shoppingLikeId': shoppingLike},
+                success: function () {
+                    console.log("성공")
+                    alert("찜하기를 취소하셨습니다!");
+                },
+                error: function () {
+                    console.log("재시도 취소")
+                }
+            });
+
+        }
+    </script>
 
 
+    <script>
+        function deleteById(questionId) {
+            const reqUrl = "/comment/" + questionId;
+
+            $.ajax({
+                type: 'delete',
+                url: reqUrl,
+                success: function () {
+                    location.reload(); // reload는 새로고침
+
+                },
+                error: function () {
+                    alert('ajax 실패');
+                }
+
+            });
+        }
+
+    </script>
 
 
+    <style>
+        .qna {
+            float: right;
+        }
+    </style>
 
 
+    <script>
+        function change() {
+            const var1 = document.getElementById('ch');
+            console.log(var1);
+            document.getElementById('dd').value = var1;
+        }
+    </script>
 
 
 </head>
@@ -139,585 +136,624 @@
 <body>
 
 <div class="super_container">
-	
-	<!-- Header -->
 
-	<header class="header">
+    <!-- Header -->
 
-		<!-- Top Bar -->
+    <header class="header">
 
-		<div class="top_bar">
-			<div class="container">
-				<div class="row">
-					<div class="col d-flex flex-row">
-						<div class="phone"></div>
-						<div class="social"></div>
-						<div class="user_box ml-auto">
+        <!-- Top Bar -->
+
+        <div class="top_bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col d-flex flex-row">
+                        <div class="phone"></div>
+                        <div class="social"></div>
+                        <div class="user_box ml-auto">
 
                             <span th:if="(${session.loginEmail}==null) and (${session.userId}==null)">
                                 <div class="user_box_login user_box_link">
                                     <a class="nav-link" href="#" data-toggle="modal" data-target="#login"
-									   style="font-size: 15px">
+                                       style="font-size: 15px">
                                     LogIn</a>
                                 </div>
                                 <div class="user_box_register user_box_link">
                                     <a class="nav-link" href="#" data-toggle="modal" data-target="#signin"
-									   style="font-size: 15px">
+                                       style="font-size: 15px">
                                     SignIn</a>
                                 </div>
                             </span>
-							<span th:if="(${session.loginEmail}!=null)">
+                            <span th:if="(${session.loginEmail}!=null)">
                                 <div class="user_box_login user_box_link">
                                     <a class="nav-link" href="/member/logOut" style="font-size: 15px">
                                     LogOut</a>
                                 </div>
                             </span>
-							<span th:if="${session['userId'] != null}">
+                            <span th:if="${session['userId'] != null}">
                                <div class="user_box_login user_box_link">
                                    <a class="nav-link" href="http://localhost:8098/member/logout"
-									  style="font-size: 15px">
+                                      style="font-size: 15px">
                                    LogOut</a>
                                </div>
                             </span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-		<!-- Main Navigation -->
+        <!-- Main Navigation -->
 
-		<nav class="main_nav">
-			<div class="container">
-				<div class="row">
-					<div class="col main_nav_col d-flex flex-row align-items-center justify-content-start">
-						<div class="logo_container">
-							<div class="logo"><a href="/"><img src="/images/logo.png" alt=""></a></div>
-						</div>
-						<div class="main_nav_container ml-auto">
-							<ul class="main_nav_list">
-								<li class="main_nav_item"><a href="/">home</a></li>
-								<li class="main_nav_item"><a href="/search/camping">booking</a></li>
-								<li class="main_nav_item"><a href="/shopping/shopping">shopping</a></li>
-								<li class="main_nav_item"><a href="about">about us</a></li>
-								<li class="main_nav_item"><a href="contact">contact</a></li>
-								<li class="main_nav_item"><a href="/test">apiTest</a></li>
-							</ul>
-						</div>
+        <nav class="main_nav">
+            <div class="container">
+                <div class="row">
+                    <div class="col main_nav_col d-flex flex-row align-items-center justify-content-start">
+                        <div class="logo_container">
+                            <div class="logo"><a href="/"><img src="/images/logo.png" alt=""></a></div>
+                        </div>
+                        <div class="main_nav_container ml-auto">
+                            <ul class="main_nav_list">
+                                <li class="main_nav_item"><a href="/">home</a></li>
+                                <li class="main_nav_item"><a href="/search/camping">booking</a></li>
+                                <li class="main_nav_item"><a href="/shopping/shopping">shopping</a></li>
+                                <li class="main_nav_item"><a href="about">about us</a></li>
+                                <li class="main_nav_item"><a href="contact">contact</a></li>
+                                <li class="main_nav_item"><a href="/test">apiTest</a></li>
+                            </ul>
+                        </div>
 
 
-						<form id="search_form" class="search_form bez_1">
-							<input type="search" class="search_content_input bez_1">
-						</form>
+                        <form id="search_form" class="search_form bez_1">
+                            <input type="search" class="search_content_input bez_1">
+                        </form>
 
-						<div class="hamburger">
-							<i class="fa fa-bars trans_200"></i>
-						</div>
-					</div>
-				</div>
-			</div>
-		</nav>
+                        <div class="hamburger">
+                            <i class="fa fa-bars trans_200"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
 
-	</header>
+    </header>
 
-	<div class="menu trans_500">
-		<div class="menu_content d-flex flex-column align-items-center justify-content-center text-center">
-			<div class="menu_close_container"><div class="menu_close"></div></div>
-			<div class="logo menu_logo"><a href="#"><img src="/images/logo.png" alt=""></a></div>
-			<ul>
-				<li class="menu_item"><a href="../index.html">home</a></li>
-				<li class="menu_item"><a href="../about.html">about us</a></li>
-				<li class="menu_item"><a href="../offers.html">offers</a></li>
-				<li class="menu_item"><a href="#">news</a></li>
-				<li class="menu_item"><a href="../contact.html">contact</a></li>
-			</ul>
-		</div>
-	</div>
+    <div class="menu trans_500">
+        <div class="menu_content d-flex flex-column align-items-center justify-content-center text-center">
+            <div class="menu_close_container">
+                <div class="menu_close"></div>
+            </div>
+            <div class="logo menu_logo"><a href="#"><img src="/images/logo.png" alt=""></a></div>
+            <ul>
+                <li class="menu_item"><a href="../index.html">home</a></li>
+                <li class="menu_item"><a href="../about.html">about us</a></li>
+                <li class="menu_item"><a href="../offers.html">offers</a></li>
+                <li class="menu_item"><a href="#">news</a></li>
+                <li class="menu_item"><a href="../contact.html">contact</a></li>
+            </ul>
+        </div>
+    </div>
 
-	<!-- Home -->
+    <!-- Home -->
 
-<!--	<div class="home">-->
-<!--		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/blog_background.jpg"></div>-->
-<!--		<div class="home_content">-->
-<!--			<div class="home_title">the blog</div>-->
-<!--		</div>-->
-<!--	</div>-->
+    <!--	<div class="home">-->
+    <!--		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/blog_background.jpg"></div>-->
+    <!--		<div class="home_content">-->
+    <!--			<div class="home_title">the blog</div>-->
+    <!--		</div>-->
+    <!--	</div>-->
 
-	<!-- Product Details Section Begin -->
-	<section class="product-details spad">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 col-md-6">
-					<div class="product__details__pic">
-						<div class="product__details__pic__item">
-							<img class="product__details__pic__item--large"
-								 th:src="@{/upload/} + ${goods.productFileName}" alt="">
-						</div>
-						<div class="product__details__pic__slider owl-carousel">
-							<img data-imgbigurl="img/product/details/product-details-2.jpg"
-								 src="/img/캠핑1.png" alt="">
-							<img data-imgbigurl="img/product/details/product-details-3.jpg"
-								 src="/img/캠핑2.png" alt="">
-							<img data-imgbigurl="img/product/details/product-details-5.jpg"
-								 src="/img/캠핑3.png" alt="">
-							<img data-imgbigurl="img/product/details/product-details-4.jpg"
-								 src="/img/캠핑4.png" alt="">
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6 col-md-6">
-					<div class="product__details__text">
-						<h3 th:text="${goods.productName}"></h3>
-						<div class="product__details__rating">
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star-half-o"></i>
-							<span>(18 reviews)</span>
-						</div>
-						<div class="product__details__price" th:text="|${goods.productPrice}|+원"></div>
-						<p th:text="${goods.productDescription}"></p>
-						<div class="product__details__quantity">
-							<div class="quantity">
-								<div class="pro-qty">
+    <!-- Product Details Section Begin -->
+    <section class="product-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__pic">
+                        <div class="product__details__pic__item">
+                            <img class="product__details__pic__item--large"
+                                 th:src="@{/upload/} + ${goods.productFileName}" alt="">
+                        </div>
+                        <div class="product__details__pic__slider owl-carousel">
+                            <img data-imgbigurl="img/product/details/product-details-2.jpg"
+                                 src="/img/캠핑1.png" alt="">
+                            <img data-imgbigurl="img/product/details/product-details-3.jpg"
+                                 src="/img/캠핑2.png" alt="">
+                            <img data-imgbigurl="img/product/details/product-details-5.jpg"
+                                 src="/img/캠핑3.png" alt="">
+                            <img data-imgbigurl="img/product/details/product-details-4.jpg"
+                                 src="/img/캠핑4.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__text">
+                        <h3 th:text="${goods.productName}"></h3>
+                        <div class="product__details__rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+                            <span>(18 reviews)</span>
+                        </div>
+                        <div class="product__details__price" th:text="|${goods.productPrice}|+원"></div>
+                        <p th:text="${goods.productDescription}"></p>
+                        <div class="product__details__quantity">
+                            <div>
+                                <div>
 									<span th:if="(${stock.stock} == 0 )">
 									<input value="품절">
 									</span>
-									<span th:unless="(${stock.stock} == 0 )">
-									<input type="text" value="1">
+                                    <span th:unless="(${stock.stock} == 0 )">
+<!--									<input onchange="change()" type="text" value="1" id="ch">-->
+										<input type='button'
+                                               onclick='count("plus")'
+                                               value='+'/>
+                                        			<span id='result'>0</span>
+										<input type='button'
+                                               onclick='count("minus")'
+                                               value='-'/>
+
 									</span>
-								</div>
-							</div>
-						</div>
-						<span th:unless="(${stock.stock} == 0 )">
+                                    <script>
+                                    function count(type)  {
+                                    // 결과를 표시할 element
+                                    const resultElement = document.getElementById('result');
+                                    const va1 = document.getElementById('dd');
+
+                                    // 현재 화면에 표시된 값
+                                    let number = resultElement.innerText;
+
+                                    // 더하기/빼기
+                                    if(type === 'plus') {
+                                    number = parseInt(number) + 1;
+                                    }else if(type === 'minus')  {
+                                    number = parseInt(number) - 1;
+                                    }
+
+                                    // 결과 출력
+                                    resultElement.innerText = number;
+                                    va1.value = number;
+                                    console.log(va1);
+                                    }
+                                    </script>
+
+                                </div>
+                            </div>
+                        </div>
+                        <span th:unless="(${stock.stock} == 0 )">
 						<form th:id="aaa" action="/shopping/cart">
 							<input type="hidden" name="productId" th:value="${goods.productId}">
 							<input type="hidden" th:name="memberId" th:value="${memberId}">
+							<input type="hidden" th:name="cartAmount" id="dd">
 						<button type="submit" class="primary-btn">ADD TO CARD</button>
 						</form>
 						</span>
-						<div>
-							<form action="/shopping/shoppingLike" method="post">
-								<input type="hidden" id="productId" th:value="${goods.productId}">
-								<input type="hidden"  name="shoppingLikeId" id="shoppingLikeId">
-							</form>
+                        <div>
+                            <form action="/shopping/shoppingLike" method="post">
+                                <input type="hidden" id="productId" th:value="${goods.productId}">
+                                <input type="hidden" name="shoppingLikeId" id="shoppingLikeId">
+                            </form>
 
-							<img src="/images/emptyHeart32.png"  id="emptyHeart" th:onclick="like()">
-							<img id="fullHeart" src="/images/fullHeart32.png" style="display:none" th:onclick="likeDelete()">
-						</div>
-						<ul>
-							<li><b>Availability</b> <span>In Stock</span></li>
-							<li><b>Shipping</b> <span>무료배송 <samp>산간,제주도 배송비 추가</samp></span></li>
-							<li><b>Weight</b> <span th:text="${goods.productWeight}"></span>&nbsp;<b>kg</b></li>
-							<li><b>Share on</b>
-								<div class="share">
-									<a href="#"><i class="fa fa-facebook"></i></a>
-									<a href="#"><i class="fa fa-twitter"></i></a>
-									<a href="#"><i class="fa fa-instagram"></i></a>
-									<a href="#"><i class="fa fa-pinterest"></i></a>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-12">
-					<div class="product__details__tab">
-						<ul class="nav nav-tabs" role="tablist">
-							<li class="nav-item">
-								<a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
-								   aria-selected="true">상품설명</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
-								   aria-selected="false">상품정보</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
-								   aria-selected="false">상품문의</a>
-							</li>
-						</ul>
-						<div class="tab-content">
-							<div class="tab-pane active" id="tabs-1" role="tabpanel">
-								<div class="product__details__tab__desc">
-									<img src="/img/시연용 예시 사진.jpg">
-									<img src="/img/시연용2.jpg">
-									<img src="/img/시연용3.jpg">
-									<img src="/img/시연용4.jpg">
-								</div>
-							</div>
-							<div class="tab-pane" id="tabs-2" role="tabpanel">
-								<div class="product__details__tab__desc">
-									<img src="/img/시연용 예시 사진.jpg">
-									<img src="/img/시연용2.jpg">
-									<img src="/img/시연용3.jpg">
-									<img src="/img/시연용4.jpg">
-								</div>
-							</div>
-							<div class="tab-pane" id="tabs-3" role="tabpanel">
-								<div class="product__details__tab__desc">
-<!--									<div id="comment-write">-->
-<!--										<div class="d-flex">-->
-<!--										<input type="text" id="commentWriter" placeholder="작성자" th:value="${session.loginEmail}" class="form-control shadow-sm" readonly><br>-->
-<!--										<input type="text" id="questionContents" placeholder="내용" class="a1 form-control shadow-sm"><br>-->
-<!--										<button id="comment-write-btn" class="form-control shadow-sm ">댓글등록</button>-->
-<!--										</div>-->
-<!--									</div>-->
-<!--									<div class="qna">-->
-									<h3><b>상품문의</b></h3><br>
-									<button class="nav-link btn btn-outline-primary" href="#" data-toggle="modal" data-target="#logins" style="float: right">
-									문의작성
-									</button>
-									<ul>
-										<li style="list-style-type: square ">구매한 상품의 <strong>취소/반품은 강캠핑 구매내역에서 신청</strong>가능합니다.</li>
-										<li style="list-style-type: square ">상품문의 및 후기게시판을 통해 취소나 환불, 반품 등은 처리되지 않습니다.</li>
-										<li style="list-style-type: square "><strong>가격, 판매자, 교환/환불 및 배송 등 해당 상품 자체와 관련 없는 문의는 고객센터 내 1:1 문의하기</strong>를 이용해주세요.</li>
-										<li style="list-style-type: square "><strong>"해당 상품 자체"와 관계없는 글, 양도, 광고성, 욕설, 비방, 도배 등의 글은 예고 없이 이동, 노출제한, 삭제 등의 조치가 취해질 수 있습니다.</strong></li>
-										<li style="list-style-type: square ">공개 게시판이므로 전화번호, 메일 주소 등 고객님의 소중한 개인정보는 절대 남기지 말아주세요.</li>
-									</ul><br><br>
+                            <img src="/images/emptyHeart32.png" id="emptyHeart" th:onclick="like()">
+                            <img id="fullHeart" src="/images/fullHeart32.png" style="display:none"
+                                 th:onclick="likeDelete()">
+                        </div>
+                        <ul>
+                            <li><b>Availability</b> <span>In Stock</span></li>
+                            <li><b>Shipping</b> <span>무료배송 <samp>산간,제주도 배송비 추가</samp></span></li>
+                            <li><b>Weight</b> <span th:text="${goods.productWeight}"></span>&nbsp;<b>kg</b></li>
+                            <li><b>Share on</b>
+                                <div class="share">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="product__details__tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
+                                   aria-selected="true">상품정보</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
+                                   aria-selected="false">상품문의</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                <div class="product__details__tab__desc">
+                                    <img src="/img/시연용 예시 사진.jpg">
+                                    <img src="/img/시연용2.jpg">
+                                    <img src="/img/시연용3.jpg">
+                                    <img src="/img/시연용4.jpg">
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="tabs-3" role="tabpanel">
+                                <div class="product__details__tab__desc">
+
+                                    <h3><b>상품문의</b></h3><br>
+                                    <button class="nav-link btn btn-outline-primary" href="#" data-toggle="modal"
+                                            data-target="#logins" style="float: right">
+                                        문의작성
+                                    </button>
+                                    <ul>
+                                        <li style="list-style-type: square ">구매한 상품의 <strong>취소/반품은 강캠핑 구매내역에서
+                                            신청</strong>가능합니다.
+                                        </li>
+                                        <li style="list-style-type: square ">상품문의 및 후기게시판을 통해 취소나 환불, 반품 등은 처리되지 않습니다.
+                                        </li>
+                                        <li style="list-style-type: square "><strong>가격, 판매자, 교환/환불 및 배송 등 해당 상품 자체와 관련
+                                            없는 문의는 고객센터 내 1:1 문의하기</strong>를 이용해주세요.
+                                        </li>
+                                        <li style="list-style-type: square "><strong>"해당 상품 자체"와 관계없는 글, 양도, 광고성, 욕설,
+                                            비방, 도배 등의 글은 예고 없이 이동, 노출제한, 삭제 등의 조치가 취해질 수 있습니다.</strong></li>
+                                        <li style="list-style-type: square ">공개 게시판이므로 전화번호, 메일 주소 등 고객님의 소중한 개인정보는 절대
+                                            남기지 말아주세요.
+                                        </li>
+                                    </ul>
+                                    <br><br>
 
 
+                                    <!--								</div>-->
 
 
+                                    <!-- The Modal -->
+                                    <div class="modal" id="logins">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
 
-<!--								</div>-->
+                                                <!-- Modal Header -->
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">문의작성</h4>
+                                                </div>
 
+                                                <!-- Modal body -->
+                                                <div class="modal-body">
+                                                    <div id="comment-write">
+                                                        <div>
+                                                            <input type="text" id="commentWriter" placeholder="작성자"
+                                                                   th:value="${session.loginEmail}"
+                                                                   class="form-control shadow-sm" readonly><br>
+                                                            <textarea type="text" id="questionContents" placeholder="내용"
+                                                                      class="a1 form-control shadow-sm"></textarea><br>
+                                                            <button id="comment-write-btn"
+                                                                    class="form-control shadow-sm ">문의등록
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
+                                                <!-- Modal footer -->
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                                        취소
+                                                    </button>
+                                                </div>
 
-									<!-- The Modal -->
-									<div class="modal" id="logins">
-										<div class="modal-dialog">
-											<div class="modal-content">
-
-												<!-- Modal Header -->
-												<div class="modal-header">
-													<h4 class="modal-title">문의작성</h4>
-												</div>
-
-												<!-- Modal body -->
-												<div class="modal-body">
-													<div id="comment-write">
-														<div>
-															<input type="text" id="commentWriter" placeholder="작성자" th:value="${session.loginEmail}" class="form-control shadow-sm" readonly><br>
-															<textarea type="text" id="questionContents" placeholder="내용" class="a1 form-control shadow-sm"></textarea><br>
-															<button id="comment-write-btn" class="form-control shadow-sm ">문의등록</button>
-														</div>
-													</div>
-												</div>
-
-												<!-- Modal footer -->
-												<div class="modal-footer">
-													<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
-												</div>
-
-											</div>
-										</div>
-									</div>
-
-
-
-									<div id="comment-area">
-										<table class="table">
-											<thead>
-											<tr>
-												<th>댓글번호</th>
-												<th>상품번호</th>
-												<th>작성자</th>
-												<th>내용</th>
-												<th>작성시간</th>
-												<th>문의삭제</th>
-												<th th:if="${#strings.equals(session['loginEmail'], 'admin')}">삭제(관리자용)</th>
-											</tr>
-											</thead>
-											<tbody>
-											<tr th:each="comment: ${commentList}">
-												<td th:text="${comment.questionId}"></td>
-												<td th:text="${comment.productId}"></td>
-												<td th:text="${comment.commentWriter}"></td>
-												<td th:text="${comment.questionContents}"></td>
-												<td th:text="${#temporals.format(comment.commentTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-												<td><button th:if="${comment.commentWriter.equals(session['loginEmail'])}" th:onclick="deleteById([[${comment.questionId}]])" class="btn btn-outline-primary">삭제</button></td>
-												<td><button th:if="${#strings.equals(session['loginEmail'], 'admin')}" th:onclick="deleteById([[${comment.questionId}]])" class="btn btn-outline-primary">삭제</button></td>
-
-											</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Product Details Section End -->
+                                            </div>
+                                        </div>
+                                    </div>
 
 
+                                    <div id="comment-area">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>문의번호</th>
+                                                <th>상품명</th>
+                                                <th>작성자</th>
+                                                <th>내용</th>
+                                                <th>작성시간</th>
+                                                <th>문의삭제</th>
+                                                <th th:if="${#strings.equals(session['loginEmail'], 'admin')}">
+                                                    삭제(관리자용)
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="comment: ${commentList}">
+                                                <td th:text="${comment.questionId}"></td>
+                                                <td th:text="${comment.productName}"></td>
+                                                <td th:text="${comment.commentWriter}"></td>
+                                                <td th:text="${comment.questionContents}"></td>
+                                                <td th:text="${#temporals.format(comment.commentTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                                <td>
+                                                    <button th:if="${comment.commentWriter.equals(session['loginEmail'])}"
+                                                            th:onclick="deleteById([[${comment.questionId}]])"
+                                                            class="btn btn-outline-primary">삭제
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button th:if="${#strings.equals(session['loginEmail'], 'admin')}"
+                                                            th:onclick="deleteById([[${comment.questionId}]])"
+                                                            class="btn btn-outline-primary">삭제
+                                                    </button>
+                                                </td>
+
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Details Section End -->
 
 
-	<!-- Related Product Section Begin -->
-	<section class="related-product">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="section-title related__product__title">
-						<h2>Related Product</h2>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<div class="product__item">
-						<div class="product__item__pic set-bg" data-setbg="/img/랜1.jpg">
-							<ul class="product__item__pic__hover">
-								<li><a href="#"><i class="fa fa-heart"></i></a></li>
-								<li><a href="#"><i class="fa fa-retweet"></i></a></li>
-								<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-							</ul>
-						</div>
-						<div class="product__item__text">
-							<h6><a href="#">트윙클가스랜턴</a></h6>
-							<h5>69,000원</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<div class="product__item">
-						<div class="product__item__pic set-bg" data-setbg="/img/랜2.jpg">
-							<ul class="product__item__pic__hover">
-								<li><a href="#"><i class="fa fa-heart"></i></a></li>
-								<li><a href="#"><i class="fa fa-retweet"></i></a></li>
-								<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-							</ul>
-						</div>
-						<div class="product__item__text">
-							<h6><a href="#">트리오랜턴</a></h6>
-							<h5>150,000원</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<div class="product__item">
-						<div class="product__item__pic set-bg" data-setbg="/img/캠1.jpg">
-							<ul class="product__item__pic__hover">
-								<li><a href="#"><i class="fa fa-heart"></i></a></li>
-								<li><a href="#"><i class="fa fa-retweet"></i></a></li>
-								<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-							</ul>
-						</div>
-						<div class="product__item__text">
-							<h6><a href="#">프라임디럭스텐트</a></h6>
-							<h5>750,000원</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<div class="product__item">
-						<div class="product__item__pic set-bg" data-setbg="/img/테1.png">
-							<ul class="product__item__pic__hover">
-								<li><a href="#"><i class="fa fa-heart"></i></a></li>
-								<li><a href="#"><i class="fa fa-retweet"></i></a></li>
-								<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-							</ul>
-						</div>
-						<div class="product__item__text">
-							<h6><a href="#">카트리나테이블</a></h6>
-							<h5>130,000원</h5>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Related Product Section End -->
-
+    <!-- Related Product Section Begin -->
+    <section class="related-product">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title related__product__title">
+                        <h2>Related Product</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg="/img/랜1.jpg">
+                            <ul class="product__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><a href="#">트윙클가스랜턴</a></h6>
+                            <h5>69,000원</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg="/img/랜2.jpg">
+                            <ul class="product__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><a href="#">트리오랜턴</a></h6>
+                            <h5>150,000원</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg="/img/캠1.jpg">
+                            <ul class="product__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><a href="#">프라임디럭스텐트</a></h6>
+                            <h5>750,000원</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg="/img/테1.png">
+                            <ul class="product__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><a href="#">카트리나테이블</a></h6>
+                            <h5>130,000원</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Related Product Section End -->
 
 
 </div>
-			</div>
-		</div>
-	</div>
+</div>
+</div>
+</div>
 
 <!-- Footer -->
 <footer class="footer">
-	<div class="container">
-		<div class="row">
-			<!-- Footer Column -->
-			<div class="col-lg-3 footer_column">
-				<div class="footer_col">
-					<div class="footer_content footer_about">
-						<div class="logo_container footer_logo">
-							<div class="logo"><a href="#"><img src="/images/logo.png" alt="">
-								<br></a></div>
-						</div>
-						<p class="footer_about_text"><br>
-							강캠핑입니다.
-							여기는 프로젝트에 관한
-							간단한 설명이나
-							기타 사항이 들어갈 예정
-							입니다.
-						</p>
-						<ul class="footer_social_list">
-							<li class="footer_social_item"><a href="#"><i
-									class="fa fa-pinterest"></i></a></li>
-							<li class="footer_social_item"><a href="https://fb.com"><i
-									class="fa fa-facebook-f"></i></a>
-							</li>
-							<li class="footer_social_item"><a href="https://twitter.com"><i
-									class="fa fa-twitter"></i></a></li>
-							<li class="footer_social_item"><a href="#"><i
-									class="fa fa-dribbble"></i></a></li>
-							<li class="footer_social_item"><a href="#"><i class="fa fa-behance"></i></a>
-							</li>
-						</ul>
-					</div>
+    <div class="container">
+        <div class="row">
+            <!-- Footer Column -->
+            <div class="col-lg-3 footer_column">
+                <div class="footer_col">
+                    <div class="footer_content footer_about">
+                        <div class="logo_container footer_logo">
+                            <div class="logo"><a href="#"><img src="/images/logo.png" alt="">
+                                <br></a></div>
+                        </div>
+                        <p class="footer_about_text"><br>
+                            강캠핑입니다.
+                            여기는 프로젝트에 관한
+                            간단한 설명이나
+                            기타 사항이 들어갈 예정
+                            입니다.
+                        </p>
+                        <ul class="footer_social_list">
+                            <li class="footer_social_item"><a href="#"><i
+                                    class="fa fa-pinterest"></i></a></li>
+                            <li class="footer_social_item"><a href="https://fb.com"><i
+                                    class="fa fa-facebook-f"></i></a>
+                            </li>
+                            <li class="footer_social_item"><a href="https://twitter.com"><i
+                                    class="fa fa-twitter"></i></a></li>
+                            <li class="footer_social_item"><a href="#"><i
+                                    class="fa fa-dribbble"></i></a></li>
+                            <li class="footer_social_item"><a href="#"><i class="fa fa-behance"></i></a>
+                            </li>
+                        </ul>
+                    </div>
 
-				</div>
-			</div>
+                </div>
+            </div>
 
-			<!-- Footer Column -->
-			<div class="col-lg-3 footer_column">
-				<div class="footer_col">
-					<div class="footer_title">연관 사이트</div>
-					<div class="footer_content footer_blog">
+            <!-- Footer Column -->
+            <div class="col-lg-3 footer_column">
+                <div class="footer_col">
+                    <div class="footer_title">연관 사이트</div>
+                    <div class="footer_content footer_blog">
 
-						<!-- Footer blog item -->
-						<div class="footer_blog_item clearfix">
-							<div class="footer_blog_image"><img src="/images/footer_blog_1.jpg"
-																alt="https://www.data.go.kr/"></div>
-							<div class="footer_blog_content">
-								<div class="footer_blog_title"><a href="https://www.data.go.kr/">공공 데이터
-									포탈</a>
-								</div>
-								<div class="footer_blog_date"></div>
-							</div>
-						</div>
+                        <!-- Footer blog item -->
+                        <div class="footer_blog_item clearfix">
+                            <div class="footer_blog_image"><img src="/images/footer_blog_1.jpg"
+                                                                alt="https://www.data.go.kr/"></div>
+                            <div class="footer_blog_content">
+                                <div class="footer_blog_title"><a href="https://www.data.go.kr/">공공 데이터
+                                    포탈</a>
+                                </div>
+                                <div class="footer_blog_date"></div>
+                            </div>
+                        </div>
 
-						<!-- Footer blog item -->
-						<div class="footer_blog_item clearfix">
-							<div class="footer_blog_image"><img src="/images/footer_blog_2.jpg"
-																alt="https://unsplash.com/@deannaritchie">
-							</div>
-							<div class="footer_blog_content">
-								<div class="footer_blog_title"><a
-										href="https://kto.visitkorea.or.kr/kor.kto">한국
-									관광
-									공사</a></div>
-								<div class="footer_blog_date"></div>
-							</div>
-						</div>
+                        <!-- Footer blog item -->
+                        <div class="footer_blog_item clearfix">
+                            <div class="footer_blog_image"><img src="/images/footer_blog_2.jpg"
+                                                                alt="https://unsplash.com/@deannaritchie">
+                            </div>
+                            <div class="footer_blog_content">
+                                <div class="footer_blog_title"><a
+                                        href="https://kto.visitkorea.or.kr/kor.kto">한국
+                                    관광
+                                    공사</a></div>
+                                <div class="footer_blog_date"></div>
+                            </div>
+                        </div>
 
-						<!-- Footer blog item -->
-						<div class="footer_blog_item clearfix">
-							<div class="footer_blog_image"><img src="/images/footer_blog_3.jpg"
-																alt="https://unsplash.com/@bergeryap87">
-							</div>
-							<div class="footer_blog_content">
-								<div class="footer_blog_title"><a href="https://www.icia.co.kr/">인천일보아카데미</a>
-								</div>
-								<div class="footer_blog_date"></div>
-							</div>
-						</div>
+                        <!-- Footer blog item -->
+                        <div class="footer_blog_item clearfix">
+                            <div class="footer_blog_image"><img src="/images/footer_blog_3.jpg"
+                                                                alt="https://unsplash.com/@bergeryap87">
+                            </div>
+                            <div class="footer_blog_content">
+                                <div class="footer_blog_title"><a href="https://www.icia.co.kr/">인천일보아카데미</a>
+                                </div>
+                                <div class="footer_blog_date"></div>
+                            </div>
+                        </div>
 
-					</div>
-				</div>
-			</div>
+                    </div>
+                </div>
+            </div>
 
-			<!-- Footer Column -->
-			<div class="col-lg-3 footer_column">
-				<div class="footer_col">
-					<div class="footer_title">검색 태그</div>
-					<div class="footer_content footer_tags">
-						<ul class="tags_list clearfix">
-							<li class="tag_item"><a th:href="@{|/search/camping?keword=야영|}">야영</a></li>
-							<li class="tag_item"><a href="/search/camping?keyword=오지">오지캠핑</a></li>
-							<li class="tag_item"><a href="/search/camping?keyword=오토">오토캠핑장</a></li>
-							<li class="tag_item"><a href="/search/camping?keyword=카라반">카라반</a></li>
-							<li class="tag_item"><a href="/search/camping?keyword=캠핑카">캠핑카</a></li>
-							<li class="tag_item"><a href="/search/camping?keyword=글램핑">글램핑</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
+            <!-- Footer Column -->
+            <div class="col-lg-3 footer_column">
+                <div class="footer_col">
+                    <div class="footer_title">검색 태그</div>
+                    <div class="footer_content footer_tags">
+                        <ul class="tags_list clearfix">
+                            <li class="tag_item"><a th:href="@{|/search/camping?keword=야영|}">야영</a></li>
+                            <li class="tag_item"><a href="/search/camping?keyword=오지">오지캠핑</a></li>
+                            <li class="tag_item"><a href="/search/camping?keyword=오토">오토캠핑장</a></li>
+                            <li class="tag_item"><a href="/search/camping?keyword=카라반">카라반</a></li>
+                            <li class="tag_item"><a href="/search/camping?keyword=캠핑카">캠핑카</a></li>
+                            <li class="tag_item"><a href="/search/camping?keyword=글램핑">글램핑</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-			<!-- Footer Column -->
-			<div class="col-lg-3 footer_column">
-				<div class="footer_col">
-					<div class="footer_title">Team info</div>
-					<div class="footer_content footer_contact">
-						<ul class="contact_info_list">
-							<li class="contact_info_item d-flex flex-row">
-								<div>
-									<div class="contact_info_icon"><img src="/images/placeholder.svg" alt="">
-									</div>
-								</div>
-								<div class="contact_info_text">인천 미추홀구 매소홀로488번길 6-32 인천일보 아카데미</div>
-							</li>
-							<li class="contact_info_item d-flex flex-row">
-								<div>
-									<div class="contact_info_icon"><img src="/images/phone-call.svg" alt="">
-									</div>
-								</div>
-								<div class="contact_info_text">032-876-3332</div>
-							</li>
-							<li class="contact_info_item d-flex flex-row">
-								<div>
-									<div class="contact_info_icon"><img src="/images/message.svg" alt=""></div>
-								</div>
-								<div class="contact_info_text"><a
-										href="mailto:contactme@gmail.com?Subject=Hello"
-										target="_top">contactme@gmail.com</a></div>
-							</li>
-							<li class="contact_info_item d-flex flex-row">
-								<div>
-									<div class="contact_info_icon"><img src="/images/planet-earth.svg" alt="">
-									</div>
-								</div>
-								<div class="contact_info_text"><a
-										href="https://github.com/kyungjin001/GangCamPing_FinalProject">https://github.com/kyungjin001/GangCamPing_FinalProject</a>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
+            <!-- Footer Column -->
+            <div class="col-lg-3 footer_column">
+                <div class="footer_col">
+                    <div class="footer_title">Team info</div>
+                    <div class="footer_content footer_contact">
+                        <ul class="contact_info_list">
+                            <li class="contact_info_item d-flex flex-row">
+                                <div>
+                                    <div class="contact_info_icon"><img src="/images/placeholder.svg" alt="">
+                                    </div>
+                                </div>
+                                <div class="contact_info_text">인천 미추홀구 매소홀로488번길 6-32 인천일보 아카데미</div>
+                            </li>
+                            <li class="contact_info_item d-flex flex-row">
+                                <div>
+                                    <div class="contact_info_icon"><img src="/images/phone-call.svg" alt="">
+                                    </div>
+                                </div>
+                                <div class="contact_info_text">032-876-3332</div>
+                            </li>
+                            <li class="contact_info_item d-flex flex-row">
+                                <div>
+                                    <div class="contact_info_icon"><img src="/images/message.svg" alt=""></div>
+                                </div>
+                                <div class="contact_info_text"><a
+                                        href="mailto:contactme@gmail.com?Subject=Hello"
+                                        target="_top">contactme@gmail.com</a></div>
+                            </li>
+                            <li class="contact_info_item d-flex flex-row">
+                                <div>
+                                    <div class="contact_info_icon"><img src="/images/planet-earth.svg" alt="">
+                                    </div>
+                                </div>
+                                <div class="contact_info_text"><a
+                                        href="https://github.com/kyungjin001/GangCamPing_FinalProject">https://github.com/kyungjin001/GangCamPing_FinalProject</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-		</div>
-	</div>
-	<!-- 모달 시작! -->
-	<!-- Login Modal -->
-	<div class="modal fade" tabindex="-1" id="login" aria-labelledby="loginModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
+        </div>
+    </div>
+    <!-- 모달 시작! -->
+    <!-- Login Modal -->
+    <div class="modal fade" tabindex="-1" id="login" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
 
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title">로그인</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">로그인</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
 
-				<!-- Modal body -->
-				<div class="modal-body">
-					<form action="/member/login" method="post" th:object="${login}">
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="/member/login" method="post" th:object="${login}">
 
-						<div class="form-group">
-							<label for="loginId" style="margin-left: 200px">ID </label> <br>
-							<input type="text" class="form-control" id="loginId" placeholder="Enter ID"
-								   name="memberEmail"
-								   required>
-						</div>
-						<div class="form-group">
-							<label for="loginPw" style="margin-left: 200px">비밀번호 </label>
-							<input type="password" class="form-control" id="loginPw" placeholder="Enter Password"
-								   name="memberPw" required>
-						</div>
-						<button type="submit" class="btn btn-primary" style="margin-left:200px">로그인</button>
-						<br>
-					</form>
-					<div style="margin-left:200px">
+                        <div class="form-group">
+                            <label for="loginId" style="margin-left: 200px">ID </label> <br>
+                            <input type="text" class="form-control" id="loginId" placeholder="Enter ID"
+                                   name="memberEmail"
+                                   required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPw" style="margin-left: 200px">비밀번호 </label>
+                            <input type="password" class="form-control" id="loginPw" placeholder="Enter Password"
+                                   name="memberPw" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="margin-left:200px">로그인</button>
+                        <br>
+                    </form>
+                    <div style="margin-left:200px">
                     <span th:if="${session['userId'] == null}">
                         <a href="https://kauth.kakao.com/oauth/authorize?client_id=49e217f552e2a1352d3462543bc0a458&redirect_uri=http://localhost:8098/kakaologin&response_type=code">
                             <img src="/images/kakao_login_medium_narrow.png">
@@ -725,215 +761,218 @@
 
                     </span><br>
 
-						<a href="#" data-toggle="modal" data-target="#findPw" data-dismiss="modal">비밀번호 찾기</a><br>
-						<a href="#" data-toggle="modal" data-target="#signin" data-dismiss="modal">회원가입</a><br>
+                        <a href="#" data-toggle="modal" data-target="#findPw" data-dismiss="modal">비밀번호 찾기</a><br>
+                        <a href="#" data-toggle="modal" data-target="#signin" data-dismiss="modal">회원가입</a><br>
 
 
-					</div>
-				</div>
+                    </div>
+                </div>
 
-				<!-- Modal footer -->
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- signin Modal -->
-	<div class="modal fade" id="signin" data-backdrop="static" data-keyboard="false" tabindex="-1"
-		 aria-labelledby="staticBackdropLabel" aria-hidden="true">
-		<div class="modal-dialog ">
-			<div class="modal-content">
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title">회원가입</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<!-- Modal body -->
-				<div class="modal-body">
-					<form action="/member/save" method="post" th:object="${member}" id="memberSave">
-						<div class="form-group">
-							<label for="memberEmail">이메일 </label> <br>
-							<input type="text" class="form-control" onblur="emailDp()" id="memberEmail"
-								   placeholder="이메일을 입력해주세요." name="memberEmail" required>
-							<span id="email_Dp"></span><br>
-						</div>
-						<div class="form-group">
-							<label for="pwd1">비밀번호 </label>
-							<input type="password" class="form-control" id="pwd1" placeholder="비밀번호를 입력해주세요."
-								   name="memberPw" required>
-							<input type="password" class="form-control" id="pwd2" placeholder="비밀번호를 다시 입력해주세요."
-								   required>
-							<div class="alert alert-success" id="alert-success" style="color : green">비밀번호가 일치합니다.</div>
-							<div class="alert alert-danger" id="alert-danger" style="color : red">비밀번호가 일치하지 않습니다.</div>
-						</div>
-						<div class="form-group">
-							<label for="registerName">이름 </label> <br>
-							<input type="text" class="form-control" id="registerName" placeholder="이름을 입력해주세요."
-								   name="memberName" required>
-						</div>
-						<div class="form-group">
-							<label for="registerPhone">전화번호 </label> <br>
-							<input type="text" class="form-control" id="registerPhone" placeholder="전화번호를 입력해주세요."
-								   name="memberPhone" required>
-						</div>
-						<div class="form-group">
-							<label for="registerPhone">주소</label> <br>
-							<input type="text" id="sample6_postcode" name="memberAddr" placeholder="우편번호">
-							<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-							<input type="text" id="sample6_address" name="memberAddr" placeholder="주소"><br>
-							<input type="text" id="sample6_detailAddress" name="memberAddr" placeholder="상세주소">
-							<input type="text" id="sample6_extraAddress" name="memberAddr" placeholder="참고항목">
-							<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-							<script>
-								function sample6_execDaumPostcode() {
-									new daum.Postcode({
-										oncomplete: function (data) {
-											// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-											// 각 주소의 노출 규칙에 따라 주소를 조합한다.
-											// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-											let addr = ''; // 주소 변수
-											let extraAddr = ''; // 참고항목 변수
-											//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-											if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-												addr = data.roadAddress;
-											} else { // 사용자가 지번 주소를 선택했을 경우(J)
-												addr = data.jibunAddress;
-											}
-											// 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-											if (data.userSelectedType === 'R') {
-												// 법정동명이 있을 경우 추가한다. (법정리는 제외)
-												// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-												if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
-													extraAddr += data.bname;
-												}
-												// 건물명이 있고, 공동주택일 경우 추가한다.
-												if (data.buildingName !== '' && data.apartment === 'Y') {
-													extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- signin Modal -->
+    <div class="modal fade" id="signin" data-backdrop="static" data-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">회원가입</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="/member/save" method="post" th:object="${member}" id="memberSave">
+                        <div class="form-group">
+                            <label for="memberEmail">이메일 </label> <br>
+                            <input type="text" class="form-control" onblur="emailDp()" id="memberEmail"
+                                   placeholder="이메일을 입력해주세요." name="memberEmail" required>
+                            <span id="email_Dp"></span><br>
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd1">비밀번호 </label>
+                            <input type="password" class="form-control" id="pwd1" placeholder="비밀번호를 입력해주세요."
+                                   name="memberPw" required>
+                            <input type="password" class="form-control" id="pwd2" placeholder="비밀번호를 다시 입력해주세요."
+                                   required>
+                            <div class="alert alert-success" id="alert-success" style="color : green">비밀번호가 일치합니다.</div>
+                            <div class="alert alert-danger" id="alert-danger" style="color : red">비밀번호가 일치하지 않습니다.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerName">이름 </label> <br>
+                            <input type="text" class="form-control" id="registerName" placeholder="이름을 입력해주세요."
+                                   name="memberName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPhone">전화번호 </label> <br>
+                            <input type="text" class="form-control" id="registerPhone" placeholder="전화번호를 입력해주세요."
+                                   name="memberPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPhone">주소</label> <br>
+                            <input type="text" id="sample6_postcode" name="memberAddr" placeholder="우편번호">
+                            <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+                            <input type="text" id="sample6_address" name="memberAddr" placeholder="주소"><br>
+                            <input type="text" id="sample6_detailAddress" name="memberAddr" placeholder="상세주소">
+                            <input type="text" id="sample6_extraAddress" name="memberAddr" placeholder="참고항목">
+                            <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+                            <script>
+                                function sample6_execDaumPostcode() {
+                                    new daum.Postcode({
+                                        oncomplete: function (data) {
+                                            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+                                            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                                            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                                            let addr = ''; // 주소 변수
+                                            let extraAddr = ''; // 참고항목 변수
+                                            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                                            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                                                addr = data.roadAddress;
+                                            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                                                addr = data.jibunAddress;
+                                            }
+                                            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                                            if (data.userSelectedType === 'R') {
+                                                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                                                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                                                if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                                                    extraAddr += data.bname;
+                                                }
+                                                // 건물명이 있고, 공동주택일 경우 추가한다.
+                                                if (data.buildingName !== '' && data.apartment === 'Y') {
+                                                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
 
-												}
-												// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-												if (extraAddr !== '') {
-													extraAddr = ' (' + extraAddr + ')';
-												}
-												// 조합된 참고항목을 해당 필드에 넣는다.
-												document.getElementById("sample6_extraAddress").value = extraAddr;
-												console.log(extraAddr);
-											} else {
-												document.getElementById("sample6_extraAddress").value = '';
-											}
-											// 우편번호와 주소 정보를 해당 필드에 넣는다.
-											document.getElementById('sample6_postcode').value = data.zonecode;
-											console.log()
-											document.getElementById("sample6_address").value = addr;
-											// 커서를 상세주소 필드로 이동한다.
-											document.getElementById("sample6_detailAddress").focus();
-										}
-									}).open();
-								}
-							</script>
-						</div>
-						<div class="form-group" style="margin-left: 130px">
-							<label style="margin-left: 80px">약관동의 </label> <br>
-							<sapn href="#"> 개인정보 이용수집동의(필수) <input type="checkbox" id="check1" name="check1" required>
-							</sapn>
-							<br>
-							<sapn href="#"> 강캠핑 이용약관 동의(필수) <input type="checkbox" href="#" id="check2" name="check2"
-																   required></sapn>
-						</div>
-						<div class="form-group" style="margin-left: 130px">
-							<label style="margin-left: 80px">약관동의 </label> <br>
-							<sapn href="#"> 개인정보 이용수집동의(필수) <input type="checkbox" id="check1" name="check1" required>
-							</sapn>
-							<br>
-							<sapn href="#"> 강캠핑 이용약관 동의(필수) <input type="checkbox" href="#" id="check2" name="check2"
-																   required></sapn>
-						</div>
-					</form>
-				</div>
-				<!-- Modal footer -->
-				<div class="modal-footer">
-					<button type="submit" form="memberSave" class="btn btn-primary" style="margin-left:20%;">등록</button>
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- findpw Modal -->
-	<div class="modal fade" id="findPw" data-backdrop="static" data-keyboard="false" tabindex="-1"
-		 aria-labelledby="staticBackdropLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title">비밀번호 찾기</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<!-- Modal body -->
-				<div class="modal-body">
-					<div class="form-group">
-						<label for="memberEmail">이메일을 입력해주세요 </label> <br>
-						<input type="text" class="form-control" id="memberEmail" th:onblur="emailCheck()"
-							   placeholder="Enter Your Email" required>
-						<form action="/member/update" method="get" name="pwUpdate">
-							<input type="text" id="members" name="memberId">
-							<input type="hidden" class="form-control" id="codeInput" placeholder="이메일 인증코드를 입력해주세요."
-								   required>
-							<input type="hidden" th:onclick="codeCheck()" id="check" value="코드확인">
-						</form>
-					</div>
-				</div>
-				<!-- Modal footer -->
-				<div class="modal-footer">
-					<input type="button" id="emailSend" th:onclick="codeSend()" class="btn btn-primary"
-						   style="margin-left:20%;" value="전송하기" readonly>
-					<input type="button" id="emailCancel" class="btn btn-secondary" data-dismiss="modal" value="취소"
-						   readonly>
-				</div>
-			</div>
-		</div>
-	</div>
-	<script>
-		var myModal = document.getElementById('login')
-		var myInput = document.getElementById('loginId')
-		myModal.addEventListener('shown.bs.modal', function () {
-			myInput.focus()
-		})
-	</script>
-	<!-- 모달 끝 -->
+                                                }
+                                                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                                                if (extraAddr !== '') {
+                                                    extraAddr = ' (' + extraAddr + ')';
+                                                }
+                                                // 조합된 참고항목을 해당 필드에 넣는다.
+                                                document.getElementById("sample6_extraAddress").value = extraAddr;
+                                                console.log(extraAddr);
+                                            } else {
+                                                document.getElementById("sample6_extraAddress").value = '';
+                                            }
+                                            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                                            document.getElementById('sample6_postcode').value = data.zonecode;
+                                            console.log()
+                                            document.getElementById("sample6_address").value = addr;
+                                            // 커서를 상세주소 필드로 이동한다.
+                                            document.getElementById("sample6_detailAddress").focus();
+                                        }
+                                    }).open();
+                                }
+                            </script>
+                        </div>
+                        <div class="form-group" style="margin-left: 130px">
+                            <label style="margin-left: 80px">약관동의 </label> <br>
+                            <sapn href="#"> 개인정보 이용수집동의(필수) <input type="checkbox" id="check1" name="check1" required>
+                            </sapn>
+                            <br>
+                            <sapn href="#"> 강캠핑 이용약관 동의(필수) <input type="checkbox" href="#" id="check2" name="check2"
+                                                                   required></sapn>
+                        </div>
+                        <div class="form-group" style="margin-left: 130px">
+                            <label style="margin-left: 80px">약관동의 </label> <br>
+                            <sapn href="#"> 개인정보 이용수집동의(필수) <input type="checkbox" id="check1" name="check1" required>
+                            </sapn>
+                            <br>
+                            <sapn href="#"> 강캠핑 이용약관 동의(필수) <input type="checkbox" href="#" id="check2" name="check2"
+                                                                   required></sapn>
+                        </div>
+                    </form>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" form="memberSave" class="btn btn-primary" style="margin-left:20%;">등록</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- findpw Modal -->
+    <div class="modal fade" id="findPw" data-backdrop="static" data-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">비밀번호 찾기</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="memberEmail">이메일을 입력해주세요 </label> <br>
+                        <input type="text" class="form-control" id="memberEmail" th:onblur="emailCheck()"
+                               placeholder="Enter Your Email" required>
+                        <form action="/member/update" method="get" name="pwUpdate">
+                            <input type="text" id="members" name="memberId">
+                            <input type="hidden" class="form-control" id="codeInput" placeholder="이메일 인증코드를 입력해주세요."
+                                   required>
+                            <input type="hidden" th:onclick="codeCheck()" id="check" value="코드확인">
+                        </form>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <input type="button" id="emailSend" th:onclick="codeSend()" class="btn btn-primary"
+                           style="margin-left:20%;" value="전송하기" readonly>
+                    <input type="button" id="emailCancel" class="btn btn-secondary" data-dismiss="modal" value="취소"
+                           readonly>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var myModal = document.getElementById('login')
+        var myInput = document.getElementById('loginId')
+        myModal.addEventListener('shown.bs.modal', function () {
+            myInput.focus()
+        })
+    </script>
+    <!-- 모달 끝 -->
 </footer>
-	<!-- Copyright -->
+<!-- Copyright -->
 
-	<div class="copyright">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 order-lg-1 order-2  ">
-					<div class="copyright_content d-flex flex-row align-items-center">
-						<div><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
-					</div>
-				</div>
-				<div class="col-lg-9 order-lg-2 order-1">
-					<div class="footer_nav_container d-flex flex-row align-items-center justify-content-lg-end">
-						<div class="footer_nav">
-							<ul class="footer_nav_list">
-								<li class="footer_nav_item"><a href="../index.html">home</a></li>
-								<li class="footer_nav_item"><a href="../about.html">about us</a></li>
-								<li class="footer_nav_item"><a href="../offers.html">offers</a></li>
-								<li class="footer_nav_item"><a href="#">news</a></li>
-								<li class="footer_nav_item"><a href="../contact.html">contact</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 order-lg-1 order-2  ">
+                <div class="copyright_content d-flex flex-row align-items-center">
+                    <div><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                        All rights reserved | This template is made with <i class="fa fa-heart-o"
+                                                                            aria-hidden="true"></i> by <a
+                                href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
+                </div>
+            </div>
+            <div class="col-lg-9 order-lg-2 order-1">
+                <div class="footer_nav_container d-flex flex-row align-items-center justify-content-lg-end">
+                    <div class="footer_nav">
+                        <ul class="footer_nav_list">
+                            <li class="footer_nav_item"><a href="../index.html">home</a></li>
+                            <li class="footer_nav_item"><a href="../about.html">about us</a></li>
+                            <li class="footer_nav_item"><a href="../offers.html">offers</a></li>
+                            <li class="footer_nav_item"><a href="#">news</a></li>
+                            <li class="footer_nav_item"><a href="../contact.html">contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </div>
 
@@ -945,9 +984,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="js/blog_custom.js"></script>
 
 
-
-
-		<!-- 상품 js-->
+<!-- 상품 js-->
 <!-- Js Plugins -->
 <script src="/js/jquery-3.3.1.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
@@ -959,44 +996,60 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="/js/main.js"></script>
 
 
-
-
-
-
-
-
-
-
 </body>
 
 
 <script>
-	$("#comment-write-btn").click(function (){
-		var name = sessionStorage.getItem('loginEmail');
-		console.log(name);
-		console.log('댓글등록 버튼 클릭');
-		const commentWriter = $("#commentWriter").val();
-		console.log(commentWriter);
-		const questionContents = $("#questionContents").val();
-		const productId = '[[${goods.productId}]]';
-		$.ajax({
-			type: 'post',
-			url: '/comment/save',
-			data: {
-				'commentWriter': commentWriter,
-				'questionContents': questionContents,
-				'productId': productId
-			},
-			dataType: 'json',
-			success: function (result) {
-				console.log(result);
+    $("#comment-write-btn").click(function () {
+        var name = sessionStorage.getItem('loginEmail');
+        console.log(name);
+        console.log('댓글등록 버튼 클릭');
+        const commentWriter = $("#commentWriter").val();
+        console.log(commentWriter);
+        const questionContents = $("#questionContents").val();
+        const productName = '[[${goods.productName}]]';
+        console.log(productName);
+        const productId = '[[${goods.productId}]]';
+        $.ajax({
+            type: 'post',
+            url: '/comment/save',
+            data: {
+                'commentWriter': commentWriter,
+                'questionContents': questionContents,
+                'productName': productName,
+                'productId': productId
+            },
+            dataType: 'json',
+            success: function (result) {
+                alert('문의작성을 완료했습니다.');
+                $('#logins').modal('hide');
+                let output = "<table class='table'>";
+                output += "<tr><th>문의번호</th>";
+                output += "<th>상품명</th>";
+                output += "<th>작성자</th>";
+                output += "<th>내용</th>";
+                output += "<th>작성시간</th></tr>";
+                for (let i in result) {
+                    output += "<tr>";
+                    output += "<td>" + result[i].questionId + "</td>";
+                    output += "<td>" + result[i].productName + "</td>";
+                    output += "<td>" + result[i].commentWriter + "</td>";
+                    output += "<td>" + result[i].questionContents + "</td>";
+                    output += "<td>" + result[i].commentT + "</td>";
+                    output += "</tr>";
+                }
+                output += "</table>";
+                // id가 comment-list인 div에 출력
+                document.getElementById('comment-area').innerHTML = output;
+                // 댓글 입력창을 비움.
+                document.getElementById('questionContents').value = '';
 
-			},
-			error: function () {
-				alert('ajax 실패');
-			}
-		});
-	});
+            },
+            error: function () {
+                alert('실패');
+            }
+        });
+    });
 </script>
 
 </html>
