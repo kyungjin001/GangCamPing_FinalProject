@@ -198,7 +198,7 @@
 	<!-- Home -->
 
 	<div class="home">
-		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="/images/about_background.jpg"></div>
+		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="/images/mypage.png"></div>
 		<div class="home_content">
 			<div class="home_title">My page</div>
 		</div>
@@ -207,7 +207,7 @@
 
 	<br>
 	<br>
-	<p style="text-align:center; color :brown"; th:text="${session.loginEmail}"></p>
+	<b style="text-align:center;" th:text="|${session['loginEmail']}|+환영합니다."></b>
 	<div class="menu-wrapper">
 		<div class="menu1" onclick="location.href='/member/update'" >나의정보</div>
 		<div class="menu2" onclick="location.href='/mypage/bookList'" style="cursor: pointer;">캠핑내역</div>
@@ -218,7 +218,7 @@
 	</div>
 
 	<a href="/member/logout">로그아웃</a><br><br><br>
-	로그인ID(email_session): <p th:text="${session['loginEmail']}"></p>
+<!--	로그인ID(email_session): <p th:text="${session['loginEmail']}"></p>-->
 
 
 

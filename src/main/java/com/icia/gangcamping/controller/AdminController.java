@@ -30,6 +30,7 @@ public class AdminController {
     private final AdminService as;
     private final BookService bs;
     private final BookRepository br;
+    private final OrderService os;
     private  final MemberService ms;
     private final MemberRepository mr;
     private final CampingService cs;
@@ -61,6 +62,15 @@ public class AdminController {
     public String memberDetail() {
         return "admin/memberDetail";
 
+    }
+    @RequestMapping("salesList")
+    public String salesList(Model model){
+        List productSaleList = os.findAll();
+        List bookSaleList = bs.findAll();
+        model.addAttribute("productList",productSaleList);
+        model.addAttribute("bookSaleList",bookSaleList);
+
+        return "admin/productSaleList";
     }
 
 //    @RequestMapping("bookList")

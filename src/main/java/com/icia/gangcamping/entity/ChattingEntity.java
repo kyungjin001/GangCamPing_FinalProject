@@ -1,5 +1,6 @@
 package com.icia.gangcamping.entity;
 
+import com.icia.gangcamping.dto.ChattingSaveDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,6 +30,17 @@ public class ChattingEntity extends BaseEntity{
     @Column
     @NotNull
     private String chattingFileName;
+
+
+    public static ChattingEntity toSaveEntity(ChattingSaveDTO chattingSaveDTO, MemberEntity memberEntity){
+        ChattingEntity chat = new ChattingEntity();
+        chat.setChattingContents(chattingSaveDTO.getChattingContents());
+        chat.setChattingDate(chattingSaveDTO.getChattingDate());
+        chat.setChattingFileName(chattingSaveDTO.getChattingFileName());
+        chat.setMemberEntity(memberEntity);
+        return chat;
+
+    }
 
 
 }
