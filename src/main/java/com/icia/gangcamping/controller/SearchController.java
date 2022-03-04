@@ -124,15 +124,21 @@ public class SearchController {
         }
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         System.out.println(session.getAttribute("checkInDate"));
-        Date checkInDate = format.parse((String) session.getAttribute("checkInDate"));
-        Date checkOutDate = format.parse((String) session.getAttribute("checkOutDate"));
-        long period = (checkOutDate.getTime()-checkInDate.getTime()) / 1000;
-        long period1 = period/(24*60*60); // 몇 박
-        long period2 = (period/(24*60*60))+1; // 몇 일
+        if(session.getAttribute("checkInDate")!=null&&session.getAttribute("checkOutDate")!=null) {
+            Date checkInDate = format.parse((String) session.getAttribute("checkInDate"));
+            Date checkOutDate = format.parse((String) session.getAttribute("checkOutDate"));
+            long period = (checkOutDate.getTime() - checkInDate.getTime()) / 1000;
+            long period1 = period / (24 * 60 * 60); // 몇 박
+            long period2 = (period / (24 * 60 * 60)) + 1; // 몇 일
 
-        campingDetailDTO.setCheckInDate(checkInDate);
-        campingDetailDTO.setCheckOutDate(checkOutDate);
-
+            campingDetailDTO.setCheckInDate(checkInDate);
+            campingDetailDTO.setCheckOutDate(checkOutDate);
+            model.addAttribute("period1", period1);
+            model.addAttribute("period2", period2);
+        }else{
+            model.addAttribute("period1", 1);
+            model.addAttribute("period2", 1);
+        }
         List<ReviewDetailDTO> review = rs.findAll(campingDetailDTO.getCampingId());
         double reviewAvg = rs.avg(campingDetailDTO.getCampingId());
         session.setAttribute("avg", reviewAvg);
@@ -143,8 +149,7 @@ public class SearchController {
 
         model.addAttribute("review",review);
         model.addAttribute("campingDetail",campingDetailDTO);
-        model.addAttribute("period1", period1);
-        model.addAttribute("period2", period2);
+
         model.addAttribute("cds",campingDetailSaveDTOS);
 
         System.out.println(campingDetailDTO.toString());

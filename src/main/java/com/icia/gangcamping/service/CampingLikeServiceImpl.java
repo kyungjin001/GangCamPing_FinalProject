@@ -25,7 +25,8 @@ public class CampingLikeServiceImpl implements CampingLikeService {
     public Long save(CampingLikeDTO campingLikeDTO, String memberEmail) {
         MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
         CampingEntity campingEntity = cs.findById(campingLikeDTO.getCampingId()).get();
-
+        campingEntity.setCampingLikeCount(campingEntity.getCampingLikeCount()+1);
+        cs.save(campingEntity);
         CampingLikeEntity campingLikeEntity = CampingLikeEntity.toSaveCampingLike(campingLikeDTO,memberEntity,campingEntity);
        return clr.save(campingLikeEntity).getCampingLikeId();
 
@@ -46,6 +47,10 @@ public class CampingLikeServiceImpl implements CampingLikeService {
     @Override
     public void deleteById(Long campingLikeId) {
         clr.deleteById(campingLikeId);
+        CampingEntity camping = clr.findById(campingLikeId).get().getCampingEntity();
+        camping.setCampingLikeCount(camping.getCampingLikeCount()-1);
+        cs.save(camping);
+
     }
 
     @Override
