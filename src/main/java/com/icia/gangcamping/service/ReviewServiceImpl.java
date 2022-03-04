@@ -65,8 +65,10 @@ public class ReviewServiceImpl implements ReviewService{
             ReviewDetailDTO reviewDetailDTO = ReviewDetailDTO.toDetailDTO(r);
             sum +=r.getReviewStar();
         }
-        avg = (double) sum/reviewDetailDTOList.size();
+        avg = (double) sum/reviewEntityList.size();
         avg=Math.round(avg);
+        System.out.println(reviewEntityList.size());
+        System.out.println(sum);
         System.out.println(String.format("%.2f", avg));
         System.out.println(avg);
         return avg;
