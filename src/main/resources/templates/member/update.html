@@ -17,6 +17,72 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <style>
+        html, body {
+            display: flex;
+            justify-content: center;
+            font-family: Roboto, Arial, sans-serif;
+            font-size: 15px;
+        }
+        form {
+            border: 5px solid #f1f1f1;
+        }
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 16px 8px;
+            text-align: center;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        .icon {
+            font-size: 60px;
+            display: flex;
+            justify-content: center;
+            color: #4286f4;
+        }
+        button {
+            background-color: #4286f4;
+            color: white;
+            padding: 14px 0;
+            margin: 10px 0;
+            border: none;
+            cursor: grab;
+            width: 48%;
+        }
+        h1 {
+            text-align:center;
+            fone-size:14;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+        .formcontainer {
+            text-align: center;
+            margin: 24px 50px 12px;
+        }
+        .container {
+            padding: 16px 0;
+            text-align:center;
+        }
+        span.psw {
+            float: right;
+            padding-top: 0;
+            padding-right: 15px;
+        }
+        /* Change styles for span on extra small screens */
+        @media screen and (max-width: 300px) {
+            span.psw {
+                display: block;
+                float: none;
+            }
+        }
+    </style>
+
+
     <style>
 
         h4{
@@ -98,7 +164,7 @@
             text-align: right;
             padding: 50px 0;
             background-color: white;
-            margin-right: 200px;
+            margin-right: 680px;
         }
 
         .kickout {
@@ -112,98 +178,6 @@
             border-radius: 20%;
         }
     </style>
-
-    <style>
-        #input1 {
-            width: 300px;
-            height: 55px;
-            border-top: none;
-            border-left: none;
-            border-right: none;
-            border-bottom : 1px solid black;
-            text-align:center;
-        }
-        #input2 {
-            width: 300px;
-            height: 55px;
-            border-top: none;
-            border-left: none;
-            border-right: none;
-            border-bottom : 1px solid black;
-            text-align:center;
-        }
-        #input3 {
-            width: 300px;
-            height: 55px;
-            border-top: none;
-            border-left: none;
-            border-right: none;
-            border-bottom : 1px solid black;
-            text-align:center;
-        }
-
-        #input4 {
-            width: 300px;
-            height: 55px;
-            border-top: none;
-            border-left: none;
-            border-right: none;
-            border-bottom : 1px solid black;
-            text-align:center;
-        }
-
-        #input5 {
-            width: 300px;
-            height: 55px;
-            border-top: none;
-            border-left: none;
-            border-right: none;
-            border-bottom : 1px solid black;
-            text-align:center;
-        }
-
-        #input6 {
-            width: 300px;
-            height: 55px;
-            border-top: none;
-            border-left: none;
-            border-right: none;
-            border-bottom : 1px solid black;
-            text-align:center;
-        }
-
-        #input7 {
-            width: 300px;
-            height: 55px;
-            border-top: none;
-            border-left: none;
-            border-right: none;
-            border-bottom : 1px solid black;
-            text-align:center;
-        }
-
-        #input8 {
-            width: 150px;
-            height: 35px;
-            border-top: none;
-            border-left: none;
-            border-right: none;
-            border-bottom : 1px solid black;
-            text-align:center;
-        }
-
-        #input9 {
-            width: 150px;
-            height: 35px;
-            border-top: none;
-            border-left: none;
-            border-right: none;
-            border-bottom : 1px solid black;
-            text-align:center;
-        }
-
-    </style>
-
 
 </head>
 
@@ -337,41 +311,52 @@
         </div>
     </div>
 
-
-    <a href="/member/shoppingDetail">쇼핑상세페이지</a>
-    <a href="/member/bookDetail">쇼핑상세페이지</a>
-    <a href="/member/addrChange">주소수정</a>
-    <a href="/member/confirmPW">비밀번호찾기</a>
-
     <div class="menu-wrapper">
         <div class="menu1" onclick="location.href='/member/update'" >나의정보</div>
-        <div class="menu2" onclick="location.href='/member/bookList'" style="cursor: pointer;">캠핑내역</div>
+        <div class="menu2" onclick="location.href='/mypage/bookList'" style="cursor: pointer;">캠핑내역</div>
         <div class="menu3" onclick="location.href='/member/shoppingList'" style="cursor: pointer;">쇼핑내역</div>
         <div class="menu4" onclick="location.href='/member/shoppingLike'" style="cursor: pointer;">찜</div>
         <div class="menu5" onclick="location.href='/room'" style="cursor: pointer;">예약변경</div>
+        <br><br></b><br><br>
+        <b style="text-align:center;" th:text="|${session['loginEmail']}|+님"></b>
+        <b style="text-align:center;">환영합니다.</b>
     </div>
 
-    <h3>update.html</h3>
-    	<div style="text-align: center;" class="formWrapper">
-            <form action="/member/confirmPW" id="memberUp" name="memberPw" >
-                <input th:type="hidden" th:name="memberId" id="memberId" th:value="${member.memberId}">
-                이메일:<input th:type="text"  th:name="memberEmail" th:value="${member.memberEmail}" readonly><br><br>
-                비밀번호:<input th:type="password"  id="memberPw" th:name="memberPw" th:value="${member.memberPw}" readonly><br><br>
-                이름:<input th:type="text" th:name="memberName"  th:value="${member.memberName}"><br><br>
-                주소:<input th:type="text" th:name="memberAddr"  th:value="${member.memberAddr}"><br><br>
-                핸드폰:<input th:type="text" th:name="memberPhone"  th:value="${member.memberPhone}"><br><br>
-                <input type="button" th:onclick="ajaxUp()" value="정보 수정">
-            </form>
+    <div style="text-align: center;" class="formWrapper">
+    <form id="memberUp" name="memberPw">
+        <br><h2>회원 상세정보</h2>
+        <div class="icon">
+            <i class="fas fa-user-circle"></i>
         </div>
+        <div class="formcontainer">
+            <div class="container">
+                <input th:type="hidden" th:name="memberId" id="memberId" th:value="${member.memberId}">
 
-    <button onclick="document.location='/member/addrChange'">주소변경</button><br><br>
-    <button onclick="location.href='/member/confirmPW'">비밀번호변경</button><br><br>
+                <label for="mEmail"><strong>이메일(Email)</strong></label>
+                <input type="text" th:name="memberEmail" id="mEmail" th:value="${member.memberEmail}" readonly >
+                <label for="memberPw"><strong>비밀번호(password)</strong></label>
+                <input type="password" th:name="memberPw" id="memberPw" th:value="${member.memberPw}" readonly>
+                <label for="memberName"><strong>이름(Name)</strong></label>
+                <input type="text" th:name="memberName" id="memberName" th:value="${member.memberName}">
+                <label for="memberAddr"><strong>주소(Address)</strong></label>
+                <input type="text" th:name="memberAddr"  id="memberAddr" th:value="${member.memberAddr}">
+                <label for="memberPhone"><strong>핸드폰번호(CellPhone Number)</strong></label>
+                <input type="text" th:name="memberPhone" id="memberPhone" th:value="${member.memberPhone}">
+            </div>
+            <button type="button" th:onclick="ajaxUp()"><strong>정보 수정</strong></button>
+        </div><br><br>
+    </form>
 
-    <a href="/member/logout">로그아웃</a><br><br><br>
-    	로그인ID(email_session): <p th:text="${session['loginEmail']}"></p>
-    	<div class="kickout-wrapper">
-    		<div class="kickout" onclick="location.href='/member/delete'" style="cursor: pointer;">회원탈퇴</div>
-    	</div>
+    <div style="text-align: center;" class="formWrapper"><br><br>
+
+        <div class="kickout" onclick="location.href='/member/addrChange'" style="cursor: pointer;">주소변경</div>
+        <div class="kickout" onclick="location.href='/member/confirmPW'" style="cursor: pointer;">비밀번호변경</div>
+        <div class="kickout" onclick="location.href='/member/logout'" style="cursor: pointer;">로그아웃</div>
+    </div><br><br><br>
+
+    <div style="text-align: center;" class="formWrapper">
+    <div class="kickout" onclick="location.href='/member/delete'" style="cursor: pointer;">회원탈퇴</div>
+    </div><br><br><br>
 
 
 
@@ -783,7 +768,7 @@
             </div>
         </div>
     </div>
-
+    </div>
 </div>
 
 <script src="/js/jquery-3.2.1.min.js"></script>
@@ -802,10 +787,6 @@
 <script>
     const ajaxUp = () => {
 
-        const pw=document.getElementById("memberPw").value;
-        const pwDB="[[${member.memberPw}]]";
-
-        if(pw==pwDB){
             const id = document.getElementById("memberId").value;
             const reqUrl = "/member/"+id;
             var form = $('#memberUp')[0];
@@ -822,16 +803,13 @@
                 cache: false,
                 timeout: 600000,
                 success: function(){
-                    location.href="/member/"+id;
+                    console.log("???")
+                    location.href="/member/update";
                 },
                 error: function (){
                     alert("Ajax 실패")
                 }
             });
-
-        }else{
-            alert("비밀번호를 확인해주세요.")
-        }
     }
 </script>
 

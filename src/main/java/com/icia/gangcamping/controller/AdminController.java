@@ -3,6 +3,7 @@ package com.icia.gangcamping.controller;
 
 import com.icia.gangcamping.dto.CommentDetailDTO;
 import com.icia.gangcamping.dto.GoodsDetailDTO;
+import com.icia.gangcamping.dto.MemberDetailDTO;
 import com.icia.gangcamping.service.*;
 import com.icia.gangcamping.dto.BookDetailDTO;
 import com.icia.gangcamping.repository.BookRepository;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -49,8 +51,11 @@ public class AdminController {
 
     }
 
-    @RequestMapping("memberList")
-    public String memberList() {
+    @GetMapping("memberList")
+    public String memberList(Model model) {
+        List<MemberDetailDTO> memberList = ms.findAll();
+        System.out.println("asdfasdfsadfdsaf"+memberList.toString());
+        model.addAttribute("memberList", memberList);
         return "admin/memberList";
 
     }
@@ -70,13 +75,15 @@ public class AdminController {
         return "admin/productSaleList";
     }
 
-//    @RequestMapping("bookList")
-//    public String bookList(Model model) {
-//        List<BookDetailDTO> bookList = bs.findAll();
-//        model.addAttribute("bookList",bookList);
-//        return "admin/bookList";
-//
-//    }
+    @RequestMapping("bookList")
+    public String bookList(Model model) {
+        List<BookDetailDTO> bookList = bs.findAll();
+        model.addAttribute("bookList",bookList);
+        return "admin/bookList";
+
+    }
+
+
     @RequestMapping("findAll")
     public String findAll(Model model) {
         List<GoodsDetailDTO> goodsList = ss.findAll();
@@ -129,7 +136,7 @@ public class AdminController {
     }
 
     @GetMapping("/shoppingAsk")
-    public String findAll1(Model model) {
+    public String findAll1(Model model) throws ParseException {
         List<CommentDetailDTO> cList = rs.findAll1();
         System.out.println(cList);
         model.addAttribute("cList", cList);

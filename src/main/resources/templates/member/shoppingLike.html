@@ -261,11 +261,14 @@
 	</div>
 
 	<div class="menu-wrapper">
-		<div class="menu1" onclick="location.href='/member/myInfo'" >나의정보</div>
-		<div class="menu2" onclick="location.href='/member/bookList'" style="cursor: pointer;">캠핑내역</div>
+		<div class="menu1" onclick="location.href='/member/update'" >나의정보</div>
+		<div class="menu2" onclick="location.href='/mypage/bookList'" style="cursor: pointer;">캠핑내역</div>
 		<div class="menu3" onclick="location.href='/member/shoppingList'" style="cursor: pointer;">쇼핑내역</div>
 		<div class="menu4" onclick="location.href='/member/shoppingLike'" style="cursor: pointer;">찜</div>
 		<div class="menu5" onclick="location.href='/room'" style="cursor: pointer;">예약변경</div>
+		<br><br></b><br><br>
+		<b style="text-align:center;" th:text="|${session['loginEmail']}|+님"></b>
+		<b style="text-align:center;">환영합니다.</b>
 	</div>
 
 	<p style="text-align:center; color :brown";>캠핑장 찜 리스트</p>

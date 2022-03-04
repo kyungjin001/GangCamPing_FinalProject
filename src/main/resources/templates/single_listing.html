@@ -19,6 +19,17 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 	<script>
+		window.onload = function (){
+			today = new Date();
+
+			today = today.toISOString().slice(0, 10);
+
+			bir = document.getElementById("checkInDate");
+			bir.value = today;
+		}
+	</script>
+
+	<script>
 		function like(){
 			document.getElementById("emptyHeart").style.display="none";
 			document.getElementById("fullHeart").style.display="";
@@ -104,14 +115,10 @@
                                     SignIn</a>
                                 </div>
                             </span>
-							<span th:if="(${session.loginEmail}!=null) and (${session.loginEmail}!='admin')">
+							<span th:if="(${session.loginEmail}!=null)">
                                 <div class="user_box_login user_box_link">
                                     <a class="nav-link" href="/member/logout" style="font-size: 15px">
-                                    Logout</a>
-                                </div>
-                                <div class="user_box_login user_box_link">
-                                    <a class="nav-link" th:href="@{|/member/${session.loginEmail}|}" style="font-size: 15px">
-                                    MyPage</a>
+                                    LogOut</a>
                                 </div>
                             </span>
 							<span th:if="${session['userId'] != null}">
@@ -120,24 +127,11 @@
 									  style="font-size: 15px">
                                    LogOut</a>
                                </div>
-                               <div class="user_box_login user_box_link">
-                                    <a class="nav-link" href="/member/mypage" style="font-size: 15px">
-                                    MyPage</a>
-                               </div>
                             </span>
-							<span th:if="(${session.loginEmail}=='admin')">
-                                <div class="user_box_login user_box_link">
-                                    <a class="nav-link" href="/member/logOut" style="font-size: 15px">
-                                    LogOut</a>
-                                </div>
-                                <div class="user_box_login user_box_link">
-                                    <a class="nav-link" href="/admin/mypage" style="font-size: 15px">
-                                    MyPage</a>
-                                </div>
-                            </span>
-
-
-
+							<div class="user_box_login user_box_link">
+								<a class="nav-link" th:href="@{|/member/${session.loginEmail}|}" style="font-size: 15px">
+									MyPage</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -156,11 +150,11 @@
 						<div class="main_nav_container ml-auto">
 							<ul class="main_nav_list">
 								<li class="main_nav_item"><a href="/">home</a></li>
-								<li class="main_nav_item"><a href="/search/camping">camping</a></li>
+								<li class="main_nav_item"><a href="/search/camping">booking</a></li>
 								<li class="main_nav_item"><a href="/shopping/shopping">shopping</a></li>
 								<li class="main_nav_item"><a href="about">about us</a></li>
 								<li class="main_nav_item"><a href="contact">contact</a></li>
-
+								<li class="main_nav_item"><a href="/test">apiTest</a></li>
 							</ul>
 						</div>
 
@@ -198,9 +192,9 @@
 	<!-- Home -->
 
 	<div class="home">
-		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="/images/single_background.jpg"></div>
+		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="/images/캠핑장사진.jpg"></div>
 		<div class="home_content">
-			<div class="home_title">the offers</div>
+			<div class="home_title">RESERVATION</div>
 		</div>
 	</div>
 
@@ -219,125 +213,40 @@
 					<div class="row fill_height no-margin">
 						<div class="col fill_height no-padding">
 
-							<!-- Search Tabs -->
-
-							<div class="search_tabs_container">
-								<div class="search_tabs d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
-									<div class="search_tab active d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="/images/suitcase.png" alt=""><span>hotels</span></div>
-									<div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="/images/bus.png" alt="">car rentals</div>
-									<div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="/images/departure.png" alt="">flights</div>
-									<div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="/images/island.png" alt="">trips</div>
-									<div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="/images/cruise.png" alt="">cruises</div>
-									<div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="/images/diving.png" alt="">activities</div>
-								</div>		
-							</div>
-
 							<!-- Search Panel -->
 
-							<div class="search_panel active">
-								<form action="#" id="search_form_1" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
-									<div class="search_item">
-										<div>destination</div>
-										<input type="text" class="destination search_input" required="required">
-									</div>
-									<div class="search_item">
-										<div>check in</div>
-										<input type="text" class="check_in search_input" placeholder="YYYY-MM-DD">
-									</div>
-									<div class="search_item">
-										<div>check out</div>
-										<input type="text" class="check_out search_input" placeholder="YYYY-MM-DD">
-									</div>
-									<div class="search_item">
-										<div>adults</div>
-										<select name="adults" id="adults_1" class="dropdown_item_select search_input">
-											<option>01</option>
-											<option>02</option>
-											<option>03</option>
-										</select>
-									</div>
-									<div class="search_item">
-										<div>children</div>
-										<select name="children" id="children_1" class="dropdown_item_select search_input">
-											<option>0</option>
-											<option>02</option>
-											<option>03</option>
-										</select>
-									</div>
-									<div class="extras">
-										<ul class="search_extras clearfix">
-											<li class="search_extras_item">
-												<div class="clearfix">
-													<input type="checkbox" id="search_extras_1" class="search_extras_cb">
-													<label for="search_extras_1">Pet Friendly</label>
-												</div>	
-											</li>
-											<li class="search_extras_item">
-												<div class="clearfix">
-													<input type="checkbox" id="search_extras_2" class="search_extras_cb">
-													<label for="search_extras_2">Car Parking</label>
+							<div class="container fill_height">
+								<div class="row fill_height">
+									<div class="col fill_height">
+										<!-- Search Panel -->
+										<div class="search_panel active">
+											<form action="/search/camping" method="get" id="search_form_1"
+												  class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
+												<div class="search_item">
+													<div>keyword</div>
+													<input type="text" name="keyword" id="keyword" class="destination search_input"
+														   required="required">
 												</div>
-											</li>
-											<li class="search_extras_item">
-												<div class="clearfix">
-													<input type="checkbox" id="search_extras_3" class="search_extras_cb">
-													<label for="search_extras_3">Wireless Internet</label>
+												<div class="search_item">
+													<div>check in</div>
+													<input type="date" class="check_in search_input" placeholder="YYYY-MM-DD"
+														   name="checkInDate" id="checkInDate" required="required">
 												</div>
-											</li>
-											<li class="search_extras_item">
-												<div class="clearfix">
-													<input type="checkbox" id="search_extras_4" class="search_extras_cb">
-													<label for="search_extras_4">Reservations</label>
+												<div class="search_item">
+													<div>check out</div>
+													<input type="date" class="check_out search_input" placeholder="YYYY-MM-DD"
+														   name="checkOutDate" id="checkOutDate" required="required">
 												</div>
-											</li>
-											<li class="search_extras_item">
-												<div class="clearfix">
-													<input type="checkbox" id="search_extras_5" class="search_extras_cb">
-													<label for="search_extras_5">Private Parking</label>
-												</div>
-											</li>
-											<li class="search_extras_item">
-												<div class="clearfix">
-													<input type="checkbox" id="search_extras_6" class="search_extras_cb">
-													<label for="search_extras_6">Smoking Area</label>
-												</div>
-											</li>
-											<li class="search_extras_item">
-												<div class="clearfix">
-													<input type="checkbox" id="search_extras_7" class="search_extras_cb">
-													<label for="search_extras_7">Wheelchair Accessible</label>
-												</div>
-											</li>
-											<li class="search_extras_item">
-												<div class="clearfix">
-													<input type="checkbox" id="search_extras_8" class="search_extras_cb">
-													<label for="search_extras_8">Pool</label>
-												</div>
-											</li>
-										</ul>
-									</div>
-									<div class="more_options">
-										<div class="more_options_trigger">
-											<a href="#">load more options</a>
+
+												<button class="button search_button" type="submit">
+													search<span></span><span></span><span></span></button>
+											</form>
 										</div>
-										<ul class="more_options_list clearfix">
-											<li class="more_options_item">
-												<div class="clearfix">
-													<input type="checkbox" id="more_options_1" class="search_extras_cb">
-													<label for="more_options_1">Pet Friendly</label>
-												</div>	
-											</li>
-											<li class="more_options_item">
-												<div class="clearfix">
-													<input type="checkbox" id="more_options_2" class="search_extras_cb">
-													<label for="more_options_2">Car Parking</label>
-												</div>
-											</li>
-										</ul>
+
 									</div>
-									<button class="button search_button">search<span></span><span></span><span></span></button>
-								</form>
+								</div>
 							</div>
+						</div>
 
 							<!-- Search Panel -->
 
@@ -564,15 +473,6 @@
 
 							<div class="hotel_image">
 								<img th:src="${campingDetail.campingFileName}" alt="">
-								<div class="hotel_review_container d-flex flex-column align-items-center justify-content-center">
-									<div class="hotel_review">
-										<div class="hotel_review_content">
-											<div class="hotel_review_title">very good</div>
-											<div class="hotel_review_subtitle">100 reviews</div>
-										</div>
-										<div class="hotel_review_rating text-center"><p th:text="${session['avg']}"></p></div>
-									</div>
-								</div>
 							</div>
 
 							<!-- Hotel Gallery  이미지 파일명만 저장하는 디비 필요-->
@@ -583,64 +483,64 @@
 
 										<!-- Hotel Gallery Slider Item -->
 										<div class="owl-item">
-											<a class="colorbox cboxElement" href="/images/listing_1.jpg">
-												<img src="/images/listing_thumb_1.jpg" alt="https://unsplash.com/@jbriscoe">
+											<a class="colorbox cboxElement" href="/images/오렌지1.jpg">
+												<img style="height: 108.69px" src="/images/오렌지1.jpg">
 											</a>
 										</div>
 
 										<!-- Hotel Gallery Slider Item -->
 										<div class="owl-item">
-											<a class="colorbox cboxElement" href="/images/listing_2.jpg">
-												<img src="/images/listing_thumb_2.jpg" alt="https://unsplash.com/@grovemade">
+											<a class="colorbox cboxElement" href="/images/오렌지2.jpg">
+												<img style="height: 108.69px" src="/images/오렌지2.jpg" alt="https://unsplash.com/@grovemade">
 											</a>
 										</div>
 
 										<!-- Hotel Gallery Slider Item -->
 										<div class="owl-item">
-											<a class="colorbox cboxElement" href="/images/listing_3.jpg">
-												<img src="/images/listing_thumb_3.jpg" alt="https://unsplash.com/@fransaraco">
+											<a class="colorbox cboxElement" href="/images/오렌지3.jpg">
+												<img style="height: 108.69px" src="/images/오렌지3.jpg" alt="https://unsplash.com/@fransaraco">
 											</a>
 										</div>
 
 										<!-- Hotel Gallery Slider Item -->
 										<div class="owl-item">
-											<a class="colorbox cboxElement" href="/images/listing_4.jpg">
-												<img src="/images/listing_thumb_4.jpg" alt="https://unsplash.com/@workweek">
+											<a class="colorbox cboxElement" href="/images/오렌지4.jpg">
+												<img style="height: 108.69px" src="/images/오렌지4.jpg" alt="https://unsplash.com/@workweek">
 											</a>
 										</div>
 
 										<!-- Hotel Gallery Slider Item -->
 										<div class="owl-item">
-											<a class="colorbox cboxElement" href="/images/listing_5.jpg">
-												<img src="/images/listing_thumb_5.jpg" alt="https://unsplash.com/@workweek">
+											<a class="colorbox cboxElement" href="/images/오렌지5.png">
+												<img style="height: 108.69px" src="/images/오렌지5.png" alt="https://unsplash.com/@workweek">
 											</a>
 										</div>
 
 										<!-- Hotel Gallery Slider Item -->
 										<div class="owl-item">
-											<a class="colorbox cboxElement" href="/images/listing_6.jpg">
-												<img src="/images/listing_thumb_6.jpg" alt="https://unsplash.com/@avidenov">
+											<a class="colorbox cboxElement" href="/images/오렌지6.png">
+												<img style="height: 108.69px" src="/images/오렌지6.png" alt="https://unsplash.com/@avidenov">
 											</a>
 										</div>
 
 										<!-- Hotel Gallery Slider Item -->
 										<div class="owl-item">
-											<a class="colorbox cboxElement" href="/images/listing_7.jpg">
-												<img src="/images/listing_thumb_7.jpg" alt="https://unsplash.com/@pietruszka">
+											<a class="colorbox cboxElement" href="/images/오렌지7.jpg">
+												<img style="height: 108.69px" src="/images/오렌지7.jpg" alt="https://unsplash.com/@pietruszka">
 											</a>
 										</div>
 
 										<!-- Hotel Gallery Slider Item -->
 										<div class="owl-item">
-											<a class="colorbox cboxElement" href="/images/listing_8.jpg">
-												<img src="/images/listing_thumb_8.jpg" alt="https://unsplash.com/@rktkn">
+											<a class="colorbox cboxElement" href="/images/오렌지8.jpg">
+												<img style="height: 108.69px" src="/images/오렌지8.jpg" alt="https://unsplash.com/@rktkn">
 											</a>
 										</div>
 
 										<!-- Hotel Gallery Slider Item -->
 										<div class="owl-item">
-											<a class="colorbox cboxElement" href="/images/listing_9.jpg">
-												<img src="/images/listing_thumb_9.jpg" alt="https://unsplash.com/@mindaugas">
+											<a class="colorbox cboxElement" href="/images/오렌지9.jpg">
+												<img style="height: 108.69px" src="/images/오렌지9.jpg" alt="https://unsplash.com/@mindaugas">
 											</a>
 										</div>
 									</div>
@@ -693,7 +593,7 @@
 
 							<div>
 							<div class="review_title">주변시설</div>
-							<span th:text="${cds.getFacility1()}"></span>
+							<span th:text="${cds.getFacility1()}"></span><br>
 
 								<div class="review_title">구비사항</div>
 								<span th:text="${cds.getFacility4()}"></span><br>
@@ -701,77 +601,12 @@
 								<span th:text="${cds.getFacility6()}"></span><br>
 								<span th:text="${cds.getFacility7()}"></span><br>
 							</div>
-							<!-- Hotel Info Tags 이미지만 수정 -->
-
-							<div class="hotel_info_tags">
-								<ul class="hotel_icons_list" style="margin-top: 0">
-									<li class="hotel_icons_item"><img src="/images/post.png" alt=""></li>
-									<li class="hotel_icons_item"><img src="/images/compass.png" alt=""></li>
-									<li class="hotel_icons_item"><img src="/images/bicycle.png" alt=""></li>
-									<li class="hotel_icons_item"><img src="/images/sailboat.png" alt=""></li>
-								</ul>
-							</div>
-
-						</div>
-						
-						<!-- Rooms 객실정보 디비에 데이터부터 입력필요-->
-
-						<!--<div class="rooms">
-
-							&lt;!&ndash; Room &ndash;&gt;
-							<div class="room">
-
-								&lt;!&ndash; Room &ndash;&gt;
-								<div class="row">
-									<div class="col-lg-2">
-										<div class="room_image"><img src="/images/room_1.jpg" alt="https://unsplash.com/@grovemade"></div>
-									</div>
-									<div class="col-lg-7">
-										<div class="room_content">
-											<div class="room_title">Double or Twin Room</div>
-											<div class="room_price">$99/night</div>
-											<div class="room_text">FREE cancellation before 23:59 on 20 December 2017</div>
-											<div class="room_extra">Breakfast $7.50</div>
-										</div>
-									</div>
-									<div class="col-lg-3 text-lg-right">
-										<div class="room_button">
-											<div class="button book_button trans_200"><a href="#">book<span></span><span></span><span></span></a></div>
-										</div>
-									</div>
-								</div>	
-							</div>
-
-							&lt;!&ndash; Room &ndash;&gt;
-							<div class="room">
-
-								&lt;!&ndash; Room &ndash;&gt;
-								<div class="row">
-									<div class="col-lg-2">
-										<div class="room_image"><img src="/images/room_2.jpg" alt="https://unsplash.com/@oowgnuj"></div>
-									</div>
-									<div class="col-lg-7">
-										<div class="room_content">
-											<div class="room_title">Double or Twin Room</div>
-											<div class="room_price">$99/night</div>
-											<div class="room_text">FREE cancellation before 23:59 on 20 December 2017</div>
-											<div class="room_extra">Breakfast $7.50</div>
-										</div>
-									</div>
-									<div class="col-lg-3 text-lg-right">
-										<div class="room_button">
-											<div class="button book_button trans_200"><a href="/camping/reservation">book<span></span><span></span><span></span></a></div>
-										</div>
-									</div>
-								</div>	
-							</div>
-
-						</div>-->
 
 						<!-- Reviews -->
 
 						<div class="reviews">
 							<div class="reviews_title">reviews</div>
+							<p th:text="${session['avg']}"></p>
 							<div class="reviews_container">
 
 								<!-- Review -->
@@ -802,18 +637,18 @@
 
 							<!-- Google Map -->
 
-							<div id="map" style="width:400px;height:400px;"></div>
+							<div id="map" style="width:90%;height:400px;"></div>
 							<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4a1f482822e34aa18a339c0eeb9a3b8d"></script>
 							<script>
 								var container = document.getElementById('map');
 								var options = {
-									center: new kakao.maps.LatLng(37.56922500646008, 126.74922236426688),
+									center: new kakao.maps.LatLng(37.913475267996525, 127.5765371556229),
 									level: 3
 								};
 
 								var map = new kakao.maps.Map(container, options);
 
-								var markerPosition  = new kakao.maps.LatLng(37.56922500646008, 126.74922236426688);
+								var markerPosition  = new kakao.maps.LatLng(37.913475267996525, 127.5765371556229);
 
 								// 마커를 생성합니다
 								var marker = new kakao.maps.Marker({
@@ -821,15 +656,6 @@
 
 								marker.setMap(map);
 							</script>
-		
-							<!--<div class="travelix_map">
-								<div id="google_map" class="google_map">
-									<div class="map_container">
-										<div id="map"></div>
-									</div>
-								</div>
-							</div>-->
-
 						</div>
 					</div>
 				</div>

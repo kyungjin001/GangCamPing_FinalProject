@@ -36,7 +36,7 @@ public class ShoppingServiceImpl implements ShoppingService{
         MultipartFile productImage = goodsSaveDTO.getProductImage();
         String productFileName = productImage.getOriginalFilename();
         productFileName = System.currentTimeMillis() + "-" + productFileName;
-        String savePath = "C:\\devleopment\\source\\springboot\\GangCamPing_FinalProject\\src\\main\\resources\\static\\upload\\"+productFileName;
+        String savePath = "C:\\development\\source\\springboot\\GangCamPing_FinalProjects\\src\\main\\resources\\static\\upload\\"+productFileName;
         if(!productImage.isEmpty()) {
             productImage.transferTo(new File(savePath));
         }
@@ -84,11 +84,11 @@ public class ShoppingServiceImpl implements ShoppingService{
 
     @Override
     public CartDetailDTO addCart(CartDetailDTO cartDetailDTO, MemberEntity memberEntity , ProductEntity productEntity) {
+        System.out.println("service"+cartDetailDTO);
         CartEntity cartEntity = CartEntity.toSaveEntity(cartDetailDTO,memberEntity,productEntity);
-        cartDetailDTO = CartDetailDTO.tpCartDetailDTO(cartEntity); //변환 모습
-
-        cr.save(cartEntity);
-        return cartDetailDTO;
+        CartEntity cartEntity1 = cr.save(cartEntity);
+        CartDetailDTO cartDetailDTO1 = CartDetailDTO.toCartDetailDTO(cartEntity1);
+        return cartDetailDTO1;
     }
 
     @Override

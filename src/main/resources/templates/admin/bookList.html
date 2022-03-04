@@ -128,6 +128,15 @@
 			border-radius: 20%;
 		}
 
+		.table-wrapper {
+			margin-bottom: 0px;
+			margin-left: 60px;
+			width: 100%;
+			height: 500px;
+			text-align: center;
+			padding: 50px 0;
+		}
+
 		.kickout-wrapper {
 			text-align: right;
 			padding: 50px 0;
@@ -308,10 +317,10 @@
 		<div class="menu8" onclick="location.href='/shopping/stock'" style="cursor: pointer;">상품재고</div>
 	</div>
 
-
 	<p style="text-align:center";>예약 관리</p>
 
-	<table class="tg" style="undefined; table-layout: fixed; width: 878px" table>
+	<div class="table-wrapper">
+		<table class="tg" style="undefined; table-layout: fixed; width: 950px" table>
 		<colgroup>
 			<col style="width: 74px">
 			<col style="width: 83px">
@@ -319,18 +328,16 @@
 			<col style="width: 295px">
 			<col style="width: 93px">
 			<col style="width: 100px">
-			<col style="width: 120px">
+			<col style="width: 80px">
 		</colgroup>
 		<thead>
 		<tr>
 			<th class="tg-lstg">주문번호</th>
 			<th class="tg-lstg">주문일자</th>
-
 			<th class="tg-lstg">캠핑장명</th>
-
 			<th class="tg-lstg">결제액</th>
-
 			<th class="tg-lstg">예약자 이름</th>
+			<th class="tg-lstg">비고</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -340,6 +347,7 @@
 			<td class="tg-80qx"><a th:text="${result.campingName}"></a></td>
 			<td class="tg-80qx"><a th:text="${result.bookPrice}"></a></td>
 			<td class="tg-80qx"><a th:text="${result.bookName}"></a></td>
+			<td class="tg-80qx"></td>
 		</tr>
 		<tr>
 			<td class="tg-80qx"></td>
@@ -352,6 +360,7 @@
 		</tr>
 		</tbody>
 	</table>
+	</div>
 
 
 
