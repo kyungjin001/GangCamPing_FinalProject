@@ -55,18 +55,18 @@ public class BookServiceImpl implements BookService {
     }
 
 
-    @Override
-    public List<BookDetailDTO> findAll() {
-        List<BookEntity> all = br.findAll();
-        List<BookDetailDTO> bookList = new ArrayList<>();
-        for(BookEntity book:all){
-            BookDetailDTO bookDetailDTO = BookDetailDTO.toBookDetailDTO(book);
-            bookList.add(bookDetailDTO);
-        }
-        return bookList;
-
-
-    }
+//    @Override
+//    public List<BookDetailDTO> findAll() {
+//        List<BookEntity> all = br.findAll();
+//        List<BookDetailDTO> bookList = new ArrayList<>();
+//        for(BookEntity book:all){
+//            BookDetailDTO bookDetailDTO = BookDetailDTO.toBookDetailDTO(book);
+//            bookList.add(bookDetailDTO);
+//        }
+//        return bookList;
+//
+//
+//    }
 
     @Override
     public void deleteById(Long bookId) {

@@ -41,15 +41,9 @@ public class MemberController {
     private final ShoppingService ss;
     private final ShoppingLikeService sls;
     private final OrderService os;
-    
 
 
-//    @GetMapping("save")
-//    public String saveForm(Model model) {
-//        model.addAttribute("member", new MemberSaveDTO());
-//        return "member/save";
-//    }
-
+//  회원가입
     @PostMapping("/save")
     public String save(@Validated @ModelAttribute("member") MemberSaveDTO memberSaveDTO) {
 
@@ -57,7 +51,7 @@ public class MemberController {
         return "index";
     }
 
-
+//    회원가입 with Validation
 //    @PostMapping("save")
 //    public String save(@Validated @ModelAttribute("member") MemberSaveDTO memberSaveDTO, BindingResult bindingResult) throws IOException {
 //        if(bindingResult.hasErrors()) {
@@ -72,13 +66,8 @@ public class MemberController {
 //        return "redirect:/member/login";
 //    }
 
-//    @GetMapping("/login")
-//    public String loginForm(Model model) {
-//        model.addAttribute("login", new MemberLoginDTO());
-//        return "login_!";
-//    }
 
-    // 로그인 처리
+//     로그인 처리
     @PostMapping("/login")
     public String login(@Validated @ModelAttribute("login") MemberLoginDTO memberLoginDTO, HttpSession session) {
 
@@ -92,6 +81,23 @@ public class MemberController {
 
         }
     }
+
+    // 로그인 처리 with Validation
+//    @PostMapping("login")
+//    public String login(@Validated @ModelAttribute("login") MemberLoginDTO memberLoginDTO, BindingResult bindingResult, HttpSession session){
+//        if(bindingResult.hasErrors()){
+//            return "redirect:/";
+//        }
+//        boolean loginResult = ms.login(memberLoginDTO);
+//        if(ms.login(memberLoginDTO)){
+//            session.setAttribute("loginEmail", memberLoginDTO.getMemberEmail());
+//            return "redirect:/";
+//        } else {
+//            bindingResult.reject("loginFail", "이메일 또는 비밀번호가 틀립니다!");
+//            return "redirect:/";
+//        }
+//    }
+
 
     // 로그인 처리 with Interceptor
 //    @PostMapping("/login")
@@ -204,6 +210,9 @@ public class MemberController {
         return "index";
     }
 
+
+
+
    /* @GetMapping("/bookList/{memberEmail}")
     public String bookList(@PathVariable("memberEmail") String memberEmail) {
 
@@ -285,15 +294,15 @@ public class MemberController {
 
 
 
-    @GetMapping("/shoppingLike")
-    public String shoppingLike(Model model) {
-        String memberEmail = (String) session.getAttribute("loginEmail");
-        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
-        List<ShoppingLikeDetailDTO> slList = sls.findByMemberEntity(memberEntity);
-        System.out.println(slList);
-        model.addAttribute("slList", slList);
-        return "member/shoppingLike";
-    }
+//    @GetMapping("/shoppingLike")
+//    public String shoppingLike(Model model) {
+//        String memberEmail = (String) session.getAttribute("loginEmail");
+//        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
+//        List<ShoppingLikeDetailDTO> slList = sls.findByMemberEntity(memberEntity);
+//        System.out.println(slList);
+//        model.addAttribute("slList", slList);
+//        return "member/shoppingLike";
+//    }
 
 
 

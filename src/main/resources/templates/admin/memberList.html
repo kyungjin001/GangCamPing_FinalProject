@@ -300,23 +300,24 @@
         <thead>
         <tr>
             <th class="tg-lstg">회원번호</th>
-            <th class="tg-lstg">가입일</th>
-            <th class="tg-lstg">회원명</th>
-            <th class="tg-lstg">회원 Email</th>
-            <th class="tg-lstg">전화번호</th>
+            <th class="tg-lstg">회원Email</th>
+            <th class="tg-lstg">비밀번호</th>
+            <th class="tg-lstg">이름 </th>
             <th class="tg-lstg">주소</th>
+            <th class="tg-lstg">핸드폰 번호</th>
             <th class="tg-lstg">비고</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td class="tg-80qx">00001</td>
-            <td class="tg-80qx">2022-02-22</td>
-            <td class="tg-80qx">가나다라마</td>
-            <td class="tg-80qx">aaaaa@aaa.com<br>옵션: 大 </td>
-            <td class="tg-80qx">01234567890</td>
-            <td class="tg-80qx">인천시 미추홀구 가나다동 123번지<br>나다라아파트 가동 101호</td>
+        <tr th:each="member: ${memberList}">
+            <td class="tg-80qx" th:text="${member.memberdId}" readonly></td>
+            <td class="tg-80qx" th:text="${member.memberEmail}" readonly></td>
+            <td class="tg-80qx" th:type="hidden" th:text="${member.memberPw}"></td>
+            <td class="tg-80qx" th:text="${member.memberName}"></td>
+            <td class="tg-80qx" th:text="${member.memberAddr}"></td>
+            <td class="tg-80qx" th:text="${member.memberPhone}"></td>
             <td class="tg-80qx"></td>
+
         </tr>
         <tr>
             <td class="tg-80qx"></td>

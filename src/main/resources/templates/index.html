@@ -160,6 +160,11 @@
         });
     </script>
 
+    <style>
+        .field-error {
+            color: red;
+        }
+    </style>
 
 
 </head>
@@ -217,7 +222,7 @@
                             </span>
                             <span th:if="(${session.loginEmail}=='admin')">
                                 <div class="user_box_login user_box_link">
-                                    <a class="nav-link" href="/member/logOut" style="font-size: 15px">
+                                    <a class="nav-link" href="/member/logout" style="font-size: 15px">
                                     LogOut</a>
                                 </div>
                                 <div class="user_box_login user_box_link">
@@ -821,16 +826,15 @@
                     <!-- Modal body -->
                     <div class="modal-body">
                         <form action="/member/login" method="post" th:object="${login}">
-
                             <div class="form-group">
                                 <label for="loginId" style="margin-left: 200px">ID </label> <br>
-                                <input type="text" class="form-control" id="loginId" placeholder="Enter ID"
+                                <input type="text" class="form-control" id="loginId" placeholder="회원가입 시 이메일을 적어주세요"
                                        name="memberEmail"
                                        required>
                             </div>
                             <div class="form-group">
                                 <label for="loginPw" style="margin-left: 200px">비밀번호 </label>
-                                <input type="password" class="form-control" id="loginPw" placeholder="Enter Password"
+                                <input type="password" class="form-control" id="loginPw" placeholder="8~20자 사이로 입력해주세요."
                                        name="memberPw" required>
                             </div>
                             <button type="submit" class="btn btn-primary" style="margin-left:200px">로그인</button>
@@ -875,13 +879,13 @@
                         <form action="/member/save" method="post" th:object="${member}" id="memberSave">
                             <div class="form-group">
                                 <label for="memberEmail">이메일 </label> <br>
-                                <input type="text" class="form-control" onblur="emailDp()" id="memberEmail"
-                                       placeholder="이메일을 입력해주세요." name="memberEmail" required>
+                                <input type="email" class="form-control" minlength='5' maxlength='30' onblur="emailDp()" id="memberEmail"
+                                       placeholder="이메일을 5~30자로 입력해주세요." name="memberEmail" required>
                                 <span id="email_Dp"></span><br>
                             </div>
                             <div class="form-group">
                                 <label for="pwd1">비밀번호 </label>
-                                <input type="password" class="form-control" id="pwd1" placeholder="비밀번호를 입력해주세요."
+                                <input type="password" class="form-control" minlength='8' maxlength='20' id="pwd1" placeholder="비밀번호를 8~20자로 입력해주세요."
                                        name="memberPw" required>
                                 <input type="password" class="form-control" id="pwd2" placeholder="비밀번호를 다시 입력해주세요."
                                        required>
@@ -890,12 +894,12 @@
                             </div>
                             <div class="form-group">
                                 <label for="registerName">이름 </label> <br>
-                                <input type="text" class="form-control" id="registerName" placeholder="이름을 입력해주세요."
+                                <input type="text" class="form-control" minlength='5' maxlength='30' id="registerName" placeholder="이름을 5~30자로 입력해주세요."
                                        name="memberName" required>
                             </div>
                             <div class="form-group">
                                 <label for="registerPhone">전화번호 </label> <br>
-                                <input type="text" class="form-control" id="registerPhone" placeholder="전화번호를 입력해주세요."
+                                <input type="text" class="form-control" minlength='10' maxlength='11' pattern="^[0-9]+$" id="registerPhone" placeholder="전화번호(10~11자 숫자)를 입력해주세요."
                                        name="memberPhone" required>
                             </div>
                             <div class="form-group">

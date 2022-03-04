@@ -3,6 +3,7 @@ package com.icia.gangcamping.controller;
 
 import com.icia.gangcamping.dto.CommentDetailDTO;
 import com.icia.gangcamping.dto.GoodsDetailDTO;
+import com.icia.gangcamping.dto.MemberDetailDTO;
 import com.icia.gangcamping.service.*;
 import com.icia.gangcamping.dto.BookDetailDTO;
 import com.icia.gangcamping.repository.BookRepository;
@@ -49,7 +50,9 @@ public class AdminController {
     }
 
     @RequestMapping("memberList")
-    public String memberList() {
+    public String memberList(Model model) {
+        List<MemberDetailDTO> memberList = ms.findAll();
+        model.addAttribute("memberList", memberList);
         return "admin/memberList";
 
     }

@@ -13,9 +13,9 @@ import javax.validation.constraints.NotBlank;
 public class MemberLoginDTO {
 
     @NotBlank(message = "이메일은 필수입니다.")
-    @Length(min = 2, max = 30, message = "3~50자 사이로 입력해주세요.")
+    @Length(min = 5, max = 30, message = "회원가입 시 이메일을 적어주세요")
     private String memberEmail;
-    @Length(min = 2, max = 20, message = "5~20자 사이로 입력해주세요.")
+    @Length(min = 8, max = 20, message = "8~20자 사이로 입력해주세요.")
     private String memberPw;
 
 
