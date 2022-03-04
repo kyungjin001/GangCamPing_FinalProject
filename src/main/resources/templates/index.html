@@ -482,7 +482,7 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h2 class="intro_title text-center">테마별 1위 캠핑장</h2>
+                    <h2 class="intro_title text-center" style="font-size: 300%">테마별 1위 캠핑장</h2>
                 </div>
             </div>
             <div class="row">
@@ -533,7 +533,7 @@
         <div class="container">
             <div class="row">
                 <div class="col text-center">
-                    <h2 class="section_title">강캠핑이 추천하는 캠핑장</h2>
+                    <h2 class="section_title" style="font-size: 300%;"> 추천하는 캠핑장</h2>
                 </div>
             </div>
             <div class="row offers_items">
@@ -557,7 +557,7 @@
                                 <div class="col-lg-6">
                                     <div class="offers_content">
                                         <div class="offers_price">
-                                            <a th:text="${result.campingName}" th:href="@{|/search/searchDetail/${result.campingName}|}"></a>
+                                            <a th:text="${result.campingName}" th:href="@{|/search/searchDetail/${result.campingName}|}" style="font-size: 70%"></a>
                                         </div>
                                         <div class="rating_r rating_r_4 offers_rating">
                                             <i></i>
@@ -599,7 +599,7 @@
         <div class="container">
             <div class="row">
                 <div class="col text-center">
-                    <h2 class="section_title">고객리뷰 베스트</h2>
+                    <h2 class="section_title" style="font-size: 300%">고객리뷰 베스트</h2>
                 </div>
 
             </div>
@@ -847,14 +847,24 @@
                     <div class="modal-body">
                         <form action="/member/login" method="post" th:object="${login}">
                             <div class="form-group">
+
+                                <label for="loginId">ID </label> <br>
+                                <input type="text" class="form-control" id="loginId" placeholder="Enter ID"
+
                                 <label for="loginId" style="margin-left: 200px">ID </label> <br>
                                 <input type="text" class="form-control" id="loginId" placeholder="회원가입 시 이메일을 적어주세요"
+
                                        name="memberEmail"
                                        required>
                             </div>
                             <div class="form-group">
+
+                                <label for="loginPw">비밀번호 </label>
+                                <input type="password" class="form-control" id="loginPw" placeholder="Enter Password"
+
                                 <label for="loginPw" style="margin-left: 200px">비밀번호 </label>
                                 <input type="password" class="form-control" id="loginPw" placeholder="8~20자 사이로 입력해주세요."
+
                                        name="memberPw" required>
                             </div>
                             <button type="submit" class="btn btn-primary" style="margin-left:200px">로그인</button>
@@ -866,7 +876,11 @@
                             <img src="/images/kakao_login_medium_narrow.png">
                         </a>
 
+                    </span><br>
+
+
                     </span>
+
 
                             <span th:if="${session['userId'] == null}" class="n1 d-flex">
 
