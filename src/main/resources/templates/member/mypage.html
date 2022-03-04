@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:text-align="http://www.w3.org/1999/xhtml">
 <head>
 <title>About Us</title>
 <meta charset="utf-8">
@@ -27,7 +27,7 @@
 		.menu-wrapper {
 			margin-bottom: 100px;
 			margin-left: 40px;
-			width: 1200px;
+			width: 100%;
 			height: 500px;
 			text-align: center;
 			/*border: solid 1px #cccccc;*/
@@ -207,8 +207,10 @@
 
 	<br>
 	<br>
-	<b style="text-align:center;" th:text="|${session['loginEmail']}|+환영합니다."></b>
+
 	<div class="menu-wrapper">
+		<b style="text-align:center;" th:text="|${session['loginEmail']}|+님"></b>
+		<b style="text-align:center;">환영합니다.</b><br><br><br><br>
 		<div class="menu1" onclick="location.href='/member/update'" >나의정보</div>
 		<div class="menu2" onclick="location.href='/mypage/bookList'" style="cursor: pointer;">캠핑내역</div>
 <!--		<div class="menu3" th:onclick="'location.href=\''+ @{|/member/shoppingList/${session['loginEmail']}|} + '\''" style="cursor: pointer;">쇼핑내역</div>-->
@@ -216,11 +218,6 @@
 		<div class="menu4" onclick="location.href='/member/shoppingLike'" style="cursor: pointer;">찜</div>
 		<div class="menu5"  onclick="window.open('/room','sales','width = 600, height = 500, top = 100, left = 300, location= no')" style="cursor: pointer;">예약변경</div>
 	</div>
-
-	<a href="/member/logout">로그아웃</a><br><br><br>
-<!--	로그인ID(email_session): <p th:text="${session['loginEmail']}"></p>-->
-
-
 
 	<!-- Footer -->
 	<footer class="footer">

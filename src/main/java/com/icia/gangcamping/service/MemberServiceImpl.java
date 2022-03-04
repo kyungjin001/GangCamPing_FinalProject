@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -100,11 +102,26 @@ public class MemberServiceImpl implements MemberService{
         mr.deleteById(memberId);
     }
 
-//    @Override
-//    public MemberDetailDTO updateAddr(MemberUpdateDTO memberUpdateDTO) {
-//        MemberEntity memberEntity = MemberEntity.toUpdateMember(memberUpdateDTO);
-//        return mr.save(memberEntity);
-//    }
+    @Override
+    public List<MemberDetailDTO> findAll() {
+        List<MemberEntity> memberEntityList=mr.findAll();
+        List<MemberDetailDTO> memberList = new ArrayList<>();
+        for(MemberEntity e : memberEntityList){
+            memberList.add(MemberDetailDTO.toMemberDetailDTO(e));
+        }
+        return memberList;
+    }
+
+    @Override
+    public MemberDetailDTO updateAddr(MemberUpdateDTO memberUpdateDTO) {
+        MemberEntity member= findByMemberEmail(memberUpdateDTO.getMemberEmail());
+        member.setMemberAddr(memberUpdateDTO.getMemberAddr());
+        MemberEntity memberEntity = mr.save(member);
+        System.out.println(member.toString());
+        MemberDetailDTO memberUpdateDTO1 = MemberDetailDTO.toMemberDetailDTO(memberEntity);
+        System.out.println(memberUpdateDTO1.toString());
+        return memberUpdateDTO1;
+    }
 
 
 //    @Override

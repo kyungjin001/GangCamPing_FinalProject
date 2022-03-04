@@ -5,6 +5,7 @@ import com.icia.gangcamping.dto.*;
 import com.icia.gangcamping.entity.MemberEntity;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 public interface MemberService {
@@ -32,8 +33,8 @@ public interface MemberService {
 
     void deleteById(Long memberId);
 
-//    MemberDetailDTO updateAddr(MemberUpdateDTO memberUpdateDTO);
+    List<MemberDetailDTO> findAll();
 
 
-//    Long confirmPW(MemberUpdateDTO memberUpdateDTO);
+    MemberDetailDTO updateAddr(MemberUpdateDTO memberUpdateDTO);
 }
