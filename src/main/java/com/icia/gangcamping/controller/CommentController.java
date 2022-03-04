@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.text.ParseException;
 import java.util.List;
 
 @Controller
@@ -27,7 +28,7 @@ public class CommentController {
       private final ReviewService rs;
 
     @PostMapping("/save")
-    public @ResponseBody List<CommentDetailDTO> save(@ModelAttribute CommentSaveDTO commentSaveDTO){
+    public @ResponseBody List<CommentDetailDTO> save(@ModelAttribute CommentSaveDTO commentSaveDTO) throws ParseException {
         Long commentId = cs.save(commentSaveDTO);
         List<CommentDetailDTO> commentList = cs.findAll(commentSaveDTO.getProductId());
         return commentList;
@@ -48,14 +49,14 @@ public class CommentController {
     }
 
 
-//    @GetMapping("/shoppingAsk")
-//    public String findAll(Model model) {
-//        List<CommentDetailDTO> cList = cs.findAll1();
-//        System.out.println(cList);
-//        model.addAttribute("cList", cList);
-//        return "redirect:/admin/shoppingAsk";
-//
-//    }
+    @GetMapping("/shoppingAsk")
+    public String findAll(Model model) {
+        List<CommentDetailDTO> cList = cs.findAll1();
+        System.out.println(cList);
+        model.addAttribute("cList", cList);
+        return "redirect:/admin/shoppingAsk";
+
+    }
 }
 
 
