@@ -759,7 +759,7 @@
 										<div class="col-lg-11">
 											<div class="review_content">
 												<div th:each="review:${review}">
-													<div class="review_rating"><p th:text="${review.reviewStar}"></p></div>
+													<div class="review_rating" style="margin-bottom: 75px;"><p th:text="${review.reviewStar}"></p></div>
 													<div class="review_title">"<span th:text="${review.reviewTitle}"></span>"</div>
 													<div ><span class="review_text" th:text="${review.reviewContents}"> </span></div>
 													<div class="review_name"><span th:text="${review.reviewWriter}"></span></div>
