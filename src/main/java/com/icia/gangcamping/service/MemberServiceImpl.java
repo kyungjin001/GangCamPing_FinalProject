@@ -112,11 +112,16 @@ public class MemberServiceImpl implements MemberService{
         return memberList;
     }
 
-//    @Override
-//    public MemberDetailDTO updateAddr(MemberUpdateDTO memberUpdateDTO) {
-//        MemberEntity memberEntity = MemberEntity.toUpdateMember(memberUpdateDTO);
-//        return mr.save(memberEntity);
-//    }
+    @Override
+    public MemberDetailDTO updateAddr(MemberUpdateDTO memberUpdateDTO) {
+        MemberEntity member= findByMemberEmail(memberUpdateDTO.getMemberEmail());
+        member.setMemberAddr(memberUpdateDTO.getMemberAddr());
+        MemberEntity memberEntity = mr.save(member);
+        System.out.println(member.toString());
+        MemberDetailDTO memberUpdateDTO1 = MemberDetailDTO.toMemberDetailDTO(memberEntity);
+        System.out.println(memberUpdateDTO1.toString());
+        return memberUpdateDTO1;
+    }
 
 
 //    @Override

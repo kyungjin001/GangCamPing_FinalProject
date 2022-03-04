@@ -54,6 +54,11 @@ public class BookServiceImpl implements BookService {
         return br.save(bookEntity).getBookId();
     }
 
+    @Override
+    public List<BookDetailDTO> findAll() {
+        return null;
+    }
+
 
 //    @Override
 //    public List<BookDetailDTO> findAll() {

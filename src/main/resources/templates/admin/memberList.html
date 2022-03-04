@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>About Us</title>
     <meta charset="utf-8">
@@ -291,9 +291,9 @@
         <colgroup>
             <col style="width: 74px">
             <col style="width: 83px">
+<!--            <col style="width: 113px">-->
             <col style="width: 113px">
-            <col style="width: 295px">
-            <col style="width: 93px">
+            <col style="width: 400px">
             <col style="width: 100px">
             <col style="width: 120px">
         </colgroup>
@@ -301,7 +301,7 @@
         <tr>
             <th class="tg-lstg">회원번호</th>
             <th class="tg-lstg">회원Email</th>
-            <th class="tg-lstg">비밀번호</th>
+<!--            <th class="tg-lstg">비밀번호</th>-->
             <th class="tg-lstg">이름 </th>
             <th class="tg-lstg">주소</th>
             <th class="tg-lstg">핸드폰 번호</th>
@@ -310,9 +310,9 @@
         </thead>
         <tbody>
         <tr th:each="member: ${memberList}">
-            <td class="tg-80qx" th:text="${member.memberdId}" readonly></td>
+            <td class="tg-80qx" th:text="${member.memberId}" readonly></td>
             <td class="tg-80qx" th:text="${member.memberEmail}" readonly></td>
-            <td class="tg-80qx" th:type="hidden" th:text="${member.memberPw}"></td>
+<!--            <td class="tg-80qx" th:type="hidden" th:text="${member.memberPw}"></td>-->
             <td class="tg-80qx" th:text="${member.memberName}"></td>
             <td class="tg-80qx" th:text="${member.memberAddr}"></td>
             <td class="tg-80qx" th:text="${member.memberPhone}"></td>

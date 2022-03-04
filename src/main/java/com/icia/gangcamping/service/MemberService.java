@@ -35,8 +35,6 @@ public interface MemberService {
 
     List<MemberDetailDTO> findAll();
 
-//    MemberDetailDTO updateAddr(MemberUpdateDTO memberUpdateDTO);
 
-
-//    Long confirmPW(MemberUpdateDTO memberUpdateDTO);
+    MemberDetailDTO updateAddr(MemberUpdateDTO memberUpdateDTO);
 }

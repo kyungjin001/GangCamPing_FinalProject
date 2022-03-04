@@ -50,9 +50,10 @@ public class AdminController {
 
     }
 
-    @RequestMapping("memberList")
+    @GetMapping("memberList")
     public String memberList(Model model) {
         List<MemberDetailDTO> memberList = ms.findAll();
+        System.out.println("asdfasdfsadfdsaf"+memberList.toString());
         model.addAttribute("memberList", memberList);
         return "admin/memberList";
 
@@ -73,13 +74,15 @@ public class AdminController {
         return "admin/productSaleList";
     }
 
-//    @RequestMapping("bookList")
-//    public String bookList(Model model) {
-//        List<BookDetailDTO> bookList = bs.findAll();
-//        model.addAttribute("bookList",bookList);
-//        return "admin/bookList";
-//
-//    }
+    @RequestMapping("bookList")
+    public String bookList(Model model) {
+        List<BookDetailDTO> bookList = bs.findAll();
+        model.addAttribute("bookList",bookList);
+        return "admin/bookList";
+
+    }
+
+
     @RequestMapping("findAll")
     public String findAll(Model model) {
         List<GoodsDetailDTO> goodsList = ss.findAll();

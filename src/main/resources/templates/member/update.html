@@ -39,7 +39,7 @@
             box-sizing: border-box;
         }
         .icon {
-            font-size: 110px;
+            font-size: 60px;
             display: flex;
             justify-content: center;
             color: #4286f4;
@@ -55,7 +55,7 @@
         }
         h1 {
             text-align:center;
-            fone-size:18;
+            fone-size:14;
         }
         button:hover {
             opacity: 0.8;
@@ -288,44 +288,40 @@
         </div>
     </div>
 
-
-    <a href="/member/shoppingDetail">쇼핑상세페이지</a>
-    <a href="/member/bookDetail">쇼핑상세페이지</a>
-    <a href="/member/addrChange">주소수정</a>
-    <a href="/member/confirmPW">비밀번호찾기</a>
-
     <div class="menu-wrapper">
         <div class="menu1" onclick="location.href='/member/update'" >나의정보</div>
-        <div class="menu2" onclick="location.href='/member/bookList'" style="cursor: pointer;">캠핑내역</div>
+        <div class="menu2" onclick="location.href='/mypage/bookList'" style="cursor: pointer;">캠핑내역</div>
         <div class="menu3" onclick="location.href='/member/shoppingList'" style="cursor: pointer;">쇼핑내역</div>
         <div class="menu4" onclick="location.href='/member/shoppingLike'" style="cursor: pointer;">찜</div>
         <div class="menu5" onclick="location.href='/room'" style="cursor: pointer;">예약변경</div>
+        <br><br></b><br><br>
+        <b style="text-align:center;" th:text="|${session['loginEmail']}|+님"></b>
+        <b style="text-align:center;">환영합니다.</b>
     </div>
 
-    <p style="text-align:center; color :brown"; th:text="${session.loginEmail}"></p>
-
     <div style="text-align: center;" class="formWrapper">
-    <form action="/member/update" id="memberUp" name="memberPw">
-        <h1>회원 상세정보</h1>
+    <form id="memberUp" name="memberPw">
+        <br><h2>회원 상세정보</h2>
         <div class="icon">
             <i class="fas fa-user-circle"></i>
         </div>
         <div class="formcontainer">
             <div class="container">
                 <input th:type="hidden" th:name="memberId" id="memberId" th:value="${member.memberId}">
-                <label for="memberEmail"><strong>이메일(Email)</strong></label>
-                <input type="text" th:name="memberEmail" th:value="${member.memberEmail}" readonly >
+
+                <label for="mEmail"><strong>이메일(Email)</strong></label>
+                <input type="text" th:name="memberEmail" id="mEmail" th:value="${member.memberEmail}" readonly >
                 <label for="memberPw"><strong>비밀번호(password)</strong></label>
-                <input type="password" th:name="memberPw" th:value="${member.memberPw}" readonly>
+                <input type="password" th:name="memberPw" id="memberPw" th:value="${member.memberPw}" readonly>
                 <label for="memberName"><strong>이름(Name)</strong></label>
-                <input type="text" th:name="memberName" th:value="${member.memberName}">
+                <input type="text" th:name="memberName" id="memberName" th:value="${member.memberName}">
                 <label for="memberAddr"><strong>주소(Address)</strong></label>
-                <input type="text" th:name="memberAddr" th:value="${member.memberAddr}">
+                <input type="text" th:name="memberAddr"  id="memberAddr" th:value="${member.memberAddr}">
                 <label for="memberPhone"><strong>핸드폰번호(CellPhone Number)</strong></label>
-                <input type="text" th:name="memberPhone" th:value="${member.memberPhone}">
+                <input type="text" th:name="memberPhone" id="memberPhone" th:value="${member.memberPhone}">
             </div>
-            <button type="submit" th:onclick="ajaxUp()"><strong>정보 수정</strong></button>
-        </div>
+            <button type="button" th:onclick="ajaxUp()"><strong>정보 수정</strong></button>
+        </div><br><br>
     </form>
 
     <div style="text-align: center;" class="formWrapper"><br><br>
@@ -768,10 +764,6 @@
 <script>
     const ajaxUp = () => {
 
-        const pw=document.getElementById("memberPw").value;
-        const pwDB="[[${member.memberPw}]]";
-
-        if(pw==pwDB){
             const id = document.getElementById("memberId").value;
             const reqUrl = "/member/"+id;
             var form = $('#memberUp')[0];
@@ -788,16 +780,13 @@
                 cache: false,
                 timeout: 600000,
                 success: function(){
-                    location.href="/member/"+id;
+                    console.log("???")
+                    location.href="/member/update";
                 },
                 error: function (){
                     alert("Ajax 실패")
                 }
             });
-
-        }else{
-            alert("비밀번호를 확인해주세요.")
-        }
     }
 </script>
 

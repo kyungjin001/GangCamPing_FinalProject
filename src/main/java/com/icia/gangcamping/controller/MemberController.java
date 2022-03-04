@@ -92,6 +92,8 @@ public class MemberController {
 
         if (ms.login(memberLoginDTO)) {
             session.setAttribute("loginEmail", memberLoginDTO.getMemberEmail());
+            Long loginId = ms.findByMemberId(memberLoginDTO.getMemberEmail());
+            session.setAttribute("loginId",loginId);
             return "redirect:/";
         } else {
             return "redirect:/";
@@ -145,19 +147,19 @@ public class MemberController {
 
 
     //마이페이지
-    @GetMapping("/mypage")
+    @GetMapping("/{memberId}")
     public String mypage() {
         return "member/mypage";
     }
 
-    @GetMapping("{memberEmail}")
+    /*@GetMapping("{memberEmail}")
     public String findById(HttpSession session, @PathVariable("memberEmail") String memberEmail, Model model) {
         String memberEmail1 = (String)session.getAttribute("loginEmail");
         MemberDetailDTO member = MemberDetailDTO.toMemberDetailDTO(ms.findByMemberEmail(memberEmail1));
         model.addAttribute("member", member);
         return "member/mypage";
 
-    }
+    }*/
 
 
 
@@ -171,14 +173,13 @@ public class MemberController {
         return "member/update";
     }
 
-//    @PostMapping("/updateAddr")
-//   public String updateAddr(HttpSession session, @ModelAttribute MemberUpdateDTO memberUpdateDTO, Model model){
-//        String memberEmail = (String) session.getAttribute("loginEmail");
-//        MemberDetailDTO member = ms.findByEmail(memberEmail);
-//       ms.updateAddr(memberUpdateDTO);
-//       model.addAttribute("member", member);
-//       return "member/update";
-//   }
+    @PostMapping("/updateAddr")
+   public String updateAddr(HttpSession session, @ModelAttribute MemberUpdateDTO memberUpdateDTO, Model model){
+
+       MemberDetailDTO member = ms.updateAddr(memberUpdateDTO);
+       model.addAttribute("member", member);
+       return "member/update";
+   }
 
 //    @PostMapping("/update")
 //    public String update(@ModelAttribute MemberUpdateDTO memberUpdateDTO) {

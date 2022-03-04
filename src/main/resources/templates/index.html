@@ -160,11 +160,11 @@
         });
     </script>
 
-    <style>
+<!--    <style>
         .field-error {
             color: red;
         }
-    </style>
+    </style> -->
 
     <script>
         window.onload = function (){
@@ -225,7 +225,7 @@
                                     Logout</a>
                                 </div>
                                 <div class="user_box_login user_box_link">
-                                    <a class="nav-link" th:href="@{|/member/${session.loginEmail}|}" style="font-size: 15px">
+                                    <a class="nav-link" th:href="@{|/member/${session.loginId}|}" style="font-size: 15px">
                                     MyPage</a>
                                 </div>
                             </span>
@@ -866,7 +866,7 @@
                             <img src="/images/kakao_login_medium_narrow.png">
                         </a>
 
-                    </span><br>
+                    </span>
 
                             <span th:if="${session['userId'] == null}" class="n1 d-flex">
 
@@ -877,7 +877,7 @@
                             </a>
 
                             <!-- 										<li onclick="naverLogout(); return false;">
-                             -->									      <a href="javascript:void(0)" onclick="naverLogout(); return false;">
+                             -->     <a href="javascript:void(0)" onclick="naverLogout(); return false;">
                             <img src = "/img/btnG_로그아웃.png" width="115" height="48"></img>
                         </a>
 
@@ -936,7 +936,7 @@
                             <!--네이버 로그인 끝  -->
                             </span>
 
-                            <br> <br><br><button  onclick="location.href='#'" data-toggle="modal" data-target="#findPw" data-dismiss="modal" class="btn btn-primary">비밀번호 찾기</button><br>
+                            <br> <br><br><button  onclick="location.href='#'" data-toggle="modal" data-target="#findPw" data-dismiss="modal" class="btn btn-primary">비밀번호 찾기</button>
                             <button onclick="location.href='#'" data-toggle="modal" data-target="#signin" data-dismiss="modal" class="btn btn-primary">회원가입</button><br>
 
 
@@ -977,12 +977,12 @@
                                        name="memberPw" required>
                                 <input type="password" class="form-control" id="pwd2" placeholder="비밀번호를 다시 입력해주세요."
                                        required>
-                                <div class="alert alert-success" id="alert-success" style="color : green">비밀번호가 일치합니다.</div>
-                                <div class="alert alert-danger" id="alert-danger" style="color : red">비밀번호가 일치하지 않습니다.</div>
+                                <div class="alert alert-success" id="alert-success" style="color : green; background-color : transparent">비밀번호가 일치합니다.</div>
+                                <div class="alert alert-danger" id="alert-danger" style="color : red; background-color : transparent">비밀번호가 일치하지 않습니다.</div>
                             </div>
                             <div class="form-group">
-                                <label for="registerName">이름 </label> <br>
-                                <input type="text" class="form-control" minlength='5' maxlength='30' id="registerName" placeholder="이름을 5~30자로 입력해주세요."
+                                <label for="memberName">이름 </label> <br>
+                                <input type="text" class="form-control" minlength='5' maxlength='30' id="memberName" placeholder="이름을 5~30자로 입력해주세요."
                                        name="memberName" required>
                             </div>
                             <div class="form-group">
