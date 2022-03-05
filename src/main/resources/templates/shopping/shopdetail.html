@@ -122,13 +122,7 @@
     </style>
 
 
-    <script>
-        function change() {
-            const var1 = document.getElementById('ch');
-            console.log(var1);
-            document.getElementById('dd').value = var1;
-        }
-    </script>
+
 
 
 </head>
@@ -233,15 +227,6 @@
         </div>
     </div>
 
-    <!-- Home -->
-
-    <!--	<div class="home">-->
-    <!--		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/blog_background.jpg"></div>-->
-    <!--		<div class="home_content">-->
-    <!--			<div class="home_title">the blog</div>-->
-    <!--		</div>-->
-    <!--	</div>-->
-
     <!-- Product Details Section Begin -->
     <section class="product-details spad">
         <div class="container">
@@ -273,7 +258,7 @@
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star-half-o"></i>
-                            <span>(18 reviews)</span>
+                            <span>(5 reviews)</span>
                         </div>
                         <div class="product__details__price" th:text="|${goods.productPrice}|+원"></div>
                         <p th:text="${goods.productDescription}"></p>
@@ -281,17 +266,16 @@
                             <div>
                                 <div>
 									<span th:if="(${stock.stock} == 0 )">
-									<input value="품절">
+									<b style="font-size: large">품절</b>
 									</span>
                                     <span th:unless="(${stock.stock} == 0 )">
-<!--									<input onchange="change()" type="text" value="1" id="ch">-->
-										<input type='button'
-                                               onclick='count("plus")'
-                                               value='+'/>
-                                        			<span id='result'>0</span>
 										<input type='button'
                                                onclick='count("minus")'
-                                               value='-'/>
+                                               value='-' class="btn btn-light"/>
+                                        			<span id='result'>1</span>
+										<input type='button'
+                                               onclick='count("plus")'
+                                               value='+' class="btn btn-light"/>
 
 									</span>
                                     <script>
