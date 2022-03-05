@@ -138,7 +138,7 @@
 				type: 'delete',
 				url:reqUrl,
 				success: function (){
-					location.reload();
+					location.href='/mypage/bookList';
 				},
 				error: function (){
 
@@ -181,8 +181,8 @@
                             </span>
 							<span th:if="(${session.loginEmail}!=null)">
                                 <div class="user_box_login user_box_link">
-                                    <a class="nav-link" href="/member/logOut" style="font-size: 15px">
-                                    LogOut</a>
+                                    <a class="nav-link" href="/member/logout" style="font-size: 15px">
+                                    logout</a>
                                 </div>
                             </span>
 							<span th:if="${session['userId'] != null}">
@@ -295,7 +295,44 @@
 			<td class="tg-80qx" th:text="|${#dates.format(book.bookCheckIn, 'yyyy-MM-dd')}|"></td>
 			<td class="tg-80qx" th:text="|${#dates.format(book.bookCheckOut, 'yyyy-MM-dd')}|"></td>
 			<td class="tg-80qx" th:text="${book.bookPrice}"><span>원</span></td>
-			<td class="tg-80qx"><button data-toggle="modal" th:onclick="deleteById([[${book.bookId}]])"  data-target="#bookCancle">예약취소</button></td>
+			<td class="tg-80qx"><button data-toggle="modal" data-target="#bookCancle">예약취소</button></td>
+			<!-- bookCancle Modal -->
+			<div class="modal fade" tabindex="-1" id="bookCancle" aria-labelledby="loginModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+
+						<!-- Modal Header -->
+						<div class="modal-header">
+							<h4 class="modal-title">예약취소</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+
+						<!-- Modal body -->
+						<div class="modal-body">
+							<form >
+
+								<div class="form-group">
+									<label for="loginId" style="margin-left: 200px">취소사유 </label> <br>
+									<select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" style="margin-left: 30%">
+										<option selected>취소사유를 선택해주세요.</option>
+										<option value="1">다른 일정이 생겼어요.</option>
+										<option value="2">가격이 다른곳보다 비싸요.</option>
+										<option value="3">단순변심</option>
+										<option value="4">기타</option>
+									</select>
+								</div>
+							</form>
+
+							<!-- Modal footer -->
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" th:onclick="deleteById([[${book.bookId}]])" data-dismiss="modal">취소하기</button>
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
 		</tr>
 		<tr>
 			<td class="tg-80qx"></td>

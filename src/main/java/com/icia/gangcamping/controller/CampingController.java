@@ -52,7 +52,7 @@ public class CampingController {
         }
         model.addAttribute("bookList",book);
 
-        return "/member/bookList";
+        return "redirect:/mypage/bookList";
     }
 
     @PostMapping("/campingLike")

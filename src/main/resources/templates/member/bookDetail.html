@@ -210,7 +210,7 @@
                             </span>
 							<span th:if="(${session.loginEmail}!=null)">
                                 <div class="user_box_login user_box_link">
-                                    <a class="nav-link" href="/member/logOut" style="font-size: 15px">
+                                    <a class="nav-link" href="/member/logout" style="font-size: 15px">
                                     LogOut</a>
                                 </div>
                             </span>
@@ -290,7 +290,7 @@
 		<div class="menu2" onclick="location.href='/member/bookList'" style="cursor: pointer;"><h4>캠핑내역</h4></div>
 		<div class="menu3" onclick="location.href='/member/shoppingList'" style="cursor: pointer;"><h4>쇼핑내역</h4></div>
 		<div class="menu4" onclick="location.href='/member/shoppingLike'" style="cursor: pointer;"><h4>찜</h4></div>
-		<div class="menu5"  onclick="window.open('/room','sales','width = 600, height = 500, top = 100, left = 300, location= no')" style="cursor: pointer;">예약변경</div>
+		<div class="menu5" onclick="location.href='/room'" style="cursor: pointer;">예약변경</div>
 	</div>
 
 
@@ -315,7 +315,7 @@
 			결제액 : <a th:text="${book.bookPrice}"></a><br><br>
 			체크인 :<a th:text="${book.bookCheckIn}"></a><br><br>
 			체크아웃 : <a th:text="${book.bookCheckOut}"></a><br><br>
-		</div>
+		</div><br>
 		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">리뷰등록</button>
 
 		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
