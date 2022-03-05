@@ -59,10 +59,14 @@
                                     SignIn</a>
                                 </div>
                             </span>
-                            <span th:if="(${session.loginEmail}!=null)">
+                            <span th:if="(${session.loginEmail}!=null) and (${session.loginEmail}!='admin')">
                                 <div class="user_box_login user_box_link">
                                     <a class="nav-link" href="/member/logout" style="font-size: 15px">
-                                    LogOut</a>
+                                    Logout</a>
+                                </div>
+                                <div class="user_box_login user_box_link">
+                                    <a class="nav-link" th:href="@{|/member/${session.loginEmail}|}" style="font-size: 15px">
+                                    MyPage</a>
                                 </div>
                             </span>
                             <span th:if="${session['userId'] != null}">
@@ -71,11 +75,24 @@
                                       style="font-size: 15px">
                                    LogOut</a>
                                </div>
-                            </span>
-                            <div class="user_box_login user_box_link">
-                                <a class="nav-link" th:href="@{|/member/${session.loginEmail}|}" style="font-size: 15px">
+                               <div class="user_box_login user_box_link">
+                                    <a class="nav-link" href="/member/mypage" style="font-size: 15px">
                                     MyPage</a>
-                            </div>
+                               </div>
+                            </span>
+                            <span th:if="(${session.loginEmail}=='admin')">
+                                <div class="user_box_login user_box_link">
+                                    <a class="nav-link" href="/member/logOut" style="font-size: 15px">
+                                    LogOut</a>
+                                </div>
+                                <div class="user_box_login user_box_link">
+                                    <a class="nav-link" href="/admin/mypage" style="font-size: 15px">
+                                    MyPage</a>
+                                </div>
+                            </span>
+
+
+
                         </div>
                     </div>
                 </div>
@@ -231,6 +248,65 @@
 
         <div class="container">
             <div class="row">
+                <div class="col-lg-1 temp_col"></div>
+                <div class="col-lg-11">
+
+                    <!-- Offers Sorting -->
+                    <div class="offers_sorting_container">
+                        <ul class="offers_sorting">
+                            <li>
+                                <span class="sorting_text">price</span>
+                                <i class="fa fa-chevron-down"></i>
+                                <ul>
+                                    <li class="sort_btn" data-isotope-option='{ "sortBy": "original-order" }'
+                                        data-parent=".price_sorting"><span>show all</span></li>
+                                    <li class="sort_btn" data-isotope-option='{ "sortBy": "price" }'
+                                        data-parent=".price_sorting"><span>ascending</span></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <span class="sorting_text">location</span>
+                                <i class="fa fa-chevron-down"></i>
+                                <ul>
+                                    <li class="sort_btn" data-isotope-option='{ "sortBy": "original-order" }'><span>default</span>
+                                    </li>
+                                    <li class="sort_btn" data-isotope-option='{ "sortBy": "name" }'>
+                                        <span>alphabetical</span></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <span class="sorting_text">stars</span>
+                                <i class="fa fa-chevron-down"></i>
+                                <ul>
+                                    <li class="filter_btn" data-filter="*"><span>show all</span></li>
+                                    <li class="sort_btn" data-isotope-option='{ "sortBy": "stars" }'>
+                                        <span>ascending</span></li>
+                                    <li class="filter_btn" data-filter=".rating_3"><span>3</span></li>
+                                    <li class="filter_btn" data-filter=".rating_4"><span>4</span></li>
+                                    <li class="filter_btn" data-filter=".rating_5"><span>5</span></li>
+                                </ul>
+                            </li>
+                            <li class="distance_item">
+                                <span class="sorting_text">distance from center</span>
+                                <i class="fa fa-chevron-down"></i>
+                                <ul>
+                                    <li class="num_sorting_btn"><span>distance</span></li>
+                                    <li class="num_sorting_btn"><span>distance</span></li>
+                                    <li class="num_sorting_btn"><span>distance</span></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <span class="sorting_text">reviews</span>
+                                <i class="fa fa-chevron-down"></i>
+                                <ul>
+                                    <li class="num_sorting_btn"><span>review</span></li>
+                                    <li class="num_sorting_btn"><span>review</span></li>
+                                    <li class="num_sorting_btn"><span>review</span></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
                 <div class="col-lg-12">
                     <!-- Offers Grid -->
@@ -308,6 +384,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -713,6 +790,7 @@
 
 </div>
 <!-- top button -->
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 <script>
     //Get the button:
     mybutton = document.getElementById("myBtn");

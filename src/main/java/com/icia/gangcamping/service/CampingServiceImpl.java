@@ -56,7 +56,7 @@ public class CampingServiceImpl implements CampingService {
 
     @Override
     public List<CampingDetailDTO> findTop3AllOrderByCampingLikeCount() {
-        List<CampingEntity> list = campingRepository.findTop4ByOrderByCampingLikeCountAsc();
+        List<CampingEntity> list = campingRepository.findTop4ByOrderByCampingLikeCountDesc();
         List<CampingDetailDTO> dtoList = new ArrayList<>();
         for( CampingEntity entity : list){
             CampingDetailDTO camping = CampingDetailDTO.toCampingDetailDTO(entity);

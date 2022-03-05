@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>About Us</title>
     <meta charset="utf-8">
@@ -171,6 +171,7 @@
 
     <!-- Header -->
 
+
     <header class="header">
 
         <!-- Top Bar -->
@@ -195,10 +196,14 @@
                                     SignIn</a>
                                 </div>
                             </span>
-                            <span th:if="(${session.loginEmail}!=null)">
+                            <span th:if="(${session.loginEmail}!=null) and (${session.loginEmail}!='admin')">
                                 <div class="user_box_login user_box_link">
-                                    <a class="nav-link" href="/member/logOut" style="font-size: 15px">
-                                    LogOut</a>
+                                    <a class="nav-link" href="/member/logout" style="font-size: 15px">
+                                    Logout</a>
+                                </div>
+                                <div class="user_box_login user_box_link">
+                                    <a class="nav-link" th:href="@{|/member/${session.loginEmail}|}" style="font-size: 15px">
+                                    MyPage</a>
                                 </div>
                             </span>
                             <span th:if="${session['userId'] != null}">
@@ -207,7 +212,24 @@
                                       style="font-size: 15px">
                                    LogOut</a>
                                </div>
+                               <div class="user_box_login user_box_link">
+                                    <a class="nav-link" href="/member/mypage" style="font-size: 15px">
+                                    MyPage</a>
+                               </div>
                             </span>
+                            <span th:if="(${session.loginEmail}=='admin')">
+                                <div class="user_box_login user_box_link">
+                                    <a class="nav-link" href="/member/logOut" style="font-size: 15px">
+                                    LogOut</a>
+                                </div>
+                                <div class="user_box_login user_box_link">
+                                    <a class="nav-link" href="/admin/mypage" style="font-size: 15px">
+                                    MyPage</a>
+                                </div>
+                            </span>
+
+
+
                         </div>
                     </div>
                 </div>
@@ -226,11 +248,11 @@
                         <div class="main_nav_container ml-auto">
                             <ul class="main_nav_list">
                                 <li class="main_nav_item"><a href="/">home</a></li>
-                                <li class="main_nav_item"><a href="/search/camping">booking</a></li>
+                                <li class="main_nav_item"><a href="/search/camping">camping</a></li>
                                 <li class="main_nav_item"><a href="/shopping/shopping">shopping</a></li>
-                                <li class="main_nav_item"><a href="/about">about us</a></li>
-                                <li class="main_nav_item"><a href="/contact">contact</a></li>
-                                <li class="main_nav_item"><a href="/test">apiTest</a></li>
+                                <li class="main_nav_item"><a href="about">about us</a></li>
+                                <li class="main_nav_item"><a href="contact">contact</a></li>
+
                             </ul>
                         </div>
 
@@ -248,6 +270,7 @@
         </nav>
 
     </header>
+
 
     <div class="menu trans_500">
         <div class="menu_content d-flex flex-column align-items-center justify-content-center text-center">
@@ -291,32 +314,33 @@
         <colgroup>
             <col style="width: 74px">
             <col style="width: 83px">
+<!--            <col style="width: 113px">-->
             <col style="width: 113px">
-            <col style="width: 295px">
-            <col style="width: 93px">
+            <col style="width: 400px">
             <col style="width: 100px">
             <col style="width: 120px">
         </colgroup>
         <thead>
         <tr>
             <th class="tg-lstg">회원번호</th>
-            <th class="tg-lstg">가입일</th>
-            <th class="tg-lstg">회원명</th>
-            <th class="tg-lstg">회원 Email</th>
-            <th class="tg-lstg">전화번호</th>
+            <th class="tg-lstg">회원Email</th>
+<!--            <th class="tg-lstg">비밀번호</th>-->
+            <th class="tg-lstg">이름 </th>
             <th class="tg-lstg">주소</th>
+            <th class="tg-lstg">핸드폰 번호</th>
             <th class="tg-lstg">비고</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td class="tg-80qx">00001</td>
-            <td class="tg-80qx">2022-02-22</td>
-            <td class="tg-80qx">가나다라마</td>
-            <td class="tg-80qx">aaaaa@aaa.com<br>옵션: 大 </td>
-            <td class="tg-80qx">01234567890</td>
-            <td class="tg-80qx">인천시 미추홀구 가나다동 123번지<br>나다라아파트 가동 101호</td>
+        <tr th:each="member: ${memberList}">
+            <td class="tg-80qx" th:text="${member.memberId}" readonly></td>
+            <td class="tg-80qx" th:text="${member.memberEmail}" readonly></td>
+<!--            <td class="tg-80qx" th:type="hidden" th:text="${member.memberPw}"></td>-->
+            <td class="tg-80qx" th:text="${member.memberName}"></td>
+            <td class="tg-80qx" th:text="${member.memberAddr}"></td>
+            <td class="tg-80qx" th:text="${member.memberPhone}"></td>
             <td class="tg-80qx"></td>
+
         </tr>
         <tr>
             <td class="tg-80qx"></td>

@@ -94,6 +94,15 @@
 			border-radius: 20%;
 		}
 
+		.table-wrapper {
+			margin-bottom: 0px;
+			margin-left: 50px;
+			width: 100%;
+			height: 500px;
+			text-align: center;
+			padding: 50px 0;
+		}
+
 		.kickout-wrapper {
 			text-align: right;
 			padding: 50px 0;
@@ -179,10 +188,14 @@
                                     SignIn</a>
                                 </div>
                             </span>
-							<span th:if="(${session.loginEmail}!=null)">
+							<span th:if="(${session.loginEmail}!=null) and (${session.loginEmail}!='admin')">
                                 <div class="user_box_login user_box_link">
                                     <a class="nav-link" href="/member/logout" style="font-size: 15px">
-                                    logout</a>
+                                    Logout</a>
+                                </div>
+                                <div class="user_box_login user_box_link">
+                                    <a class="nav-link" th:href="@{|/member/${session.loginEmail}|}" style="font-size: 15px">
+                                    MyPage</a>
                                 </div>
                             </span>
 							<span th:if="${session['userId'] != null}">
@@ -191,7 +204,24 @@
 									  style="font-size: 15px">
                                    LogOut</a>
                                </div>
+                               <div class="user_box_login user_box_link">
+                                    <a class="nav-link" href="/member/mypage" style="font-size: 15px">
+                                    MyPage</a>
+                               </div>
                             </span>
+							<span th:if="(${session.loginEmail}=='admin')">
+                                <div class="user_box_login user_box_link">
+                                    <a class="nav-link" href="/member/logOut" style="font-size: 15px">
+                                    LogOut</a>
+                                </div>
+                                <div class="user_box_login user_box_link">
+                                    <a class="nav-link" href="/admin/mypage" style="font-size: 15px">
+                                    MyPage</a>
+                                </div>
+                            </span>
+
+
+
 						</div>
 					</div>
 				</div>
@@ -210,11 +240,11 @@
 						<div class="main_nav_container ml-auto">
 							<ul class="main_nav_list">
 								<li class="main_nav_item"><a href="/">home</a></li>
-								<li class="main_nav_item"><a href="/search/camping">booking</a></li>
+								<li class="main_nav_item"><a href="/search/camping">camping</a></li>
 								<li class="main_nav_item"><a href="/shopping/shopping">shopping</a></li>
 								<li class="main_nav_item"><a href="about">about us</a></li>
 								<li class="main_nav_item"><a href="contact">contact</a></li>
-								<li class="main_nav_item"><a href="/test">apiTest</a></li>
+
 							</ul>
 						</div>
 
@@ -264,6 +294,7 @@
 		<div class="menu5"  onclick="window.open('/room','sales','width = 600, height = 500, top = 100, left = 300, location= no')" style="cursor: pointer;">예약변경</div>
 	</div>
 
+	<div class="table-wrapper">
 	<p style="text-align:center; color :brown";>캠핑 예약내역</p>
 
 	<table class="tg" style="undefined; table-layout: fixed; width: 878px" table>
@@ -285,6 +316,7 @@
 			<th class="tg-lstg">입실일</th>
 			<th class="tg-lstg">퇴실일</th>
 			<th class="tg-lstg">결제액</th>
+			<th class="tg-lstg">비고</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -346,6 +378,7 @@
 		</tr>
 		</tbody>
 	</table>
+	</div>
 
 
 
