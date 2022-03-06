@@ -45,6 +45,14 @@
     <script>
         function codeSend() {
 
+            var timer =null;
+            var isRunning = false;
+
+            var display = document.getElementById("codeTime");
+            var leftSec=180;
+
+
+
             const mail = document.getElementById("pwMemberEmail").value;
             const codeInput = document.getElementById("codeInput");
             const send = document.getElementById("send");
@@ -52,7 +60,8 @@
             const emailcancel = document.getElementById("emailCancel");
             const emailSend = document.getElementById("emailSend");
             const check = document.getElementById("check");
-            const useremail = document.getElementById("members")
+            const useremail = document.getElementById("members");
+            const back = document.getElementById("back");
             $.ajax({
                 type: 'post',
                 url: '/mail/mailCode',
@@ -67,7 +76,38 @@
                         send.type = "submit";
                         cancel.type = "button";
                         check.type = "button";
+                        back.type = "button";
                         useremail.value = result.memberId;
+
+                        if(isRunning){
+                            clearInterval(timer);
+                            display.html("");
+                            startTimer(leftSec, display);
+                        }else{
+                            startTimer(leftSec, display);
+                        }
+
+                        function startTimer(count, display){
+
+                            var minutes, seconds;
+                            timer = setInterval(function (){
+                                minutes = parseInt(count / 60, 10);
+                                seconds = parseInt(count % 60, 10);
+
+                                minutes = minutes < 10 ? "0" + minutes : minutes;
+                                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                                display.textContent=(minutes + ":" + seconds);
+
+                                if(--count < 0){
+                                    clearInterval(timer);
+                                    alert("시간초과");
+                                    display.textContent=("시간초과");
+                                    isRunning = false;
+                                }
+                            }, 1000);
+                            isRunning = true;
+                        }
 
                     } else {
                         console.log('안되지롱 안되지롱 에베베베베베')
@@ -107,6 +147,78 @@
             });
         }
 
+    </script>
+    <script>
+
+        function codeSendBack(){
+
+            const mail = document.getElementById("pwMemberEmail").value;
+            const codeInput = document.getElementById("codeInput");
+            const send = document.getElementById("send");
+            const cancel = document.getElementById("cancel");
+            const emailcancel = document.getElementById("emailCancel");
+            const emailSend = document.getElementById("emailSend");
+            const check = document.getElementById("check");
+            const useremail = document.getElementById("members");
+
+            $.ajax({
+               type: 'post',
+                url: '/mail/mailCode',
+                data: {"memberEmail": mail},
+                dataType: 'json',
+                success: function (result) {
+
+                    if (result != null) {
+                        emailcancel.type = "hidden";
+                        emailSend.type = "hidden";
+                        codeInput.type = "text";
+                        send.type = "submit";
+                        cancel.type = "button";
+                        check.type = "button";
+                        back.type = "button";
+                        useremail.value = result.memberId;
+
+                        if(isRunning){
+                            clearInterval(timer);
+                            display.html("");
+                            startTimer(leftSec, display);
+                        }else{
+                            startTimer(leftSec, display);
+                        }
+
+                        function startTimer(count, display){
+
+                            var minutes, seconds;
+                            timer = setInterval(function (){
+                                minutes = parseInt(count / 60, 10);
+                                seconds = parseInt(count % 60, 10);
+
+                                minutes = minutes < 10 ? "0" + minutes : minutes;
+                                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                                display.textContent=(minutes + ":" + seconds);
+
+                                if(--count < 0){
+                                    clearInterval(timer);
+                                    alert("시간초과");
+                                    display.textContent=("시간초과");
+                                    isRunning = false;
+                                }
+                            }, 1000);
+                            isRunning = true;
+                        }
+
+                    } else {
+                        console.log('안되지롱 안되지롱 에베베베베베')
+                    }
+
+                },
+                error: function () {
+                    console.log("다시 확인해주세요.")
+                }
+
+            });
+        }
     </script>
 
 
@@ -160,12 +272,6 @@
         });
     </script>
 
-<!--    <style>
-        .field-error {
-            color: red;
-        }
-    </style> -->
-
     <script>
         window.onload = function (){
             today = new Date();
@@ -180,6 +286,15 @@
     <style>
         .n1{
             float: left;
+        }
+
+        #codeTime{
+            display: inline;
+            color: red;
+        }
+
+        #codeInput{
+            margin: 0;
         }
     </style>
 
@@ -849,23 +964,14 @@
                             <div class="form-group">
 
                                 <label for="loginId">ID </label> <br>
-                                <input type="text" class="form-control" id="loginId" placeholder="Enter ID"
+                                <input type="text" class="form-control" name="memberEmail" id="loginId" placeholder="Enter ID">
 
-                                <label for="loginId" style="margin-left: 200px">ID </label> <br>
-                                <input type="text" class="form-control" id="loginId" placeholder="회원가입 시 이메일을 적어주세요"
-
-                                       name="memberEmail"
-                                       required>
                             </div>
                             <div class="form-group">
 
                                 <label for="loginPw">비밀번호 </label>
-                                <input type="password" class="form-control" id="loginPw" placeholder="Enter Password"
+                                <input type="password" class="form-control" name="memberPw" id="loginPw" placeholder="Enter Password">
 
-                                <label for="loginPw" style="margin-left: 200px">비밀번호 </label>
-                                <input type="password" class="form-control" id="loginPw" placeholder="8~20자 사이로 입력해주세요."
-
-                                       name="memberPw" required>
                             </div>
                             <button type="submit" class="btn btn-primary" style="margin-left:200px">로그인</button>
                             <br>
@@ -1096,9 +1202,10 @@
                                    placeholder="Enter Your Email" required>
                             <form action="/member/update" method="get"  id="updateGO" name="pwUpdate">
                                 <input type="hidden" id="members" name="memberId">
-                                <input type="hidden" class="form-control" id="codeInput" placeholder="이메일 인증코드를 입력해주세요."
-                                       required>
+                                <input type="hidden" style="width: 80%" class="form-control" id="codeInput" placeholder="이메일 인증코드를 입력해주세요."
+                                       required><p id="codeTime"></p>
                                 <input type="hidden" th:onclick="codeCheck()" id="check" value="코드확인">
+                                <input type="hidden" th:onclick="codeSendBack()" id="back" value="재전송">
                             </form>
                         </div>
                     </div>
