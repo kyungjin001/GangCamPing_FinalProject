@@ -13,4 +13,5 @@ public interface CampingLikeRepository extends JpaRepository<CampingLikeEntity,L
     CampingLikeEntity findByMemberEntityAndCampingEntity(MemberEntity memberEntity, Optional<CampingEntity> camping);
 
     List<CampingLikeEntity> findByMemberEntity(MemberEntity memberEntity);
+
 }

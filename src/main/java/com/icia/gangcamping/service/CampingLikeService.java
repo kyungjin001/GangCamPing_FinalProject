@@ -17,4 +17,6 @@ public interface CampingLikeService {
     void deleteById(Long campingLikeId);
 
     List<CampingLikeDetailDTO> findByMemberEntity(MemberEntity memberEntity);
+
+
 }
