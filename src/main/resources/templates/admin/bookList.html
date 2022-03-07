@@ -343,7 +343,7 @@
 		<tbody>
 		<tr th:each="result :${bookList}">
 			<td class="tg-80qx"><a th:href="@{|/admin/bookDetail/${result.bookId}|}" th:text="${result.bookId}"></a></td>
-			<td class="tg-80qx"><a th:text="${result.createTime}"></a></td>
+			<td class="tg-80qx"><a th:text="|${#temporals.format(result.createTime, 'yyyy-MM-dd')}|"></a></td>
 			<td class="tg-80qx"><a th:text="${result.campingName}"></a></td>
 			<td class="tg-80qx"><a th:text="${result.bookPrice}"></a></td>
 			<td class="tg-80qx"><a th:text="${result.bookName}"></a></td>

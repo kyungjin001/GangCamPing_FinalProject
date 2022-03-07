@@ -78,6 +78,7 @@ public class AdminController {
     @RequestMapping("bookList")
     public String bookList(Model model) {
         List<BookDetailDTO> bookList = bs.findAll();
+        System.out.println(bookList.toString());
         model.addAttribute("bookList",bookList);
         return "admin/bookList";
 

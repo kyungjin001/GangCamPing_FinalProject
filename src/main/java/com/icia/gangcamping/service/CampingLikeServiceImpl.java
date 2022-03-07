@@ -64,5 +64,4 @@ public class CampingLikeServiceImpl implements CampingLikeService {
         return campingLikeDTO;
     }
 
-
 }
