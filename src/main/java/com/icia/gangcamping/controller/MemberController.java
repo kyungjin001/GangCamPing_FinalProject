@@ -219,12 +219,6 @@ public class MemberController {
         return "member/confirmPW";
     }
 
-//    @DeleteMapping("/{memberId}")
-//    public String deleteById(@PathVariable("memberId") Long memberId){
-//        ms.deleteById(memberId);
-//        return "index";
-//    }
-
     @DeleteMapping("/{memberId}")
     public ResponseEntity deleteById(HttpSession session, @PathVariable("memberId") Long memberId){
         ms.deleteById(memberId);
