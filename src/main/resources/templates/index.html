@@ -198,7 +198,7 @@
 
                                 if(--count < 0){
                                     clearInterval(timer);
-                                    alert("시간초과");
+                                    alert("재전송을 눌러주세요.");
                                     display.textContent=("시간초과");
                                     isRunning = false;
                                 }
@@ -279,7 +279,6 @@
             bir.value = today;
         }
     </script>
-
 
     <style>
         .n1{
@@ -1284,6 +1283,8 @@
         * @example   datePickerSet($("#datepicker1"), $("#datepicker2"));
         */
     function datePickerSet(sDate, eDate, flag) {
+        let todayDate = new Date();
+        console.log(todayDate);
         //시작 ~ 종료 2개 짜리 달력 datepicker
         if (!isValidStr(sDate) && !isValidStr(eDate) && sDate.length > 0 && eDate.length > 0) {
             var sDay = sDate.val();
