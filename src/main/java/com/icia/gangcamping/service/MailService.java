@@ -9,4 +9,6 @@ public interface MailService {
     String findByEmailCode(String emailCode);
 
     MailCodeDetailDTO findByMemberEmailAndEmailCode(String memberEmail, String emailCode);
+
+    String findByMail(String emailCode);
 }
