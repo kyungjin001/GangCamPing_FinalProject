@@ -335,11 +335,11 @@
 			예약번호 : <a th:text="${book.bookId}"></a><br><br>
 			캠핑장명 : <a th:text="${book.campingName}"></a><br><br>
 			결제액 : <a th:text="${book.bookPrice}"></a><br><br>
-			체크인 :<a th:text="${book.bookCheckIn}"></a><br><br>
-			체크아웃 : <a th:text="${book.bookCheckOut}"></a><br><br>
-		</div>
-		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">리뷰등록</button>
+			체크인 :<a th:text="|${#dates.format(book.bookCheckIn,'yyyy-MM-dd')}|"></a><br><br>
+			체크아웃 : <a th:text="|${#dates.format(book.bookCheckOut,'yyyy-MM-dd')}|"></a><br><br>
 
+		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">리뷰등록</button>
+		</div>
 		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
