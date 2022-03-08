@@ -47,6 +47,7 @@
 				success: function (result){
 					console.log("과연...");
 					if(result != null){
+						alert("찜 목록에 추가되었습니다.");
 						campingLike.value = result.campingLikeId;
 						console.log(campingLike);
 					}else{
@@ -62,7 +63,6 @@
 	</script>
 
 	<script>
-
 		function likeDelete(){
 			document.getElementById("emptyHeart").style.display="";
 			document.getElementById("fullHeart").style.display="none";
@@ -83,6 +83,12 @@
 
 		}
 	</script>
+	<style>
+		.reviewStar{
+			color: transparent;
+			text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+		}
+	</style>
 </head>
 
 <body>
@@ -457,8 +463,11 @@
 									<div>
 										<input type="hidden" id="campingId" th:value="${campingDetail.getCampingId()}">
 										<input type="hidden"  name="campingLikeId" id="campingLikeId">
-										<img src="/images/emptyHeart32.png"  id="emptyHeart" th:onclick="like()">
-										<img id="fullHeart" src="/images/fullHeart32.png" style="display:none" th:onclick="likeDelete()">
+										<div>
+											<img src="/images/emptyHeart32.png"  id="emptyHeart" th:onclick="like()">
+											<img id="fullHeart" src="/images/fullHeart32.png" style="display:none" th:onclick="likeDelete()">
+
+										</div>
 									</div>
 									<button style="margin-top: 0" class="button search_button" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">
 										book<span></span><span></span><span></span></button>
@@ -615,11 +624,11 @@
 										<div class="col-lg-11">
 											<div class="review_content">
 												<div th:each="review:${review}">
-													<div class="review_rating" style="margin-bottom: 75px;"><p th:text="${review.reviewStar}"></p></div>
+													<div class="review_rating" style="margin-bottom: 75px;"><span th:text="${review.reviewStar}"></span></div>
 													<div class="review_title">"<span th:text="${review.reviewTitle}"></span>"</div>
 													<div ><span class="review_text" th:text="${review.reviewContents}"> </span></div>
 													<div class="review_name"><span th:text="${review.reviewWriter}"></span></div>
-													<div class="review_date"><span th:text="|${#temporals.format(review.getCreateTime(), 'yyyy-MM-dd')}|"></span></div><br>
+													<div class="review_date"><span th:text="|${#temporals.format(review.getCreateTime(), 'yyyy-MM-dd-ss HH:mm:ss')}|"></span></div><br>
 
 												</div>
 											</div>

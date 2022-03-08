@@ -17,4 +17,5 @@ public interface BookService {
     List<BookDetailDTO> findAll();
 
     void deleteById(Long bookId);
+
 }

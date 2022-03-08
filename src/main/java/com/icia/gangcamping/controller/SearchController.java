@@ -1,11 +1,10 @@
 package com.icia.gangcamping.controller;
 
-import com.icia.gangcamping.dto.CampingDetailDTO;
-import com.icia.gangcamping.dto.CampingDetailSaveDTO;
-import com.icia.gangcamping.dto.ReviewDetailDTO;
+import com.icia.gangcamping.dto.*;
 import com.icia.gangcamping.entity.CampingEntity;
-import com.icia.gangcamping.service.CampingService;
-import com.icia.gangcamping.service.ReviewService;
+import com.icia.gangcamping.entity.MemberEntity;
+import com.icia.gangcamping.repository.CampingRepository;
+import com.icia.gangcamping.service.*;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -26,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -33,6 +33,9 @@ import java.util.List;
 public class SearchController {
     private final CampingService cs;
     private final ReviewService rs;
+    private final CampingLikeService cls;
+    private final MemberService ms;
+    private final CampingRepository cr;
 
      public List searchList(String keyword) throws IOException, ParseException {
 
@@ -147,10 +150,14 @@ public class SearchController {
         CampingDetailSaveDTO campingDetailSaveDTOS = cs.findByCampingEntity(campingEntity);
         System.out.println(campingDetailSaveDTOS.toString());
 
+        String memberEmail = (String)session.getAttribute("loginEmail");
+        MemberEntity memberEntity = ms.findByMemberEmail(memberEmail);
+        Optional<CampingEntity> camping= cr.findById(campingDetailDTO.getCampingId());
+
         model.addAttribute("review",review);
         model.addAttribute("campingDetail",campingDetailDTO);
-
         model.addAttribute("cds",campingDetailSaveDTOS);
+
 
         System.out.println(campingDetailDTO.toString());
          return "single_listing";

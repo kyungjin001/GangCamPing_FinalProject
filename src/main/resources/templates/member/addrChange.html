@@ -265,6 +265,7 @@
 	</div>
 
 	<div class="menu-wrapper">
+
 		<div class="menu1" onclick="location.href='/member/update'" >나의정보</div>
 		<div class="menu2" onclick="location.href='/mypage/bookList'" style="cursor: pointer;">캠핑내역</div>
 		<div class="menu3" onclick="location.href='/member/shoppingList'" style="cursor: pointer;">쇼핑내역</div>
@@ -273,6 +274,7 @@
 		<br><br></b><br><br>
 		<b style="text-align:center;" th:text="|${session['loginEmail']}|+님"></b>
 		<b style="text-align:center;">환영합니다.</b>
+
 	</div>
 	<p style="text-align:center; color :black";>변경할 주소를 입력하세요.</p>
 
@@ -294,13 +296,7 @@
 			<input type="hidden" name="memberEmail" th:value="${session.loginEmail}">
 			<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
-			<!--                        <script>-->
-			<!--                            function addr1() {-->
-			<!--                                var addr1 = "";-->
-			<!--                                document.getElementById('sample6_detailAddress').value = addr1;-->
-			<!--                                console.log(addr1);-->
-			<!--                            }-->
-			<!--                        </script>-->
+
 
 			<script>
 				function sample6_execDaumPostcode() {
@@ -355,7 +351,6 @@
 					}).open();
 				}
 			</script>
-<!--		<div class="kick" onclick="location.href='/member/addrChange'" style="cursor: pointer;">주소가 수정되었습니다.</div>-->
 	</div>
 	</div>
 	</form>
