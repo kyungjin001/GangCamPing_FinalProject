@@ -963,37 +963,52 @@
 
                             <div class="form-group">
 
-                                <label for="loginId">ID </label> <br>
-                                <input type="text" class="form-control" name="memberEmail" id="loginId" placeholder="Enter ID">
-
+                                <label for="loginId" style="margin-left: 200px">ID </label> <br>
+                                <input type="text" class="form-control" id="loginId" placeholder="회원가입 시 이메일을 적어주세요" name="memberEmail" required>
                             </div>
+
                             <div class="form-group">
-
-                                <label for="loginPw">비밀번호 </label>
-                                <input type="password" class="form-control" name="memberPw" id="loginPw" placeholder="Enter Password">
+                                <label for="loginPw" style="margin-left: 200px">비밀번호 </label>
+                                <input type="password" class="form-control" id="loginPw" placeholder="8~20자 사이로 입력해주세요." name="memberPw" required>
 
                             </div>
+
                             <button type="submit" class="btn btn-primary" style="margin-left:200px">로그인</button>
-                            <br>
                         </form>
-                        <div>
+                        <div><br>
+
+
+                    <div align="center">
                     <span th:if="${session['userId'] == null}">
                         <a href="https://kauth.kakao.com/oauth/authorize?client_id=49e217f552e2a1352d3462543bc0a458&redirect_uri=http://localhost:8098/kakaologin&response_type=code">
-                            <img src="/images/kakao_login_medium_narrow.png">
+                            <img src="/images/kakao_login_medium_narrow.png" width="180" height="37">
                         </a>
+                    </span>
+                    </div><br>
 
-                    </span><br>
 
+
+                            <div align="center">
+
+
+                                <a id="naverIdLogin_loginButton" href="javascript:void(0)">
+                                    <img src = "/img/btnG_완성형.png" width="180" height="37"></img>
+                                </a> </div>
+                            </span>
                             <span th:if="${session['userId'] == null}" class="n1 d-flex">
 
                             <!--네이버 로그인 시작  -->
-                                <!-- 아래와같이 아이디를 꼭 써준다. -->
-                            <a id="naverIdLogin_loginButton" href="javascript:void(0)">
-                                <img src = "/img/btnG_완성형.png" width="222" height="48"></img>
-                            </a>
+                            <!-- 아래와같이 아이디를 꼭 써준다. -->
 
 
-                                <!-- 네이버 스크립트 -->
+                            <!-- 										<li onclick="naverLogout(); return false;">
+                                  <a href="javascript:void(0)" onclick="naverLogout(); return false;">
+                            <img src = "/img/btnG_로그아웃.png" width="115" height="48"></img>
+                        </a> -->
+
+
+                            <!-- 네이버 스크립트 -->
+
                             <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 
                             <script>
@@ -1043,8 +1058,11 @@
                                 <!--네이버 로그인 끝  -->
                             </span>
 
-                            <br> <br><br><button  onclick="location.href='#'" data-toggle="modal" data-target="#findPw" data-dismiss="modal" class="btn btn-primary">비밀번호 찾기</button><br>
-                            <button onclick="location.href='#'" data-toggle="modal" data-target="#signin" data-dismiss="modal" class="btn btn-primary">회원가입</button><br>
+
+                            <div align="center">
+                                <br><br><br> <button onclick="location.href='#'" data-toggle="modal" data-target="#signin" data-dismiss="modal" class="btn btn-primary">회원가입</button><br><br>
+                               <button  onclick="location.href='#'" data-toggle="modal" data-target="#findPw" data-dismiss="modal" class="btn btn-primary">비밀번호 찾기</button>
+                            </div>
 
 
                         </div>
