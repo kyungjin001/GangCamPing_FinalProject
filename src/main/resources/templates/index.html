@@ -269,6 +269,7 @@
             });
         });
     </script>
+
     <script>
         window.onload = function (){
             today = new Date();
@@ -297,7 +298,7 @@
 
 
 
-       
+
 
 </head>
 
@@ -337,7 +338,7 @@
                                     Logout</a>
                                 </div>
                                 <div class="user_box_login user_box_link">
-                                    <a class="nav-link" th:href="@{|/member/${session.loginId}|}" style="font-size: 15px">
+                                    <a class="nav-link" th:href="@{|/member/${session.loginEmail}|}" style="font-size: 15px">
                                     MyPage</a>
                                 </div>
                             </span>
@@ -354,7 +355,7 @@
                             </span>
                             <span th:if="(${session.loginEmail}=='admin')">
                                 <div class="user_box_login user_box_link">
-                                    <a class="nav-link" href="/member/logout" style="font-size: 15px">
+                                    <a class="nav-link" href="/member/logOut" style="font-size: 15px">
                                     LogOut</a>
                                 </div>
                                 <div class="user_box_login user_box_link">
@@ -362,7 +363,7 @@
                                     MyPage</a>
                                 </div>
                             </span>
-
+                            <div class="user_box_register user_box_link"><a href="/shopping/goods">Goods</a></div>
 
 
                         </div>
@@ -383,11 +384,11 @@
                         <div class="main_nav_container ml-auto">
                             <ul class="main_nav_list">
                                 <li class="main_nav_item"><a href="/">home</a></li>
-                                <li class="main_nav_item"><a href="/search/camping">camping</a></li>
+                                <li class="main_nav_item"><a href="/search/camping">booking</a></li>
                                 <li class="main_nav_item"><a href="/shopping/shopping">shopping</a></li>
                                 <li class="main_nav_item"><a href="about">about us</a></li>
                                 <li class="main_nav_item"><a href="contact">contact</a></li>
-
+                                <li class="main_nav_item"><a href="/test">apiTest</a></li>
                             </ul>
                         </div>
 
@@ -595,7 +596,7 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h2 class="intro_title text-center" style="font-size: 300%">테마별 1위 캠핑장</h2>
+                    <h2 class="intro_title text-center">테마별 1위 캠핑장</h2>
                 </div>
             </div>
             <div class="row">
@@ -646,7 +647,7 @@
         <div class="container">
             <div class="row">
                 <div class="col text-center">
-                    <h2 class="section_title" style="font-size: 300%;"> 추천하는 캠핑장</h2>
+                    <h2 class="section_title">강캠핑이 추천하는 캠핑장</h2>
                 </div>
             </div>
             <div class="row offers_items">
@@ -670,7 +671,7 @@
                                 <div class="col-lg-6">
                                     <div class="offers_content">
                                         <div class="offers_price">
-                                            <a th:text="${result.campingName}" th:href="@{|/search/searchDetail/${result.campingName}|}" style="font-size: 70%"></a>
+                                            <a th:text="${result.campingName}" th:href="@{|/search/searchDetail/${result.campingName}|}"></a>
                                         </div>
                                         <div class="rating_r rating_r_4 offers_rating">
                                             <i></i>
@@ -712,7 +713,7 @@
         <div class="container">
             <div class="row">
                 <div class="col text-center">
-                    <h2 class="section_title" style="font-size: 300%">고객리뷰 베스트</h2>
+                    <h2 class="section_title">고객리뷰 베스트</h2>
                 </div>
 
             </div>
@@ -959,6 +960,7 @@
                     <!-- Modal body -->
                     <div class="modal-body">
                         <form action="/member/login" method="post" th:object="${login}">
+
                             <div class="form-group">
 
                                 <label for="loginId">ID </label> <br>
@@ -982,26 +984,16 @@
 
                     </span><br>
 
-
-                    </span>
-
-
                             <span th:if="${session['userId'] == null}" class="n1 d-flex">
 
                             <!--네이버 로그인 시작  -->
-                            <!-- 아래와같이 아이디를 꼭 써준다. -->
+                                <!-- 아래와같이 아이디를 꼭 써준다. -->
                             <a id="naverIdLogin_loginButton" href="javascript:void(0)">
                                 <img src = "/img/btnG_완성형.png" width="222" height="48"></img>
                             </a>
 
 
-                            <!-- 										<li onclick="naverLogout(); return false;">
-                             -->     <a href="javascript:void(0)" onclick="naverLogout(); return false;">
-                            <img src = "/img/btnG_로그아웃.png" width="115" height="48"></img>
-                        </a>
-
-
-                            <!-- 네이버 스크립트 -->
+                                <!-- 네이버 스크립트 -->
                             <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 
                             <script>
@@ -1048,10 +1040,10 @@
                                 }
 
                             </script>
-                            <!--네이버 로그인 끝  -->
+                                <!--네이버 로그인 끝  -->
                             </span>
 
-                            <br> <br><br><button  onclick="location.href='#'" data-toggle="modal" data-target="#findPw" data-dismiss="modal" class="btn btn-primary">비밀번호 찾기</button>
+                            <br> <br><br><button  onclick="location.href='#'" data-toggle="modal" data-target="#findPw" data-dismiss="modal" class="btn btn-primary">비밀번호 찾기</button><br>
                             <button onclick="location.href='#'" data-toggle="modal" data-target="#signin" data-dismiss="modal" class="btn btn-primary">회원가입</button><br>
 
 
@@ -1082,27 +1074,27 @@
                         <form action="/member/save" method="post" th:object="${member}" id="memberSave">
                             <div class="form-group">
                                 <label for="memberEmail">이메일 </label> <br>
-                                <input type="email" class="form-control" minlength='5' maxlength='30' onblur="emailDp()" id="memberEmail"
-                                       placeholder="이메일을 5~30자로 입력해주세요." name="memberEmail" required>
+                                <input type="text" class="form-control" onblur="emailDp()" id="memberEmail"
+                                       placeholder="이메일을 입력해주세요." name="memberEmail" required>
                                 <span id="email_Dp"></span><br>
                             </div>
                             <div class="form-group">
                                 <label for="pwd1">비밀번호 </label>
-                                <input type="password" class="form-control" minlength='8' maxlength='20' id="pwd1" placeholder="비밀번호를 8~20자로 입력해주세요."
+                                <input type="password" class="form-control" id="pwd1" placeholder="비밀번호를 입력해주세요."
                                        name="memberPw" required>
                                 <input type="password" class="form-control" id="pwd2" placeholder="비밀번호를 다시 입력해주세요."
                                        required>
-                                <div class="alert alert-success" id="alert-success" style="color : green; background-color : transparent">비밀번호가 일치합니다.</div>
-                                <div class="alert alert-danger" id="alert-danger" style="color : red; background-color : transparent">비밀번호가 일치하지 않습니다.</div>
+                                <div class="alert alert-success" id="alert-success" style="color : green">비밀번호가 일치합니다.</div>
+                                <div class="alert alert-danger" id="alert-danger" style="color : red">비밀번호가 일치하지 않습니다.</div>
                             </div>
                             <div class="form-group">
-                                <label for="memberName">이름 </label> <br>
-                                <input type="text" class="form-control" minlength='5' maxlength='30' id="memberName" placeholder="이름을 5~30자로 입력해주세요."
+                                <label for="registerName">이름 </label> <br>
+                                <input type="text" class="form-control" id="registerName" placeholder="이름을 입력해주세요."
                                        name="memberName" required>
                             </div>
                             <div class="form-group">
                                 <label for="registerPhone">전화번호 </label> <br>
-                                <input type="text" class="form-control" minlength='10' maxlength='11' pattern="^[0-9]+$" id="registerPhone" placeholder="전화번호(10~11자 숫자)를 입력해주세요."
+                                <input type="text" class="form-control" id="registerPhone" placeholder="전화번호를 입력해주세요."
                                        name="memberPhone" required>
                             </div>
                             <div class="form-group">
@@ -1230,35 +1222,36 @@
         </script>
         <!-- 모달 끝 -->
     </footer>
-        <!-- Copyright -->
+    <!-- Copyright -->
     <div class="copyright">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 order-lg-1 order-2  ">
-                        <div class="copyright_content d-flex flex-row align-items-center">
-                            <div><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                Copyright &copy;<script>document.write(new Date().getFullYear());</script>
-                                All rights reserved | This template is made with <i class="fa fa-heart-o"
-                                                                                    aria-hidden="true"></i> by <a
-                                        href="https://colorlib.com" target="_blank">Colorlib</a>
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 order-lg-1 order-2  ">
+                    <div class="copyright_content d-flex flex-row align-items-center">
+                        <div><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                            All rights reserved | This template is made with <i class="fa fa-heart-o"
+                                                                                aria-hidden="true"></i> by <a
+                                    href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </div>
                     </div>
-                    <div class="col-lg-9 order-lg-2 order-1">
-                        <div class="footer_nav_container d-flex flex-row align-items-center justify-content-lg-end">
-                            <div class="footer_nav">
+                </div>
+                <div class="col-lg-9 order-lg-2 order-1">
+                    <div class="footer_nav_container d-flex flex-row align-items-center justify-content-lg-end">
+                        <div class="footer_nav">
 
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
 
 
 </div>
+
     <script src="/js/jquery-3.2.1.min.js"></script>
     <script src="/styles/bootstrap4/popper.js"></script>
     <script src="/styles/bootstrap4/bootstrap.min.js"></script>
@@ -1350,6 +1343,7 @@
         }
     }
 </script>
+
 
 </body>
 

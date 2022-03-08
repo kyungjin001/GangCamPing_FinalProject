@@ -269,7 +269,7 @@
 		<div class="menu2" onclick="location.href='/member/bookList'" style="cursor: pointer;"><h4>캠핑내역</h4></div>
 		<div class="menu3" onclick="location.href='/member/shoppingList'" style="cursor: pointer;"><h4>쇼핑내역</h4></div>
 		<div class="menu4" onclick="location.href='/member/shoppingLike'" style="cursor: pointer;"><h4>찜</h4></div>
-		<div class="menu5" onclick="location.href='/room'" style="cursor: pointer;"><h4>예약변경</h4></div>
+		<div class="menu5"  onclick="window.open('/room','sales','width = 600, height = 500, top = 100, left = 300, location= no')" style="cursor: pointer;">예약변경</div>
 	</div>
 	<p style="text-align:center; color :brown";>주소 수정</p>
 
@@ -291,13 +291,7 @@
 			<input type="hidden" name="memberEmail" th:value="${session.loginEmail}">
 			<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
-			<!--                        <script>-->
-			<!--                            function addr1() {-->
-			<!--                                var addr1 = "";-->
-			<!--                                document.getElementById('sample6_detailAddress').value = addr1;-->
-			<!--                                console.log(addr1);-->
-			<!--                            }-->
-			<!--                        </script>-->
+
 
 			<script>
 				function sample6_execDaumPostcode() {
@@ -352,7 +346,6 @@
 					}).open();
 				}
 			</script>
-<!--		<div class="kick" onclick="location.href='/member/addrChange'" style="cursor: pointer;">주소가 수정되었습니다.</div>-->
 	</div>
 	</div>
 	</form>
