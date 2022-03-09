@@ -123,7 +123,6 @@ public class MemberServiceImpl implements MemberService{
         return memberUpdateDTO1;
     }
 
-
 //    @Override
 //    public Long confirmPW(MemberUpdateDTO memberUpdateDTO) {
 //        MemberEntity memberEntity = MemberEntity.toUpdateMember(memberUpdateDTO);

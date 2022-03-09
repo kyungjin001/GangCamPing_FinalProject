@@ -56,43 +56,46 @@ public class MainController {
 
     @RequestMapping("/")
     public String cxczcof(Model model) {
-//
-//        List campingDetailDTOList = new ArrayList();
-//        for(int i=0;i<3;i++) {
-//            CampingDetailDTO campingDetailDTO = CampingDetailDTO.toCampingDetailDTO(cs.findById((int) (Math.random() * 1000)).get());
-//            if(campingDetailDTO.getCampingFileName()==null){
-//                i= i-1;
-//            }else {
-//                campingDetailDTOList.add(campingDetailDTO);
-//            }
-//        }
-//        List<ReviewDetailDTO> reviewList = new ArrayList<>();
-//        int max = rr.findAll().size();
-//        if(max>0) {
-//            for (int i = 0; i < 5; i++) {
-//                int rnd = (int) (Math.random() * 10) + 1;
-//                if (rnd > max) {
-//                    i = i - 1;
-//                } else {
-//                    System.out.println(rnd + "/" + max);
-//                    ReviewDetailDTO dto = rs.findById(rnd);
-//                    if (dto.getCampingFileName() == null) {
-//                        i = i - 1;
-//                    } else {
-//                        reviewList.add(dto);
-//                    }
-//                }
-//            }
-//        }
-//
-//        List<CampingDetailDTO> recommendList = cs.findTop3AllOrderByCampingLikeCount();
-//        model.addAttribute("reviewList",reviewList);
-//        model.addAttribute("resultList",campingDetailDTOList);
-//        model.addAttribute("recommendList",recommendList);
-//
-//
+
+
+        List campingDetailDTOList = new ArrayList();
+        for(int i=0;i<3;i++) {
+            CampingDetailDTO campingDetailDTO = CampingDetailDTO.toCampingDetailDTO(cs.findById((int) (Math.random() * 1000)).get());
+            if(campingDetailDTO.getCampingFileName()==null){
+                i= i-1;
+            }else {
+                campingDetailDTOList.add(campingDetailDTO);
+            }
+        }
+        List<ReviewDetailDTO> reviewList = new ArrayList<>();
+        int max = rr.findAll().size();
+        if(max>0) {
+            for (int i = 0; i < 5; i++) {
+                int rnd = (int) (Math.random() * 10) + 1;
+                if (rnd > max) {
+                    i = i - 1;
+                } else {
+                    System.out.println(rnd + "/" + max);
+                    ReviewDetailDTO dto = rs.findById(rnd);
+                    if (dto.getCampingFileName() == null) {
+                        i = i - 1;
+                    } else {
+                        reviewList.add(dto);
+                    }
+                }
+            }
+        }
+
+        List<CampingDetailDTO> recommendList = cs.findTop3AllOrderByCampingLikeCount();
+        model.addAttribute("reviewList",reviewList);
+        model.addAttribute("resultList",campingDetailDTOList);
+        model.addAttribute("recommendList",recommendList);
+
+
+
         return "index";
     }
+
 
 
 

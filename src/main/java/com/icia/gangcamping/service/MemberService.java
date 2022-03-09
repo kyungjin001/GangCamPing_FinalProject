@@ -37,4 +37,5 @@ public interface MemberService {
 
 
     MemberDetailDTO updateAddr(MemberUpdateDTO memberUpdateDTO);
+
 }

@@ -84,7 +84,7 @@
 		}
 	</script>
 	<style>
-		.reviewStar{
+		#reviewAvg{
 			color: transparent;
 			text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
 		}
@@ -454,6 +454,13 @@
 							<div class="hotel_title_container d-flex flex-lg-row flex-column">
 								<div class="hotel_title_content">
 									<h1 class="hotel_title"><a th:text="${campingDetail.campingName}"></a></h1>
+									<div>
+										<span id="reviewAvg" th:if="0.0<=${session['avg']} and 1.9>=${session['avg']}">★</span>
+										<span id="reviewAvg" th:if="2.0<=${session['avg']} and 2.9>=${session['avg']}">★★</span>
+										<span id="reviewAvg" th:if="3.0<=${session['avg']} and 3.9>=${session['avg']}">★★★</span>
+										<span id="reviewAvg" th:if="4.0<=${session['avg']} and 4.9>=${session['avg']}">★★★★</span>
+										<span id="reviewAvg" th:if="5.0==${session['avg']}">★★★★★</span>
+									</div>
 									<div class="review_title">per Night 170,000</div>
 									<div class="hotel_location"><a th:text="${campingDetail.campingAddr}"></a></div>
 
@@ -615,7 +622,7 @@
 
 						<div class="reviews">
 							<div class="reviews_title">reviews</div>
-							<p th:text="${session['avg']}"></p>
+
 							<div class="reviews_container">
 
 								<!-- Review -->

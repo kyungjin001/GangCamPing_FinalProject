@@ -144,6 +144,7 @@ public class SearchController {
         }
         List<ReviewDetailDTO> review = rs.findAll(campingDetailDTO.getCampingId());
         double reviewAvg = rs.avg(campingDetailDTO.getCampingId());
+
         session.setAttribute("avg", reviewAvg);
 
         CampingEntity campingEntity = cs.findById(campingDetailDTO.getCampingId()).get();

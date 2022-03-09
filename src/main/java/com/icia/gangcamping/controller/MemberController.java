@@ -85,7 +85,7 @@ public class MemberController {
 //    }
 
     // 로그인 처리
-    @PostMapping("/login")
+  /*  @PostMapping("/login")
     public String login(@Validated @ModelAttribute("login") MemberLoginDTO memberLoginDTO, HttpSession session) {
 
         boolean loginResult = ms.login(memberLoginDTO);
@@ -99,6 +99,34 @@ public class MemberController {
             return "redirect:/";
 
         }
+    }*/
+
+    @PostMapping("/login2")
+    public @ResponseBody String login(@RequestParam("loginEmail") String loginEmail, @RequestParam("loginPw") String loginPw){
+
+        String result ="";
+        System.out.println(loginEmail);
+        System.out.println(loginPw);
+        MemberEntity memberEntity = ms.findByMemberEmail(loginEmail);
+        System.out.println(memberEntity.getMemberEmail());
+        System.out.println(memberEntity.getMemberPw());
+
+        if(memberEntity == null){
+            return "no";
+        }else if(memberEntity != null){
+            if(memberEntity.getMemberPw().equals(loginPw)){
+                session.setAttribute("loginEmail", memberEntity.getMemberEmail());
+                Long loginId = ms.findByMemberId(memberEntity.getMemberEmail());
+                session.setAttribute("loginId",loginId);
+                System.out.println(session.getAttribute("loginEmail"));
+                System.out.println(loginId);
+                return "ok";
+            }else{
+                return "no";
+            }
+        }
+        System.out.println("asdfasdfadsfasdf");
+        return result;
     }
 
     // 로그인 처리 with Validation
