@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <style>
         html, body {
-            display: flex;
+            /*display: flex;*/
             justify-content: center;
             font-family: Roboto, Arial, sans-serif;
             font-size: 15px;
@@ -323,13 +323,13 @@
     </div>
 
     <div style="text-align: center;" class="formWrapper">
-    <form id="memberUp" name="memberPw">
-        <br><h2>회원 상세정보</h2>
-        <div class="icon">
+         <form id="memberUp" name="memberPw">
+             <br><h2>회원 상세정보</h2>
+             <div class="icon">
             <i class="fas fa-user-circle"></i>
-        </div>
-        <div class="formcontainer">
-            <div class="container">
+             </div>
+             <div class="formcontainer">
+                 <div class="container">
                 <input th:type="hidden" th:name="memberId" id="memberId" th:value="${member.memberId}">
 
                 <label for="mEmail"><strong>이메일(Email)</strong></label>
@@ -342,11 +342,11 @@
                 <input type="text" th:name="memberAddr"  id="memberAddr" th:value="${member.memberAddr}">
                 <label for="memberPhone"><strong>핸드폰번호(CellPhone Number)</strong></label>
                 <input type="text" th:name="memberPhone" id="memberPhone" th:value="${member.memberPhone}">
-            </div>
-            <button type="button" th:onclick="ajaxUp()"><strong>정보 수정</strong></button>
-        </div><br><br>
-    </form>
-
+                </div>
+                <button type="button" th:onclick="ajaxUp()"><strong>정보 수정</strong></button>
+             </div><br><br>
+            </form>
+    </div>
     <div style="text-align: center;" class="formWrapper"><br><br>
 
         <div class="kickout" onclick="location.href='/member/addrChange'" style="cursor: pointer;">주소변경</div>
@@ -357,21 +357,6 @@
     <div style="text-align: center;" class="formWrapper">
     <div class="kickout" onclick="location.href='/member/delete'" style="cursor: pointer;">회원탈퇴</div>
     </div><br><br><br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <!-- Footer -->
     <footer class="footer">
@@ -768,7 +753,7 @@
             </div>
         </div>
     </div>
-    </div>
+
 </div>
 
 <script src="/js/jquery-3.2.1.min.js"></script>

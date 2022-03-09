@@ -45,7 +45,7 @@
             margin-left: 300px;
         }
 
-        img{
+        #productId{
             width: 80px;
             height: 80px;
         }
@@ -338,9 +338,9 @@
         <div class="menu8" onclick="location.href='/shopping/stock'" style="cursor: pointer;">상품재고</div>
     </div>
 
-
+    <div>
     <p style="text-align:center";>상품 관리</p>
-    <div class="goods"> <button onclick="location.href='/shopping/goods'" style="cursor: pointer;" class="btn btn-light">상품등록</button></div>
+
     <table class="tg" style="undefined; table-layout: fixed; width: 878px" table>
         <colgroup>
             <col style="width: 74px">
@@ -368,7 +368,7 @@
         <tr th:each="goodsList:${goodsList}" >
             <td class="tg-80qx" th:text="${goodsList.productId}"></td>
             <td class="tg-80qx" th:text="${#temporals.format(goodsList.productTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-            <td class="tg-80qx"><img th:src="@{/upload/} + ${goodsList.productFileName}"></td>
+            <td class="tg-80qx"><img id="productImg" th:src="@{/upload/} + ${goodsList.productFileName}"></td>
             <td class="tg-80qx" th:text="${goodsList.productName}"></td>
             <td class="tg-80qx" th:text="${goodsList.productDescription}"></td>
             <td class="tg-80qx" th:text="${goodsList.productPrice}"></td>
@@ -380,7 +380,9 @@
 
         </tbody>
     </table>
-
+        <div class="goods" style="margin-left: 50%;"> <button onclick="location.href='/shopping/goods'" style="cursor: pointer;" class="btn btn-light">상품등록</button></div>
+        <Br>
+    </div>
 
 
 
