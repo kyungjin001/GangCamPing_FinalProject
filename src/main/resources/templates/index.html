@@ -134,7 +134,9 @@
                 success: function (result) {
 
                     if (result == "ok") {
+                        const codeInput = document.getElementById("codeInput").value;
                         alert("비밀번호를 변경해주세요.");
+                        location.href="/member/confirmPW?inputCode="+codeInput;
                     } else {
                         alert("인증코드를 다시 확인해주세요.");
                     }
@@ -418,7 +420,7 @@
                                 <li class="main_nav_item"><a href="/shopping/shopping">shopping</a></li>
                                 <li class="main_nav_item"><a href="about">about us</a></li>
                                 <li class="main_nav_item"><a href="contact">contact</a></li>
-                                <li class="main_nav_item"><a href="/test">apiTest</a></li>
+
                             </ul>
                         </div>
 
@@ -694,7 +696,7 @@
 
                                         </div>
                                         <div class="offer_name">
-                                            <a th:text="${result.campingName}" th:href="@{|/search/searchDetail/${result.campingName}|}"></a>
+                                            <a th:text="${result.campingName}" th:href="@{|/search/searchDetail/${result.campingName}|}" style="font-size: 70%;"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -1241,9 +1243,9 @@
                             <label for="pwMemberEmail">이메일을 입력해주세요 </label> <br>
                             <input type="text" class="form-control" id="pwMemberEmail" th:onblur="emailCheck()"
                                    placeholder="Enter Your Email" required>
-                            <form action="/member/update" method="get"  id="updateGO" name="pwUpdate">
+                            <form action="/member/confirmPW" method="get"  id="updateGO" name="pwUpdate">
                                 <input type="hidden" id="members" name="memberId">
-                                <input type="hidden" style="width: 80%" class="form-control" id="codeInput" placeholder="이메일 인증코드를 입력해주세요."
+                                <input type="hidden" style="width: 80%" class="form-control" id="codeInput" name="codeInput" placeholder="이메일 인증코드를 입력해주세요."
                                        required><p id="codeTime"></p>
                                 <input type="hidden" th:onclick="codeCheck()" id="check" value="코드확인">
                                 <input type="hidden" th:onclick="codeSendBack()" id="back" value="재전송">
