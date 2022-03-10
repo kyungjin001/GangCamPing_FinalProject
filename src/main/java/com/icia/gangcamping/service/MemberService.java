@@ -37,4 +37,6 @@ public interface MemberService {
 
 
     MemberDetailDTO updateAddr(MemberUpdateDTO memberUpdateDTO);
+
+    String loginCheck(MemberLoginDTO memberLoginDTO);
 }
