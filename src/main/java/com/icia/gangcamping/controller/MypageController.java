@@ -50,6 +50,7 @@ public class MypageController {
         List<BookDetailDTO> list = bs.findByMemberEntity(memberEntity);
 
         model.addAttribute("bookList", list);
+        System.out.println("mypage="+memberEmail);
 
         return "/member/bookList";
     }

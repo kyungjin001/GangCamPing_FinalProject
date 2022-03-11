@@ -119,6 +119,11 @@
 			text-align: center;
 			display: inline-block;
 			border-radius: 20%;
+
+		}
+
+		.btn btn-outline-dark{
+			font-size: 11px;
 		}
 		</style>
 
@@ -332,7 +337,7 @@
 			<td class="tg-80qx" th:text="|${#dates.format(book.bookCheckIn, 'yyyy-MM-dd')}|"></td>
 			<td class="tg-80qx" th:text="|${#dates.format(book.bookCheckOut, 'yyyy-MM-dd')}|"></td>
 			<td class="tg-80qx" th:text="${book.bookPrice}"><span>원</span></td>
-			<td class="tg-80qx"><button data-toggle="modal" data-target="#bookCancle">예약취소</button></td>
+			<td class="tg-80qx"><button type="button" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#bookCancle">예약취소</button></td>
 			<!-- bookCancle Modal -->
 			<div class="modal fade" tabindex="-1" id="bookCancle" aria-labelledby="loginModalLabel" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered">
@@ -384,22 +389,6 @@
 		</tbody>
 	</table>
 	</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	<!-- Footer -->
 	<footer class="footer">

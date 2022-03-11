@@ -311,6 +311,33 @@
             bir = document.getElementById("checkInDate");
             bir.value = today;
         }
+
+        function login(){
+            const loginEmail = document.getElementById("loginEmail").value;
+            const loginPw = document.getElementById("loginPw").value;
+
+            $.ajax({
+                type: 'post',
+                url: '/member/login2',
+                data:{'loginEmail': loginEmail, 'loginPw':loginPw},
+                dataType: 'text',
+                success: function (result){
+
+                    if(result == 'ok'){
+
+                        location.href="/";
+                    }else{
+                        alert("로그인 정보가 잘 못 되었습니다.");
+                    }
+
+                },
+                error: function (){
+                    alert("안돼요");
+                    console.log('???')
+                },
+
+            });
+        }
     </script>
 
     <style>
@@ -679,7 +706,7 @@
         <div class="container">
             <div class="row">
                 <div class="col text-center">
-                    <h2 class="section_title">강캠핑이 추천하는 캠핑장</h2>
+                    <h2 class="section_title" style="font-size: 300%;">강캠핑이 추천하는 캠핑장</h2>
                 </div>
             </div>
             <div class="row offers_items">
@@ -703,7 +730,7 @@
                                 <div class="col-lg-6">
                                     <div class="offers_content">
                                         <div class="offers_price">
-                                            <a th:text="${result.campingName}" th:href="@{|/search/searchDetail/${result.campingName}|}"></a>
+                                            <a th:text="${result.campingName}" th:href="@{|/search/searchDetail/${result.campingName}|}" style="font-size: 70%;"></a>
                                         </div>
                                         <div class="rating_r rating_r_4 offers_rating">
                                             <i></i>
@@ -991,21 +1018,21 @@
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <form action="/member/login" method="post" th:object="${login}">
+                        <form >
 
                             <div class="form-group">
 
-                                <label for="loginId" style="margin-left: 200px">ID </label> <br>
-                                <input type="text" class="form-control" id="loginId" placeholder="회원가입 시 이메일을 적어주세요" name="memberEmail" required>
+                                <label for="loginEmail">ID </label> <br>
+                                <input type="text" class="form-control" id="loginEmail" placeholder="이메일을 입력해주세요." name="memberEmail" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="loginPw" style="margin-left: 200px">비밀번호 </label>
-                                <input type="password" class="form-control" id="loginPw" placeholder="8~20자 사이로 입력해주세요." name="memberPw" required>
+                                <label for="loginPw">비밀번호 </label>
+                                <input type="password" class="form-control" id="loginPw" placeholder="비밀번호를 입력해주세요." name="memberPw" required>
 
                             </div>
 
-                            <button type="submit" class="btn btn-primary" style="margin-left:200px">로그인</button>
+                            <button type="button" th:onclick="login()" class="btn btn-primary" style="margin-left:200px">로그인</button>
                         </form>
                         <div><br>
 
