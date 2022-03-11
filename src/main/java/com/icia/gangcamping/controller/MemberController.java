@@ -3,12 +3,7 @@ package com.icia.gangcamping.controller;
 
 import com.icia.gangcamping.dto.*;
 import com.icia.gangcamping.entity.MemberEntity;
-import com.icia.gangcamping.service.BookService;
-import com.icia.gangcamping.service.CampingLikeService;
-import com.icia.gangcamping.service.MemberService;
-import com.icia.gangcamping.service.OrderService;
-import com.icia.gangcamping.service.ShoppingLikeService;
-import com.icia.gangcamping.service.ShoppingService;
+import com.icia.gangcamping.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +29,7 @@ import static com.icia.gangcamping.common.SessionConst.LOGIN_EMAIL;
 public class MemberController {
 
     private final MemberService ms;
-
+    private final MailService mail;
     private final BookService bs;
     private final CampingLikeService cls;
     private final HttpSession session;
@@ -44,11 +39,6 @@ public class MemberController {
     
 
 
-//    @GetMapping("save")
-//    public String saveForm(Model model) {
-//        model.addAttribute("member", new MemberSaveDTO());
-//        return "member/save";
-//    }
 
     @PostMapping("/save")
     public String save(@Validated @ModelAttribute("member") MemberSaveDTO memberSaveDTO) {
@@ -96,8 +86,7 @@ public class MemberController {
             session.setAttribute("loginId",loginId);
             return "redirect:/";
         } else {
-            return "redirect:/";
-
+            return "member/loginError";
         }
     }
 
@@ -144,6 +133,14 @@ public class MemberController {
         String result = ms.emailDp(memberEmail);
         return result;
     }
+
+    // 로그인 오류시 알림
+//    @PostMapping("/loginCheck")
+//    @ResponseBody
+//    public String loginCheck(@RequestParam("memberEmail") MemberLoginDTO memberLoginDTO) {
+//        String result = ms.loginCheck(new MemberLoginDTO());
+//        return result;
+//    }
 
 
     //마이페이지
@@ -205,20 +202,24 @@ public class MemberController {
 
 
     @GetMapping("/confirmPW")
-    public String confirmPWForm(Model model, HttpSession session) {
-        System.out.println(session.getAttribute("loginEmail"));
-        String memberEmail = (String) session.getAttribute("loginEmail");
-        MemberDetailDTO member = ms.findByEmail(memberEmail);
-        model.addAttribute("member", member);
-        System.out.println(member);
+    public String confirmPWForm(Model model, HttpSession session,@RequestParam(value = "inputCode",required = false) String codeInput) {
+        System.out.println(codeInput);
+         if(!codeInput.equals("")){
+            String memberEmail = mail.findByMail(codeInput);
+            MemberDetailDTO member = ms.findByEmail(memberEmail);
+            model.addAttribute("member",member);
+
+        }else{
+
+             System.out.println(session.getAttribute("loginEmail"));
+             String memberEmail = (String) session.getAttribute("loginEmail");
+             MemberDetailDTO member = ms.findByEmail(memberEmail);
+             model.addAttribute("member", member);
+             System.out.println(member);
+
+         }
         return "member/confirmPW";
     }
-
-//    @DeleteMapping("/{memberId}")
-//    public String deleteById(@PathVariable("memberId") Long memberId){
-//        ms.deleteById(memberId);
-//        return "index";
-//    }
 
     @DeleteMapping("/{memberId}")
     public ResponseEntity deleteById(HttpSession session, @PathVariable("memberId") Long memberId){

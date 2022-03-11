@@ -24,38 +24,34 @@ public class MainController {
     private final ReviewRepository rr;
 
     @RequestMapping("about")
-    public String osf() {
+    public String about() {
         return "about";
     }
 
     @RequestMapping("elements.html")
-    public String ofa() {
+    public String elements() {
         return "elements";
     }
 
     @RequestMapping("contact")
-    public String cof() {
+    public String contact() {
         return "contact";
     }
 
     @RequestMapping("single_listing.html")
-    public String ccxxof() {
+    public String single_listing() {
         return "single_listing";
     }
 
     @RequestMapping("offers.html")
-    public String sssss() {
+    public String offers() {
         return "offers";
     }
-    @RequestMapping("test")
-    public String test() {
-        return "te1st";
-    }
-
 
 
     @RequestMapping("/")
-    public String cxczcof(Model model) {
+    public String main(Model model) {
+
 
         List campingDetailDTOList = new ArrayList();
         for(int i=0;i<3;i++) {

@@ -62,11 +62,18 @@ public class MailServiceImpl implements MailService {
 
     }
 
+
     @Override
     public MailCodeDetailDTO findByMemberEmailAndEmailCode(String memberEmail, String emailCode) {
         MailEntity mailEntity = mar.findByMemberEmailAndEmailCode(memberEmail,emailCode);
         MailCodeDetailDTO mailCodeDetailDTO = MailCodeDetailDTO.toMailCodeDetailDTO(mailEntity);
         return mailCodeDetailDTO;
+    }
+
+    @Override
+    public String findByMail(String emailCode) {
+        MailEntity mail = mar.findByEmailCode(emailCode);
+        return mail.getMemberEmail();
     }
 
 }

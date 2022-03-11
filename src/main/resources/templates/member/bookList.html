@@ -287,15 +287,20 @@
 	</div>
 
 	<div class="menu-wrapper">
-		<div class="menu1" onclick="location.href='/member/myInfo'" >나의정보</div>
-		<div class="menu2" onclick="location.href='/member/bookList'" style="cursor: pointer;">캠핑내역</div>
+
+		<div class="menu1" onclick="location.href='/member/update'" >나의정보</div>
+		<div class="menu2" onclick="location.href='/mypage/bookList'" style="cursor: pointer;">캠핑내역</div>
 		<div class="menu3" onclick="location.href='/member/shoppingList'" style="cursor: pointer;">쇼핑내역</div>
 		<div class="menu4" onclick="location.href='/member/shoppingLike'" style="cursor: pointer;">찜</div>
-		<div class="menu5"  onclick="window.open('/room','sales','width = 600, height = 500, top = 100, left = 300, location= no')" style="cursor: pointer;">예약변경</div>
+		<div class="menu5" onclick="location.href='/room'" style="cursor: pointer;">예약변경</div>
+		<br><br></b><br><br>
+		<b style="text-align:center;" th:text="|${session['loginEmail']}|+님"></b>
+		<b style="text-align:center;">환영합니다.</b>
+
 	</div>
 
 	<div class="table-wrapper">
-	<p style="text-align:center; color :brown";>캠핑 예약내역</p>
+	<p style="margin-right:10%; color :brown";>캠핑 예약내역</p>
 
 	<table class="tg" style="undefined; table-layout: fixed; width: 878px" table>
 		<colgroup>
@@ -346,8 +351,8 @@
 							<form >
 
 								<div class="form-group">
-									<label for="loginId" style="margin-left: 200px">취소사유 </label> <br>
-									<select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" style="margin-left: 30%">
+									<label for="loginId">취소사유 </label> <br>
+									<select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
 										<option selected>취소사유를 선택해주세요.</option>
 										<option value="1">다른 일정이 생겼어요.</option>
 										<option value="2">가격이 다른곳보다 비싸요.</option>

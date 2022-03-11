@@ -77,11 +77,11 @@
 </table>
 </div>
 <div>
-    --------------------------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------------------------------------------------------------------------------
 </div>
 <span><h3 align="center"> 상품 매출 상세내역</h3></span>
 <div  align="center">
-    <table class="tg" style="undefined; table-layout: fixed; width: 878px" table>
+    <table class="tg" style="undefined; table-layout: fixed; width: 878px" align="center">
         <colgroup>
             <col style="width: 74px">
             <col style="width: 83px">
@@ -105,9 +105,9 @@
         </thead>
         <tbody>
         <tr th:each="result :${productList}">
-            <td class="tg-80qx"><a th:href="@{|/admin/bookDetail/${result.bookId}|}" th:text="${result.orderId}"></a></td>
-            <td class="tg-80qx"><a th:text="${result.memberId}"></a></td>
-            <td class="tg-80qx"><a th:text="${result.shoppingListPrice}"></a></td>
+            <td class="tg-100qx"><a th:href="@{|/admin/bookDetail/${result.orderId}|}" th:text="${result.orderId}"></a></td>
+            <td class="tg-100qx"><a th:text="${result.memberId}"></a></td>
+            <td class="tg-100qx"><a th:text="${result.shoppingListPrice}"></a></td>
 
         </tr>
         <tr>

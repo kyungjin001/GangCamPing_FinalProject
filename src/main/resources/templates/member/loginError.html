@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <title>About Us</title>
     <meta charset="utf-8">
@@ -15,72 +15,6 @@
     <link rel="stylesheet" type="text/css" href="/styles/about_responsive.css">
 
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
-
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-    <style>
-        html, body {
-            /*display: flex;*/
-            justify-content: center;
-            font-family: Roboto, Arial, sans-serif;
-            font-size: 15px;
-        }
-        form {
-            border: 0px solid #f1f1f1;
-        }
-        input[type=text], input[type=password] {
-            width: 100%;
-            padding: 16px 8px;
-            text-align: center;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-        }
-        .icon {
-            font-size: 60px;
-            display: flex;
-            justify-content: center;
-            color: #4286f4;
-        }
-        button {
-            background-color: #4286f4;
-            color: white;
-            padding: 14px 0;
-            margin: 10px 0;
-            border: none;
-            cursor: grab;
-            width: 48%;
-        }
-        h1 {
-            text-align:center;
-            fone-size:14;
-        }
-        button:hover {
-            opacity: 0.8;
-        }
-        .formcontainer {
-            text-align: center;
-            margin: 24px 50px 12px;
-        }
-        .container {
-            padding: 16px 0;
-            text-align:center;
-        }
-        span.psw {
-            float: right;
-            padding-top: 0;
-            padding-right: 15px;
-        }
-        /* Change styles for span on extra small screens */
-        @media screen and (max-width: 300px) {
-            span.psw {
-                display: block;
-                float: none;
-            }
-        }
-    </style>
 
 
     <style>
@@ -160,24 +94,68 @@
             border-radius: 20%;
         }
 
-        .kickout-wrapper {
-            text-align: right;
+        .kick-wrapper {
+            text-align: center;
             padding: 50px 0;
             background-color: white;
-            margin-right: 680px;
         }
 
-        .kickout {
+        .kick {
+            width: 740px;
+            height: 200px;
+            line-height : 200px;
+            /*background-color: whitesmokee;*/
+            /*border : solid 1px;*/
+            color :darkred;
+            font-size: 1.05rem;
+            text-align: center;
+            display: inline-block;
+            border-radius: 30%;
+            /*border-color: white;*/
+        }
+
+        .agreekick-wrapper {
+            text-align: center;
+            padding: 50px 0;
+            background-color: white;
+        }
+
+        .kickokorno {
             width: 100px;
             height: 30px;
             line-height : 30px;
+            background-color: whitesmoke;
             border : solid 1px;
+            color :black;
             font-size: 0.75rem;
             text-align: center;
             display: inline-block;
             border-radius: 20%;
         }
     </style>
+
+
+
+
+    <script>
+        const deleteById = (memberId) => {
+
+            console.log(memberId);
+            const reqUrl = "/member/"+memberId;
+            $.ajax({
+                type: 'delete',
+                url:reqUrl,
+                success: function (){
+                    location.href="/";
+                },
+                error: function (){
+
+                }
+            });
+        }
+
+    </script>
+
 
 </head>
 
@@ -304,64 +282,17 @@
 
     <!-- Home -->
 
-   <div class="home">
+    <div class="home">
         <div class="home_background parallax-window" data-parallax="scroll" data-image-src="/images/about_background.jpg"></div>
         <div class="home_content">
             <div class="home_title">My page</div>
         </div>
     </div>
 
-
-    <div class="menu-wrapper">
-        <div class="menu1" onclick="location.href='/member/update'" >나의정보</div>
-        <div class="menu2" onclick="location.href='/mypage/bookList'" style="cursor: pointer;">캠핑내역</div>
-        <div class="menu3" onclick="location.href='/member/shoppingList'" style="cursor: pointer;">쇼핑내역</div>
-        <div class="menu4" onclick="location.href='/member/shoppingLike'" style="cursor: pointer;">찜</div>
-        <div class="menu5" onclick="location.href='/room'" style="cursor: pointer;">예약변경</div>
-        <br><br></b><br><br>
-        <b style="text-align:center;" th:text="|${session['loginEmail']}|+님"></b>
-        <b style="text-align:center;">환영합니다.</b>
+    <div align="center" style="font: bold 1.1em 명조체; color : orangered"><br><br>로그인 정보가 잘못되었습니다.<br><br>
+        잠시 후 메인페이지로 이동합니다.<br><br><br><br>
+        <meta http-equiv="refresh" content="1.5; url=/">
     </div>
-
-
-    <div style="text-align: center;" class="formWrapper">
-         <form id="memberUp" name="memberPw">
-             <br><h2>회원 상세정보</h2>
-             <div class="icon">
-            <i class="fas fa-user-circle"></i>
-             </div>
-             <div class="formcontainer">
-                 <div class="container">
-                <input th:type="hidden" th:name="memberId" id="memberId" th:value="${member.memberId}">
-
-                <label for="mEmail"><strong>이메일(Email)</strong></label>
-                <input type="text" th:name="memberEmail" id="mEmail" th:value="${member.memberEmail}" readonly >
-                <label for="memberPw"><strong>비밀번호(password)</strong></label>
-                <input type="password" th:name="memberPw" id="memberPw" th:value="${member.memberPw}" readonly>
-                <label for="memberName"><strong>이름(Name)</strong></label>
-                <input type="text" th:name="memberName" id="memberName" th:value="${member.memberName}">
-                <label for="memberAddr"><strong>주소(Address)</strong></label>
-                <input type="text" th:name="memberAddr"  id="memberAddr" th:value="${member.memberAddr}">
-                <label for="memberPhone"><strong>핸드폰번호(CellPhone Number)</strong></label>
-                <input type="text" th:name="memberPhone" id="memberPhone" th:value="${member.memberPhone}">
-
-            </div>
-            <button type="button" th:onclick="ajaxUp()"><strong>정보 수정</strong></button>
-        </div><br><br>
-    </form>
-
-    </div>
-    <div style="text-align: center;" class="formWrapper"><br><br>
-
-        <div class="kickout" onclick="location.href='/member/addrChange'" style="cursor: pointer; color: black">주소변경</div>
-        <div class="kickout" onclick="location.href='/member/confirmPW'" style="cursor: pointer; color: black">비밀번호변경</div>
-        <div class="kickout" onclick="location.href='/member/logout'" style="cursor: pointer; color: black">로그아웃</div>
-    </div><br><br><br>
-
-    <div style="text-align: center;" class="formWrapper">
-    <div class="kickout" onclick="location.href='/member/delete'" style="cursor: pointer;">회원탈퇴</div>
-    </div><br><br><br>
-
 
 
 
@@ -775,35 +706,6 @@
 <script src="/plugins/easing/easing.js"></script>
 <script src="/plugins/parallax-js-master/parallax.min.js"></script>
 <script src="/js/about_custom.js"></script>
-
-<script>
-    const ajaxUp = () => {
-
-            const id = document.getElementById("memberId").value;
-            const reqUrl = "/member/"+id;
-            var form = $('#memberUp')[0];
-            var data = new FormData(form);
-            console.log(data);
-
-            $.ajax({
-                type: 'PUT',
-                // enctype: 'multipart/form-data',
-                url:reqUrl,
-                data: data,
-                processData: false,
-                contentType: false,
-                cache: false,
-                timeout: 600000,
-                success: function(){
-                    console.log("???")
-                    location.href="/member/update";
-                },
-                error: function (){
-                    alert("Ajax 실패")
-                }
-            });
-    }
-</script>
 
 </body>
 

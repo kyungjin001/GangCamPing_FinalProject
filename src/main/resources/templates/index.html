@@ -13,10 +13,8 @@
     <link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/animate.css">
     <link rel="stylesheet" type="text/css" href="/styles/main_styles.css">
     <link rel="stylesheet" type="text/css" href="/styles/responsive.css">
-
-
-
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
     <script>
         let id = "";
 
@@ -45,6 +43,14 @@
     <script>
         function codeSend() {
 
+            var timer =null;
+            var isRunning = false;
+
+            var display = document.getElementById("codeTime");
+            var leftSec=180;
+
+
+
             const mail = document.getElementById("pwMemberEmail").value;
             const codeInput = document.getElementById("codeInput");
             const send = document.getElementById("send");
@@ -52,7 +58,8 @@
             const emailcancel = document.getElementById("emailCancel");
             const emailSend = document.getElementById("emailSend");
             const check = document.getElementById("check");
-            const useremail = document.getElementById("members")
+            const useremail = document.getElementById("members");
+            const back = document.getElementById("back");
             $.ajax({
                 type: 'post',
                 url: '/mail/mailCode',
@@ -67,7 +74,38 @@
                         send.type = "submit";
                         cancel.type = "button";
                         check.type = "button";
+                        back.type = "button";
                         useremail.value = result.memberId;
+
+                        if(isRunning){
+                            clearInterval(timer);
+                            display.html("");
+                            startTimer(leftSec, display);
+                        }else{
+                            startTimer(leftSec, display);
+                        }
+
+                        function startTimer(count, display){
+
+                            var minutes, seconds;
+                            timer = setInterval(function (){
+                                minutes = parseInt(count / 60, 10);
+                                seconds = parseInt(count % 60, 10);
+
+                                minutes = minutes < 10 ? "0" + minutes : minutes;
+                                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                                display.textContent=(minutes + ":" + seconds);
+
+                                if(--count < 0){
+                                    clearInterval(timer);
+                                    alert("시간초과");
+                                    display.textContent=("시간초과");
+                                    isRunning = false;
+                                }
+                            }, 1000);
+                            isRunning = true;
+                        }
 
                     } else {
                         console.log('안되지롱 안되지롱 에베베베베베')
@@ -96,7 +134,9 @@
                 success: function (result) {
 
                     if (result == "ok") {
+                        const codeInput = document.getElementById("codeInput").value;
                         alert("비밀번호를 변경해주세요.");
+                        location.href="/member/confirmPW?inputCode="+codeInput;
                     } else {
                         alert("인증코드를 다시 확인해주세요.");
                     }
@@ -107,6 +147,78 @@
             });
         }
 
+    </script>
+    <script>
+
+        function codeSendBack(){
+
+            const mail = document.getElementById("pwMemberEmail").value;
+            const codeInput = document.getElementById("codeInput");
+            const send = document.getElementById("send");
+            const cancel = document.getElementById("cancel");
+            const emailcancel = document.getElementById("emailCancel");
+            const emailSend = document.getElementById("emailSend");
+            const check = document.getElementById("check");
+            const useremail = document.getElementById("members");
+
+            $.ajax({
+               type: 'post',
+                url: '/mail/mailCode',
+                data: {"memberEmail": mail},
+                dataType: 'json',
+                success: function (result) {
+
+                    if (result != null) {
+                        emailcancel.type = "hidden";
+                        emailSend.type = "hidden";
+                        codeInput.type = "text";
+                        send.type = "submit";
+                        cancel.type = "button";
+                        check.type = "button";
+                        back.type = "button";
+                        useremail.value = result.memberId;
+
+                        if(isRunning){
+                            clearInterval(timer);
+                            display.html("");
+                            startTimer(leftSec, display);
+                        }else{
+                            startTimer(leftSec, display);
+                        }
+
+                        function startTimer(count, display){
+
+                            var minutes, seconds;
+                            timer = setInterval(function (){
+                                minutes = parseInt(count / 60, 10);
+                                seconds = parseInt(count % 60, 10);
+
+                                minutes = minutes < 10 ? "0" + minutes : minutes;
+                                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                                display.textContent=(minutes + ":" + seconds);
+
+                                if(--count < 0){
+                                    clearInterval(timer);
+                                    alert("재전송을 눌러주세요.");
+                                    display.textContent=("시간초과");
+                                    isRunning = false;
+                                }
+                            }, 1000);
+                            isRunning = true;
+                        }
+
+                    } else {
+                        console.log('안되지롱 안되지롱 에베베베베베')
+                    }
+
+                },
+                error: function () {
+                    console.log("다시 확인해주세요.")
+                }
+
+            });
+        }
     </script>
 
 
@@ -138,6 +250,7 @@
             });
         }
     </script>
+
     <script type="text/javascript">
         $(function () {
             $("#alert-success").hide();
@@ -160,6 +273,34 @@
         });
     </script>
 
+    <script>
+        /* 아이디 입력을 하는 동안에 idDuplicate() 함수를 호출하고 입력된 값을 콘솔에 출력 */
+        function loginCheck() {
+            const id = document.getElementById('memberEmail').value;
+            console.log(id);
+            const checkResult = document.getElementById('login_Check');
+            $.ajax({
+                type: 'post', // 전송방식(get, post, put 등)
+                url: '/member/loginCheck', // 요청주소(controller로 요청하는 주소)
+                data: {'memberEmail': id},  // 전송할 데이터
+                dataType: 'text', // 요청 후 리턴받을 때의 데이터 형식
+                success: function (result) { // 요청이 성공적으로 처리됐을때 실행 할 함수
+                    console.log('ajax 성공');
+                    console.log(result); // MemberController에서 넘어온 result값 찍어보기(ok or no)
+                    if (result == "ok") {
+                        // checkResult.style.color = 'green';
+                        // checkResult.innerHTML = '멋진 아이디네요!!';
+                    } else {
+                        alert("로그인 정보가 잘못되었습니다.");
+                    }
+                },
+                error: function () { // 요청이 실패했을때 실행 할 함수
+                    console.log('오타 찾으세요.');
+                }
+            });
+        }
+    </script>
+
 
     <script>
         window.onload = function (){
@@ -175,6 +316,15 @@
     <style>
         .n1{
             float: left;
+        }
+
+        #codeTime{
+            display: inline;
+            color: red;
+        }
+
+        #codeInput{
+            margin: 0;
         }
     </style>
 
@@ -270,7 +420,7 @@
                                 <li class="main_nav_item"><a href="/shopping/shopping">shopping</a></li>
                                 <li class="main_nav_item"><a href="about">about us</a></li>
                                 <li class="main_nav_item"><a href="contact">contact</a></li>
-                                <li class="main_nav_item"><a href="/test">apiTest</a></li>
+
                             </ul>
                         </div>
 
@@ -323,8 +473,8 @@
                     <div class="home_slider_content text-center">
                         <div class="home_slider_content_inner" data-animation-in="flipInX"
                              data-animation-out="animate-out fadeOut">
-                            <h1>discover</h1>
-                            <h1>the world</h1>
+                            <h1></h1>
+                            <h1>GangCamping</h1>
                             <div class="button home_slider_button">
                                 <div class="button_bcg"></div>
                                 <a href="/booking/ranking">Booking now<span></span><span></span><span></span></a>
@@ -340,8 +490,8 @@
                     <div class="home_slider_content text-center">
                         <div class="home_slider_content_inner" data-animation-in="flipInX"
                              data-animation-out="animate-out fadeOut">
-                            <h1>discover</h1>
-                            <h1>the world</h1>
+                            <h1></h1>
+                            <h1>GangCamping</h1>
                             <div class="button home_slider_button">
                                 <div class="button_bcg"></div>
                                 <a href="/booking/ranking">Booking now<span></span><span></span><span></span></a>
@@ -357,8 +507,8 @@
                     <div class="home_slider_content text-center">
                         <div class="home_slider_content_inner" data-animation-in="flipInX"
                              data-animation-out="animate-out fadeOut">
-                            <h1>discover</h1>
-                            <h1>the world</h1>
+                            <h1></h1>
+                            <h1>GangCamping</h1>
                             <div class="button home_slider_button">
                                 <div class="button_bcg"></div>
                                 <a href="/booking/ranking">Booking now<span></span><span></span><span></span></a>
@@ -452,13 +602,14 @@
                             </div>
                             <div class="search_item">
                                 <div>check in</div>
-                                <input type="date" class="check_in search_input" placeholder="YYYY-MM-DD"
-                                       name="checkInDate" id="checkInDate" required="required">
+                                <input type="text" class="check_in search_input"
+                                        id="checkInDate" name="checkInDate" required="required" readonly>
+                                <input id="datepicker1" type="hidden">
                             </div>
                             <div class="search_item">
                                 <div>check out</div>
-                                <input type="date" class="check_out search_input" placeholder="YYYY-MM-DD"
-                                       name="checkOutDate" id="checkOutDate" required="required">
+                                <input type="text" class="check_out search_input" placeholder="연도-월-일"
+                                        id="checkOutDate" name="checkOutDate" required="required" readonly>
                             </div>
 
                             <button class="button search_button" type="submit">
@@ -545,7 +696,7 @@
 
                                         </div>
                                         <div class="offer_name">
-                                            <a th:text="${result.campingName}" th:href="@{|/search/searchDetail/${result.campingName}|}"></a>
+                                            <a th:text="${result.campingName}" th:href="@{|/search/searchDetail/${result.campingName}|}" style="font-size: 70%;"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -843,37 +994,55 @@
                         <form action="/member/login" method="post" th:object="${login}">
 
                             <div class="form-group">
+
                                 <label for="loginId" style="margin-left: 200px">ID </label> <br>
-                                <input type="text" class="form-control" id="loginId" placeholder="Enter ID"
-                                       name="memberEmail"
-                                       required>
+                                <input type="text" class="form-control" id="loginId" placeholder="회원가입 시 이메일을 적어주세요" name="memberEmail" required>
                             </div>
+
                             <div class="form-group">
                                 <label for="loginPw" style="margin-left: 200px">비밀번호 </label>
-                                <input type="password" class="form-control" id="loginPw" placeholder="Enter Password"
-                                       name="memberPw" required>
+                                <input type="password" class="form-control" id="loginPw" placeholder="8~20자 사이로 입력해주세요." name="memberPw" required>
+
                             </div>
+
                             <button type="submit" class="btn btn-primary" style="margin-left:200px">로그인</button>
-                            <br>
                         </form>
-                        <div>
+                        <div><br>
+
+
+
+
+                    <div align="center">
                     <span th:if="${session['userId'] == null}">
                         <a href="https://kauth.kakao.com/oauth/authorize?client_id=49e217f552e2a1352d3462543bc0a458&redirect_uri=http://localhost:8098/kakaologin&response_type=code">
-                            <img src="/images/kakao_login_medium_narrow.png">
+                            <img src="/images/kakao_login_medium_narrow.png" width="180" height="37">
                         </a>
+                    </span>
+                    </div><br>
 
-                    </span><br>
 
+
+                            <div align="center">
+
+
+                                <a id="naverIdLogin_loginButton" href="javascript:void(0)">
+                                    <img src = "/img/btnG_완성형.png" width="180" height="37"></img>
+                                </a> </div>
+                            </span>
                             <span th:if="${session['userId'] == null}" class="n1 d-flex">
 
                             <!--네이버 로그인 시작  -->
-                                <!-- 아래와같이 아이디를 꼭 써준다. -->
-                            <a id="naverIdLogin_loginButton" href="javascript:void(0)">
-                                <img src = "/img/btnG_완성형.png" width="222" height="48"></img>
-                            </a>
+                            <!-- 아래와같이 아이디를 꼭 써준다. -->
 
 
-                                <!-- 네이버 스크립트 -->
+                            <!-- 										<li onclick="naverLogout(); return false;">
+                                  <a href="javascript:void(0)" onclick="naverLogout(); return false;">
+                            <img src = "/img/btnG_로그아웃.png" width="115" height="48"></img>
+                        </a> -->
+
+
+                            <!-- 네이버 스크립트 -->
+
                             <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 
                             <script>
@@ -923,8 +1092,11 @@
                                 <!--네이버 로그인 끝  -->
                             </span>
 
-                            <br> <br><br><button  onclick="location.href='#'" data-toggle="modal" data-target="#findPw" data-dismiss="modal" class="btn btn-primary">비밀번호 찾기</button><br>
-                            <button onclick="location.href='#'" data-toggle="modal" data-target="#signin" data-dismiss="modal" class="btn btn-primary">회원가입</button><br>
+
+                            <div align="center">
+                                <br><br><br> <button onclick="location.href='#'" data-toggle="modal" data-target="#signin" data-dismiss="modal" class="btn btn-primary">회원가입</button><br><br>
+                               <button  onclick="location.href='#'" data-toggle="modal" data-target="#findPw" data-dismiss="modal" class="btn btn-primary">비밀번호 찾기</button>
+                            </div>
 
 
                         </div>
@@ -955,26 +1127,26 @@
                             <div class="form-group">
                                 <label for="memberEmail">이메일 </label> <br>
                                 <input type="text" class="form-control" onblur="emailDp()" id="memberEmail"
-                                       placeholder="이메일을 입력해주세요." name="memberEmail" required>
+                                       placeholder="5~30자로 입력해주세요." name="memberEmail" required>
                                 <span id="email_Dp"></span><br>
                             </div>
                             <div class="form-group">
                                 <label for="pwd1">비밀번호 </label>
-                                <input type="password" class="form-control" id="pwd1" placeholder="비밀번호를 입력해주세요."
+                                <input type="password" class="form-control" id="pwd1" placeholder="8~20자로 입력해주세요."
                                        name="memberPw" required>
                                 <input type="password" class="form-control" id="pwd2" placeholder="비밀번호를 다시 입력해주세요."
                                        required>
-                                <div class="alert alert-success" id="alert-success" style="color : green">비밀번호가 일치합니다.</div>
-                                <div class="alert alert-danger" id="alert-danger" style="color : red">비밀번호가 일치하지 않습니다.</div>
+                                <div class="alert alert-success" id="alert-success" style="color : green; background-color: #11ffee00">비밀번호가 일치합니다.</div>
+                                <div class="alert alert-danger" id="alert-danger" style="color : red; background-color: #11ffee00">비밀번호가 일치하지 않습니다.</div>
                             </div>
                             <div class="form-group">
                                 <label for="registerName">이름 </label> <br>
-                                <input type="text" class="form-control" id="registerName" placeholder="이름을 입력해주세요."
+                                <input type="text" class="form-control" id="registerName" placeholder="5~30자로 입력해주세요"
                                        name="memberName" required>
                             </div>
                             <div class="form-group">
                                 <label for="registerPhone">전화번호 </label> <br>
-                                <input type="text" class="form-control" id="registerPhone" placeholder="전화번호를 입력해주세요."
+                                <input type="text" class="form-control" id="registerPhone" placeholder="10~11자 숫자로 입력해주세요."
                                        name="memberPhone" required>
                             </div>
                             <div class="form-group">
@@ -1046,7 +1218,8 @@
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="submit" form="memberSave" class="btn btn-primary" style="margin-left:20%;">등록</button>
+                        <button type="submit" onclick="loginCheck()" form="memberSave" class="btn btn-primary" style="margin-left:20%;">등록</button>
+                        <span id="login_Check"></span><br>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
                     </div>
                 </div>
@@ -1070,11 +1243,12 @@
                             <label for="pwMemberEmail">이메일을 입력해주세요 </label> <br>
                             <input type="text" class="form-control" id="pwMemberEmail" th:onblur="emailCheck()"
                                    placeholder="Enter Your Email" required>
-                            <form action="/member/update" method="get"  id="updateGO" name="pwUpdate">
+                            <form action="/member/confirmPW" method="get"  id="updateGO" name="pwUpdate">
                                 <input type="hidden" id="members" name="memberId">
-                                <input type="hidden" class="form-control" id="codeInput" placeholder="이메일 인증코드를 입력해주세요."
-                                       required>
+                                <input type="hidden" style="width: 80%" class="form-control" id="codeInput" name="codeInput" placeholder="이메일 인증코드를 입력해주세요."
+                                       required><p id="codeTime"></p>
                                 <input type="hidden" th:onclick="codeCheck()" id="check" value="코드확인">
+                                <input type="hidden" th:onclick="codeSendBack()" id="back" value="재전송">
                             </form>
                         </div>
                     </div>
@@ -1130,12 +1304,99 @@
 
 
 </div>
-<script src="/js/jquery-3.2.1.min.js"></script>
-<script src="/styles/bootstrap4/popper.js"></script>
-<script src="/styles/bootstrap4/bootstrap.min.js"></script>
-<script src="/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script src="/plugins/easing/easing.js"></script>
-<script src="/js/custom.js"></script>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/styles/bootstrap4/popper.js"></script>
+    <script src="/styles/bootstrap4/bootstrap.min.js"></script>
+    <script src="/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+    <script src="/plugins/easing/easing.js"></script>
+    <script src="/js/custom.js"></script>
+<link rel="stylesheet" href="/dist/css/datepicker.min.css">
+<script src="/dist/js/datepicker.min.js"></script>
+<script src="/dist/js/i18n/datepicker.ko.js"></script>
+<script>
+    //두개짜리 제어 연결된거 만들어주는 함수
+    datePickerSet($("#checkInDate"), $("#checkOutDate"), true); //다중은 시작하는 달력 먼저, 끝달력 2번째
+
+    /*
+        * 달력 생성기
+        * @param sDate 파라미터만 넣으면 1개짜리 달력 생성
+        * @example   datePickerSet($("#datepicker"));
+        *
+        *
+        * @param sDate,
+        * @param eDate 2개 넣으면 연결달력 생성되어 서로의 날짜를 넘어가지 않음
+        * @example   datePickerSet($("#datepicker1"), $("#datepicker2"));
+        */
+    function datePickerSet(sDate, eDate, flag) {
+        let todayDate = new Date();
+        console.log(todayDate);
+        //시작 ~ 종료 2개 짜리 달력 datepicker
+        if (!isValidStr(sDate) && !isValidStr(eDate) && sDate.length > 0 && eDate.length > 0) {
+            var sDay = sDate.val();
+            var eDay = eDate.val();
+
+            if (flag && !isValidStr(sDay) && !isValidStr(eDay)) { //처음 입력 날짜 설정, update...
+                var sdp = sDate.datepicker().data("datepicker");
+                sdp.selectDate(new Date(sDay.replace(/-/g, "/")));  //익스에서는 그냥 new Date하면 -을 인식못함 replace필요
+
+                var edp = eDate.datepicker().data("datepicker");
+                edp.selectDate(new Date(eDay.replace(/-/g, "/")));  //익스에서는 그냥 new Date하면 -을 인식못함 replace필요
+            }
+
+            //시작일자 세팅하기 날짜가 없는경우엔 제한을 걸지 않음
+            if (!isValidStr(eDay)) {
+                sDate.datepicker({
+                    maxDate: new Date(eDay.replace(/-/g, "/"))
+                });
+            }
+            sDate.datepicker({
+                language: 'ko',
+                autoClose: true,
+                onSelect: function () {
+                    datePickerSet(sDate, eDate);
+
+                }
+            });
+
+            //종료일자 세팅하기 날짜가 없는경우엔 제한을 걸지 않음
+            if (!isValidStr(sDay)) {
+                eDate.datepicker({
+                    minDate: new Date(sDay.replace(/-/g, "/"))
+                });
+            }
+            eDate.datepicker({
+                language: 'ko',
+                autoClose: true,
+                onSelect: function () {
+                    datePickerSet(sDate, eDate);
+                }
+            });
+
+            //한개짜리 달력 datepicker
+        } else if (!isValidStr(sDate)) {
+            var sDay = sDate.val();
+            if (flag && !isValidStr(sDay)) { //처음 입력 날짜 설정, update...
+                var sdp = sDate.datepicker().data("datepicker");
+                sdp.selectDate(new Date(sDay.replace(/-/g, "/"))); //익스에서는 그냥 new Date하면 -을 인식못함 replace필요
+            }
+
+            sDate.datepicker({
+                language: 'ko',
+                autoClose: true
+            });
+        }
+
+
+        function isValidStr(str) {
+            if (str == null || str == undefined || str == "")
+                return true;
+            else
+                return false;
+        }
+    }
+</script>
+
 
 </body>
 

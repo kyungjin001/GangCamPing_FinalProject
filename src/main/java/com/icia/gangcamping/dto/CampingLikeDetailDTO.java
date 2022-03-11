@@ -15,6 +15,7 @@ public class CampingLikeDetailDTO {
     private Long campingId;
     private String campingName;
     private String campingInfo;
+    private String memberEmail;
 
 
     public static CampingLikeDetailDTO CampingLikeDetailDTO(CampingLikeEntity campingLike) {
@@ -25,6 +26,7 @@ public class CampingLikeDetailDTO {
         campingLikeDetailDTO.setMemberId(campingLike.getMemberEntity().getMemberId());
         campingLikeDetailDTO.setCampingName(campingLike.getCampingEntity().getCampingName());
         campingLikeDetailDTO.setCampingInfo(campingLike.getCampingEntity().getCampingInfo());
+        campingLikeDetailDTO.setMemberEmail(campingLike.getMemberEntity().getMemberEmail());
         return campingLikeDetailDTO;
     }
 }
