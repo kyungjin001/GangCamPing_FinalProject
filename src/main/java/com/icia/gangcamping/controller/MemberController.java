@@ -39,11 +39,6 @@ public class MemberController {
     
 
 
-//    @GetMapping("save")
-//    public String saveForm(Model model) {
-//        model.addAttribute("member", new MemberSaveDTO());
-//        return "member/save";
-//    }
 
     @PostMapping("/save")
     public String save(@Validated @ModelAttribute("member") MemberSaveDTO memberSaveDTO) {
@@ -91,8 +86,7 @@ public class MemberController {
             session.setAttribute("loginId",loginId);
             return "redirect:/";
         } else {
-            return "redirect:/";
-
+            return "member/loginError";
         }
     }*/
 
@@ -186,6 +180,14 @@ public class MemberController {
         String result = ms.emailDp(memberEmail);
         return result;
     }
+
+    // 로그인 오류시 알림
+//    @PostMapping("/loginCheck")
+//    @ResponseBody
+//    public String loginCheck(@RequestParam("memberEmail") MemberLoginDTO memberLoginDTO) {
+//        String result = ms.loginCheck(new MemberLoginDTO());
+//        return result;
+//    }
 
 
     //마이페이지

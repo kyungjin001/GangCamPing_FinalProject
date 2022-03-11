@@ -21,7 +21,7 @@ public class MemberSaveDTO {
     private String memberPw;
 
     @NotBlank(message = "이름은 필수입니다.")
-    @Length(min = 5, max = 30, message = "5~30자로 입력해주세요")
+    @Length(min = 2, max = 30, message = "2~30자로 입력해주세요")
     private String memberName;
 
     @NotBlank(message = "전화번호는 필수입니다.")
