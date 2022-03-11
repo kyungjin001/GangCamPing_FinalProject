@@ -5,6 +5,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,6 +34,9 @@ public class QuestionEntity extends BaseEntity {
 
     @OneToOne(mappedBy = "questionEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private AnswerEntity answerEntity;
+
+//    @OneToMany(mappedBy = "questionEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+//    private List<AnswerEntity> answerEntityList = new ArrayList<>();
 
 
     public static QuestionEntity toSaveEntity(CommentSaveDTO commentSaveDTO,MemberEntity memberEntity,ProductEntity productEntity) {

@@ -63,15 +63,14 @@ GoodsDetailDTO goods = ss.findById(productId);
 model.addAttribute("goods", goods);
 List<CommentDetailDTO> commentList = cs.findAll(productId);
 model.addAttribute("commentList", commentList);
-
+List<AnswerDetailDTO> answer = cs.findAll2(productId);
+    model.addAttribute("answer", answer);
 MemberEntity memberEntity = ms.findByMemberEmail((String) session.getAttribute("loginEmail"));
 MemberDetailDTO memberDetailDTO = MemberDetailDTO.toMemberDetailDTO(memberEntity);
 Long memberId = memberDetailDTO.getMemberId();
 model.addAttribute("memberId", memberId);
 Optional<ProductEntity> productEntity = pr.findById(productId);
 StockEntity stockEntity = tr.findByProductEntity(productEntity.get());
-    System.out.println("sdfsf"+ stockEntity);
-    System.out.println("sdfsxxcccccccf"+ pr.findById(productId).get());
 StockDetailDTO stockDetailDTO = StockDetailDTO.toStockDetailDTO(stockEntity);
 model.addAttribute("stock", stockDetailDTO);
 return "shopping/shopdetail";

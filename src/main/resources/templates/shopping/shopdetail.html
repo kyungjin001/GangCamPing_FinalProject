@@ -115,11 +115,34 @@
     </script>
 
 
+    <script>
+        function answer(){
+            const commentWriters = document.getElementById("commentWriters");
+            const answerContents = document.getElementById("answerContents");
+            const Answerb = document.getElementById("Answer-btn");
+            commentWriters.type = "text";
+            answerContents.type = "text";
+            Answerb.type = "button";
+
+        }
+    </script>
+
+
     <style>
         .qna {
             float: right;
         }
     </style>
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -427,6 +450,9 @@
                                     </div>
 
 
+
+
+
                                     <div id="comment-area">
                                         <table class="table">
                                             <thead>
@@ -440,14 +466,17 @@
                                                 <th th:if="${#strings.equals(session['loginEmail'], 'admin')}">
                                                     삭제(관리자용)
                                                 </th>
+                                                <th th:if="${#strings.equals(session['loginEmail'], 'admin')}">
+                                                    답글달기
+                                                </th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr th:each="comment: ${commentList}">
                                                 <td th:text="${comment.questionId}"></td>
-                                                <td th:text="${comment.productName}"></td>
-                                                <td th:text="${comment.commentWriter}"></td>
-                                                <td th:text="${comment.questionContents}"></td>
+                                                <td th:text="${comment.productName}" ></td>
+                                                <td th:text="${comment.commentWriter}" ></td>
+                                                <td th:text="${comment.questionContents}" ></td>
                                                 <td th:text="${#temporals.format(comment.commentTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                                 <td>
                                                     <button th:if="${comment.commentWriter.equals(session['loginEmail'])}"
@@ -461,10 +490,97 @@
                                                             class="btn btn-outline-primary">삭제
                                                     </button>
                                                 </td>
+                                                <td>
+<!--                                                    <button th:if="${#strings.equals(session['loginEmail'], 'admin')}"-->
+<!--                                                            class="nav-link btn btn-outline-primary" href="#" data-toggle="modal"-->
+<!--                                                            data-target="#answer" style="float: right">-->
+<!--                                                        답글달기-->
+<!--                                                    </button>-->
+
+                                                    <button th:if="${#strings.equals(session['loginEmail'], 'admin')}"
+                                                            class="nav-link btn btn-outline-primary" th:onclick="answer()"
+                                                            >
+                                                        답글달기
+                                                    </button>
+                                                <td th:text="${comment.answerContents}"></td>
+                                                <td th:text="${comment.answerId}"></td>
+                                                </td>
+
+                                                <!-- The Modal -->
+<!--                                                <div class="modal" id="answer">-->
+<!--                                                    <div class="modal-dialog">-->
+<!--                                                        <div class="modal-content">-->
+
+<!--                                                            &lt;!&ndash; Modal Header &ndash;&gt;-->
+<!--                                                            <div class="modal-header">-->
+<!--                                                                <h4 class="modal-title">답글작성</h4>-->
+<!--                                                            </div>-->
+
+                                                            <!-- Modal body -->
+<!--                                                            <div class="modal-body">-->
+                                                                <div id="answer">
+                                                                    <div>
+                                                                        <input type="hidden" id="questionId1" th:value="${comment.questionId}">
+                                                                        <input type="hidden" id="q2" th:value="${comment.questionContents}">
+                                                                        <input type="hidden" id="q3" th:value="${comment.productName}">
+                                                                        <input type="hidden" id="q4" th:value="${comment.commentWriter}">
+                                                                        <input type="hidden" id="q5" th:value="${#temporals.format(comment.commentTime, 'yyyy-MM-dd HH:mm:ss')}">
+                                                                        <input type="hidden" id="commentWriters" placeholder="작성자"
+                                                                               th:value="${session.loginEmail}"
+                                                                               class="form-control shadow-sm" readonly><br>
+                                                                        <input type="hidden" id="answerContents" placeholder="내용"
+                                                                                  class="a1 form-control shadow-sm"></input><br>
+                                                                        <input id="Answer-btn" type="hidden"
+                                                                                class="form-control shadow-sm " value="답글등록">
+                                                                        </input>
+                                                                    </div>
+                                                                </div>
+<!--                                                            </div>-->
+
+<!--                                                            &lt;!&ndash; Modal footer &ndash;&gt;-->
+<!--                                                            <div class="modal-footer">-->
+<!--                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">-->
+<!--                                                                    취소-->
+<!--                                                                </button>-->
+<!--                                                            </div>-->
+
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+
+
 
                                             </tr>
                                             </tbody>
                                         </table>
+                                    </div>
+
+
+
+<!--                                                <div id="answer-area"  >-->
+<!--                                                    <table class="table">-->
+<!--                                                        <thead>-->
+<!--                                                        <tr>-->
+<!--                                                            <th>문의번호</th>-->
+<!--                                                            <th>작성자</th>-->
+<!--                                                            <th>내용</th>-->
+<!--                                                            <th>문의삭제</th>-->
+<!--                                                            <th th:if="${#strings.equals(session['loginEmail'], 'admin')}">-->
+<!--                                                                삭제(관리자용)-->
+<!--                                                            </th>-->
+<!--                                                        </tr>-->
+<!--                                                        </thead>-->
+<!--                                                        <tbody>-->
+<!--                                                        <tr th:each="answer: ${answer}">-->
+<!--                                                            <td th:text="${answer.answerId}"></td>-->
+<!--                                                            <td th:text="${answer.answerContents}"></td>-->
+
+<!--                                                        </tr>-->
+<!--                                                        </tbody>-->
+<!--                                                    </table>-->
+<!--                                            </div>-->
+
+
                                     </div>
                                 </div>
                             </div>
@@ -472,7 +588,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+
     </section>
     <!-- Product Details Section End -->
 
@@ -1035,5 +1151,136 @@
         });
     });
 </script>
+
+
+
+<script>
+    $("#Answer-btn").click(function () {
+        var name = sessionStorage.getItem('loginEmail');
+        console.log(name);
+        console.log('댓글등록 버튼 클릭');
+        // const commentWriter = $("#commentWriters").val();
+        // console.log(commentWriter);
+        const answerContents = $("#answerContents").val();
+        const questionId = document.getElementById('questionId1').value;
+        const questionContents = document.getElementById('q2').value;
+        const commentWriter= document.getElementById('q4').value;
+        console.log(questionContents)
+        const commentT = document.getElementById('q5').value;
+        const productName = document.getElementById('q3').value;
+        console.log(productName);
+        console.log(questionId);
+
+        $.ajax({
+            type: 'post',
+            url: '/comment/answer',
+            data: {
+                'commentWriter': commentWriter,
+                'answerContents': answerContents,
+                'questionContents': questionContents,
+                'commentT': commentT,
+                'productName': productName,
+                'questionId': questionId
+            },
+            dataType: 'json',
+            success: function (result) {
+                alert('답글작성을 완료했습니다.');
+                console.log(result);
+                // document.getElementById("answer-area").style.display = "";
+                $('#answer').modal('hide');
+                let output = "<table class='table'>";
+                output += "<tr><th>문의번호</th>";
+                output += "<th>상품명</th>";
+                output += "<th>작성자</th>";
+                output += "<th>내용</th>";
+                for (let i in result) {
+                    output += "<tr>";
+                    output += "<td>" + result[i].questionId + "</td>";
+                    console.log(questionId);
+                    output += "<td>" + result[i].productName+ "</td>";
+                    console.log(productName);
+                    output += "<td>" + result[i].commentWriter+ "</td>";
+                    output += "<td>" + result[i].questionContents + "</td>";
+                    console.log(questionContents);
+                    output += "<td>" + result[i].commentT + "</td>";
+                    console.log(commentT);
+
+                    output += "</tr>";
+                    output += "<tr>";
+                    output += "<td>" + result[i].answerId + "</td>";
+                    output += "<td>" + '관리자' + "</td>";
+                    output += "<td>" + result[i].answerContents + "</td>";
+                    output += "</tr>";
+                }
+                output += "</table>";
+                // id가 comment-list인 div에 출력
+                document.getElementById('comment-area').innerHTML = output;
+                // 댓글 입력창을 비움.
+                document.getElementById('answerContents').value = '';
+
+            },
+            error: function () {
+                alert('실패');
+            }
+        });
+    });
+</script>
+
+
+
+
+
+
+
+<!--<script>-->
+<!--    $("#Answer-btn").click(function () {-->
+<!--        var name = sessionStorage.getItem('loginEmail');-->
+<!--        console.log(name);-->
+<!--        console.log('댓글등록 버튼 클릭');-->
+<!--        const commentWriter = $("#commentWriters").val();-->
+<!--        console.log(commentWriter);-->
+<!--        const answerContents = $("#answerContents").val();-->
+<!--        const questionId = document.getElementById('questionId1').value;-->
+<!--        console.log(questionId);-->
+
+
+<!--        $.ajax({-->
+<!--            type: 'post',-->
+<!--            url: '/comment/answer',-->
+<!--            data: {-->
+<!--                'commentWriter': commentWriter,-->
+<!--                'answerContents': answerContents,-->
+<!--                'questionId': questionId-->
+<!--            },-->
+<!--            dataType: 'json',-->
+<!--            success: function (result) {-->
+<!--                alert('답글작성을 완료했습니다.');-->
+<!--                // document.getElementById("answer-area").style.display = "";-->
+<!--                $('#answer').modal('hide');-->
+<!--                let output = "<table class='table'>";-->
+<!--                output += "<tr><th>문의번호</th>";-->
+<!--                output += "<th>상품명</th>";-->
+<!--                output += "<th>작성자</th>";-->
+<!--                output += "<th>내용</th>";-->
+<!--                for (let i in result) {-->
+<!--                    output += "<tr>";-->
+<!--                    output += "<td>" + result[i].questionId + "</td>";-->
+<!--                    output += "<td>" + result[i].commentWriters + "</td>";-->
+<!--                    output += "<td>" + result[i].answerContents + "</td>";-->
+<!--                    output += "</tr>";-->
+<!--                }-->
+<!--                output += "</table>";-->
+<!--                // id가 comment-list인 div에 출력-->
+<!--                document.getElementById('answer-area').innerHTML = output;-->
+<!--                // 댓글 입력창을 비움.-->
+<!--                document.getElementById('answerContents').value = '';-->
+
+<!--            },-->
+<!--            error: function () {-->
+<!--                alert('실패');-->
+<!--            }-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
 
 </html>
