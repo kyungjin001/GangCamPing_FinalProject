@@ -44,17 +44,26 @@ public class CommentServiceImpl implements CommentService {
         ProductEntity productEntity = pr.findById(productId).get();
         List<QuestionEntity> questionEntityList = productEntity.getQuestionEntityList();
         List<CommentDetailDTO> commentList = new ArrayList<>();
+        int i = 0;
+        int size = 0;
         if (!questionEntityList.isEmpty()) {
             for (QuestionEntity q : questionEntityList) {
+                if (q.getAnswerEntityList() != null){
+                size = q.getAnswerEntityList().size();
+                }
                 CommentDetailDTO commentDetailDTO = CommentDetailDTO.toCommentDetailDTO(q);
                 LocalDateTime commentT = q.getCreateTime();
 
                 String date1 = java.sql.Timestamp.valueOf(commentT).toString().substring(0, 19);
-//
+               if(i<size) {
+                   String qna = q.getAnswerEntityList().get(i).getAnswerContents();
+                   commentDetailDTO.setAnswerContents(qna);
+               }
+                   commentDetailDTO.setCommentT(date1);
+                   System.out.println(commentDetailDTO);
+                   commentList.add(commentDetailDTO);
 
-                commentDetailDTO.setCommentT(date1);
-                System.out.println(commentDetailDTO);
-                commentList.add(commentDetailDTO); //한줄로 가능
+                   i++;
             }
         }
         return commentList;

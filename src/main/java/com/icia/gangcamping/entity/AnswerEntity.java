@@ -19,8 +19,8 @@ public class AnswerEntity extends BaseEntity{
     @GeneratedValue
     @Column(name = "answerId")
     private Long answerId;
-    @OneToOne(fetch = FetchType.LAZY)
-//    @ManyToOne(fetch = FetchType.LAZY)
+//    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "questionId")
     private QuestionEntity questionEntity;
     @Column

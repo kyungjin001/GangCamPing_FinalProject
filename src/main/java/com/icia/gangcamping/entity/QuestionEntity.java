@@ -32,8 +32,8 @@ public class QuestionEntity extends BaseEntity {
     @NotNull
     private boolean answerCheck;
 
-    @OneToOne(mappedBy = "questionEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private AnswerEntity answerEntity;
+    @OneToMany(mappedBy = "questionEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<AnswerEntity> answerEntityList;
 
 //    @OneToMany(mappedBy = "questionEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
 //    private List<AnswerEntity> answerEntityList = new ArrayList<>();

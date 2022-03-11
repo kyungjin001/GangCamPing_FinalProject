@@ -42,7 +42,7 @@ public class CommentDetailDTO {
         commentDetailDTO.setQuestionContents(questionEntity.getQuestionContents());
         commentDetailDTO.setProductName(questionEntity.getProductEntity().getProductName());
         commentDetailDTO.setMemberEmail(questionEntity.getMemberEntity().getMemberEmail());
-//        commentDetailDTO.setAnswerContents(questionEntity.getAnswerEntity().getAnswerContents());
+//        commentDetailDTO.setAnswerContents(questionEntity.getAnswerEntityList().);
 //        commentDetailDTO.setAnswerId(questionEntity.getAnswerEntity().getAnswerId());
 //        commentDetailDTO.setMemberEmail(questionEntity.getMemberEntity().getMemberEmail());
         if(questionEntity.getUpdateTime()==null){
