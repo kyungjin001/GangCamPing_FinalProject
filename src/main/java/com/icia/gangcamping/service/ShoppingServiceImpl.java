@@ -36,7 +36,7 @@ public class ShoppingServiceImpl implements ShoppingService{
         MultipartFile productImage = goodsSaveDTO.getProductImage();
         String productFileName = productImage.getOriginalFilename();
         productFileName = System.currentTimeMillis() + "-" + productFileName;
-        String savePath = "C:\\development\\source\\springboot\\GangCamPing_FinalProjects\\src\\main\\resources\\static\\upload\\"+productFileName;
+        String savePath = "C:\\devleopment\\source\\springboot\\GangCamPing_FinalProject\\src\\main\\resources\\static\\upload\\"+productFileName;
         if(!productImage.isEmpty()) {
             productImage.transferTo(new File(savePath));
         }

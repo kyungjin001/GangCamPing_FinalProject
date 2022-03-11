@@ -75,7 +75,7 @@ public class MemberController {
 //    }
 
     // 로그인 처리
-    @PostMapping("/login")
+  /*  @PostMapping("/login")
     public String login(@Validated @ModelAttribute("login") MemberLoginDTO memberLoginDTO, HttpSession session) {
 
         boolean loginResult = ms.login(memberLoginDTO);
@@ -88,6 +88,53 @@ public class MemberController {
         } else {
             return "member/loginError";
         }
+    }*/
+
+    @GetMapping("/login")
+    public String login(){
+        return "/member/login";
+    }
+
+    @PostMapping("/login")
+    public String login2(){
+        return "/member/login";
+    }
+
+    @PostMapping("/login2")
+    public @ResponseBody String login(@RequestParam("loginEmail") String loginEmail, @RequestParam("loginPw") String loginPw) {
+
+        System.out.println(loginEmail);
+        System.out.println(loginPw);
+        MemberEntity memberEntity = ms.findByMemberEmail(loginEmail);
+        System.out.println(memberEntity.getMemberEmail());
+        System.out.println(memberEntity.getMemberPw());
+
+        if (memberEntity != null) {
+            System.out.println("이거느 ㄴ 나와?");
+            if (memberEntity.getMemberPw().equals(loginPw)) {
+                System.out.println("이거느 ㄴ 나와?2");
+                session.setAttribute("loginEmail", memberEntity.getMemberEmail());
+                Long loginId = ms.findByMemberId(memberEntity.getMemberEmail());
+                session.setAttribute("loginId", loginId);
+                System.out.println(session.getAttribute("loginEmail"));
+                System.out.println(loginId);
+                String redirectURL = (String) session.getAttribute("redirectURL");
+                System.out.println(redirectURL);
+                if (redirectURL != null) {
+                    System.out.println("이거느 ㄴ 나와?3");
+                    return "redirect:" + redirectURL;
+
+                } else {
+                    System.out.println("이거느 ㄴ 나와?4");
+                    return "ok";
+                }
+            } else {
+                return "no";
+            }
+        }else{
+            return "no";
+        }
+
     }
 
     // 로그인 처리 with Validation
@@ -197,6 +244,7 @@ public class MemberController {
     public ResponseEntity update(@ModelAttribute MemberUpdateDTO memberUpdateDTO) throws IllegalStateException, IOException{
         System.out.println(memberUpdateDTO);
         Long memberId = ms.update(memberUpdateDTO);
+        System.out.println("updaet="+memberUpdateDTO.toString());
         return new ResponseEntity(HttpStatus.OK);
     }
 
@@ -204,11 +252,12 @@ public class MemberController {
     @GetMapping("/confirmPW")
     public String confirmPWForm(Model model, HttpSession session,@RequestParam(value = "inputCode",required = false) String codeInput) {
         System.out.println(codeInput);
-         if(!codeInput.equals("")){
+
+         if(!(codeInput==null)){
             String memberEmail = mail.findByMail(codeInput);
             MemberDetailDTO member = ms.findByEmail(memberEmail);
             model.addAttribute("member",member);
-
+             System.out.println("confirm="+member.toString());
         }else{
 
              System.out.println(session.getAttribute("loginEmail"));
