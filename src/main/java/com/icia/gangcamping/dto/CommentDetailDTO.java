@@ -1,6 +1,7 @@
 package com.icia.gangcamping.dto;
 
 
+import com.icia.gangcamping.entity.AnswerEntity;
 import com.icia.gangcamping.entity.CartEntity;
 import com.icia.gangcamping.entity.QuestionEntity;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,8 @@ public class CommentDetailDTO {
     private String memberEmail;
     private String productName;
     private String commentT;
+    private Long answerId;
+    private String answerContents;
 
 
 
@@ -39,10 +42,12 @@ public class CommentDetailDTO {
         commentDetailDTO.setQuestionContents(questionEntity.getQuestionContents());
         commentDetailDTO.setProductName(questionEntity.getProductEntity().getProductName());
         commentDetailDTO.setMemberEmail(questionEntity.getMemberEntity().getMemberEmail());
+//        commentDetailDTO.setAnswerContents(questionEntity.getAnswerEntityList().);
+//        commentDetailDTO.setAnswerId(questionEntity.getAnswerEntity().getAnswerId());
+//        commentDetailDTO.setMemberEmail(questionEntity.getMemberEntity().getMemberEmail());
         if(questionEntity.getUpdateTime()==null){
             commentDetailDTO.setCommentTime(questionEntity.getCreateTime());
         }else {
-            commentDetailDTO.setCommentTime(questionEntity.getUpdateTime());
             commentDetailDTO.setCommentTime(questionEntity.getUpdateTime());
         }
         return commentDetailDTO;
