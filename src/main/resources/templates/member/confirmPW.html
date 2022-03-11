@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>About Us</title>
 <meta charset="utf-8">
@@ -118,43 +118,6 @@
 			margin-bottom: 50px;
 		}
 		</style>
-
-	<script>
-		const ajaxUp = () => {
-
-			const pw=document.getElementById("memberPw").value;
-			const pwDB="[[${member.memberPw}]]";
-
-			// if(pw==pwDB){
-				const id = document.getElementById("memberId").value;
-				const reqUrl = "/member/"+id;
-				var form = $('#memberUp')[0];
-				var data = new FormData(form);
-				console.log(data);
-
-				$.ajax({
-					type: 'PUT',
-					// enctype: 'multipart/form-data',
-					url:reqUrl,
-					data: data,
-					processData: false,
-					contentType: false,
-					cache: false,
-					timeout: 600000,
-					success: function(){
-						location.href="/member/"+id;
-					},
-					error: function (){
-						alert("Ajax 실패")
-					}
-				});
-
-			// }else{
-			// 	alert("비밀번호를 확인해주세요.")
-			// }
-		}
-	</script>
-
 
 	<script type="text/javascript">
 		$(function(){
@@ -324,7 +287,7 @@
 	<div style="text-align: center;" class="formWrapper">
 		<form id="memberUp" name="memberPw" >
 			<input th:type="hidden" th:name="memberId" id="memberId" th:value="${member.memberId}">
-			<input th:type="hidden"  th:name="memberEmail" id="memberEmail" th:value="${member.memberEmail}" readonly>
+			<input th:type="hidden"  th:name="memberEmail" id="memberEmail2" th:value="${member.memberEmail}" readonly>
 <!--			<input th:type="password"  id="memberPw" th:name="memberPw" th:value="${member.memberPw}">-->
 <!--			새로운  비밀번호<input th:type="password"  id="memberPw" th:name="memberPw">-->
 <!--			새 비밀번호 확인<input th:type="password"  id="memberPw1" th:name="memberPw"}>-->
@@ -340,6 +303,7 @@
 			<input th:type="hidden" th:name="memberName" id="memberName" th:value="${member.memberName}">
 			<input th:type="hidden" th:name="memberAddr"  id="memberAddr" th:value="${member.memberAddr}">
 			<input th:type="hidden" th:name="memberPhone" id="memberPhone" th:value="${member.memberPhone}">
+			세션값: <sapn th:text="${session.loginEmail}"></sapn>
 			<input type="button" th:onclick="ajaxUp()" value="비밀번호 수정"><br><br>
 		</form>
 	</div>
@@ -699,6 +663,7 @@
 								<input type="hidden" class="form-control" id="codeInput" placeholder="이메일 인증코드를 입력해주세요."
 									   required>
 								<input type="hidden" th:onclick="codeCheck()" id="check" value="코드확인">
+
 							</form>
 						</div>
 					</div>
@@ -766,5 +731,58 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="/js/about_custom.js"></script>
 
 </body>
+<script>
+	const ajaxUp = () => {
 
+		const pw=document.getElementById("memberPw").value;
+		const pwDB="[[${member.memberPw}]]";
+		const login = "[[${session.loginEmail}]]";
+		console.log(login);
+
+		var form = $('#memberUp')[0];
+		var data = new FormData(form);
+
+		const id = document.getElementById("memberId").value;
+		const email = document.getElementById("memberEmail2").value;
+		const name = document.getElementById("memberName").value;
+		const phone = document.getElementById("memberPhone").value;
+		const addr = document.getElementById("memberAddr").value;
+		const reqUrl = "/member/"+id;
+		const updateData=JSON.stringify({
+			memberId: id,
+			memberPw:pw,
+			memberName:name,
+			memberPhone:phone,
+			memberAddr:addr,
+			memberEmail:email
+		});
+
+		$.ajax({
+			type: 'PUT',
+			// enctype: 'multipart/form-data',
+			url:reqUrl,
+			data: data,
+			/*contentType: 'application/json',*/
+			processData: false,
+			contentType: false,
+			cache: false,
+			timeout: 600000,
+			success: function(){
+
+				if(login == ""){
+					alert("null")
+					location.href="/";
+
+				}else{
+					alert("!= null")
+					location.href="/member/"+id;
+				}
+			},
+			error: function (){
+				alert("Ajax 실패")
+			}
+		});
+
+	}
+</script>
 </html>
