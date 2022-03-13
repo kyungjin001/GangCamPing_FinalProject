@@ -464,14 +464,13 @@
                                                 <th>내용</th>
                                                 <th>작성시간</th>
                                                 <th>답변확인</th>
-                                                <th>문의삭제</th>
-                                                <th th:if="${#strings.equals(session['loginEmail'], 'admin')}">
-                                                    삭제(관리자용)
-                                                </th>
+                                                <th>답변여부</th>
+<!--                                                <th th:if="${#strings.equals(session['loginEmail'], 'admin')}">-->
+<!--                                                    삭제(관리자용)-->
+<!--                                                </th>-->
                                                 <th th:if="${#strings.equals(session['loginEmail'], 'admin')}">
                                                     답글달기
                                                 </th>
-                                                <th>답변여부</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -481,34 +480,7 @@
                                                 <td th:text="${comment.commentWriter}" ></td>
                                                 <td th:text="${comment.questionContents}" ></td>
                                                 <td th:text="${#temporals.format(comment.commentTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                                                <td th:text="${comment.answerContents}" ></td>
-                                                <td>
-                                                <td>
-                                                    <button th:if="${comment.commentWriter.equals(session['loginEmail'])}"
-                                                            th:onclick="deleteById([[${comment.questionId}]])"
-                                                            class="btn btn-outline-primary">삭제
-                                                    </button>
-                                                </td>
-                                                <td>
-                                                    <button th:if="${#strings.equals(session['loginEmail'], 'admin')}"
-                                                            th:onclick="deleteById([[${comment.questionId}]])"
-                                                            class="btn btn-outline-primary">삭제
-                                                    </button>
-                                                </td>
-
-                                                <td>
-<!--                                                    <button th:if="${#strings.equals(session['loginEmail'], 'admin')}"-->
-<!--                                                            class="nav-link btn btn-outline-primary" href="#" data-toggle="modal"-->
-<!--                                                            data-target="#answer" style="float: right">-->
-<!--                                                        답글달기-->
-<!--                                                    </button>-->
-
-                                                    <button th:if="${#strings.equals(session['loginEmail'], 'admin')}"
-                                                            class="nav-link btn btn-outline-primary" th:onclick="answer([[${comment.questionId}]])"
-                                                            >
-                                                        답글달기
-                                                    </button>
-                                                </td>
+                                                <td th:text="${comment.answerContents}" style="font-family: bold" ></td>
                                                 <td>
                                                 <span th:if="${comment.answerContents} != null">
                                                     <p style="color: green" >답변완료</p>
@@ -517,7 +489,33 @@
                                                         <p style="color: red">답변미완료</p>
                                                     </span>
                                                 </td>
+                                                <td th:if="${comment.commentWriter.equals(session['loginEmail'])}">
+                                                    <button
+                                                            th:onclick="deleteById([[${comment.questionId}]])"
+                                                            class="btn btn-outline-primary">삭제
+                                                    </button>
+                                                </td>
+<!--                                                <td>-->
+<!--                                                    <button th:if="${#strings.equals(session['loginEmail'], 'admin')}"-->
+<!--                                                            th:onclick="deleteById([[${comment.questionId}]])"-->
+<!--                                                            class="btn btn-outline-primary">삭제-->
+<!--                                                    </button>-->
+<!--                                                </td>-->
 
+
+                                                <td th:if="${#strings.equals(session['loginEmail'], 'admin')}">
+<!--                                                    <button th:if="${#strings.equals(session['loginEmail'], 'admin')}"-->
+<!--                                                            class="nav-link btn btn-outline-primary" href="#" data-toggle="modal"-->
+<!--                                                            data-target="#answer" style="float: right">-->
+<!--                                                        답글달기-->
+<!--                                                    </button>-->
+
+                                                    <button
+                                                            class="nav-link btn btn-outline-primary" th:onclick="answer([[${comment.questionId}]])"
+                                                            >
+                                                        답글달기
+                                                    </button>
+                                                </td>
 
                                                 <!-- The Modal -->
 <!--                                                <div class="modal" id="answer">-->
