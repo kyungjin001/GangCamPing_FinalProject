@@ -250,6 +250,7 @@
             });
         }
     </script>
+
     <script type="text/javascript">
         $(function () {
             $("#alert-success").hide();
@@ -271,6 +272,35 @@
             });
         });
     </script>
+
+    <script>
+        /* 아이디 입력을 하는 동안에 idDuplicate() 함수를 호출하고 입력된 값을 콘솔에 출력 */
+        function loginCheck() {
+            const id = document.getElementById('memberEmail').value;
+            console.log(id);
+            const checkResult = document.getElementById('login_Check');
+            $.ajax({
+                type: 'post', // 전송방식(get, post, put 등)
+                url: '/member/loginCheck', // 요청주소(controller로 요청하는 주소)
+                data: {'memberEmail': id},  // 전송할 데이터
+                dataType: 'text', // 요청 후 리턴받을 때의 데이터 형식
+                success: function (result) { // 요청이 성공적으로 처리됐을때 실행 할 함수
+                    console.log('ajax 성공');
+                    console.log(result); // MemberController에서 넘어온 result값 찍어보기(ok or no)
+                    if (result == "ok") {
+                        // checkResult.style.color = 'green';
+                        // checkResult.innerHTML = '멋진 아이디네요!!';
+                    } else {
+                        alert("로그인 정보가 잘못되었습니다.");
+                    }
+                },
+                error: function () { // 요청이 실패했을때 실행 할 함수
+                    console.log('오타 찾으세요.');
+                }
+            });
+        }
+    </script>
+
 
     <script>
         window.onload = function (){
@@ -1009,6 +1039,8 @@
                         <div><br>
 
 
+
+
                     <div align="center">
                     <span th:if="${session['userId'] == null}">
                         <a href="https://kauth.kakao.com/oauth/authorize?client_id=49e217f552e2a1352d3462543bc0a458&redirect_uri=http://localhost:8098/kakaologin&response_type=code">
@@ -1124,26 +1156,26 @@
                             <div class="form-group">
                                 <label for="memberEmail">이메일 </label> <br>
                                 <input type="text" class="form-control" onblur="emailDp()" id="memberEmail"
-                                       placeholder="이메일을 입력해주세요." name="memberEmail" required>
+                                       placeholder="5~30자로 입력해주세요." name="memberEmail" required>
                                 <span id="email_Dp"></span><br>
                             </div>
                             <div class="form-group">
                                 <label for="pwd1">비밀번호 </label>
-                                <input type="password" class="form-control" id="pwd1" placeholder="비밀번호를 입력해주세요."
+                                <input type="password" class="form-control" id="pwd1" placeholder="8~20자로 입력해주세요."
                                        name="memberPw" required>
                                 <input type="password" class="form-control" id="pwd2" placeholder="비밀번호를 다시 입력해주세요."
                                        required>
-                                <div class="alert alert-success" id="alert-success" style="color : green">비밀번호가 일치합니다.</div>
-                                <div class="alert alert-danger" id="alert-danger" style="color : red">비밀번호가 일치하지 않습니다.</div>
+                                <div class="alert alert-success" id="alert-success" style="color : green; background-color: #11ffee00">비밀번호가 일치합니다.</div>
+                                <div class="alert alert-danger" id="alert-danger" style="color : red; background-color: #11ffee00">비밀번호가 일치하지 않습니다.</div>
                             </div>
                             <div class="form-group">
                                 <label for="registerName">이름 </label> <br>
-                                <input type="text" class="form-control" id="registerName" placeholder="이름을 입력해주세요."
+                                <input type="text" class="form-control" id="registerName" placeholder="5~30자로 입력해주세요"
                                        name="memberName" required>
                             </div>
                             <div class="form-group">
                                 <label for="registerPhone">전화번호 </label> <br>
-                                <input type="text" class="form-control" id="registerPhone" placeholder="전화번호를 입력해주세요."
+                                <input type="text" class="form-control" id="registerPhone" placeholder="10~11자 숫자로 입력해주세요."
                                        name="memberPhone" required>
                             </div>
                             <div class="form-group">
@@ -1215,7 +1247,8 @@
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="submit" form="memberSave" class="btn btn-primary" style="margin-left:20%;">등록</button>
+                        <button type="submit" onclick="loginCheck()" form="memberSave" class="btn btn-primary" style="margin-left:20%;">등록</button>
+                        <span id="login_Check"></span><br>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
                     </div>
                 </div>

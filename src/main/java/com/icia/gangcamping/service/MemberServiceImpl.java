@@ -123,11 +123,27 @@ public class MemberServiceImpl implements MemberService{
         return memberUpdateDTO1;
     }
 
+
 //    @Override
 //    public Long confirmPW(MemberUpdateDTO memberUpdateDTO) {
 //        MemberEntity memberEntity = MemberEntity.toUpdateMember(memberUpdateDTO);
 //        return mr.save(memberEntity).getMemberId();
 //    }
+
+    @Override
+    public String loginCheck(MemberLoginDTO memberLoginDTO) {
+        MemberEntity result = mr.findByMemberEmail(memberLoginDTO.getMemberEmail());
+        if(result != null){
+            if (result.getMemberPw().equals(memberLoginDTO.getMemberPw())){
+                return "ok";
+            }else {
+                return "no";
+            }}
+        else {
+            return "no";
+        }
+    }
+
 
 
 
