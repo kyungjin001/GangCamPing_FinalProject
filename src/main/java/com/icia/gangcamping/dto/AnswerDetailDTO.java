@@ -30,11 +30,9 @@ public class AnswerDetailDTO {
 
 
     public static AnswerDetailDTO toAnswerDetailDTO(AnswerEntity answer){
-        System.out.println(answer.getQuestionEntity().getQuestionContents());
-        System.out.println(answer.getQuestionEntity().getProductEntity().getProductName());
-        System.out.println(answer.getQuestionEntity().getMemberEntity().getMemberEmail());
         AnswerDetailDTO answerDetailDTO = new AnswerDetailDTO();
         answerDetailDTO.setAnswerId(answer.getAnswerId());
+        answerDetailDTO.setProductId(answer.getQuestionEntity().getProductEntity().getProductId());
         answerDetailDTO.setMemberId(answer.getQuestionEntity().getMemberEntity().getMemberId());
         answerDetailDTO.setQuestionId(answer.getQuestionEntity().getQuestionId());
         answerDetailDTO.setAnswerContents(answer.getAnswerContents());
