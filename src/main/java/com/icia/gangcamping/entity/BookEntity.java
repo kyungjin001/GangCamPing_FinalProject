@@ -45,6 +45,10 @@ public class BookEntity extends BaseEntity{
     @OneToMany(mappedBy = "bookEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<CampingSaleEntity> campingSaleEntityList = new ArrayList<>();
 
+    @OneToOne
+    @JoinColumn(name="bookListId")
+    private BookListEntity bookListEntity;
+
     public static BookEntity toBookSave(BookSaveDTO bookSaveDTO, MemberEntity memberEntity, CampingEntity campingEntity) {
 
         BookEntity bookEntity = new BookEntity();

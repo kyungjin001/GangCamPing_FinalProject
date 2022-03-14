@@ -3,8 +3,10 @@ package com.icia.gangcamping.service;
 import com.icia.gangcamping.dto.BookDetailDTO;
 import com.icia.gangcamping.dto.BookSaveDTO;
 import com.icia.gangcamping.entity.BookEntity;
+import com.icia.gangcamping.entity.BookListEntity;
 import com.icia.gangcamping.entity.CampingEntity;
 import com.icia.gangcamping.entity.MemberEntity;
+import com.icia.gangcamping.repository.BookListRepository;
 import com.icia.gangcamping.repository.BookRepository;
 import com.icia.gangcamping.repository.MemberRepository;
 import lombok.AllArgsConstructor;
@@ -21,6 +23,7 @@ public class BookServiceImpl implements BookService {
     private final BookRepository br;
     private final MemberService ms;
     private final CampingService cs;
+    private final BookListRepository blr;
 
     @Override
     public List<BookDetailDTO> findByMemberEntity(MemberEntity memberEntity) {
@@ -51,6 +54,7 @@ public class BookServiceImpl implements BookService {
         CampingEntity campingEntity = cs.findById(bookSaveDTO.getCampingId()).get();
 
         BookEntity bookEntity = BookEntity.toBookSave(bookSaveDTO, memberEntity, campingEntity);
+
         return br.save(bookEntity).getBookId();
     }
 

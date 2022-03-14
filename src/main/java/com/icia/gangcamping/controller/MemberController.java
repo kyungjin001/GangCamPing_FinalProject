@@ -96,9 +96,7 @@ public class MemberController {
         System.out.println(loginEmail);
         System.out.println(loginPw);
         MemberEntity memberEntity = ms.findByMemberEmail(loginEmail);
-        System.out.println(memberEntity.getMemberEmail());
-        System.out.println(memberEntity.getMemberPw());
-        System.out.println("login="+memberEntity.toString());
+
 
         if (memberEntity != null) {
             System.out.println("이거느 ㄴ 나와?");
