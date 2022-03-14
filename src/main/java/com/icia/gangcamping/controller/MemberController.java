@@ -68,14 +68,14 @@ public class MemberController {
 //        return "redirect:/member/login";
 //    }
 
-//    @GetMapping("/login")
-//    public String loginForm(Model model) {
-//        model.addAttribute("login", new MemberLoginDTO());
-//        return "login_!";
-//    }
+    @GetMapping("/login")
+    public String loginForm(Model model) {
+        model.addAttribute("login", new MemberLoginDTO());
+        return "/member/login";
+    }
 
     // 로그인 처리
-  /*  @PostMapping("/login")
+    @PostMapping("/login")
     public String login(@Validated @ModelAttribute("login") MemberLoginDTO memberLoginDTO, HttpSession session) {
 
         boolean loginResult = ms.login(memberLoginDTO);
@@ -88,16 +88,6 @@ public class MemberController {
         } else {
             return "member/loginError";
         }
-    }*/
-
-    @GetMapping("/login")
-    public String login(){
-        return "/member/login";
-    }
-
-    @PostMapping("/login")
-    public String login2(){
-        return "/member/login";
     }
 
     @PostMapping("/login2")
@@ -108,6 +98,7 @@ public class MemberController {
         MemberEntity memberEntity = ms.findByMemberEmail(loginEmail);
         System.out.println(memberEntity.getMemberEmail());
         System.out.println(memberEntity.getMemberPw());
+        System.out.println("login="+memberEntity.toString());
 
         if (memberEntity != null) {
             System.out.println("이거느 ㄴ 나와?");
@@ -122,8 +113,8 @@ public class MemberController {
                 System.out.println(redirectURL);
                 if (redirectURL != null) {
                     System.out.println("이거느 ㄴ 나와?3");
-                    return "redirect:" + redirectURL;
-
+                    // return "redirect:" + redirectURL;
+                        return "ok2";
                 } else {
                     System.out.println("이거느 ㄴ 나와?4");
                     return "ok";

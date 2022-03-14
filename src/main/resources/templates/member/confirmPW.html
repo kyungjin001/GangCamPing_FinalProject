@@ -743,19 +743,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		var data = new FormData(form);
 
 		const id = document.getElementById("memberId").value;
-		const email = document.getElementById("memberEmail2").value;
-		const name = document.getElementById("memberName").value;
-		const phone = document.getElementById("memberPhone").value;
-		const addr = document.getElementById("memberAddr").value;
+
 		const reqUrl = "/member/"+id;
-		const updateData=JSON.stringify({
-			memberId: id,
-			memberPw:pw,
-			memberName:name,
-			memberPhone:phone,
-			memberAddr:addr,
-			memberEmail:email
-		});
 
 		$.ajax({
 			type: 'PUT',

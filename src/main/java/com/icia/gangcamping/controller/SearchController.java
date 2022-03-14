@@ -36,6 +36,7 @@ public class SearchController {
     private final CampingLikeService cls;
     private final MemberService ms;
     private final CampingRepository cr;
+    private final BookService bs;
 
      public List searchList(String keyword) throws IOException, ParseException {
 
@@ -107,9 +108,10 @@ public class SearchController {
              model.addAttribute("searchList",campingDetailDTOList);
              session.setAttribute("checkInDate" ,checkInDate);
              session.setAttribute("checkOutDate" ,checkOutDate);
-
          }
-
+         
+         List<BookDetailDTO> book = bs.findAll();
+         model.addAttribute("book",book);
         return "offers";
     }
 
