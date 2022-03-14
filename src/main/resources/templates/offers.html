@@ -22,9 +22,15 @@
         }
     </script>
 
+
     <style>
         #offerStyle{
             padding: 0;
+        }
+
+        #reservation{
+            color: lawngreen;
+            float: right;
         }
     </style>
 </head>
@@ -280,7 +286,20 @@
                                     <div class="offers_content">
                                         <div class="offers_price"><a
                                                 th:href="@{|/search/searchDetail/${result.campingName}|}"
-                                                th:text="${result.campingName}"></a></div>
+                                                th:text="${result.campingName}"></a>
+                                               <!-- <div th:each="book:${book}">
+                                                    <div th:if="(${#strings.equals(book.campingName,result.campingName)})">
+                                                    </div>
+                                                    <span th:unless="(${#strings.equals(book.campingName,result.campingName)})">
+                                                        예약가능
+                                                    </span>
+                                                    <p th:text="|${#dates.format(book.bookCheckIn,'yyyy-MM-dd')}|"></p>
+                                                    <p th:text="${session.checkInDate}"></p>
+                                                    <p th:text="${book.campingName}"></p>
+                                                    <p th:text="${result.campingName}"></p>
+                                                </div>-->
+                                            </div>
+
                                         <div class="rating_r rating_r_3 offers_rating" data-rating="1">
                                             <i></i>
                                             <i></i>
