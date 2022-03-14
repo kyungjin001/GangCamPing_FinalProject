@@ -300,9 +300,9 @@
 <!--				<label for="pwd1">비밀번호 </label>-->
 <!--				<input type="password" class="form-control" id="pwd1" placeholder="비밀번호를 입력해주세요." name="memberPw" required>-->
 				<h5><strong>새로운 비밀번호를 입력해 주세요.</strong></h5>
-				<input th:type="password" size=40 onFocus="this.value='';return true;" id="memberPw" th:name="memberPw" th:value="${member.memberPw}" required><br><br>
+				<input th:type="password" size=40 style = "text-align:center;" onFocus="this.value='';return true;" id="memberPw" th:name="memberPw" th:value="${member.memberPw}" required><br><br>
 				<h5><strong>새로운 비밀번호를 다시 입력해주세요.</strong></h5>
-				<input th:type="password" size=40  id="pwd2" required><br><br>
+				<input th:type="password" size=40 style = "text-align:center;" id="pwd2" required><br><br>
 <!--				<input type="password" class="form-control" id="pwd2" placeholder="비밀번호를 다시 입력해주세요." required>-->
 				<div class="alert alert-success" id="alert-success" style="color : green">비밀번호가 일치합니다.</div>
 				<div class="alert alert-danger" id="alert-danger" style="color : red">비밀번호가 일치하지 않습니다.</div>
