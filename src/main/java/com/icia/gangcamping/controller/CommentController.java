@@ -1,10 +1,8 @@
 package com.icia.gangcamping.controller;
 
-import com.icia.gangcamping.dto.CommentDetailDTO;
-import com.icia.gangcamping.dto.CommentSaveDTO;
-import com.icia.gangcamping.dto.GoodsDetailDTO;
+import com.icia.gangcamping.dto.*;
+import com.icia.gangcamping.entity.ProductEntity;
 import com.icia.gangcamping.service.CommentService;
-import com.icia.gangcamping.dto.ReviewSaveDTO;
 import com.icia.gangcamping.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -52,11 +50,24 @@ public class CommentController {
     @GetMapping("/shoppingAsk")
     public String findAll(Model model) {
         List<CommentDetailDTO> cList = cs.findAll1();
+//        List<AnswerDetailDTO> aList = cs.findAll3();
         System.out.println(cList);
         model.addAttribute("cList", cList);
         return "redirect:/admin/shoppingAsk";
 
     }
+
+
+    @PostMapping("/answer")
+    public @ResponseBody List<AnswerDetailDTO> save(@ModelAttribute AnswerSaveDTO answerSaveDTO) throws ParseException {
+        System.out.println(answerSaveDTO);
+        Long answerId = cs.save1(answerSaveDTO);
+        List<AnswerDetailDTO> answer = cs.findAll2(answerSaveDTO.getAnswerId());
+        return answer;
+    }
+
+
+
 }
 
 
