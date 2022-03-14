@@ -97,7 +97,6 @@ public class MemberController {
         System.out.println(loginPw);
         MemberEntity memberEntity = ms.findByMemberEmail(loginEmail);
 
-
         if (memberEntity != null) {
             System.out.println("이거느 ㄴ 나와?");
             if (memberEntity.getMemberPw().equals(loginPw)) {
@@ -248,14 +247,12 @@ public class MemberController {
             model.addAttribute("member",member);
              System.out.println("confirm="+member.toString());
         }else{
-
              System.out.println(session.getAttribute("loginEmail"));
              String memberEmail = (String) session.getAttribute("loginEmail");
              MemberDetailDTO member = ms.findByEmail(memberEmail);
              model.addAttribute("member", member);
              System.out.println(member);
-
-         }
+           }
         return "member/confirmPW";
     }
 
