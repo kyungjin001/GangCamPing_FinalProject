@@ -323,11 +323,10 @@
                 dataType: 'text',
                 success: function (result){
 
-                    if(result == "ok"){
-                        location.href="/";
-                    }else if(result == "ok2"){
 
-                        location.href="[[${session.redirectURL}]]";
+                     if((result == "ok") || (result == "ok2") ){
+                        location.href="/";
+
                     }else{
                         alert('로그인 정보가 잘못되었습니다.');
                     }

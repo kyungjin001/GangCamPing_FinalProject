@@ -5,6 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,8 +19,6 @@ public class BookListEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bookListId")
     private Long bookListId;
-    @Column
-    @NotNull
-    private LocalDateTime bookListDate;
+
 
 }

@@ -112,7 +112,9 @@ public class SearchController {
          
          List<BookDetailDTO> book = bs.findAll();
          model.addAttribute("book",book);
+
         return "offers";
+
     }
 
     @GetMapping("/searchDetail/{campingName}")
