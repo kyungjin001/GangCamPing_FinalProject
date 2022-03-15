@@ -32,6 +32,7 @@
 			width: 100px;
 			height: 30px;
 			line-height : 30px;
+			margin-right: 20px;
 			background-color: whitesmoke;
 			border : solid 1px;
 			color :black;
@@ -44,6 +45,7 @@
 			width: 100px;
 			height: 30px;
 			line-height : 30px;
+			margin-right: 20px;
 			background-color: whitesmoke;
 			border : solid 1px;
 			color :black;
@@ -56,6 +58,7 @@
 			width: 100px;
 			height: 30px;
 			line-height : 30px;
+			margin-right: 20px;
 			background-color: whitesmoke;
 			border : solid 1px;
 			color :black;
@@ -68,6 +71,7 @@
 			width: 100px;
 			height: 30px;
 			line-height : 30px;
+			margin-right: 20px;
 			background-color: whitesmoke;
 			border : solid 1px;
 			color :black;
@@ -275,15 +279,15 @@
 
 
 	<div class="menu-wrapper">
-		<div class="menu1" onclick="location.href='/member/myInfo'" ><h4>나의정보</h4></div>
-		<div class="menu2" onclick="location.href='/member/bookList'" style="cursor: pointer;"><h4>캠핑내역</h4></div>
-		<div class="menu3" onclick="location.href='/member/shoppingList'" style="cursor: pointer;"><h4>쇼핑내역</h4></div>
-		<div class="menu4" onclick="location.href='/member/shoppingLike'" style="cursor: pointer;"><h4>찜</h4></div>
-		<div class="menu5"  onclick="window.open('/room','sales','width = 600, height = 500, top = 100, left = 300, location= no')" style="cursor: pointer;">문의하기</div>
+		<div class="menu1" onclick="location.href='/member/myInfo'" >나의정보</div>
+		<div class="menu2" onclick="location.href='/member/bookList'" style="cursor: pointer;">캠핑내역</div>
+		<div class="menu3" onclick="location.href='/member/shoppingList'" style="cursor: pointer;">쇼핑내역</div>
+		<div class="menu4" onclick="location.href='/member/shoppingLike'" style="cursor: pointer;">찜</div>
+		<div class="menu5"  style="cursor: pointer;" onclick="window.open('/room','sales','width = 600, height = 500, top = 100, left = 300, location= no')">문의하기</div>
 	</div>
 
 
-	<p style="text-align:center; color :brown";>비밀번호 재설정</p>
+	<p style="text-align:center; font-size: medium; color :black";>비밀번호 재설정</p>
 
 	<div style="text-align: center;" class="formWrapper">
 		<form id="memberUp" name="memberPw" >
@@ -295,8 +299,10 @@
 			<div class="form-group">
 <!--				<label for="pwd1">비밀번호 </label>-->
 <!--				<input type="password" class="form-control" id="pwd1" placeholder="비밀번호를 입력해주세요." name="memberPw" required>-->
-				<input th:type="password"  id="memberPw" th:name="memberPw" th:value="${member.memberPw}"><br><br>
-				<input th:type="password" id="pwd2" placeholder="비밀번호를 다시 입력해주세요." required><br><br>
+				<h5><strong>새로운 비밀번호를 입력해 주세요.</strong></h5>
+				<input th:type="password" size=40 style = "text-align:center;" onFocus="this.value='';return true;" id="memberPw" th:name="memberPw" th:value="${member.memberPw}" required><br><br>
+				<h5><strong>새로운 비밀번호를 다시 입력해주세요.</strong></h5>
+				<input th:type="password" size=40 style = "text-align:center;" id="pwd2" required><br><br>
 <!--				<input type="password" class="form-control" id="pwd2" placeholder="비밀번호를 다시 입력해주세요." required>-->
 				<div class="alert alert-success" id="alert-success" style="color : green">비밀번호가 일치합니다.</div>
 				<div class="alert alert-danger" id="alert-danger" style="color : red">비밀번호가 일치하지 않습니다.</div>
@@ -304,8 +310,8 @@
 			<input th:type="hidden" th:name="memberName" id="memberName" th:value="${member.memberName}">
 			<input th:type="hidden" th:name="memberAddr"  id="memberAddr" th:value="${member.memberAddr}">
 			<input th:type="hidden" th:name="memberPhone" id="memberPhone" th:value="${member.memberPhone}">
-			세션값: <sapn th:text="${session.loginEmail}"></sapn>
-			<input type="button" th:onclick="ajaxUp()" value="비밀번호 수정"><br><br>
+<!--			세션값: <sapn th:text="${session.loginEmail}"></sapn>-->
+			<input type="button" style="WIDTH: 120pt; HEIGHT: 22pt" th:onclick="ajaxUp()" value="비밀번호 수정"><br><br>
 		</form>
 	</div>
 
