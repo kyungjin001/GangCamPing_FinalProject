@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -19,4 +18,8 @@ public class BookSaveDTO {
     private Date bookCheckIn;
     private Date bookCheckOut;
     private String bookName;
+    private boolean result;
+
+
+
 }

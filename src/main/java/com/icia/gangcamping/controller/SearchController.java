@@ -102,20 +102,26 @@ public class SearchController {
          if(keyword==null){
              keyword = "캠핑";
              List<CampingDetailDTO> campingDetailDTOList = this.searchList(keyword);
+             for (CampingDetailDTO c: campingDetailDTOList) {
+                 c.setCampingName(c.getCampingName().replaceAll(" ",""));
+             }
              model.addAttribute("searchList",campingDetailDTOList);
+             System.out.println("campingDetailDTOList = " + campingDetailDTOList);
+
          }else{
             List<CampingDetailDTO> campingDetailDTOList = this.searchList(keyword);
+             for (CampingDetailDTO c: campingDetailDTOList) {
+                 c.setCampingName(c.getCampingName().replaceAll(" ",""));
+             }
              model.addAttribute("searchList",campingDetailDTOList);
+             System.out.println("campingDetailDTOList = " + campingDetailDTOList);
              session.setAttribute("checkInDate" ,checkInDate);
              session.setAttribute("checkOutDate" ,checkOutDate);
          }
-         
-         List<BookDetailDTO> book = bs.findAll();
-         model.addAttribute("book",book);
 
-        /* for(BookDetailDTO bookDetailDTO : book){
-
-         }*/
+        List<BookDetailDTO> book = bs.findAll();
+        model.addAttribute("book",book);
+        System.out.println("book = " + book);
 
          return "offers";
     }

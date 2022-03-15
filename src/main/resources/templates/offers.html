@@ -28,9 +28,10 @@
             padding: 0;
         }
 
-        #reservation{
-            color: lawngreen;
+        #reservation2{
+            color: red;
             float: right;
+            margin-right: 15em;
         }
     </style>
 </head>
@@ -287,19 +288,11 @@
                                         <div class="offers_price"><a
                                                 th:href="@{|/search/searchDetail/${result.campingName}|}"
                                                 th:text="${result.campingName}"></a>
-                                               <!-- <div th:each="book:${book}">
-                                                    <div th:if="(${#strings.equals(book.campingName,result.campingName)})">
-                                                    </div>
-                                                    <span th:unless="(${#strings.equals(book.campingName,result.campingName)})">
-                                                        예약가능
-                                                    </span>
-                                                    <p th:text="|${#dates.format(book.bookCheckIn,'yyyy-MM-dd')}|"></p>
-                                                    <p th:text="${session.checkInDate}"></p>
-                                                    <p th:text="${book.campingName}"></p>
-                                                    <p th:text="${result.campingName}"></p>
-                                                </div>-->
-                                            </div>
-
+                                        </div>
+                                        <div th:each="book:${book}">
+                                            <span id="reservation2"  th:if="(${#strings.equals(book.campingName,result.campingName)})">예약불가능
+                                            </span>
+                                        </div>
                                         <div class="rating_r rating_r_3 offers_rating" data-rating="1">
                                             <i></i>
                                             <i></i>

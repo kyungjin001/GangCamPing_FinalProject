@@ -26,6 +26,7 @@ public class BookDetailDTO {
     private String campingFileName;
     private int bookPrice;
     private String bookName;
+    private boolean check;
 
     public static BookDetailDTO toBookDetailDTO(BookEntity bookEntity) {
         BookDetailDTO bookDetailDTO = new BookDetailDTO();
