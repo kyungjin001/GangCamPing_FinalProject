@@ -40,6 +40,8 @@ public class BookEntity extends BaseEntity{
     @NotNull
     private int bookPrice;
 
+
+
     @OneToMany(mappedBy = "bookEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<CampingPayEntity> campingPayEntityList = new ArrayList<>();
     @OneToMany(mappedBy = "bookEntity",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
@@ -59,6 +61,7 @@ public class BookEntity extends BaseEntity{
         bookEntity.setBookPrice(bookSaveDTO.getBookPrice());
         bookEntity.setMemberEntity(memberEntity);
         bookEntity.setCampingEntity(campingEntity);
+
         return bookEntity;
     }
 }
